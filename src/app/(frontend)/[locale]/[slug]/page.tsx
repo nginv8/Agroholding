@@ -51,9 +51,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home', locale = 'en' } = await paramsPromise
   const url = '/' + slug
 
-  let page: RequiredDataFromCollectionSlug<'pages'> | null
-
-  page = await queryPage({
+  const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPage({
     slug,
     locale,
   })
@@ -73,8 +71,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
-      {/* <RenderBlocks blocks={layout} locale={locale} /> */}
+      <RenderBlocks blocks={layout} locale={locale} />
     </article>
   )
 }
@@ -88,27 +85,6 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
   return generateMeta({ doc: page })
 }
-
-// const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-//   const { isEnabled: draft } = await draftMode()
-
-//   const payload = await getPayload({ config: configPromise })
-
-//   const result = await payload.find({
-//     collection: 'pages',
-//     draft,
-//     limit: 1,
-//     pagination: false,
-//     overrideAccess: draft,
-//     where: {
-//       slug: {
-//         equals: slug,
-//       },
-//     },
-//   })
-
-//   return result.docs?.[0] || null
-// })
 
 const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode()

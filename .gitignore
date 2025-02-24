@@ -1,6 +1,7 @@
 build
 dist / media
 node_modules
+sqlt.db
 .DS_Store
 .env
 .next
