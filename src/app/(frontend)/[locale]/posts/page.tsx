@@ -7,15 +7,27 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+
+import { TypedLocale } from 'payload'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
+type Args = {
+  params: Promise<{
+    locale: TypedLocale
+  }>
+}
+
+export default async function Page({ params }: Args) {
+  const { locale = 'uk' } = await params
+  const t = await getTranslations()
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
     collection: 'posts',
+    locale,
     depth: 1,
     limit: 12,
     overrideAccess: false,
@@ -32,7 +44,7 @@ export default async function Page() {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>{t('posts')}</h1>
         </div>
       </div>
 

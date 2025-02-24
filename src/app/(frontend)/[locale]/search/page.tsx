@@ -7,15 +7,28 @@ import React from 'react'
 import { Search } from '@/search/Component'
 import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
+import { getTranslations } from 'next-intl/server'
+
+import { Post } from '@/payload-types'
+import { TypedLocale } from 'payload'
 
 type Args = {
   searchParams: Promise<{
     q: string
   }>
+  params: Promise<{
+    locale: TypedLocale
+  }>
 }
-export default async function Page({ searchParams: searchParamsPromise }: Args) {
+
+export default async function Page({
+  searchParams: searchParamsPromise,
+  params: paramsPromise,
+}: Args) {
   const { q: query } = await searchParamsPromise
+  const { locale } = await paramsPromise
   const payload = await getPayload({ config: configPromise })
+  const t = await getTranslations()
 
   const posts = await payload.find({
     collection: 'search',
@@ -64,7 +77,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">Search</h1>
+          <h1 className="mb-8 lg:mb-16">{t('search')}</h1>
 
           <div className="max-w-[50rem] mx-auto">
             <Search />
@@ -75,7 +88,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="container">No results found.</div>
+        <div className="container">{t('no-results')}</div>
       )}
     </div>
   )
