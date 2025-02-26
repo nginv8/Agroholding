@@ -190,7 +190,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | AboutUsBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -727,6 +727,55 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock".
+ */
+export interface AboutUsBlock {
+  subtitle: string;
+  title: string;
+  titleSecondColor: string;
+  description: string;
+  mainImage: number | Media;
+  secondaryImage: number | Media;
+  features: {
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline' | 'destructive' | 'ghost' | 'link' | 'secondary') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  stats: {
+    number: string;
+    label: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutUs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1015,6 +1064,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        aboutUs?: T | AboutUsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1111,6 +1161,49 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock_select".
+ */
+export interface AboutUsBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  titleSecondColor?: T;
+  description?: T;
+  mainImage?: T;
+  secondaryImage?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  stats?:
+    | T
+    | {
+        number?: T;
+        label?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

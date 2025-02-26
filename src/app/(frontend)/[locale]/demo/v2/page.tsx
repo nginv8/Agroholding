@@ -1,4 +1,5 @@
 import AboutUsV2 from '@/components/AboutUsV2'
+import CareersV2 from '@/components/Careers'
 import ContactUsV2 from '@/components/ContactUsV2'
 import FAQV2 from '@/components/FAQV2'
 import FooterV2 from '@/components/FooterV2'
@@ -18,12 +19,12 @@ export default async function Page() {
       <AboutUsV2 />
       <ProductsV2 />
       <WhyUsV2 />
-      <NewsGridV2 />
       <OurIdeasV2 />
+      <NewsGridV2 />
       <TestimonialsV2 />
+      <CareersV2 />
       <FAQV2 />
       <ContactUsV2 />
-
       <FooterV2 />
     </>
   )
