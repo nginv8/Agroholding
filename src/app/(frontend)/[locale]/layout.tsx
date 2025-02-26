@@ -69,9 +69,9 @@ export default async function RootLayout({ children, params }: Args) {
             />
             <LivePreviewListener />
 
-            <Header />
+            {/* <Header /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </NextIntlClientProvider>
         </Providers>
       </body>

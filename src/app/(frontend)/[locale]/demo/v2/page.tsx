@@ -1,5 +1,5 @@
 import AboutUsV2 from '@/components/AboutUsV2'
-import CareersV2 from '@/components/Careers'
+import CareersV2 from '@/components/CareersV2'
 import ContactUsV2 from '@/components/ContactUsV2'
 import FAQV2 from '@/components/FAQV2'
 import FooterV2 from '@/components/FooterV2'

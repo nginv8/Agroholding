@@ -1,6 +1,7 @@
 import AboutUs from '@/components/AboutUs'
 import ContactUs from '@/components/ContactUs'
 import FAQ from '@/components/FAQ'
+import Careers from '@/components/Careers'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
@@ -21,6 +22,7 @@ export default async function Page() {
       <NewsGrid />
       <OurIdeas />
       <Testimonials />
+      <Careers />
       <FAQ />
       <ContactUs />
 

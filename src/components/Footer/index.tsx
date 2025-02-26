@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Facebook, Instagram, Linkedin, Twitter, Send } from 'lucide-react'
 import Link from 'next/link'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 const footerLinks = {
   company: [
@@ -164,13 +165,9 @@ export default function Footer() {
             <p className="text-gray-300 text-sm">
               © {new Date().getFullYear()} AgroHolding. Всі права захищені.
             </p>
-            <div className="flex gap-6">
-              <Link href="#" className="text-gray-300 hover:text-white text-sm transition-colors">
-                Політика конфіденційності
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white text-sm transition-colors">
-                Умови використання
-              </Link>
+            <div className="flex gap-6 items-center">
+              Theme:
+              <ThemeSelector />
             </div>
           </div>
         </div>

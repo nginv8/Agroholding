@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 export default function FooterV2() {
   return (
@@ -107,6 +108,17 @@ export default function FooterV2() {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+                      Політика конфіденційності
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+                      Умови використання
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </motion.div>
@@ -130,13 +142,9 @@ export default function FooterV2() {
               <p className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} AgroHolding. Всі права захищені.
               </p>
-              <div className="flex gap-6">
-                <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                  Політика конфіденційності
-                </Link>
-                <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                  Умови використання
-                </Link>
+              <div className="flex gap-6 items-center">
+                Theme:
+                <ThemeSelector />
               </div>
             </div>
           </div>
