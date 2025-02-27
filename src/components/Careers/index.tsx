@@ -126,21 +126,17 @@ export default function CareersV2() {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Заголовок секції */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
-            Кар'єра в AgroHolding
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-            Приєднуйтесь до команди
-            <span className="block text-green-700">професіоналів</span>
-          </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <h2 className="text-4xl font-bold text-green-800 mb-4">Приєднуйтесь до команди</h2>
+          <div className="w-24 h-1 bg-yellow-500 mx-auto mb-8"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Ми пропонуємо цікаві можливості для професійного розвитку та зростання в одній з
             провідних агрокомпаній України
           </p>

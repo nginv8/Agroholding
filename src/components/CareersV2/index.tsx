@@ -35,10 +35,6 @@ const positions = [
         icon: Clock,
       },
       {
-        text: 'Знання сучасних агротехнологій',
-        icon: MonitorSmartphone,
-      },
-      {
         text: 'Навички роботи з GPS-системами',
         icon: Calculator,
       },
@@ -57,7 +53,7 @@ const positions = [
         icon: Clock,
       },
       {
-        text: 'Права категорії В, С',
+        text: 'Права категорії B, C',
         icon: Car,
       },
       {
@@ -67,10 +63,6 @@ const positions = [
       {
         text: 'Досвід ремонтних робіт',
         icon: Building2,
-      },
-      {
-        text: 'Відповідальність та пунктуальність',
-        icon: ClipboardCheck,
       },
     ],
   },
@@ -87,16 +79,12 @@ const positions = [
         icon: Calculator,
       },
       {
-        text: 'Впевнений користувач 1С',
+        text: 'Впевнений користувач 1C',
         icon: MonitorSmartphone,
       },
       {
         text: 'Вміння керувати персоналом',
         icon: Users,
-      },
-      {
-        text: 'Уважність до деталей',
-        icon: Eye,
       },
     ],
   },
@@ -105,7 +93,7 @@ const positions = [
 export default function CareersV2() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [direction, setDirection] = useState(0)
-  const slideInterval = 5000 // 5 seconds
+  const slideInterval = 5000
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -163,7 +151,7 @@ export default function CareersV2() {
 
   return (
     <section className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="container px-4 grid grid-cols-1 gap-24 lg:grid-cols-2">
+      <div className="container px-4 grid grid-cols-1 gap-16 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -189,7 +177,7 @@ export default function CareersV2() {
           </Button>
         </motion.div>
 
-        <div className="relative col-span-1 mx-auto h-[500px] w-full flex items-center justify-center">
+        <div className="relative col-span-1 mx-auto h-[580px] w-full flex items-center justify-center">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={currentSlide}
@@ -219,28 +207,31 @@ export default function CareersV2() {
               <div className="bg-white rounded-2xl p-12 shadow-xl">
                 <div className="text-center mb-8">
                   <h3 className="text-3xl font-bold text-gray-900 mb-2">
-                    {positions[currentSlide].title}
+                    {positions[currentSlide] && positions[currentSlide].title}
                   </h3>
-                  <p className="text-green-600 font-medium">{positions[currentSlide].location}</p>
+                  <p className="text-green-600 font-medium">
+                    {positions[currentSlide] && positions[currentSlide].location}
+                  </p>
                 </div>
 
                 <div className="space-y-6 mb-8">
-                  {positions[currentSlide].requirements.map((requirement, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center space-x-4"
-                    >
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
-                        {React.createElement(requirement.icon, {
-                          className: 'w-5 h-5 text-green-600',
-                        })}
-                      </div>
-                      <p className="text-gray-600">{requirement.text}</p>
-                    </motion.div>
-                  ))}
+                  {positions[currentSlide] &&
+                    positions[currentSlide].requirements.map((requirement, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-center space-x-4"
+                      >
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
+                          {React.createElement(requirement.icon, {
+                            className: 'w-5 h-5 text-green-600',
+                          })}
+                        </div>
+                        <p className="text-gray-600">{requirement.text}</p>
+                      </motion.div>
+                    ))}
                 </div>
 
                 <div className="flex justify-center">
@@ -255,25 +246,25 @@ export default function CareersV2() {
 
           {/* Кнопки навігації */}
           <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+            className="absolute left-0 z-10 top-1/2 -translate-y-1/2 lg:-translate-x-12 -translate-x-2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
             onClick={() => paginate(-1)}
           >
             <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
           <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+            className="absolute right-0 z-10 top-1/2 -translate-y-1/2 lg:translate-x-12 translate-x-2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
             onClick={() => paginate(1)}
           >
             <ChevronRight className="w-6 h-6 text-gray-600" />
           </button>
 
           {/* Індикатори */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex space-x-2">
+          <div className="absolute bottom-0 z-10 left-1/2 -translate-x-1/2 flex space-x-2">
             {positions.map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentSlide ? 'bg-green-600' : 'bg-gray-300'
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentSlide ? 'bg-green-600 w-4' : 'bg-gray-300'
                 }`}
                 onClick={() => {
                   setDirection(index > currentSlide ? 1 : -1)

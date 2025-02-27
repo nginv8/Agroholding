@@ -21,8 +21,8 @@ export default async function Page() {
       <WhyUsV2 />
       <OurIdeasV2 />
       <NewsGridV2 />
-      <TestimonialsV2 />
       <CareersV2 />
+      <TestimonialsV2 />
       <FAQV2 />
       <ContactUsV2 />
       <FooterV2 />

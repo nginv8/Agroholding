@@ -1,28 +1,16 @@
-'use client'
-
-import { motion, useScroll, useTransform } from 'motion/react'
+import * as motion from 'motion/react-client'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRef } from 'react'
 
 export default function HeroV2() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
   return (
-    <div ref={ref} className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Паралакс фонове зображення */}
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
         <Image src="/agro-media/1.jpg" alt="Пшеничне поле" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
-      </motion.div>
+      </div>
 
       {/* Декоративні елементи */}
       <div className="absolute inset-0 z-10">
@@ -31,8 +19,8 @@ export default function HeroV2() {
       </div>
 
       {/* Основний контент */}
-      <div className="relative z-20 container mx-auto px-4 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 items-center py-20">
+      <div className="min-h-screen flex flex-col justify-center">
+        <div className="relative z-20 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center flex-1  py-20">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -77,7 +65,7 @@ export default function HeroV2() {
             >
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-black text-lg px-8 h-14"
+                className="bg-yellow-500 hover:bg-yellow-400 text-black text-lg px-8 h-14 w-full md:w-auto"
               >
                 Дізнатися більше
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -85,7 +73,7 @@ export default function HeroV2() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 text-lg px-8 h-14 hover:bg-white hover:text-black transition-colors"
+                className="border-2 text-lg px-8 h-14 bg-transparent border-white hover:bg-white hover:text-black transition-colors w-full md:w-auto"
               >
                 Зв'язатися з нами
               </Button>
@@ -112,35 +100,30 @@ export default function HeroV2() {
             </div>
           </motion.div>
         </div>
-      </div>
-
-      {/* Статистика */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute bottom-0 left-0 right-0 z-20 bg-black/30 backdrop-blur-sm"
-      >
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '15+', label: 'років досвіду' },
-              { number: '1000+', label: 'гектарів землі' },
-              { number: '50+', label: 'партнерів' },
-              { number: '10+', label: 'країн експорту' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + index * 0.1, duration: 1 }}
-                className="text-center text-white"
-              >
-                <div className="text-3xl font-bold text-yellow-400 mb-2">{stat.number}</div>
-                <div className="text-sm text-gray-300 uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            ))}
+        <div className="relative w-full top-full left-0 right-0 z-20 bg-black/30 backdrop-blur-sm flex-none">
+          <div className="container mx-auto px-4 py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: '15+', label: 'років досвіду' },
+                { number: '1000+', label: 'гектарів землі' },
+                { number: '50+', label: 'партнерів' },
+                { number: '10+', label: 'країн експорту' },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration: 1 }}
+                  className="text-center text-white"
+                >
+                  <div className="text-3xl font-bold text-yellow-400 mb-2">{stat.number}</div>
+                  <div className="text-sm text-gray-300 uppercase tracking-wider">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

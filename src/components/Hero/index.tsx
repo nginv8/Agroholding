@@ -1,12 +1,10 @@
-'use client'
-
 import * as motion from 'motion/react-client'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Фонове зображення */}
       <div
         className="absolute inset-0 z-0"
@@ -21,7 +19,7 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-4 pt-20 relative z-10">
-        <div className="max-w-4xl mx-auto text-center text-white">
+        <div className="max-w-4xl mx-auto text-center text-white relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -60,7 +58,7 @@ export default function Hero() {
           >
             <Button
               size="lg"
-              className="bg-yellow-500 hover:bg-yellow-600 text-black min-w-[200px] group"
+              className="bg-yellow-500 hover:bg-yellow-400 text-black min-w-[200px] group"
             >
               Наша продукція
               <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -68,30 +66,24 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-black min-w-[200px] group"
+              className="min-w-[200px] border-white bg-black/30 text-white hover:bg-white  hover:text-black group"
             >
               Зв'язатися з нами
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
-
-          {/* Скролл індикатор */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-              className="w-6 h-10 border-2 border-white rounded-full p-1"
-            >
-              <div className="w-1.5 h-1.5 bg-white rounded-full mx-auto" />
-            </motion.div>
-          </motion.div>
         </div>
       </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <div className="w-6 h-10 border-2 border-white rounded-full p-1 animate-bounce">
+          <div className="w-1.5 h-1.5 bg-white rounded-full mx-auto" />
+        </div>
+      </motion.div>
     </section>
   )
 }

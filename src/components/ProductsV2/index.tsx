@@ -78,9 +78,9 @@ export default function ProductsV2() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="group"
+              className="group h-full"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+              <div className="bg-white flex flex-col justify-stretch h-full rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
                 <div className="relative h-80 overflow-hidden">
                   <Image
                     src={product.image || '/placeholder.svg'}
@@ -90,16 +90,9 @@ export default function ProductsV2() {
                   />
                   {/* Оверлей з градієнтом */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                  {/* Рейтинг */}
-                  <div className="absolute top-4 right-4 flex items-center space-x-1">
-                    {[...Array(product.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
                 </div>
 
-                <div className="p-8">
+                <div className="p-8 flex flex-col justify-between flex-1">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{product.name}</h3>
 
                   <p className="text-gray-600 mb-6">{product.description}</p>
@@ -129,7 +122,7 @@ export default function ProductsV2() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-24 bg-green-50 rounded-2xl p-12"
+          className="mt-24 bg-orange-50 rounded-2xl p-12 border border-slate-300"
         >
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>

@@ -5,6 +5,8 @@ export const themeLocalStorageKey = 'payload-theme'
 export const defaultTheme = 'light'
 
 export const getImplicitPreference = (): Theme | null => {
+  return 'light'
+
   const mediaQuery = '(prefers-color-scheme: dark)'
   const mql = window.matchMedia(mediaQuery)
   const hasImplicitPreference = typeof mql.matches === 'boolean'
