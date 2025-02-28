@@ -1,71 +1,121 @@
-import * as motion from 'motion/react-client'
+'use client'
+
+import { motion, useScroll, useTransform } from 'motion/react'
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
+import { useRef } from 'react'
+import { Title } from '../ui/title'
 
-export default function AboutUs() {
+export default function AboutSectionStory() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
+
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-green-50">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-4">Про нас</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
-        </motion.div>
+    <section ref={containerRef} className="py-32 relative overflow-hidden">
+      {/* Фонові декоративні елементи */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Image
-              src="/agro-media/2.jpg"
-              alt="Наші поля"
-              width={600}
-              height={400}
-              className="rounded-lg shadow-xl"
-            />
-          </motion.div>
+      <div className="container mx-auto px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Текстова колонка */}
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h3 className="text-2xl font-semibold text-green-700">Лідери у вирощуванні попкорну</h3>
-            <p className="text-gray-600 leading-relaxed">
-              Наша компанія спеціалізується на вирощуванні найякісніших сортів кукурудзи для
-              попкорну, а також інших сільськогосподарських культур. Ми поєднуємо традиційні методи
-              землеробства з сучасними технологіями для досягнення найкращих результатів.
-            </p>
-            <ul className="space-y-3">
-              {[
-                'Понад 1000 гектарів оброблюваних земель',
-                'Сучасна сільськогосподарська техніка',
-                'Власна лабораторія контролю якості',
-                'Експорт продукції у понад 10 країн',
-              ].map((item, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="relative"
+            >
+              <Title
+                title="Лідери у вирощуванні преміальної кукурудзи"
+                boldPart="преміальної кукурудзи"
+                align="left"
+              />
+              <div className="space-y-8">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.1 * index }}
-                  className="flex items-center space-x-2"
+                  transition={{ delay: 0.4 }}
+                  className="text-xl leading-relaxed text-gray-600"
                 >
-                  <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                  <span className="text-gray-700">{item}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
+                  Сьогодні ми — це команда професіоналів, об'єднаних спільною метою: вирощувати
+                  найякіснішу продукцію, впроваджувати інноваційні технології та дбати про
+                  українську землю. Наші поля — це не просто гектари землі, це наша гордість та
+                  відповідальність перед майбутніми поколіннями.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="text-xl leading-relaxed text-gray-600"
+                >
+                  Ми віримо, що успіх починається з поваги до традицій та відкритості до інновацій.
+                  Кожен день ми працюємо над тим, щоб створювати продукцію, якою пишається вся
+                  країна.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <Button size="lg" className="group mt-8">
+                    Дізнатися більше
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Колонка з зображеннями */}
+            <div className="relative h-[600px]">
+              {/* Головне зображення */}
+              <motion.div style={{ y: y1 }} className="absolute left-0 right-0 top-0 z-20">
+                <div className="relative h-[400px] w-11/12 rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/placeholder.svg?height=800&width=600"
+                    alt="Наші поля"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                </div>
+              </motion.div>
+
+              {/* Додаткове зображення */}
+              <motion.div
+                style={{ y: y2, opacity }}
+                className="absolute left-1/4 right-0 top-1/3 z-10"
+              >
+                <div className="relative h-[300px] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/placeholder.svg?height=600&width=800"
+                    alt="Наша команда"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                </div>
+              </motion.div>
+
+              {/* Декоративні елементи */}
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

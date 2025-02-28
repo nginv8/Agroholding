@@ -2,6 +2,7 @@
 
 import * as motion from 'motion/react-client'
 import { Leaf, Award, Users, TrendingUp } from 'lucide-react'
+import { Title } from '../ui/title'
 
 const features = [
   {
@@ -30,16 +31,13 @@ export default function WhyUs() {
   return (
     <section className="py-20 bg-green-900 text-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4">Чому обирають нас</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
-        </motion.div>
+        <Title
+          title="Досконалість у кожній деталі"
+          boldPart="кожній деталі"
+          subtitle="Ми прагнемо до досконалості у всьому, що робимо, забезпечуючи найвищу якість продукції та сервісу для наших клієнтів"
+          align="center"
+          style="light"
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (

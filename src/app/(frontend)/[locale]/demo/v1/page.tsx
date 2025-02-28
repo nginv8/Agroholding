@@ -10,6 +10,9 @@ import OurIdeas from '@/components/OurIdeas'
 import Products from '@/components/Products'
 import Testimonials from '@/components/Testimonials'
 import WhyUs from '@/components/WhyUs'
+import ProductGrid from '@/components/ProductGrid'
+import Advantages from '@/components/Advantages'
+import ContactUsV3 from '@/components/ContactUsV3'
 
 export default async function Page() {
   return (
@@ -17,14 +20,17 @@ export default async function Page() {
       <Header />
       <Hero />
       <AboutUs />
-      <Products />
+      <ProductGrid />
+      {/* <Products /> */}
       <WhyUs />
       <NewsGrid />
-      <OurIdeas />
+      {/* <OurIdeas /> */}
+      <Advantages />
       <Testimonials />
       <Careers />
       <FAQ />
-      <ContactUs />
+      {/* <ContactUs /> */}
+      <ContactUsV3 />
 
       <Footer />
     </>

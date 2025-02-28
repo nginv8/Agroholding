@@ -1,322 +1,192 @@
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import {
-  MapPin,
-  Clock,
-  Banknote,
-  GraduationCap,
-  Users,
-  ArrowRight,
-  CheckCircle2,
-  Building2,
-} from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+'use client'
 
-const jobs = [
+import { motion, AnimatePresence } from 'framer-motion'
+import { Title } from '@/components/ui/title'
+import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import { MapPin, Clock, Briefcase, Plus, Minus, ArrowRight, Users } from 'lucide-react'
+import { useState } from 'react'
+
+const positions = [
   {
     id: 1,
-    title: 'Агроном',
-    department: 'Виробництво',
+    title: 'Головний агроном',
     location: 'Київська область',
     type: 'Повна зайнятість',
-    salary: '25 000 - 35 000 грн',
     experience: '3-5 років',
-    education: 'Вища агрономічна',
-    description:
-      'Ми шукаємо досвідченого агронома для управління та оптимізації процесів вирощування сільськогосподарських культур.',
-    responsibilities: [
-      'Планування та організація посівних робіт',
-      'Контроль якості продукції на всіх етапах вирощування',
-      'Впровадження нових технологій та методів обробки землі',
-      'Ведення документації та звітності',
-    ],
     requirements: [
-      'Вища освіта за спеціальністю',
-      'Досвід роботи від 3 років',
+      'Вища профільна освіта',
+      'Досвід роботи на аналогічній посаді',
       'Знання сучасних агротехнологій',
-      'Навички роботи з GPS-системами',
+      'Навички управління персоналом',
     ],
-    benefits: [
-      'Конкурентна заробітна плата',
-      'Медичне страхування',
-      'Корпоративний транспорт',
-      'Можливості професійного розвитку',
-    ],
-    image: '/placeholder.svg?height=400&width=600',
   },
   {
     id: 2,
-    title: 'Механізатор',
-    department: 'Виробництво',
-    location: 'Київська область',
+    title: 'Інженер-механік',
+    location: 'Полтавська область',
     type: 'Повна зайнятість',
-    salary: '20 000 - 30 000 грн',
-    experience: '2-3 роки',
-    education: 'Середня спеціальна',
-    description:
-      'Запрошуємо до команди досвідченого механізатора для роботи на сучасній сільськогосподарській техніці.',
-    responsibilities: [
-      'Керування та обслуговування сільгосптехніки',
-      'Проведення польових робіт',
-      'Технічне обслуговування техніки',
-      'Ведення звітності про виконані роботи',
-    ],
+    experience: 'від 2 років',
     requirements: [
-      'Досвід роботи від 2 років',
-      'Наявність посвідчення тракториста',
-      'Знання сучасної сільгосптехніки',
-      'Відповідальність та пунктуальність',
+      'Технічна освіта',
+      'Досвід ремонту сільгосптехніки',
+      'Знання гідравлічних систем',
+      'Вміння працювати з документацією',
     ],
-    benefits: [
-      'Офіційне працевлаштування',
-      'Харчування',
-      'Корпоративний транспорт',
-      'Премії за результатами роботи',
-    ],
-    image: '/placeholder.svg?height=400&width=600',
   },
   {
     id: 3,
-    title: 'Менеджер з продажу',
-    department: 'Продажі',
-    location: 'Київ',
+    title: 'Менеджер з логістики',
+    location: 'Черкаська область',
     type: 'Повна зайнятість',
-    salary: '30 000 - 45 000 грн',
-    experience: '3-5 років',
-    education: 'Вища',
-    description:
-      'Шукаємо енергійного менеджера з продажу для розвитку нових напрямків та роботи з ключовими клієнтами.',
-    responsibilities: [
-      'Пошук та залучення нових клієнтів',
-      'Ведення переговорів та укладання договорів',
-      'Супровід угод та контроль поставок',
-      'Аналіз ринку та конкурентів',
-    ],
+    experience: '2-3 роки',
     requirements: [
-      'Досвід роботи в продажах від 3 років',
-      'Знання ринку агропродукції',
+      'Вища освіта',
+      'Досвід у сфері логістики',
+      'Знання ринку перевезень',
       'Навички ведення переговорів',
-      'Знання англійської мови',
     ],
-    benefits: [
-      'Висока заробітна плата + бонуси',
-      'Медичне страхування',
-      'Корпоративний автомобіль',
-      'Навчання та тренінги',
-    ],
-    image: '/placeholder.svg?height=400&width=600',
   },
 ]
 
-export default function CareersV2() {
+export default function CareersSection() {
+  const [expandedId, setExpandedId] = useState<number | null>(null)
+
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Фонові декоративні елементи */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-white to-transparent" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Заголовок секції */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-4">Приєднуйтесь до команди</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto mb-8"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Ми пропонуємо цікаві можливості для професійного розвитку та зростання в одній з
-            провідних агрокомпаній України
-          </p>
-        </motion.div>
-
-        {/* Переваги роботи */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="grid md:grid-cols-3 gap-8 mb-24"
-        >
-          {[
-            {
-              icon: Building2,
-              title: 'Стабільна компанія',
-              description: '15+ років успішної роботи на ринку та постійний розвиток',
-            },
-            {
-              icon: Users,
-              title: 'Професійна команда',
-              description: 'Можливість працювати з найкращими фахівцями галузі',
-            },
-            {
-              icon: GraduationCap,
-              title: 'Навчання та розвиток',
-              description: 'Регулярні тренінги та програми підвищення кваліфікації',
-            },
-          ].map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent rounded-2xl" />
-              <div className="relative p-8">
-                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
-                  <benefit.icon className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Список вакансій */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          {jobs.map((job, index) => (
-            <motion.div
-              key={job.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-            >
-              <Card className="h-full">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-2xl mb-2">{job.title}</CardTitle>
-                      <CardDescription className="text-base">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          <Badge variant="secondary">{job.department}</Badge>
-                          <Badge variant="outline">{job.type}</Badge>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="flex items-center text-gray-500">
-                            <MapPin className="w-4 h-4 mr-2" />
-                            {job.location}
-                          </div>
-                          <div className="flex items-center text-gray-500">
-                            <Clock className="w-4 h-4 mr-2" />
-                            {job.experience}
-                          </div>
-                          <div className="flex items-center text-gray-500">
-                            <Banknote className="w-4 h-4 mr-2" />
-                            {job.salary}
-                          </div>
-                          <div className="flex items-center text-gray-500">
-                            <GraduationCap className="w-4 h-4 mr-2" />
-                            {job.education}
-                          </div>
-                        </div>
-                      </CardDescription>
-                    </div>
-                    <div className="relative w-24 h-24 rounded-xl overflow-hidden">
-                      <Image
-                        src={job.image || '/placeholder.svg'}
-                        alt={job.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-6">{job.description}</p>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Обов'язки:</h4>
-                      <ul className="space-y-2">
-                        {job.responsibilities.map((item, i) => (
-                          <li key={i} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-600">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Вимоги:</h4>
-                      <ul className="space-y-2">
-                        {job.requirements.map((item, i) => (
-                          <li key={i} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-600">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Ми пропонуємо:</h4>
-                      <ul className="space-y-2">
-                        {job.benefits.map((item, i) => (
-                          <li key={i} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-600">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full group">
-                    Відгукнутися на вакансію
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Додаткова інформація */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 bg-green-50 rounded-2xl p-8 lg:p-12"
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Не знайшли підходящу вакансію?
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Надішліть нам своє резюме, і ми повідомимо вас, коли з'явиться відповідна позиція
-              </p>
-              <Button variant="outline" size="lg" className="group">
-                Надіслати резюме
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-            <div className="relative h-64">
+    <section className="py-24 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Зображення (1/3 ширини) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:sticky lg:top-24"
+          >
+            <div className="relative aspect-square rounded-2xl overflow-hidden">
               <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="Кар'єра"
+                src="/placeholder.svg?height=800&width=600"
+                alt="Команда AgroHolding"
                 fill
-                className="object-cover rounded-xl"
+                className="object-cover"
               />
+              {/* Градієнтний оверлей */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+              {/* Статистика */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-3xl font-bold mb-1">150+</div>
+                    <div className="text-sm opacity-80">співробітників</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-1">12+</div>
+                    <div className="text-sm opacity-80">років досвіду</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Контент (2/3 ширини) */}
+          <div className="lg:col-span-1">
+            <Title
+              title="Кар'єра в нашій компанії"
+              boldPart="нашій компанії"
+              subtitle="Приєднуйтесь до команди професіоналів та розвивайтеся разом з нами"
+            />
+
+            <div className="space-y-4">
+              {positions.map((position) => (
+                <motion.div
+                  key={position.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    {/* Заголовок позиції */}
+                    <div
+                      className="p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+                      onClick={() => setExpandedId(expandedId === position.id ? null : position.id)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold mb-3">{position.title}</h3>
+                          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                            <span className="flex items-center">
+                              <MapPin className="w-4 h-4 mr-1.5" />
+                              {position.location}
+                            </span>
+                            <span className="flex items-center">
+                              <Briefcase className="w-4 h-4 mr-1.5" />
+                              {position.type}
+                            </span>
+                            <span className="flex items-center">
+                              <Clock className="w-4 h-4 mr-1.5" />
+                              {position.experience}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="ml-4">
+                          <div className="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center transition-colors group-hover:border-green-500">
+                            {expandedId === position.id ? (
+                              <Minus className="w-5 h-5 text-green-600" />
+                            ) : (
+                              <Plus className="w-5 h-5 text-gray-400" />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Розгорнутий контент */}
+                    <AnimatePresence>
+                      {expandedId === position.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className="px-6 pb-6">
+                            <div className="pt-6 border-t border-gray-100">
+                              <h4 className="font-medium mb-4 flex items-center">
+                                <Users className="w-5 h-5 mr-2 text-green-600" />
+                                Вимоги до кандидата:
+                              </h4>
+                              <ul className="space-y-3 mb-6">
+                                {position.requirements.map((req, index) => (
+                                  <motion.li
+                                    key={index}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="flex items-center text-gray-600"
+                                  >
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mr-3" />
+                                    {req}
+                                  </motion.li>
+                                ))}
+                              </ul>
+                              <Button className="w-full sm:w-auto group">
+                                Відгукнутися
+                                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                              </Button>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

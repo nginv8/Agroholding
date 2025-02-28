@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordionPlus'
+} from '@/components/ui/accordion'
 import Image from 'next/image'
 
 const faqs = [
@@ -107,7 +107,7 @@ export default function FAQ() {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className=" data-[state=open]:bg-gray-100/80 rounded transition-colors border-none"
+                    className="bg-white border border-gray-200 rounded-xl shadow-sm data-[state=open]:bg-green-50/50 transition-colors"
                   >
                     <AccordionTrigger className="px-6 py-4 text-left hover:no-underline data-[state=open]:text-green-700">
                       <span className="text-lg font-medium">{faq.question}</span>

@@ -46,8 +46,8 @@ export default function ProductsV2() {
   return (
     <section ref={ref} className="relative py-32 overflow-hidden">
       {/* Фонові декоративні елементи */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-gray-50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-100/80" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-gray-100/80 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

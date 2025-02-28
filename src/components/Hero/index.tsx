@@ -58,7 +58,7 @@ export default function Hero() {
           >
             <Button
               size="lg"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black min-w-[200px] group"
+              className="bg-yellow-500 hover:bg-yellow-400 text-black min-w-[200px] w-full md:w-auto group"
             >
               Наша продукція
               <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -66,7 +66,7 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="min-w-[200px] border-white bg-black/30 text-white hover:bg-white  hover:text-black group"
+              className="min-w-[200px] border-white bg-black/30 text-white hover:bg-white w-full md:w-auto  hover:text-black group"
             >
               Зв'язатися з нами
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

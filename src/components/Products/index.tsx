@@ -3,6 +3,7 @@
 import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { Title } from '../ui/title'
 
 const products = [
   {
@@ -30,19 +31,12 @@ export default function Products() {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-4">Наша продукція</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto mb-8"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Ми пропонуємо широкий асортимент сільськогосподарської продукції найвищої якості
-          </p>
-        </motion.div>
+        <Title
+          title="Преміальна якість для вашого бізнесу"
+          boldPart="вашого бізнесу"
+          subtitle="Ми пропонуємо широкий асортимент сільськогосподарської продукції найвищої якості"
+          align="center"
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (

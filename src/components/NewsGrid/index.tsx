@@ -4,6 +4,7 @@ import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Title } from '../ui/title'
 
 type Post = {
   id: number
@@ -42,16 +43,12 @@ export default function NewsGrid() {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-4">Новини</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
-        </motion.div>
+        <Title
+          title="Інновації та розвиток для майбутнього"
+          boldPart="Інновації та розвиток"
+          subtitle="Ми постійно розвиваємося та впроваджуємо інноваційні рішення для покращення якості нашої продукції та збереження довкілля"
+          align="center"
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {samplePosts.map((post, index) => (
