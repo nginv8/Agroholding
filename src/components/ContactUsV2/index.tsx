@@ -10,7 +10,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Phone, Mail, MapPin, Clock, Send, Building, ArrowRight } from 'lucide-react'
-import Image from 'next/image'
 
 const contactInfo = [
   {
@@ -56,21 +55,21 @@ export default function ContactFormV2() {
             transition={{ duration: 1 }}
           >
             <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
-              Зв'яжіться з нами
+              Зв&apos;яжіться з нами
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
               Готові до співпраці?
               <span className="block text-green-700">Напишіть нам</span>
             </h2>
             <p className="text-xl text-gray-600 mb-12 leading-relaxed">
-              Заповніть форму нижче, і наші спеціалісти зв'яжуться з вами протягом 24 годин для
+              Заповніть форму нижче, і наші спеціалісти зв&apos;яжуться з вами протягом 24 годин для
               обговорення деталей співпраці.
             </p>
 
             <form className="space-y-8">
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900">Ім'я</label>
+                  <label className="text-sm font-medium text-gray-900">Ім&apos;я</label>
                   <Input placeholder="Ваше ім'я" className="h-12" />
                 </div>
                 <div className="space-y-2">

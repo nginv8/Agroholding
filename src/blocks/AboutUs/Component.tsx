@@ -1,6 +1,5 @@
 import * as motion from 'motion/react-client'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import type { AboutUsBlock as AboutUsBlockProps } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'

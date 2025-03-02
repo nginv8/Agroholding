@@ -6,8 +6,8 @@ import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/globals/Footer/Component'
-import { Header } from '@/globals/Header/Component'
+// import { Footer } from '@/globals/Footer/Component'
+// import { Header } from '@/globals/Header/Component'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
@@ -20,7 +20,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
-import localization from '@/i18n/localization'
+// import localization from '@/i18n/localization'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -34,9 +34,9 @@ type Args = {
 
 export default async function RootLayout({ children, params }: Args) {
   const { locale } = await params
-  const currentLocale = localization.locales.find((loc) => loc.code === locale)
+  // const currentLocale = localization.locales.find((loc) => loc.code === locale)
 
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale)) {
     notFound()
   }
   if (locale) {

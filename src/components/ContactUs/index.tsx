@@ -17,12 +17,10 @@ export default function ContactForm() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-green-800 mb-4">
-            Зв'яжіться з нами
-          </h2>
+          <h2 className="text-4xl font-bold text-green-800 mb-4">Зв&apos;яжіться з нами</h2>
           <div className="w-24 h-1 bg-yellow-500 mx-auto mb-8"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Маєте питання? Зв'яжіться з нами, і ми будемо раді допомогти
+            Маєте питання? Зв&apos;яжіться з нами, і ми будемо раді допомогти
           </p>
         </motion.div>
 
@@ -67,32 +65,21 @@ export default function ContactForm() {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Ім'я
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Ім&apos;я</label>
                   <Input placeholder="Ваше ім'я" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                   <Input type="email" placeholder="ваш@email.com" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Тема
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Тема</label>
                 <Input placeholder="Тема повідомлення" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Повідомлення
-                </label>
-                <Textarea
-                  placeholder="Ваше повідомлення..."
-                  className="min-h-[150px]"
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Повідомлення</label>
+                <Textarea placeholder="Ваше повідомлення..." className="min-h-[150px]" />
               </div>
             </div>
             <Button className="w-full">Надіслати</Button>

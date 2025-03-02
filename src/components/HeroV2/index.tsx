@@ -75,7 +75,7 @@ export default function HeroV2() {
                 variant="outline"
                 className="border-2 text-lg px-8 h-14 bg-transparent border-white hover:bg-white hover:text-black transition-colors w-full md:w-auto"
               >
-                Зв'язатися з нами
+                Зв&apos;язатися з нами
               </Button>
             </motion.div>
           </motion.div>

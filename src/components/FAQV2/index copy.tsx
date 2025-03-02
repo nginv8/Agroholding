@@ -132,7 +132,7 @@ export default function FAQ() {
             >
               <p className="text-green-800 font-medium">Не знайшли відповідь на своє запитання?</p>
               <p className="text-green-600 mt-2">
-                Зв'яжіться з нашою службою підтримки, і ми з радістю допоможемо вам.
+                Зв&apos;яжіться з нашою службою підтримки, і ми з радістю допоможемо вам.
               </p>
             </motion.div>
           </motion.div>

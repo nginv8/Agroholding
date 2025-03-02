@@ -1,9 +1,6 @@
-'use client'
-
-import { motion, useScroll, useTransform } from 'motion/react'
+import * as motion from 'motion/react-client'
 import { Lightbulb, Sprout, Recycle, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
-import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 
 const ideas = [
@@ -31,16 +28,8 @@ const ideas = [
 ]
 
 export default function OurIdeasV2() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100])
-
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 

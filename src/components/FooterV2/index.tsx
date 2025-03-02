@@ -26,7 +26,7 @@ export default function FooterV2() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2 className="text-4xl font-bold mb-8">Залишайтесь на зв'язку</h2>
+              <h2 className="text-4xl font-bold mb-8">Залишайтесь на зв&apos;язку</h2>
               <p className="text-gray-300 text-lg mb-12 leading-relaxed max-w-lg">
                 Підпишіться на нашу розсилку, щоб отримувати останні новини та спеціальні пропозиції
                 від нашої компанії.

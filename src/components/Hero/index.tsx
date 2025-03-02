@@ -67,7 +67,7 @@ export default function Hero() {
               variant="outline"
               className="min-w-[200px] border-white bg-black/30 text-white hover:bg-white w-full md:w-auto  hover:text-black group"
             >
-              Зв'язатися з нами
+              Зв&apos;язатися з нами
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>

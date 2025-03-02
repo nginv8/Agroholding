@@ -1,10 +1,8 @@
-'use client'
-
-import { motion, useScroll, useTransform } from 'motion/react'
+import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { useRef } from 'react'
-import { ArrowRight, Star } from 'lucide-react'
+
+import { ArrowRight } from 'lucide-react'
 
 const products = [
   {
@@ -35,16 +33,8 @@ const products = [
 ]
 
 export default function ProductsV2() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100])
-
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-100/80" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-gray-100/80 to-transparent" />
@@ -133,7 +123,7 @@ export default function ProductsV2() {
                 Ми можемо розробити спеціальну пропозицію під ваші потреби та масштаби бізнесу.
               </p>
               <Button variant="outline" size="lg" className="group">
-                Зв'язатися з нами
+                Зв&apos;язатися з нами
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

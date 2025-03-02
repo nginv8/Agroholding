@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react'
+import { Phone, Mail, Send } from 'lucide-react'
 import Image from 'next/image'
 import { Title } from '../ui/title'
 
@@ -137,7 +137,7 @@ export default function ContactFormV2() {
             <form className="space-y-8">
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-200">Ім'я</label>
+                  <label className="text-sm font-medium text-gray-200">Ім&apos;я</label>
                   <Input
                     placeholder="Ваше ім'я"
                     className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-yellow-400 transition-colors"

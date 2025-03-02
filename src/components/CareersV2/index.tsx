@@ -12,12 +12,10 @@ import {
   Clock,
   Car,
   Wrench,
-  ClipboardCheck,
   Building2,
   Calculator,
   MonitorSmartphone,
   Users,
-  Eye,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
@@ -160,7 +158,7 @@ export default function CareersV2() {
           className="text-center lg:text-left max-w-3xl mx-auto mb-24"
         >
           <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
-            Кар'єра в AgroHolding
+            Кар&apos;єра в AgroHolding
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
             Приєднуйтесь до команди

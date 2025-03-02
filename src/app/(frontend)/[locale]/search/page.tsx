@@ -9,7 +9,7 @@ import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
 import { getTranslations } from 'next-intl/server'
 
-import { Post } from '@/payload-types'
+// import { Post } from '@/payload-types'
 import { TypedLocale } from 'payload'
 
 type Args = {
@@ -23,10 +23,10 @@ type Args = {
 
 export default async function Page({
   searchParams: searchParamsPromise,
-  params: paramsPromise,
+  // params: paramsPromise,
 }: Args) {
   const { q: query } = await searchParamsPromise
-  const { locale } = await paramsPromise
+  // const { locale } = await paramsPromise
   const payload = await getPayload({ config: configPromise })
   const t = await getTranslations()
 
