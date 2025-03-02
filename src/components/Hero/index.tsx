@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import * as motion from 'motion/react-client'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, ArrowRight } from 'lucide-react'
@@ -6,16 +7,14 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Фонове зображення */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: "url('/agro-media/1.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        {/* Оверлей */}
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="fixed inset-0 -z-10 after:absolute after:inset-0 after:bg-black/50">
+        <Image
+          src="/demo/field2.jpg"
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-40"
+        />
       </div>
 
       <div className="container mx-auto px-4 pt-20 relative z-10">

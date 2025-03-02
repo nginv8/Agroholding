@@ -12,21 +12,21 @@ const ideas = [
     title: 'Інновації в агротехнологіях',
     description:
       'Впровадження сучасних методів обробки землі та вирощування культур для досягнення найкращих результатів',
-    image: '/agro-media/1.jpg',
+    image: '/demo/w5.jpg',
   },
   {
     icon: Sprout,
     title: 'Екологічне землеробство',
     description:
       'Розвиток органічного землеробства та збереження природних ресурсів для майбутніх поколінь',
-    image: '/agro-media/2.jpg',
+    image: '/demo/w1.jpg',
   },
   {
     icon: Recycle,
     title: 'Сталий розвиток',
     description:
       'Збалансований підхід до використання природних ресурсів та впровадження відновлюваних джерел енергії',
-    image: '/agro-media/3.jpg',
+    image: '/demo/hub.jpg',
   },
 ]
 
@@ -115,7 +115,7 @@ export default function OurIdeasV2() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <Image
-                src="/agro-media/2.jpg"
+                src="/demo/w4.jpg"
                 alt="Інновації в дії"
                 width={800}
                 height={600}

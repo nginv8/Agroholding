@@ -16,6 +16,7 @@ export default async function Page() {
   return (
     <>
       <HeaderV2 />
+
       <HeroV2 />
       <AboutUsV2 />
       <ProductsV2 />
@@ -26,7 +27,6 @@ export default async function Page() {
       <TestimonialsV2 />
       <FAQV2 />
       <ContactUsV2 />
-      {/* <ContactUsV3 /> */}
 
       <FooterV2 />
     </>

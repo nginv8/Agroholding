@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import * as motion from 'motion/react-client'
 import { Leaf, Award, Users, TrendingUp } from 'lucide-react'
 import { Title } from '../ui/title'
@@ -29,7 +30,14 @@ const features = [
 
 export default function WhyUs() {
   return (
-    <section className="py-20 bg-green-900 text-white">
+    <section className="relative py-20 bg-green-900/90 text-white overflow-hidden">
+      <Image
+        src="/demo/k5.jpg"
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        className="absolute inset-40 -z-10"
+      />
       <div className="container mx-auto px-4">
         <Title
           title="Досконалість у кожній деталі"

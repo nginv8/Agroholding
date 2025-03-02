@@ -44,15 +44,10 @@ export default function FAQ() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="relative order-2 lg:order-1"
+            className="order-2 lg:order-1 sticky top-24"
           >
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-              <Image
-                src="/placeholder.svg?height=800&width=600"
-                alt="Поле кукурудзи"
-                fill
-                className="object-cover"
-              />
+            <div className="relative h-[720px] rounded-2xl overflow-hidden">
+              <Image src="/demo/f1.jpg" alt="Поле кукурудзи" fill className="object-cover" />
               {/* Оверлей */}
               <div className="absolute inset-0 bg-gradient-to-t from-green-950/40 to-transparent" />
             </div>

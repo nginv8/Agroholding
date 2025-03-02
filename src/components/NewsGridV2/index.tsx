@@ -21,7 +21,7 @@ const samplePosts: Post[] = [
     excerpt:
       'Впровадження нових технологій для підвищення якості та врожайності спеціальних сортів кукурудзи...',
     date: '2024-02-15',
-    image: '/agro-media/1.jpg',
+    image: '/demo/w3.jpg',
     category: 'Технології',
   },
   {
@@ -30,7 +30,7 @@ const samplePosts: Post[] = [
     excerpt:
       'Наша компанія успішно пройшла міжнародну сертифікацію якості та відповідає найвищим стандартам...',
     date: '2024-02-10',
-    image: '/agro-media/2.jpg',
+    image: '/demo/l6.jpg',
     category: 'Досягнення',
   },
   {
@@ -39,7 +39,7 @@ const samplePosts: Post[] = [
     excerpt:
       'Відкриття нових експортних напрямків та укладання контрактів з провідними світовими компаніями...',
     date: '2024-02-05',
-    image: '/agro-media/3.jpg',
+    image: '/demo/t5.jpg',
     category: 'Бізнес',
   },
 ]

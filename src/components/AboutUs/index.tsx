@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'motion/react'
 import Image from 'next/image'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { useRef } from 'react'
@@ -14,9 +14,9 @@ export default function AboutSectionStory() {
     offset: ['start end', 'end start'],
   })
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50])
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
 
   return (
     <section ref={containerRef} className="py-32 relative overflow-hidden">
@@ -72,9 +72,9 @@ export default function AboutSectionStory() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
                 >
-                  <Button size="lg" className="group mt-8">
+                  <Button size="lg" className="group mt-8 bg-green-800">
                     Дізнатися більше
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 w-4 h-4  transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
               </div>
@@ -83,14 +83,9 @@ export default function AboutSectionStory() {
             {/* Колонка з зображеннями */}
             <div className="relative h-[600px]">
               {/* Головне зображення */}
-              <motion.div style={{ y: y1 }} className="absolute left-0 right-0 top-0 z-20">
+              <motion.div style={{ y: y1 }} className="absolute left-0 right-0 top-20 z-20">
                 <div className="relative h-[400px] w-11/12 rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="/placeholder.svg?height=800&width=600"
-                    alt="Наші поля"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/demo/fd1.jpg" alt="Наші поля" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
               </motion.div>
@@ -101,12 +96,7 @@ export default function AboutSectionStory() {
                 className="absolute left-1/4 right-0 top-1/3 z-10"
               >
                 <div className="relative h-[300px] rounded-2xl overflow-hidden shadow-xl">
-                  <Image
-                    src="/placeholder.svg?height=600&width=800"
-                    alt="Наша команда"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/demo/field4.jpg" alt="Наша команда" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
               </motion.div>

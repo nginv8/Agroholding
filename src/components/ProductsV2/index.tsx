@@ -12,7 +12,7 @@ const products = [
     name: 'Преміум попкорн',
     description:
       'Найкраща кукурудза для попкорну преміум якості з відмінними смаковими характеристиками',
-    image: '/agro-media/1.jpg',
+    image: '/demo/p3.jpg',
     rating: 5,
     features: ['Великі зерна', 'Відмінний смак', '100% натуральний продукт'],
   },
@@ -20,7 +20,7 @@ const products = [
     id: 2,
     name: 'Золота кукурудза',
     description: 'Спеціальний сорт кукурудзи для професійного використання',
-    image: '/agro-media/2.jpg',
+    image: '/demo/p2.jpg',
     rating: 5,
     features: ['Висока врожайність', 'Стійкість до хвороб', 'Тривале зберігання'],
   },
@@ -28,7 +28,7 @@ const products = [
     id: 3,
     name: 'Органік попкорн',
     description: 'Органічна кукурудза для попкорну, вирощена без використання хімікатів',
-    image: '/agro-media/3.jpg',
+    image: '/demo/p7.jpg',
     rating: 5,
     features: ['Органічний продукт', 'Екологічно чистий', 'Багатий смак'],
   },
@@ -139,7 +139,7 @@ export default function ProductsV2() {
             </div>
             <div className="relative h-64">
               <Image
-                src="/agro-media/3.jpg"
+                src="/demo/rc1.jpg"
                 alt="Консультація"
                 fill
                 className="object-cover rounded-xl"

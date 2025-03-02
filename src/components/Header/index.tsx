@@ -18,14 +18,14 @@ export default function Header() {
         <div className="container mx-auto px-4 flex justify-center md:justify-between items-center h-8 gap-8">
           <Link
             href="tel:+96 733 324 996"
-            className="text-white hover:text-orange-200 transition-colors flex items-center"
+            className="text-white font-light hover:text-orange-200 transition-colors flex items-center"
           >
             <Phone size={18} className="mr-2" />
             +96 733 324 996
           </Link>
           <Link
             href="mailto:agroholdeing@gmail.com"
-            className="text-white hover:text-orange-200 transition-colors md:flex items-center ml-4 hidden "
+            className="text-white hover:text-orange-200 transition-colors md:flex items-center ml-4 hidden font-light"
           >
             <Mail size={18} className="mr-2" />
             agroholdeing@gmail.com

@@ -11,49 +11,49 @@ const products = [
     name: 'Преміум попкорн',
     description:
       'Найкраща кукурудза для попкорну преміум якості з відмінними смаковими характеристиками',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p1.jpg',
   },
   {
     id: 2,
     name: 'Золота кукурудза',
     description: 'Спеціальний сорт кукурудзи для професійного використання з високою врожайністю',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p2.jpg',
   },
   {
     id: 3,
     name: 'Органік попкорн',
     description: 'Органічна кукурудза для попкорну, вирощена без використання хімікатів',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p3.jpg',
   },
   {
     id: 4,
     name: 'Солодка кукурудза',
     description: 'Спеціальний сорт солодкої кукурудзи для свіжого споживання та консервування',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p4.jpg',
   },
   {
     id: 5,
     name: 'Кормова кукурудза',
     description: 'Високоврожайний сорт кукурудзи для виробництва кормів',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p5.jpg',
   },
   {
     id: 6,
     name: 'Насіннєва кукурудза',
     description: 'Елітне насіння кукурудзи для професійного вирощування',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p6.jpg',
   },
   {
     id: 7,
     name: 'Біла кукурудза',
     description: 'Спеціальний сорт білої кукурудзи для виробництва крупи та борошна',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p7.jpg',
   },
   {
     id: 8,
     name: 'Цукрова кукурудза',
     description: 'Надсолодкий сорт кукурудзи з підвищеним вмістом цукру',
-    image: '/placeholder.svg?height=400&width=400',
+    image: '/demo/p8.jpg',
   },
 ]
 

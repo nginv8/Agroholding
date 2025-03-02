@@ -13,7 +13,7 @@ export default function AboutUsV2() {
     offset: ['start end', 'end start'],
   })
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -120])
 
   return (
     <section ref={ref} className="relative py-32 overflow-hidden">
@@ -33,7 +33,7 @@ export default function AboutUsV2() {
           >
             <div className="relative z-10">
               <Image
-                src="/agro-media/2.jpg"
+                src="/demo/field3.jpg"
                 alt="Поле пшениці"
                 width={800}
                 height={600}
@@ -42,10 +42,10 @@ export default function AboutUsV2() {
             </div>
 
             {/* Плаваюче зображення */}
-            <div className="absolute -bottom-12 -right-12 z-20 w-64 h-64">
+            <div className="absolute -bottom-32 -right-12 z-20 size-80">
               <motion.div style={{ y: y1 }}>
                 <Image
-                  src="/agro-media/3.jpg"
+                  src="/demo/g6.jpg"
                   alt="Кукурудза крупним планом"
                   width={300}
                   height={300}

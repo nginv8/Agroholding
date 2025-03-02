@@ -11,28 +11,28 @@ const features = [
     title: 'Екологічність',
     description:
       'Використовуємо екологічно чисті методи вирощування наших культур, зберігаючи природні ресурси для майбутніх поколінь',
-    image: '/agro-media/1.jpg',
+    image: '/demo/o1.jpg',
   },
   {
     icon: Award,
     title: 'Найвища якість',
     description:
       'Суворий контроль якості на всіх етапах виробництва забезпечує преміальну якість нашої продукції',
-    image: '/agro-media/2.jpg',
+    image: '/demo/p4.jpg',
   },
   {
     icon: Users,
     title: 'Професійна команда',
     description:
       'Наша команда складається з досвідчених фахівців з багаторічним досвідом у сільському господарстві',
-    image: '/agro-media/3.jpg',
+    image: '/demo/team3.jpg',
   },
   {
     icon: TrendingUp,
     title: 'Інноваційний підхід',
     description:
       'Впровадження сучасних технологій землеробства для досягнення найкращих результатів',
-    image: '/agro-media/1.jpg',
+    image: '/demo/l3.jpg',
   },
 ]
 
@@ -50,10 +50,10 @@ export default function WhyUsV2() {
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0">
         <Image
-          src="/agro-media/2.jpg"
+          src="/demo/field2.jpg"
           alt="Background texture"
           fill
-          className="object-cover opacity-5"
+          className="object-cover opacity-10"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-green-950/50 to-green-950" />

@@ -8,7 +8,7 @@ export default function HeroV2() {
     <div className="relative min-h-screen overflow-hidden">
       {/* Паралакс фонове зображення */}
       <div className="absolute inset-0 z-0">
-        <Image src="/agro-media/1.jpg" alt="Пшеничне поле" fill className="object-cover" priority />
+        <Image src="/demo/field12.jpg" alt="Пшеничне поле" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       </div>
 
@@ -88,11 +88,11 @@ export default function HeroV2() {
           >
             <div className="relative">
               <Image
-                src="/agro-media/2.jpg"
+                src="/demo/b4.png"
                 alt="Кукурудза"
                 width={600}
                 height={600}
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl "
               />
               {/* Декоративні елементи */}
               <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />

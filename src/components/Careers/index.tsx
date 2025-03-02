@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { Title } from '@/components/ui/title'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
@@ -56,17 +56,17 @@ export default function CareersSection() {
     <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Зображення (1/3 ширини) */}
+          {/* Зображення (1/2 ширини) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:sticky lg:top-24"
+            className="lg:sticky lg:top-24 lg:order-2"
           >
-            <div className="relative aspect-square rounded-2xl overflow-hidden">
+            <div className="relative h-[720px] rounded-2xl overflow-hidden">
               <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/demo/team2.jpg"
                 alt="Команда AgroHolding"
                 fill
                 className="object-cover"

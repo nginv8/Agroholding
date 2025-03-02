@@ -20,23 +20,22 @@ const samplePosts: Post[] = [
     title: 'Новий врожай кукурудзи для попкорну',
     excerpt: 'Цього року ми зібрали рекордний врожай спеціальної кукурудзи для попкорну...',
     date: '2024-02-15',
-    image: '/agro-media/1.jpg',
+    image: '/demo/l1.jpg',
   },
   {
     id: 2,
     title: 'Новий врожай кукурудзи для попкорну',
     excerpt: 'Цього року ми зібрали рекордний врожай спеціальної кукурудзи для попкорну...',
     date: '2024-02-15',
-    image: '/agro-media/2.jpg',
+    image: '/demo/w1.jpg',
   },
   {
     id: 3,
     title: 'Новий врожай кукурудзи для попкорну',
     excerpt: 'Цього року ми зібрали рекордний врожай спеціальної кукурудзи для попкорну...',
     date: '2024-02-15',
-    image: '/agro-media/3.jpg',
+    image: '/demo/t5.jpg',
   },
-  // Add more sample posts...
 ]
 
 export default function NewsGrid() {

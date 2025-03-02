@@ -11,8 +11,8 @@ const testimonials = [
     role: 'Власник мережі кінотеатрів',
     content:
       'Найкраща кукурудза для попкорну, яку ми коли-небудь використовували. Відмінна якість та стабільні поставки.',
-    avatar: '/agro-media/1.jpg',
-    image: '/agro-media/2.jpg',
+    avatar: '/demo/a4.jpg',
+    image: '/demo/r1.jpg',
     rating: 5,
   },
   {
@@ -21,8 +21,8 @@ const testimonials = [
     role: 'Директор з виробництва',
     content:
       'Професійний підхід до роботи та висока якість продукції. Рекомендую як надійного партнера.',
-    avatar: '/agro-media/2.jpg',
-    image: '/agro-media/3.jpg',
+    avatar: '/demo/a3.jpg',
+    image: '/demo/r2.jpg',
     rating: 5,
   },
   {
@@ -31,8 +31,8 @@ const testimonials = [
     role: 'Керівник агрохолдингу',
     content:
       'Інноваційний підхід до вирощування та обробки продукції. Завжди дотримуються термінів та умов співпраці.',
-    avatar: '/agro-media/3.jpg',
-    image: '/agro-media/1.jpg',
+    avatar: '/demo/a2.jpg',
+    image: '/demo/r4.jpg',
     rating: 5,
   },
 ]
@@ -93,7 +93,7 @@ export default function TestimonialsV2() {
                       alt={testimonial.name}
                       width={56}
                       height={56}
-                      className="rounded-full border-4 border-white shadow-lg"
+                      className="rounded-full aspect-square border-4 border-white shadow-lg"
                     />
                     <div className="ml-4">
                       <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
