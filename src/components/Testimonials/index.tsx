@@ -39,7 +39,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <Title
           title="Що про нас кажуть наші партнери"

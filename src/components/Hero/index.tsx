@@ -5,7 +5,7 @@ import { ChevronRight, ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-end flex-wrap overflow-hidden">
       {/* Фонове зображення */}
       <div className="fixed inset-0 -z-10 after:absolute after:inset-0 after:bg-black/50">
         <Image
@@ -17,7 +17,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container mx-auto px-4 pt-20 relative z-10">
+      <div className="container mx-auto px-4 pt-28 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="flex justify-center w-full my-16"
       >
         <div className="w-6 h-10 border-2 border-white rounded-full p-1 animate-bounce">
           <div className="w-1.5 h-1.5 bg-white rounded-full mx-auto" />

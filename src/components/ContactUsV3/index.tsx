@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Phone, Mail, Send } from 'lucide-react'
+import { Phone, Mail, Send, MapPin, Clock } from 'lucide-react'
 import Image from 'next/image'
 import { Title } from '../ui/title'
 
@@ -52,18 +52,14 @@ export default function ContactFormV2() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Ліва колонка з формою */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+          <div>
             <Title
               title="Готові до співпраці? Напишіть нам"
               boldPart="Напишіть нам"
               subtitle="Заповніть форму нижче, і наші спеціалісти зв'яжуться з вами протягом 24 годин для обговорення деталей співпраці."
               align="left"
               style="light"
+              className="max-w-full overflow-hidden"
             />
             <div className="grid sm:grid-cols-2 gap-8">
               {contactInfo.map((info, index) => (
@@ -100,7 +96,7 @@ export default function ContactFormV2() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="mt-12"
+              className="mt-12 overflow-hidden"
             >
               <a
                 className="relative block h-[360px] rounded-2xl overflow-hidden"
@@ -123,7 +119,7 @@ export default function ContactFormV2() {
                 </div>
               </a>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Права колонка з інформацією */}
 
@@ -132,7 +128,7 @@ export default function ContactFormV2() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 lg:p-12 sticky top-24"
+            className="bg-white/10 backdrop-blur-md rounded-2xl py-8 px-4 lg:p-12 sticky top-24"
           >
             <form className="space-y-8">
               <div className="grid sm:grid-cols-2 gap-6">

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import * as motion from 'motion/react-client'
 import Link from 'next/link'
 import { Mail, Menu, Phone, SearchIcon, X } from 'lucide-react'
@@ -42,7 +43,13 @@ export default function Header() {
               transition={{ delay: 0.2 }}
             >
               <Link href="/" className="text-2xl font-bold text-green-800">
-                AgroHolding
+                <Image
+                  src="/logo.svg"
+                  alt="Наша команда"
+                  width="160"
+                  height="48"
+                  className="h-14 w-auto"
+                />
               </Link>
             </motion.div>
 

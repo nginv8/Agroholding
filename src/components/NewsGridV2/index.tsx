@@ -46,7 +46,7 @@ const samplePosts: Post[] = [
 
 export default function NewsGridV2() {
   return (
-    <section className="py-32 bg-gray-50">
+    <section className="py-32 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-between items-start mb-16">
           <motion.div

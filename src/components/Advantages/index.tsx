@@ -40,7 +40,7 @@ const advantages = [
 
 export default function Advantages() {
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="container mx-auto px-4">
         <Title
           title="Чому обирають нас"

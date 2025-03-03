@@ -42,7 +42,7 @@ export default function AboutUsV2() {
             </div>
 
             {/* Плаваюче зображення */}
-            <div className="absolute -bottom-32 -right-12 z-20 size-80">
+            <div className="absolute -bottom-12 -right-12 z-20 size-1/2">
               <motion.div style={{ y: y1 }}>
                 <Image
                   src="/demo/g6.jpg"

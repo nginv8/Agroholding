@@ -40,7 +40,7 @@ const samplePosts: Post[] = [
 
 export default function NewsGrid() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <Title
           title="Інновації та розвиток для майбутнього"

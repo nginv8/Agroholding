@@ -11,10 +11,6 @@ import ProductGrid from '@/components/ProductGrid'
 import Advantages from '@/components/Advantages'
 import ContactUsV3 from '@/components/ContactUsV3'
 
-// import ContactUs from '@/components/ContactUs'
-// import OurIdeas from '@/components/OurIdeas'
-// import Products from '@/components/Products'
-
 export default async function Page() {
   return (
     <>
@@ -30,10 +26,6 @@ export default async function Page() {
       <FAQ />
       <Testimonials />
       <ContactUsV3 />
-
-      {/* <ContactUs />
-      <OurIdeas />
-      <Products /> */}
 
       <Footer />
     </>

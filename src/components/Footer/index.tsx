@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Facebook, Instagram, Linkedin, Twitter, Send } from 'lucide-react'
 import Link from 'next/link'
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import Image from 'next/image'
 
 const footerLinks = {
   company: [
@@ -35,7 +35,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-green-900 text-white">
+    <footer className="bg-green-900 text-white overflow-hidden">
       {/* Основний контент футера */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
@@ -47,7 +47,13 @@ export default function Footer() {
             className="lg:col-span-2"
           >
             <Link href="/" className="text-2xl font-bold mb-6 block">
-              AgroHolding
+              <Image
+                src="/logo-light.svg"
+                alt="Наша команда"
+                width="160"
+                height="48"
+                className="h-14 w-auto"
+              />
             </Link>
             <p className="text-gray-300 mb-6 max-w-md">
               Провідний виробник попкорну та інших зернових культур в Україні. Ми поєднуємо традиції
@@ -147,7 +153,7 @@ export default function Footer() {
               <Input
                 type="email"
                 placeholder="Ваш email"
-                className="bg-green-800 border-green-700 text-white placeholder:text-gray-400"
+                className="bg-green-800 border-green-700 text-white placeholder:text-gray-300"
               />
               <Button type="submit" variant="secondary" size="icon">
                 <Send className="h-4 w-4" />
@@ -165,10 +171,6 @@ export default function Footer() {
             <p className="text-gray-300 text-sm">
               © {new Date().getFullYear()} AgroHolding. Всі права захищені.
             </p>
-            <div className="flex gap-6 items-center">
-              Theme:
-              <ThemeSelector />
-            </div>
           </div>
         </div>
       </div>

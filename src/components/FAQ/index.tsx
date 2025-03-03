@@ -35,7 +35,7 @@ export default function FAQ() {
   const [expandedId, setExpandedId] = useState<number | null>(null)
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Ліва колонка з зображенням */}
@@ -51,9 +51,6 @@ export default function FAQ() {
               {/* Оверлей */}
               <div className="absolute inset-0 bg-gradient-to-t from-green-950/40 to-transparent" />
             </div>
-            {/* Декоративні елементи */}
-            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-            <div className="absolute -top-8 -left-8 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
 
             {/* Статистика */}
             <div className="absolute bottom-8 left-8 right-8">
@@ -112,11 +109,11 @@ export default function FAQ() {
                     >
                       <div className="flex items-center justify-between">
                         <h3 className="text-lg font-medium text-gray-900">{faq.question}</h3>
-                        <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center transition-colors group-hover:border-green-500">
+                        <div className="size-8 aspect-square rounded-full border-2 border-gray-300 flex items-center justify-center transition-colors group-hover:border-green-500">
                           {expandedId === index ? (
-                            <Minus className="w-4 h-4 text-green-500" />
+                            <Minus className="size-4 text-green-500" />
                           ) : (
-                            <Plus className="w-4 h-4 text-gray-500" />
+                            <Plus className="size-4 text-gray-500" />
                           )}
                         </div>
                       </div>

@@ -104,13 +104,12 @@ export default function HeaderV2() {
           >
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/placeholder.svg?height=40&width=40"
-                alt="Logo"
-                width={40}
-                height={40}
-                className="rounded"
+                src="/logo.svg"
+                alt="Наша команда"
+                width="160"
+                height="48"
+                className="h-14 w-auto"
               />
-              <span className="text-2xl font-bold text-green-800">AgroHolding</span>
             </Link>
           </motion.div>
 

@@ -59,7 +59,7 @@ const products = [
 
 export default function ProductGrid() {
   return (
-    <section className="py-32 bg-gray-50">
+    <section className="py-32 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <Title
           title="Широкий асортимент якісної продукції"

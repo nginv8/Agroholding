@@ -81,7 +81,7 @@ export default function AboutSectionStory() {
             </motion.div>
 
             {/* Колонка з зображеннями */}
-            <div className="relative h-[600px]">
+            <div className="relative h-[500px]">
               {/* Головне зображення */}
               <motion.div style={{ y: y1 }} className="absolute left-0 right-0 top-20 z-20">
                 <div className="relative h-[400px] w-11/12 rounded-2xl overflow-hidden shadow-2xl">

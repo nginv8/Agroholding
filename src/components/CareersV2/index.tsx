@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef } from 'react'
+import Image from 'next/image'
 
 import { motion, AnimatePresence } from 'motion/react'
 import { Button } from '@/components/ui/button'
@@ -106,7 +107,7 @@ export default function CareersV2() {
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? 200 : -200,
       opacity: 0,
     }),
     center: {
@@ -116,7 +117,7 @@ export default function CareersV2() {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? 200 : -200,
       opacity: 0,
     }),
   }
@@ -148,14 +149,14 @@ export default function CareersV2() {
   }
 
   return (
-    <section className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="container px-4 grid grid-cols-1 gap-16 lg:grid-cols-2">
+    <section className="py-32 bg-gradient-to-b from-gray-100 to-white relative overflow-hidden">
+      <div className="container px-4 grid grid-cols-1 gap-x-16 lg:grid-cols-2 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center lg:text-left max-w-3xl mx-auto mb-24"
+          className="text-center lg:text-left max-w-3xl mx-auto lg:mb-24 mb-10  relative z-10"
         >
           <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
             Кар&apos;єра в AgroHolding
@@ -164,6 +165,13 @@ export default function CareersV2() {
             Приєднуйтесь до команди
             <span className="block text-green-700">професіоналів</span>
           </h2>
+          <Image
+            src="/demo/team3.jpg"
+            alt="Наша команда"
+            width={500}
+            height={300}
+            className="w-full rounded-xl mb-6 h-64 object-cover transition-transform duration-700 group-hover:scale-105"
+          />
           <p className="text-xl text-gray-600 leading-relaxed">
             Ми шукаємо талановитих спеціалістів, які прагнуть розвиватися та робити внесок у
             розвиток сільського господарства України

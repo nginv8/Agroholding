@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input'
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 export default function FooterV2() {
   return (
@@ -124,23 +123,21 @@ export default function FooterV2() {
         <div className="border-t border-white/10">
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center space-x-2">
-                <Image
-                  src="/placeholder.svg?height=40&width=40"
-                  alt="Logo"
-                  width={40}
-                  height={40}
-                  className="rounded"
-                />
-                <span className="text-xl font-bold">AgroHolding</span>
-              </div>
+              <Image
+                src="/logo-light.svg"
+                alt="Наша команда"
+                width="160"
+                height="48"
+                className="h-14 w-auto"
+              />
+
               <p className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} AgroHolding. Всі права захищені.
               </p>
-              <div className="flex gap-6 items-center">
+              {/* <div className="flex gap-6 items-center">
                 Theme:
                 <ThemeSelector />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

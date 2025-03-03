@@ -20,7 +20,7 @@ export default function HeroV2() {
 
       {/* Основний контент */}
       <div className="min-h-screen flex flex-col justify-center">
-        <div className="relative z-20 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center flex-1  py-20">
+        <div className="relative z-20 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center flex-1  py-32">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
