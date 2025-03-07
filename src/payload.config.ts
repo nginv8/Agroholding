@@ -1,4 +1,4 @@
-// storage-adapter-import-placeholder
+import { cloudinaryStorage } from 'payload-cloudinary'
 // import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 
@@ -83,7 +83,20 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
-    // storage-adapter-placeholder
+    cloudinaryStorage({
+      config: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+        api_key: process.env.CLOUDINARY_API_KEY || '',
+        api_secret: process.env.CLOUDINARY_API_SECRET || '',
+      },
+      collections: {
+        media: true, // Enable for media collection
+        // Add more collections as needed
+      },
+      folder: 'your-folder-name', // Optional, defaults to 'payload-media'
+      disableLocalStorage: true, // Optional, defaults to true
+      enabled: true, // Optional, defaults to true
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
