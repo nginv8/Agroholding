@@ -71,7 +71,7 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
             <p className="text-xl text-gray-600 mb-12 leading-relaxed">{description}</p>
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
-              {features.map((item, index) => (
+              {features?.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
           transition={{ duration: 1, delay: 0.2 }}
           className="mt-32 grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
-          {stats.map((stat, index) => (
+          {stats?.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}

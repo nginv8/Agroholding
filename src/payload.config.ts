@@ -90,12 +90,11 @@ export default buildConfig({
         api_secret: process.env.CLOUDINARY_API_SECRET || '',
       },
       collections: {
-        media: true, // Enable for media collection
-        // Add more collections as needed
+        media: true,
       },
-      folder: 'your-folder-name', // Optional, defaults to 'payload-media'
-      disableLocalStorage: true, // Optional, defaults to true
-      enabled: true, // Optional, defaults to true
+      folder: 'payload-media',
+      disableLocalStorage: true,
+      enabled: true,
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,

@@ -12,50 +12,55 @@ export const AboutBlock: Block = {
     {
       name: 'subtitle',
       type: 'text',
-      required: true,
+      localized: true,
     },
     {
       name: 'title',
       type: 'text',
-      required: true,
+      localized: true,
     },
     {
       name: 'titleSecondColor',
       type: 'text',
-      required: true,
+      localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
-      required: true,
+      localized: true,
     },
     {
       name: 'mainImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'secondaryImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'features',
       type: 'array',
-      required: true,
       minRows: 1,
       fields: [
         {
           name: 'title',
           type: 'text',
-          required: true,
         },
         {
           name: 'description',
           type: 'text',
-          required: true,
+        },
+        {
+          name: 'icon',
+          label: 'Icon',
+          type: 'text',
+          admin: {
+            components: {
+              Field: '@/fields/CustomFields/IconSelectField',
+            },
+          },
         },
       ],
     },
@@ -68,18 +73,15 @@ export const AboutBlock: Block = {
     {
       name: 'stats',
       type: 'array',
-      required: true,
       minRows: 1,
       fields: [
         {
           name: 'number',
           type: 'text',
-          required: true,
         },
         {
           name: 'label',
           type: 'text',
-          required: true,
         },
       ],
     },

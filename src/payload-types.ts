@@ -730,17 +730,20 @@ export interface Form {
  * via the `definition` "AboutUsBlock".
  */
 export interface AboutUsBlock {
-  subtitle: string;
-  title: string;
-  titleSecondColor: string;
-  description: string;
-  mainImage: number | Media;
-  secondaryImage: number | Media;
-  features: {
-    title: string;
-    description: string;
-    id?: string | null;
-  }[];
+  subtitle?: string | null;
+  title?: string | null;
+  titleSecondColor?: string | null;
+  description?: string | null;
+  mainImage?: (number | null) | Media;
+  secondaryImage?: (number | null) | Media;
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   links?:
     | {
         link: {
@@ -765,11 +768,13 @@ export interface AboutUsBlock {
         id?: string | null;
       }[]
     | null;
-  stats: {
-    number: string;
-    label: string;
-    id?: string | null;
-  }[];
+  stats?:
+    | {
+        number?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'aboutUs';
@@ -1180,6 +1185,7 @@ export interface AboutUsBlockSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        icon?: T;
         id?: T;
       };
   links?:
