@@ -17,6 +17,9 @@ export const linkGroup: LinkGroupType = ({ appearances, overrides = {} } = {}) =
     fields: [
       link({
         appearances,
+        overrides: {
+          localized: true,
+        },
       }),
     ],
     admin: {

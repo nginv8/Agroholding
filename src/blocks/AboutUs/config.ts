@@ -15,52 +15,71 @@ export const AboutBlock: Block = {
       localized: true,
     },
     {
-      name: 'title',
-      type: 'text',
-      localized: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          localized: true,
+        },
+        {
+          name: 'titleSecondColor',
+          type: 'text',
+          localized: true,
+        },
+      ],
     },
-    {
-      name: 'titleSecondColor',
-      type: 'text',
-      localized: true,
-    },
+
     {
       name: 'description',
       type: 'textarea',
       localized: true,
     },
     {
-      name: 'mainImage',
-      type: 'upload',
-      relationTo: 'media',
+      type: 'row',
+      fields: [
+        {
+          name: 'mainImage',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'secondaryImage',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
     },
-    {
-      name: 'secondaryImage',
-      type: 'upload',
-      relationTo: 'media',
-    },
+
     {
       name: 'features',
       type: 'array',
-      minRows: 1,
       fields: [
         {
-          name: 'title',
-          type: 'text',
+          type: 'row',
+          fields: [
+            {
+              name: 'icon',
+              label: 'Icon',
+              type: 'text',
+              admin: {
+                components: {
+                  Field: '@/fields/CustomFields/IconSelectField',
+                },
+              },
+            },
+            {
+              name: 'title',
+              type: 'text',
+              localized: true,
+            },
+          ],
         },
+
         {
           name: 'description',
-          type: 'text',
-        },
-        {
-          name: 'icon',
-          label: 'Icon',
-          type: 'text',
-          admin: {
-            components: {
-              Field: '@/fields/CustomFields/IconSelectField',
-            },
-          },
+          type: 'textarea',
+          localized: true,
         },
       ],
     },
@@ -73,15 +92,20 @@ export const AboutBlock: Block = {
     {
       name: 'stats',
       type: 'array',
-      minRows: 1,
       fields: [
         {
-          name: 'number',
-          type: 'text',
-        },
-        {
-          name: 'label',
-          type: 'text',
+          type: 'row',
+          fields: [
+            {
+              name: 'number',
+              type: 'text',
+            },
+            {
+              name: 'label',
+              type: 'text',
+              localized: true,
+            },
+          ],
         },
       ],
     },

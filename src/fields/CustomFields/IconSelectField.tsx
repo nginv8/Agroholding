@@ -74,13 +74,13 @@ const IconSelectField: TextFieldClientComponent = ({ path, field }) => {
   }, [])
 
   return (
-    <div style={{ marginBottom: '1.5rem' }}>
+    <div style={{ flex: '1 1 20%' }}>
       {/* Label */}
       <label
         htmlFor={path}
         style={{
           display: 'block',
-          marginBottom: '0.25rem',
+          marginBottom: '5px',
         }}
       >
         {String(field?.label) || 'Icon'}

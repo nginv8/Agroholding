@@ -738,9 +738,9 @@ export interface AboutUsBlock {
   secondaryImage?: (number | null) | Media;
   features?:
     | {
+        icon?: string | null;
         title?: string | null;
         description?: string | null;
-        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1183,9 +1183,9 @@ export interface AboutUsBlockSelect<T extends boolean = true> {
   features?:
     | T
     | {
+        icon?: T;
         title?: T;
         description?: T;
-        icon?: T;
         id?: T;
       };
   links?:
