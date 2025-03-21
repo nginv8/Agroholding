@@ -731,8 +731,9 @@ export interface Form {
  */
 export interface AboutUsBlock {
   subtitle?: string | null;
-  title?: string | null;
-  titleSecondColor?: string | null;
+  titleStart?: string | null;
+  titleAccent?: string | null;
+  titleEnd?: string | null;
   description?: string | null;
   mainImage?: (number | null) | Media;
   secondaryImage?: (number | null) | Media;
@@ -1175,8 +1176,9 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface AboutUsBlockSelect<T extends boolean = true> {
   subtitle?: T;
-  title?: T;
-  titleSecondColor?: T;
+  titleStart?: T;
+  titleAccent?: T;
+  titleEnd?: T;
   description?: T;
   mainImage?: T;
   secondaryImage?: T;

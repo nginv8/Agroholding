@@ -18,12 +18,17 @@ export const AboutBlock: Block = {
       type: 'row',
       fields: [
         {
-          name: 'title',
+          name: 'titleStart',
           type: 'text',
           localized: true,
         },
         {
-          name: 'titleSecondColor',
+          name: 'titleAccent',
+          type: 'text',
+          localized: true,
+        },
+        {
+          name: 'titleEnd',
           type: 'text',
           localized: true,
         },

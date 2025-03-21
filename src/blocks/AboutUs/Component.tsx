@@ -1,14 +1,16 @@
 import * as motion from 'motion/react-client'
 import { Check } from 'lucide-react'
-import type { AboutUsBlock as AboutUsBlockProps } from '@/payload-types'
-import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
+import { ParallaxPreview } from '@/components/ParallaxPreview'
+
+import type { AboutUsBlock as AboutUsBlockProps } from '@/payload-types'
 
 export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
   const {
     subtitle,
-    title,
-    titleSecondColor,
+    titleStart,
+    titleAccent,
+    titleEnd,
     description,
     mainImage,
     secondaryImage,
@@ -26,30 +28,8 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left column with images */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
-            <div className="relative z-10">
-              {mainImage && <Media resource={mainImage} imgClassName="rounded-2xl shadow-2xl" />}
-            </div>
 
-            {/* Floating image */}
-            <div className="absolute -bottom-12 -right-12 z-20 w-64 h-64">
-              <motion.div>
-                {secondaryImage && (
-                  <Media resource={secondaryImage} imgClassName="rounded-2xl shadow-xl" />
-                )}
-              </motion.div>
-            </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -top-12 -left-12 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
-          </motion.div>
+          <ParallaxPreview mainMedia={mainImage} floatingMedia={secondaryImage} />
 
           {/* Right column with text */}
           <motion.div
@@ -64,8 +44,9 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
             </span>
 
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-              {title}
-              <span className="block text-green-700">{titleSecondColor}</span>
+              {titleStart}
+              <span className="inline text-green-700"> {titleAccent} </span>
+              {titleEnd}
             </h2>
 
             <p className="text-xl text-gray-600 mb-12 leading-relaxed">{description}</p>
