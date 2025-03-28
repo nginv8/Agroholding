@@ -3,7 +3,7 @@
 import { Media } from '@/components/Media'
 import { FC, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import type { AboutUsBlock as AboutUsBlockProps } from '@/payload-types'
+import type { AboutUsV2Block as AboutUsBlockProps } from '@/payload-types'
 
 type ParallaxPreviewProps = {
   mainMedia?: AboutUsBlockProps['mainImage']
@@ -22,6 +22,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}

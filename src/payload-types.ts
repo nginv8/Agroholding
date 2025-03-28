@@ -54,6 +54,7 @@ export type SupportedTimezones =
   | 'Asia/Singapore'
   | 'Asia/Tokyo'
   | 'Asia/Seoul'
+  | 'Australia/Brisbane'
   | 'Australia/Sydney'
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
@@ -190,7 +191,15 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | AboutUsBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | AboutUsV1Block
+    | AboutUsV2Block
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -624,6 +633,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
+            placeholder?: string | null;
             options?:
               | {
                   label: string;
@@ -727,13 +737,72 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsBlock".
+ * via the `definition` "AboutUsV1Block".
  */
-export interface AboutUsBlock {
+export interface AboutUsV1Block {
   subtitle?: string | null;
-  titleStart?: string | null;
-  titleAccent?: string | null;
-  titleEnd?: string | null;
+  title?: string | null;
+  accentedPart?: string | null;
+  variant?: ('colorAccent' | 'weightAccent') | null;
+  style?: ('dark' | 'light') | null;
+  align?: ('left' | 'center' | 'right') | null;
+  description?: string | null;
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  mainImage?: (number | null) | Media;
+  secondaryImage?: (number | null) | Media;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline' | 'destructive' | 'ghost' | 'link' | 'secondary') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutUsV1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsV2Block".
+ */
+export interface AboutUsV2Block {
+  subtitle?: string | null;
+  title?: string | null;
+  accentedPart?: string | null;
+  variant?: ('colorAccent' | 'weightAccent') | null;
+  style?: ('dark' | 'light') | null;
+  align?: ('left' | 'center' | 'right') | null;
   description?: string | null;
   mainImage?: (number | null) | Media;
   secondaryImage?: (number | null) | Media;
@@ -778,7 +847,7 @@ export interface AboutUsBlock {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'aboutUs';
+  blockType: 'aboutUsV2';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1070,7 +1139,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        aboutUs?: T | AboutUsBlockSelect<T>;
+        aboutUsV1?: T | AboutUsV1BlockSelect<T>;
+        aboutUsV2?: T | AboutUsV2BlockSelect<T>;
       };
   meta?:
     | T
@@ -1172,13 +1242,48 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsBlock_select".
+ * via the `definition` "AboutUsV1Block_select".
  */
-export interface AboutUsBlockSelect<T extends boolean = true> {
+export interface AboutUsV1BlockSelect<T extends boolean = true> {
   subtitle?: T;
-  titleStart?: T;
-  titleAccent?: T;
-  titleEnd?: T;
+  title?: T;
+  accentedPart?: T;
+  variant?: T;
+  style?: T;
+  align?: T;
+  description?: T;
+  richText?: T;
+  mainImage?: T;
+  secondaryImage?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsV2Block_select".
+ */
+export interface AboutUsV2BlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  accentedPart?: T;
+  variant?: T;
+  style?: T;
+  align?: T;
   description?: T;
   mainImage?: T;
   secondaryImage?: T;
@@ -1456,6 +1561,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               options?:
                 | T
                 | {

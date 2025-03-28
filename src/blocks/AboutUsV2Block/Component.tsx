@@ -1,16 +1,16 @@
 import * as motion from 'motion/react-client'
 import { Check } from 'lucide-react'
 import { CMSLink } from '@/components/Link'
-import { ParallaxPreview } from '@/components/ParallaxPreview'
+import { ParallaxPreview } from '@/components/ParallaxPreviewV2'
 
-import type { AboutUsBlock as AboutUsBlockProps } from '@/payload-types'
+import type { AboutUsV2Block as AboutUsBlockProps } from '@/payload-types'
+import { SectionTitle } from '@/components/ui/sectionTitle'
 
-export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
+export const AboutUsV2Block: React.FC<AboutUsBlockProps> = (props) => {
   const {
     subtitle,
-    titleStart,
-    titleAccent,
-    titleEnd,
+    title,
+    accentedPart,
     description,
     mainImage,
     secondaryImage,
@@ -39,17 +39,18 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
-              {subtitle}
-            </span>
-
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-              {titleStart}
-              <span className="inline text-green-700"> {titleAccent} </span>
-              {titleEnd}
-            </h2>
-
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">{description}</p>
+            {title && (
+              <SectionTitle
+                title={title}
+                accentPart={accentedPart || ''}
+                subtitle={subtitle || ''}
+                description={description || ''}
+                variant="colorAccent"
+                style="dark"
+                align="left"
+                className="mb-12"
+              />
+            )}
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
               {features?.map((item, index) => (
@@ -79,11 +80,6 @@ export const AboutUsBlock: React.FC<AboutUsBlockProps> = (props) => {
                 return <CMSLink key={i} size="lg" {...link} />
               })}
             </div>
-
-            {/* <Button size="lg" className="group">
-              Learn More
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button> */}
           </motion.div>
         </div>
 

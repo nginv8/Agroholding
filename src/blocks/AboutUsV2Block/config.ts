@@ -1,45 +1,16 @@
 import type { Block } from 'payload'
 import { linkGroup } from '@/fields/linkGroup'
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
 
-export const AboutBlock: Block = {
-  slug: 'aboutUs',
+export const AboutUsV2Block: Block = {
+  slug: 'aboutUsV2',
   labels: {
-    singular: 'About Us',
-    plural: 'About Us',
+    singular: 'About Us V2',
+    plural: 'About Us V2',
   },
-  interfaceName: 'AboutUsBlock',
+  interfaceName: 'AboutUsV2Block',
   fields: [
-    {
-      name: 'subtitle',
-      type: 'text',
-      localized: true,
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'titleStart',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'titleAccent',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'titleEnd',
-          type: 'text',
-          localized: true,
-        },
-      ],
-    },
-
-    {
-      name: 'description',
-      type: 'textarea',
-      localized: true,
-    },
+    SectionTitle(),
     {
       type: 'row',
       fields: [
