@@ -11,7 +11,6 @@ type ParallaxPreviewProps = {
 }
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
-  if (!props.mainMedia && !props.floatingMedia) return null
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
