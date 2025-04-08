@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import * as motion from 'motion/react-client'
 import { Leaf, Award, Users, TrendingUp } from 'lucide-react'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 const features = [
   {

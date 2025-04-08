@@ -3,7 +3,7 @@
 import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 const products = [
   {

@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/select'
 import { Phone, Mail, Send } from 'lucide-react'
 import Image from 'next/image'
-import { Title } from '../ui/title'
+import { Title } from '../../ui/title'
 
 const contactInfo = [
   {

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { ArrowDown, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 const products = [
   {

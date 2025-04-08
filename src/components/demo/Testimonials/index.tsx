@@ -3,7 +3,7 @@
 import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Star } from 'lucide-react'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 const testimonials = [
   {

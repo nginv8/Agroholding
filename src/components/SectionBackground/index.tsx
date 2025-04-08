@@ -19,14 +19,14 @@ type getBgClassesArgs = {
 const getBgClasses = ({ variant, gradientType, theme }: getBgClassesArgs): string => {
   const colors = {
     light: {
-      top: 'before:from-gray-100',
-      bottom: 'after:from-gray-100',
+      top: 'before:from-secondary-100',
+      bottom: 'after:from-secondary-100',
       bg: 'bg-white',
     },
     dark: {
-      top: 'before:from-green-950',
-      bottom: 'after:from-green-950',
-      bg: 'bg-green-900',
+      top: 'before:from-primary-950',
+      bottom: 'after:from-primary-950',
+      bg: 'bg-primary-900',
     },
   }
 
@@ -55,7 +55,7 @@ export const SectionBackground = ({
 
   return (
     <div className={cn('absolute inset-0 z-0', gradientClasses, className)}>
-      {backgroundMedia && (
+      {(variant === 'image' || variant === 'gradient and image') && backgroundMedia && (
         <Media
           resource={backgroundMedia}
           alt="Background image"

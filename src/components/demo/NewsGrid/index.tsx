@@ -4,7 +4,7 @@ import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 type Post = {
   id: number

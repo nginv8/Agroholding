@@ -56,14 +56,14 @@ export function SectionTitle({
         <>
           {' '}
           <h2
-            className={`text-3xl md:text-4xl lg:text-5xl leading-tight font-light mb-4 capitalize ${theme === 'light' ? 'text-gray-800' : 'text-white'}`}
+            className={`text-3xl md:text-4xl lg:text-5xl leading-tight font-light mb-4 capitalize ${theme === 'light' ? 'text-secondary-800' : 'text-white'}`}
           >
             {' '}
             {beforeText} {accentText && <span className="font-semibold">{accentText}</span>}{' '}
             {afterText}{' '}
           </h2>
           <div
-            className={`flex mb-5 after:w-32 after:block after:h-1 after:bg-yellow-500 ${decorAlignmentClasses[alignment || 'left']}`}
+            className={`flex mb-5 after:w-32 after:block after:h-1 after:bg-accent-500 ${decorAlignmentClasses[alignment || 'left']}`}
           />{' '}
           {description && (
             <motion.p
@@ -71,7 +71,7 @@ export function SectionTitle({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className={`text-lg md:text-xl leading-relaxed font-light ${theme === 'light' ? 'text-gray-600' : 'text-gray-200'}`}
+              className={`text-lg md:text-xl leading-relaxed font-light ${theme === 'light' ? 'text-secondary-600' : 'text-secondary-200'}`}
             >
               {' '}
               {description}{' '}
@@ -83,19 +83,19 @@ export function SectionTitle({
           {' '}
           {subtitle && (
             <span
-              className={`inline-block text-sm font-medium mb-6 tracking-wider uppercase ${theme === 'light' ? 'text-yellow-600' : 'text-yellow-400'}`}
+              className={`inline-block text-sm font-medium mb-6 tracking-wider uppercase ${theme === 'light' ? 'text-accent-600' : 'text-accent-400'}`}
             >
               {' '}
               {subtitle}{' '}
             </span>
           )}
           <h2
-            className={`text-4xl lg:text-5xl font-bold mb-8 leading-tight ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
+            className={`text-4xl lg:text-5xl font-bold mb-8 leading-tight ${theme === 'light' ? 'text-secondary-900' : 'text-white'}`}
           >
             {beforeText}
             {accentText && (
               <span
-                className={`inline ${theme === 'light' ? '!text-green-700' : '!text-yellow-400'}`}
+                className={`inline ${theme === 'light' ? '!text-primary-700' : '!text-accent-400'}`}
               >
                 {' '}
                 {accentText}{' '}
@@ -109,7 +109,7 @@ export function SectionTitle({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className={`text-xl mb-12 leading-relaxed ${theme === 'light' ? 'text-gray-600' : 'text-gray-100'}`}
+              className={`text-xl mb-12 leading-relaxed ${theme === 'light' ? 'text-secondary-600' : 'text-secondary-100'}`}
             >
               {description}
             </motion.p>

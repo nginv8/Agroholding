@@ -28,7 +28,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1, delay: 0.2 }}
         style={{ y: y1 }}
         className="absolute left-0 right-0 top-20 z-20 h-[400px] w-11/12 rounded-2xl overflow-hidden shadow-2xl"
       >
@@ -44,7 +44,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 0.5, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1 }}
         style={{ y: y2, opacity }}
         className="absolute h-[300px] left-1/4 right-0 top-1/3 z-10 rounded-2xl overflow-hidden shadow-xl"
       >

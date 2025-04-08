@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { useRef } from 'react'
-import { Title } from '../ui/title'
+import { Title } from '@/components/ui/title'
 
 export default function AboutSectionStory() {
   const containerRef = useRef<HTMLDivElement>(null)
