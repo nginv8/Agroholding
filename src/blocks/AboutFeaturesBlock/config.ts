@@ -1,16 +1,21 @@
 import type { Block } from 'payload'
 import { linkGroup } from '@/fields/linkGroup'
 import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
+import { iconSelect } from '@/fields/CustomFields/iconSelect'
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
 
-export const AboutUsV2Block: Block = {
-  slug: 'aboutUsV2',
+export const AboutFeaturesBlock: Block = {
+  slug: 'aboutFeatures',
   labels: {
-    singular: 'About Us V2',
-    plural: 'About Us V2',
+    singular: 'About Features',
+    plural: 'About Features',
   },
-  interfaceName: 'AboutUsV2Block',
+  interfaceName: 'AboutFeaturesBlock',
   fields: [
+    SectionTheme(),
     SectionTitle(),
+    SectionBackground(),
     {
       type: 'row',
       fields: [
@@ -34,20 +39,12 @@ export const AboutUsV2Block: Block = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'icon',
-              label: 'Icon',
-              type: 'text',
-              admin: {
-                components: {
-                  Field: '@/fields/CustomFields/IconSelectField',
-                },
-              },
-            },
+            iconSelect(),
             {
               name: 'title',
               type: 'text',
               localized: true,
+              required: true,
             },
           ],
         },
@@ -60,9 +57,9 @@ export const AboutUsV2Block: Block = {
       ],
     },
     linkGroup({
-      appearances: ['default', 'outline', 'destructive', 'ghost', 'link', 'secondary'],
       overrides: {
-        maxRows: 2,
+        name: 'cta',
+        label: 'Call to Action',
       },
     }),
     {
@@ -75,11 +72,13 @@ export const AboutUsV2Block: Block = {
             {
               name: 'number',
               type: 'text',
+              required: true,
             },
             {
               name: 'label',
               type: 'text',
               localized: true,
+              required: true,
             },
           ],
         },

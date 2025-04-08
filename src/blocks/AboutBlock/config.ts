@@ -1,24 +1,29 @@
 import type { Block } from 'payload'
 import { linkGroup } from '@/fields/linkGroup'
 import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
 
-export const AboutUsV1Block: Block = {
-  slug: 'aboutUsV1',
+export const AboutBlock: Block = {
+  slug: 'about',
   labels: {
-    singular: 'About Us V1',
-    plural: 'About Us V1',
+    singular: 'About',
+    plural: 'About',
   },
-  interfaceName: 'AboutUsV1Block',
+  interfaceName: 'AboutBlock',
   fields: [
+    SectionTheme(),
     SectionTitle(),
+    SectionBackground(),
     {
       name: 'richText',
+      label: 'Content',
       type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
@@ -30,27 +35,30 @@ export const AboutUsV1Block: Block = {
           ]
         },
       }),
-      label: false,
     },
     {
       type: 'row',
       fields: [
         {
           name: 'mainImage',
+          label: 'Main Image',
           type: 'upload',
           relationTo: 'media',
+          required: true,
         },
         {
           name: 'secondaryImage',
+          label: 'Secondary Image',
           type: 'upload',
           relationTo: 'media',
+          required: true,
         },
       ],
     },
     linkGroup({
-      appearances: ['default', 'outline', 'destructive', 'ghost', 'link', 'secondary'],
       overrides: {
-        maxRows: 2,
+        name: 'cta',
+        label: 'Call to Action',
       },
     }),
   ],

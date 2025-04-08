@@ -1,5 +1,6 @@
 import tailwindcssAnimate from 'tailwindcss-animate'
 import typography from '@tailwindcss/typography'
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -44,6 +45,12 @@ const config = {
         sm: '40rem',
         xl: '80rem',
       },
+    },
+    colors: {
+      ...colors,
+      primary: colors.green,
+      secondary: colors.stone,
+      accent: colors.yellow,
     },
     extend: {
       animation: {

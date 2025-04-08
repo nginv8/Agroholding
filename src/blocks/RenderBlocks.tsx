@@ -7,8 +7,13 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
-import { AboutUsV1Block } from '@/blocks/AboutUsV1Block/Component'
-import { AboutUsV2Block } from '@/blocks/AboutUsV2Block/Component'
+import { AboutBlock } from '@/blocks/AboutBlock/Component'
+import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/Component'
+import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/Component'
+import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/Component'
+import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/Component'
+import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/Component'
+
 import { TypedLocale } from 'payload'
 
 const blockComponents = {
@@ -17,8 +22,12 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
-  aboutUsV1: AboutUsV1Block,
-  aboutUsV2: AboutUsV2Block,
+  about: AboutBlock,
+  aboutFeatures: AboutFeaturesBlock,
+  featureCards: FeatureCardsBlock,
+  featureTabs: FeatureTabsBlock,
+  featureGrid: FeatureGridBlock,
+  featureGallery: FeatureGalleryBlock,
 }
 
 export const RenderBlocks: React.FC<{

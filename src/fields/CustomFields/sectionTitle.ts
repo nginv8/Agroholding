@@ -1,33 +1,22 @@
 import type { Field } from 'payload'
 import deepMerge from '@/utilities/deepMerge'
 
-type SectionTitleType = (options?: { overrides?: Field }) => Field
+type SectionTitleType = (options?: {
+  variant?: 'colorAccent' | 'weightAccent'
+  align?: 'left' | 'center' | 'right'
+  overrides?: Partial<Field>
+}) => Field
 
-export const SectionTitle: SectionTitleType = ({ overrides = {} } = {}) => {
+export const SectionTitle: SectionTitleType = ({
+  variant = 'colorAccent',
+  align = 'left',
+  overrides = {},
+} = {}) => {
   const generatedSectionTitle: Field = {
+    name: 'title',
     label: 'Section Title',
-    type: 'collapsible',
+    type: 'group',
     fields: [
-      {
-        name: 'subtitle',
-        type: 'text',
-        localized: true,
-      },
-      {
-        type: 'row',
-        fields: [
-          {
-            name: 'title',
-            type: 'text',
-            localized: true,
-          },
-          {
-            name: 'accentedPart',
-            type: 'text',
-            localized: true,
-          },
-        ],
-      },
       {
         type: 'row',
         fields: [
@@ -44,25 +33,10 @@ export const SectionTitle: SectionTitleType = ({ overrides = {} } = {}) => {
                 value: 'weightAccent',
               },
             ],
-            defaultValue: 'colorAccent',
+            defaultValue: variant,
           },
           {
-            name: 'style',
-            type: 'select',
-            options: [
-              {
-                label: 'Dark',
-                value: 'dark',
-              },
-              {
-                label: 'Light',
-                value: 'light',
-              },
-            ],
-            defaultValue: 'dark',
-          },
-          {
-            name: 'align',
+            name: 'alignment',
             type: 'select',
             options: [
               {
@@ -78,17 +52,42 @@ export const SectionTitle: SectionTitleType = ({ overrides = {} } = {}) => {
                 value: 'right',
               },
             ],
-            defaultValue: 'left',
+            defaultValue: align,
           },
         ],
       },
-
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'subtitle',
+            type: 'text',
+            localized: true,
+            admin: {
+              condition: (_, siblingData) => siblingData?.variant === 'colorAccent',
+            },
+          },
+          {
+            name: 'title',
+            type: 'text',
+            localized: true,
+          },
+          {
+            name: 'accentPart',
+            type: 'text',
+            localized: true,
+          },
+        ],
+      },
       {
         name: 'description',
         type: 'textarea',
         localized: true,
       },
     ],
+    admin: {
+      hideGutter: true,
+    },
   }
 
   return deepMerge(generatedSectionTitle, overrides)

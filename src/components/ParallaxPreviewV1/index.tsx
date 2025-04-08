@@ -3,11 +3,11 @@
 import { Media } from '@/components/Media'
 import { FC, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import type { AboutUsV2Block as AboutUsBlockProps } from '@/payload-types'
+import type { Media as MediaType } from '@/payload-types'
 
 type ParallaxPreviewProps = {
-  mainMedia?: AboutUsBlockProps['mainImage']
-  floatingMedia?: AboutUsBlockProps['secondaryImage']
+  mainMedia?: MediaType | number | null
+  floatingMedia?: MediaType | number | null
 }
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
@@ -42,11 +42,11 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
       {/* Additional image */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        whileInView={{ opacity: 0.5, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         style={{ y: y2, opacity }}
-        className="absolute h-[300px]  left-1/4 right-0 top-1/3 z-10 rounded-2xl overflow-hidden shadow-xl"
+        className="absolute h-[300px] left-1/4 right-0 top-1/3 z-10 rounded-2xl overflow-hidden shadow-xl"
       >
         <Media
           resource={props.floatingMedia}

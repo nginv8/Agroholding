@@ -3,27 +3,16 @@ import { Check } from 'lucide-react'
 import { CMSLink } from '@/components/Link'
 import { ParallaxPreview } from '@/components/ParallaxPreviewV2'
 
-import type { AboutUsV2Block as AboutUsBlockProps } from '@/payload-types'
-import { SectionTitle } from '@/components/ui/sectionTitle'
+import type { AboutFeaturesBlock as AboutFeaturesProps } from '@/payload-types'
+import { SectionTitle } from '@/components/SectionTitle'
+import { SectionBackground } from '@/components/SectionBackground'
 
-export const AboutUsV2Block: React.FC<AboutUsBlockProps> = (props) => {
-  const {
-    subtitle,
-    title,
-    accentedPart,
-    description,
-    mainImage,
-    secondaryImage,
-    features,
-    links,
-    stats,
-  } = props
+export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
+  const { title, background, theme, mainImage, secondaryImage, features, cta, stats } = props
 
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-white to-transparent" />
+    <section className="relative py-32 overflow-hidden" data-theme={theme}>
+      <SectionBackground {...background} theme={theme} />
 
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -39,18 +28,7 @@ export const AboutUsV2Block: React.FC<AboutUsBlockProps> = (props) => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            {title && (
-              <SectionTitle
-                title={title}
-                accentPart={accentedPart || ''}
-                subtitle={subtitle || ''}
-                description={description || ''}
-                variant="colorAccent"
-                style="dark"
-                align="left"
-                className="mb-12"
-              />
-            )}
+            <SectionTitle {...title} title={title?.title || ''} theme={theme} />
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
               {features?.map((item, index) => (
@@ -76,7 +54,7 @@ export const AboutUsV2Block: React.FC<AboutUsBlockProps> = (props) => {
               ))}
             </div>
             <div className="flex items-center space-x-4">
-              {(links || []).map(({ link }, i) => {
+              {(cta || []).map(({ link }, i) => {
                 return <CMSLink key={i} size="lg" {...link} />
               })}
             </div>
@@ -100,7 +78,7 @@ export const AboutUsV2Block: React.FC<AboutUsBlockProps> = (props) => {
               transition={{ delay: 0.2 + index * 0.1 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent rounded-2xl" />
               <div className="relative p-8 text-center">
                 <div className="text-4xl font-bold text-green-700 mb-2">{stat.number}</div>
                 <div className="text-gray-600 font-medium uppercase tracking-wider text-sm">

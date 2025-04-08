@@ -197,8 +197,12 @@ export interface Page {
     | MediaBlock
     | ArchiveBlock
     | FormBlock
-    | AboutUsV1Block
-    | AboutUsV2Block
+    | AboutBlock
+    | AboutFeaturesBlock
+    | FeatureCardsBlock
+    | FeatureTabsBlock
+    | FeatureGridBlock
+    | FeatureGalleryBlock
   )[];
   meta?: {
     title?: string | null;
@@ -737,16 +741,23 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsV1Block".
+ * via the `definition` "AboutBlock".
  */
-export interface AboutUsV1Block {
-  subtitle?: string | null;
-  title?: string | null;
-  accentedPart?: string | null;
-  variant?: ('colorAccent' | 'weightAccent') | null;
-  style?: ('dark' | 'light') | null;
-  align?: ('left' | 'center' | 'right') | null;
-  description?: string | null;
+export interface AboutBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
   richText?: {
     root: {
       type: string;
@@ -762,9 +773,9 @@ export interface AboutUsV1Block {
     };
     [k: string]: unknown;
   } | null;
-  mainImage?: (number | null) | Media;
-  secondaryImage?: (number | null) | Media;
-  links?:
+  mainImage: number | Media;
+  secondaryImage: number | Media;
+  cta?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
@@ -783,38 +794,45 @@ export interface AboutUsV1Block {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline' | 'destructive' | 'ghost' | 'link' | 'secondary') | null;
+          appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
       }[]
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'aboutUsV1';
+  blockType: 'about';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsV2Block".
+ * via the `definition` "AboutFeaturesBlock".
  */
-export interface AboutUsV2Block {
-  subtitle?: string | null;
-  title?: string | null;
-  accentedPart?: string | null;
-  variant?: ('colorAccent' | 'weightAccent') | null;
-  style?: ('dark' | 'light') | null;
-  align?: ('left' | 'center' | 'right') | null;
-  description?: string | null;
+export interface AboutFeaturesBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
   mainImage?: (number | null) | Media;
   secondaryImage?: (number | null) | Media;
   features?:
     | {
         icon?: string | null;
-        title?: string | null;
+        title: string;
         description?: string | null;
         id?: string | null;
       }[]
     | null;
-  links?:
+  cta?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
@@ -833,21 +851,189 @@ export interface AboutUsV2Block {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline' | 'destructive' | 'ghost' | 'link' | 'secondary') | null;
+          appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
       }[]
     | null;
   stats?:
     | {
-        number?: string | null;
-        label?: string | null;
+        number: string;
+        label: string;
         id?: string | null;
       }[]
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'aboutUsV2';
+  blockType: 'aboutFeatures';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlock".
+ */
+export interface FeatureCardsBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  features?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureTabsBlock".
+ */
+export interface FeatureTabsBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  features?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureTabs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock".
+ */
+export interface FeatureGridBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  advantages?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGalleryBlock".
+ */
+export interface FeatureGalleryBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  features: {
+    title: string;
+    description: string;
+    image: number | Media;
+    icon?: string | null;
+    id?: string | null;
+  }[];
+  stats: {
+    number: string;
+    label: string;
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureGallery';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1139,8 +1325,12 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        aboutUsV1?: T | AboutUsV1BlockSelect<T>;
-        aboutUsV2?: T | AboutUsV2BlockSelect<T>;
+        about?: T | AboutBlockSelect<T>;
+        aboutFeatures?: T | AboutFeaturesBlockSelect<T>;
+        featureCards?: T | FeatureCardsBlockSelect<T>;
+        featureTabs?: T | FeatureTabsBlockSelect<T>;
+        featureGrid?: T | FeatureGridBlockSelect<T>;
+        featureGallery?: T | FeatureGalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -1242,20 +1432,31 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsV1Block_select".
+ * via the `definition` "AboutBlock_select".
  */
-export interface AboutUsV1BlockSelect<T extends boolean = true> {
-  subtitle?: T;
-  title?: T;
-  accentedPart?: T;
-  variant?: T;
-  style?: T;
-  align?: T;
-  description?: T;
+export interface AboutBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
   richText?: T;
   mainImage?: T;
   secondaryImage?: T;
-  links?:
+  cta?:
     | T
     | {
         link?:
@@ -1275,16 +1476,27 @@ export interface AboutUsV1BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsV2Block_select".
+ * via the `definition` "AboutFeaturesBlock_select".
  */
-export interface AboutUsV2BlockSelect<T extends boolean = true> {
-  subtitle?: T;
-  title?: T;
-  accentedPart?: T;
-  variant?: T;
-  style?: T;
-  align?: T;
-  description?: T;
+export interface AboutFeaturesBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
   mainImage?: T;
   secondaryImage?: T;
   features?:
@@ -1295,7 +1507,7 @@ export interface AboutUsV2BlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  links?:
+  cta?:
     | T
     | {
         link?:
@@ -1315,6 +1527,167 @@ export interface AboutUsV2BlockSelect<T extends boolean = true> {
     | {
         number?: T;
         label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlock_select".
+ */
+export interface FeatureCardsBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureTabsBlock_select".
+ */
+export interface FeatureTabsBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        content?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock_select".
+ */
+export interface FeatureGridBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  advantages?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGalleryBlock_select".
+ */
+export interface FeatureGalleryBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        icon?: T;
+        id?: T;
+      };
+  stats?:
+    | T
+    | {
+        number?: T;
+        label?: T;
+        description?: T;
         id?: T;
       };
   id?: T;

@@ -1,27 +1,25 @@
 import { FC } from 'react'
 import * as motion from 'motion/react-client'
-import { SectionTitle } from '@/components/ui/sectionTitle'
+import { SectionTitle } from '@/components/SectionTitle'
 import { CMSLink } from '@/components/Link'
 
-import type { AboutUsV1Block as AboutUsBlockProps } from '@/payload-types'
+import type { AboutBlock as AboutBlockProps } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { ParallaxPreview } from '@/components/ParallaxPreviewV1'
+import { SectionBackground } from '@/components/SectionBackground'
 
-export const AboutUsV1Block: FC<AboutUsBlockProps> = ({
+export const AboutBlock: FC<AboutBlockProps> = ({
   title,
-  accentedPart,
-  description,
+  background,
+  theme,
   richText,
   mainImage,
   secondaryImage,
-  links,
-  style,
-  align,
+  cta,
 }) => {
   return (
-    <section className="py-32 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
+    <section className="py-32 relative overflow-hidden" data-theme={theme}>
+      <SectionBackground {...background} theme={theme} />
 
       <div className="container mx-auto px-4 relative">
         <div className="max-w-7xl mx-auto">
@@ -34,14 +32,7 @@ export const AboutUsV1Block: FC<AboutUsBlockProps> = ({
               transition={{ duration: 1 }}
               className="relative"
             >
-              <SectionTitle
-                title={title || ''}
-                accentPart={accentedPart || ''}
-                align={align || 'left'}
-                description={description || ''}
-                variant="weightAccent"
-                style={style || 'dark'}
-              />
+              <SectionTitle {...title} title={title?.title || ''} theme={theme} />
               <div className="space-y-8">
                 {richText && (
                   <motion.div
@@ -49,12 +40,10 @@ export const AboutUsV1Block: FC<AboutUsBlockProps> = ({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
-                    className="text-gray-600"
                   >
                     {richText && <RichText data={richText} enableGutter={false} />}
                   </motion.div>
                 )}
-
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +51,7 @@ export const AboutUsV1Block: FC<AboutUsBlockProps> = ({
                   transition={{ delay: 0.6 }}
                   className="flex items-center space-x-4"
                 >
-                  {(links || []).map(({ link }, i) => {
+                  {(cta || []).map(({ link }, i) => {
                     return <CMSLink key={i} size="lg" {...link} />
                   })}
                 </motion.div>

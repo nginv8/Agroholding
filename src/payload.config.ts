@@ -92,7 +92,6 @@ export default buildConfig({
       collections: {
         media: true,
       },
-      folder: 'payload-media',
       disableLocalStorage: true,
       enabled: true,
     }),

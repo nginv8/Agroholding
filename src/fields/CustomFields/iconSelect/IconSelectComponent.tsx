@@ -7,9 +7,7 @@ import * as lucideIcons from 'react-icons/lu'
 import { FixedSizeList as List } from 'react-window'
 import { LuChevronDown, LuSearch, LuX } from 'react-icons/lu'
 
-import type React from 'react'
-
-const IconSelectField: TextFieldClientComponent = ({ path, field }) => {
+const IconSelectComponent: TextFieldClientComponent = ({ path, field }) => {
   const { value, setValue } = useField<string>({ path })
   const [options, setOptions] = useState<{ label: string; value: string }[]>([])
   const [isOpen, setIsOpen] = useState(false)
@@ -74,7 +72,7 @@ const IconSelectField: TextFieldClientComponent = ({ path, field }) => {
   }, [])
 
   return (
-    <div style={{ flex: '1 1 20%' }}>
+    <div className="field-type" style={{ flex: '1 1 20%' }}>
       {/* Label */}
       <label
         htmlFor={path}
@@ -97,12 +95,12 @@ const IconSelectField: TextFieldClientComponent = ({ path, field }) => {
             padding: '0.5rem 0.75rem',
             width: '100%',
             height: '40px',
+            color: 'var(--theme-elevation-800)',
             backgroundColor: 'var(--theme-input-bg)',
             border: '1px solid var(--theme-elevation-150)',
-            borderRadius: '3px',
-            boxShadow: isOpen
-              ? '0 0 0 1px var(--theme-elevation-500)'
-              : '0 1px 2px var(--theme-elevation-150)',
+            borderColor: isOpen ? 'var(--theme-elevation-400)' : 'var(--theme-elevation-150)',
+            borderRadius: 'var(--style-radius-s)',
+            boxShadow: '0 2px 2px -1px #0000001a',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
@@ -271,4 +269,4 @@ const IconSelectField: TextFieldClientComponent = ({ path, field }) => {
   )
 }
 
-export default IconSelectField
+export default IconSelectComponent

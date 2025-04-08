@@ -1,0 +1,71 @@
+import type { Field } from 'payload'
+import deepMerge from '@/utilities/deepMerge'
+
+type SectionBackgroundType = (options?: {
+  variant?: 'gradient' | 'image' | 'gradient and image' | 'color'
+  gradientType?: 'bottom' | 'top' | 'top and bottom'
+  overrides?: Partial<Field>
+}) => Field
+
+export const SectionBackground: SectionBackgroundType = ({
+  variant = 'color',
+  gradientType = 'top and bottom',
+  overrides = {},
+} = {}) => {
+  const generatedSectionBackground: Field = {
+    name: 'background',
+    label: 'Section Background',
+    type: 'group',
+    fields: [
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'variant',
+            label: 'Variant',
+            type: 'select',
+            options: [
+              { label: 'Color', value: 'color' },
+              { label: 'Gradient', value: 'gradient' },
+              { label: 'Image', value: 'image' },
+              { label: 'Gradient and Image', value: 'gradient and image' },
+            ],
+            defaultValue: variant,
+          },
+          {
+            name: 'gradientType',
+            label: 'Gradient Type',
+            type: 'select',
+            options: [
+              { label: 'Top', value: 'top' },
+              { label: 'Bottom', value: 'bottom' },
+              { label: 'Top and Bottom', value: 'top and bottom' },
+            ],
+            defaultValue: gradientType,
+            admin: {
+              condition: (_, siblingData) =>
+                siblingData?.variant === 'gradient' ||
+                siblingData?.variant === 'gradient and image',
+            },
+          },
+          {
+            name: 'backgroundMedia',
+            label: 'Background Media',
+            type: 'upload',
+            relationTo: 'media',
+            required: true,
+            admin: {
+              condition: (_, siblingData) =>
+                siblingData?.variant === 'image' || siblingData?.variant === 'gradient and image',
+            },
+          },
+        ],
+      },
+    ],
+    admin: {
+      hideGutter: true,
+    },
+  }
+
+  return deepMerge(generatedSectionBackground, overrides)
+}

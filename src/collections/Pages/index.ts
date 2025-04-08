@@ -7,8 +7,12 @@ import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
 import { FormBlock } from '@/blocks/Form/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { AboutUsV1Block } from '@/blocks/AboutUsV1Block/config'
-import { AboutUsV2Block } from '@/blocks/AboutUsV2Block/config'
+import { AboutBlock } from '@/blocks/AboutBlock/config'
+import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config'
+import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config'
+import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/config'
+import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/config'
+import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/config'
 
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
@@ -84,8 +88,12 @@ export const Pages: CollectionConfig<'pages'> = {
                 MediaBlock,
                 Archive,
                 FormBlock,
-                AboutUsV1Block,
-                AboutUsV2Block,
+                AboutBlock,
+                AboutFeaturesBlock,
+                FeatureCardsBlock,
+                FeatureTabsBlock,
+                FeatureGridBlock,
+                FeatureGalleryBlock,
               ],
               required: true,
               admin: {

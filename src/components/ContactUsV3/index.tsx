@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Phone, Mail, Send, MapPin, Clock } from 'lucide-react'
+import { Phone, Mail, Send } from 'lucide-react'
 import Image from 'next/image'
 import { Title } from '../ui/title'
 

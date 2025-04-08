@@ -16,75 +16,101 @@
   :root {
     scroll-behavior: smooth;
 
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors */
+    --background: 60 10% 98%;
+    --foreground: 120 6% 10%;
 
-    --card: 240 5% 96%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 60 15% 96%;
+    --card-foreground: 120 6% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 60 10% 98%;
+    --popover-foreground: 120 6% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Green as primary color (grass, plants) */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Light brown as secondary color (soil) */
+    --secondary: 35 40% 90%;
+    --secondary-foreground: 35 40% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted colors */
+    --muted: 60 15% 92%;
+    --muted-foreground: 120 6% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Yellow as accent color (wheat, sun) */
+    --accent: 45 96% 58%;
+    --accent-foreground: 45 10% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Other colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 80%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 120 10% 85%;
+    --input: 120 10% 90%;
+    --ring: 142 76% 36%;
 
-    --radius: 0.2rem;
+    --radius: 0.3rem;
 
-    --success: 196 52% 74%;
-    --warning: 34 89% 85%;
-    --error: 10 100% 86%;
+    /* Status colors */
+    --success: 142 76% 46%;
+    --warning: 45 96% 58%;
+    --error: 0 84% 60%;
+
+    /* Additional colors for agricultural theme */
+    --wheat: 45 80% 80%;
+    --soil: 35 40% 40%;
+    --sky: 200 80% 75%;
+    --leaf: 120 60% 50%;
   }
 
   [data-theme='dark'] {
     scroll-behavior: smooth;
 
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
+    /* Base colors */
+    --background: 120 10% 5%;
+    --foreground: 60 15% 95%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 210 40% 98%;
+    --card: 120 10% 8%;
+    --card-foreground: 60 15% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 120 10% 5%;
+    --popover-foreground: 60 15% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Dark green as primary color */
+    --primary: 142 60% 30%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Dark brown as secondary color */
+    --secondary: 35 30% 20%;
+    --secondary-foreground: 35 30% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted colors */
+    --muted: 120 10% 15%;
+    --muted-foreground: 60 15% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Muted yellow as accent color */
+    --accent: 45 70% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Other colors */
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0, 0%, 15%, 0.8;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 120 10% 20%;
+    --input: 120 10% 15%;
+    --ring: 142 60% 30%;
 
-    --success: 196 100% 14%;
-    --warning: 34 51% 25%;
-    --error: 10 39% 43%;
+    /* Status colors */
+    --success: 142 60% 30%;
+    --warning: 45 70% 40%;
+    --error: 0 62% 40%;
+
+    /* Additional colors for agricultural theme */
+    --wheat: 45 50% 40%;
+    --soil: 35 30% 25%;
+    --sky: 200 50% 30%;
+    --leaf: 120 40% 25%;
   }
   @supports not (scroll-behavior: smooth) {
     :root {

@@ -3,11 +3,11 @@
 import { Media } from '@/components/Media'
 import { FC, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import type { AboutUsV2Block as AboutUsBlockProps } from '@/payload-types'
+import type { Media as MediaType } from '@/payload-types'
 
 type ParallaxPreviewProps = {
-  mainMedia?: AboutUsBlockProps['mainImage']
-  floatingMedia?: AboutUsBlockProps['secondaryImage']
+  mainMedia?: MediaType | number | null
+  floatingMedia?: MediaType | number | null
 }
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
