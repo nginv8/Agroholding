@@ -46,12 +46,6 @@ const config = {
         xl: '80rem',
       },
     },
-    colors: {
-      ...colors,
-      primary: colors.green,
-      secondary: colors.stone,
-      accent: colors.yellow,
-    },
     extend: {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -64,6 +58,7 @@ const config = {
       },
       colors: {
         accent: {
+          ...colors.yellow,
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
@@ -88,11 +83,13 @@ const config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
+          ...colors.green,
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         ring: 'hsl(var(--ring))',
         secondary: {
+          ...colors.stone,
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
