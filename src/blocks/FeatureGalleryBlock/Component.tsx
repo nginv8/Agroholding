@@ -5,6 +5,7 @@ import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types
 import { SectionTitle } from '@/components/SectionTitle'
 import { Media } from '@/components/Media'
 import { SectionBackground } from '@/components/SectionBackground'
+import { CMSLink } from '@/components/Link'
 
 export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
   title,
@@ -47,29 +48,33 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary-950/90 to-transparent" />
 
-                  {/* Іконка на зображенні */}
+                  {/* Icon & title */}
                   <div className="absolute bottom-6 left-6 flex items-center space-x-4">
-                    <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm">
-                      {feature?.icon && (
+                    {feature?.icon && (
+                      <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm">
                         <IconRenderer name={feature.icon} size={24} className="text-accent-400" />
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
                   </div>
                 </div>
 
                 <div className="relative">
-                  <p
-                    className={`text-lg leading-relaxed mb-4 ${theme === 'dark' ? 'text-secondary-300' : 'text-secondary-600'}`}
-                  >
-                    {feature.description}
-                  </p>
-                  <button
-                    className={`inline-flex items-center  transition-colors group/btn ${theme === 'dark' ? 'text-accent-400 hover:text-accent-300' : 'text-primary-700 hover:text-primary-600'}`}
-                  >
-                    Дізнатися більше
-                    <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
+                  {feature.description && (
+                    <p
+                      className={`text-lg leading-relaxed mb-4 ${theme === 'dark' ? 'text-secondary-300' : 'text-secondary-600'}`}
+                    >
+                      {feature.description}
+                    </p>
+                  )}
+                  {feature.link.type && (
+                    <CMSLink
+                      {...feature.link}
+                      className={`inline-flex items-center  transition-colors group/btn ${theme === 'dark' ? 'text-accent-400 hover:text-accent-300' : 'text-primary-700 hover:text-primary-600'}`}
+                    >
+                      <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </CMSLink>
+                  )}
                 </div>
               </div>
             </motion.div>

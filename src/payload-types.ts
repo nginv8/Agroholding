@@ -1023,6 +1023,21 @@ export interface FeatureGalleryBlock {
     description: string;
     image: number | Media;
     icon?: string | null;
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
     id?: string | null;
   }[];
   stats: {
@@ -1680,6 +1695,15 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
         description?: T;
         image?: T;
         icon?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
         id?: T;
       };
   stats?:
