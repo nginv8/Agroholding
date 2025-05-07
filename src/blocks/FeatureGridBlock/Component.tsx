@@ -34,24 +34,30 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
               className="flex items-start group cursor-pointer z-10"
             >
               <div className="mr-6 relative">
-                <div className="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center group-hover:bg-primary-100 transition-colors dark:bg-primary-800 dark:group-hover:bg-primary-700">
                   <motion.div
                     animate={{ rotate: 0 }}
                     className="group-hover:animate-[wiggle_0.5s_ease-in-out]"
                   >
                     {advantage?.icon && (
-                      <IconRenderer name={advantage.icon} size={24} className="text-green-600" />
+                      <IconRenderer
+                        name={advantage.icon}
+                        size={24}
+                        className="text-primary-600 dark:text-accent-400 dark:group-hover:text-accent-300"
+                      />
                     )}
                   </motion.div>
                 </div>
                 {/* Decorative element */}
-                <div className="absolute -z-10 -inset-4 rounded-[30px] bg-green-50/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -z-10 -inset-4 rounded-[30px] bg-primary-50/50 dark:bg-primary-800/50 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-700 dark:text-white dark:group-hover:text-white transition-colors">
                   {advantage.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {advantage.description}
+                </p>
               </div>
             </motion.div>
           ))}
