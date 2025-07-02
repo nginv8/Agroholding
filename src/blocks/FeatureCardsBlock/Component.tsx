@@ -40,51 +40,31 @@ export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />
 
         <motion.div
-          className="flex justify-center gap-8 text-white flex-wrap"
+          className="flex justify-center gap-6 xl:gap-8 text-white flex-wrap"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
           {features?.map((feature, index) => (
-            <>
+            <motion.div
+              key={index + 'a'}
+              variants={itemVariants}
+              className="text-center flex-shrink-[1] flex-grow-[1] md:max-w-[calc(50%-12px)] lg:max-w-[calc(33.333%-16px)] xl:max-w-[calc(25%-24px)] w-full"
+            >
               <motion.div
-                key={index + 'a'}
-                variants={itemVariants}
-                className="text-center flex-shrink-[1] flex-grow-[1] max-w-[31%] w-full"
+                whileHover={{ scale: 1.1 }}
+                className="bg-primary-800 p-6 rounded-lg h-full"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="bg-primary-800 p-6 rounded-lg h-full"
-                >
-                  <div className="inline-block p-3 bg-primary-700 rounded-full mb-4">
-                    {feature.icon && (
-                      <IconRenderer name={feature.icon} className="size-8 text-accent-400" />
-                    )}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-stone-300">{feature.description}</p>
-                </motion.div>
+                <div className="inline-block p-3 bg-primary-700 rounded-full mb-4">
+                  {feature.icon && (
+                    <IconRenderer name={feature.icon} className="size-8 text-accent-400" />
+                  )}
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <p className="text-stone-300">{feature.description}</p>
               </motion.div>
-              <motion.div
-                key={index + 'd'}
-                variants={itemVariants}
-                className="text-center flex-shrink-[1] flex-grow-[1] max-w-[31%] w-full"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="bg-primary-800 p-6 rounded-lg h-full"
-                >
-                  <div className="inline-block p-3 bg-primary-700 rounded-full mb-4">
-                    {feature.icon && (
-                      <IconRenderer name={feature.icon} className="size-8 text-accent-400" />
-                    )}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-stone-300">{feature.description}</p>
-                </motion.div>
-              </motion.div>
-            </>
+            </motion.div>
           ))}
         </motion.div>
       </div>
