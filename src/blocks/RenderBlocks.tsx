@@ -13,6 +13,7 @@ import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/Component'
 import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/Component'
 import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/Component'
 import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/Component'
+import { ProductGridBlock } from '@/blocks/ProductGridBlock/Component'
 
 import { TypedLocale } from 'payload'
 
@@ -28,6 +29,7 @@ const blockComponents = {
   featureTabs: FeatureTabsBlock,
   featureGrid: FeatureGridBlock,
   featureGallery: FeatureGalleryBlock,
+  productGrid: ProductGridBlock,
 }
 
 export const RenderBlocks: React.FC<{

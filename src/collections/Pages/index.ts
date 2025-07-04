@@ -13,6 +13,7 @@ import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config'
 import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/config'
 import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/config'
 import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/config'
+import { ProductGridBlock } from '@/blocks/ProductGridBlock/config'
 
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
@@ -94,6 +95,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureTabsBlock,
                 FeatureGridBlock,
                 FeatureGalleryBlock,
+                ProductGridBlock,
               ],
               required: true,
               admin: {
