@@ -6,11 +6,19 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
 
 export const ProductGridBlock: Block = {
   slug: 'productGrid',
   interfaceName: 'ProductGridBlock',
   fields: [
+    SectionTheme(),
+    SectionTitle({
+      align: 'center',
+    }),
+    SectionBackground(),
     {
       name: 'introContent',
       type: 'richText',

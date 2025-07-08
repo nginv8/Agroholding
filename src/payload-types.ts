@@ -1063,6 +1063,20 @@ export interface FeatureGalleryBlock {
  * via the `definition` "ProductGridBlock".
  */
 export interface ProductGridBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
   introContent?: {
     root: {
       type: string;
@@ -1765,6 +1779,24 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
  * via the `definition` "ProductGridBlock_select".
  */
 export interface ProductGridBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
   introContent?: T;
   populateBy?: T;
   relationTo?: T;

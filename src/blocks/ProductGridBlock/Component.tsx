@@ -2,17 +2,29 @@ import type { Post, ProductGridBlock as ProductGridBlockProps } from '@/payload-
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { FC } from 'react'
 import RichText from '@/components/RichText'
+import * as motion from 'motion/react-client'
 
-import { CollectionArchive } from '@/components/CollectionArchive'
+import { SectionBackground } from '@/components/SectionBackground'
+import { CollectionProductGrid } from '@/components/CollectionProductGrid'
+import { SectionTitle } from '@/components/SectionTitle'
 
-export const ProductGridBlock: FC<
+export const ProductGridBlock: React.FC<
   ProductGridBlockProps & {
     id?: string
   }
 > = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
+  const {
+    id,
+    title,
+    background,
+    theme,
+    categories,
+    introContent,
+    limit: limitFromProps,
+    populateBy,
+    selectedDocs,
+  } = props
 
   const limit = limitFromProps || 8
 
@@ -53,13 +65,24 @@ export const ProductGridBlock: FC<
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
+    <section className="relative py-32 overflow-hidden" id={`block-${id}`} data-theme={theme}>
+      <SectionBackground {...background} theme={theme} />
+
       {introContent && (
-        <div className="container mb-16">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="text-center max-w-3xl mx-auto mb-24"
+          >
+            <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+          </motion.div>
           <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
         </div>
       )}
-      <CollectionArchive posts={posts} />
-    </div>
+      <CollectionProductGrid posts={posts} />
+    </section>
   )
 }
