@@ -1,21 +1,48 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-})
+});
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends(
+    'next/core-web-vitals',
+    'next/typescript',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:prettier/recommended',
+    'plugin:tailwindcss/recommended'
+  ),
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    excludedFiles: [
+      'eslint.config.mjs',
+      'next.config.js',
+      'postcss.config.js',
+      'tailwind.config.mjs',
+    ],
+    languageOptions: {
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+  },
   {
     rules: {
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-confusing-void-expression': 'off',
+      '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -31,8 +58,16 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ['.next/'],
+    ignores: [
+      '.next/',
+      'eslint.config.mjs',
+      'next.config.js',
+      'postcss.config.js',
+      'tailwind.config.js',
+      'redirects.js',
+      'prettier.config.js',
+    ],
   },
-]
+];
 
-export default eslintConfig
+export default eslintConfig;
