@@ -1,4 +1,3 @@
-import { cn } from '@/utilities/ui'
 import React from 'react'
 
 import { ProductCard, CardPostData } from '@/components/ProductCard'

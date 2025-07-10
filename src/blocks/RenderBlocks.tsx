@@ -14,9 +14,11 @@ import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/Component'
 import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/Component'
 import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/Component'
 import { ProductGridBlock } from '@/blocks/ProductGridBlock/Component'
+import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component'
 
 import { TypedLocale } from 'payload'
 
+// This is a mapping of block types (slugs) to their respective components
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -30,6 +32,7 @@ const blockComponents = {
   featureGrid: FeatureGridBlock,
   featureGallery: FeatureGalleryBlock,
   productGrid: ProductGridBlock,
+  testimonial: TestimonialBlock,
 }
 
 export const RenderBlocks: React.FC<{

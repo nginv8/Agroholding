@@ -62,6 +62,18 @@
     --soil: 35 40% 40%;
     --sky: 200 80% 75%;
     --leaf: 120 60% 50%;
+
+    /* Carousel */
+    --slide-height: 10rem;
+    --slide-spacing: 2rem;
+    --slide-size: 100%;
+
+    --detail-medium-contrast: #d1d5db;
+    --text-high-contrast-rgb-value: 80, 80, 80;
+    --text-body: #111827;
+    --text-body-hover: #4c5874;
+    --detail-high-contrast: #f3f4f6;
+    --text-body-rgb-value: 80, 80, 80;
   }
 
   [data-theme='dark'] {
@@ -152,3 +164,19 @@ html[data-theme='light'] {
     transform: rotate(-5deg);
   }
 }
+
+@media (min-width: 768px) {
+  :root {
+    --slide-size: 50%;
+    --slide-spacing: 3rem;
+    --slide-height: 12rem;
+  }
+ }
+
+ @media (min-width: 1280px) {
+  :root {
+    --slide-size: 33%;
+    --slide-spacing: 3rem;
+    --slide-height: 12rem;
+  }
+ }

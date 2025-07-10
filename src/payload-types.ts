@@ -204,6 +204,7 @@ export interface Page {
     | FeatureGridBlock
     | FeatureGalleryBlock
     | ProductGridBlock
+    | TestimonialBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1108,6 +1109,40 @@ export interface ProductGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  theme?: ('light' | 'dark') | null;
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  testimonials?:
+    | {
+        name: string;
+        role?: string | null;
+        rating?: number | null;
+        image?: (number | null) | Media;
+        avatar?: (number | null) | Media;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1403,6 +1438,7 @@ export interface PagesSelect<T extends boolean = true> {
         featureGrid?: T | FeatureGridBlockSelect<T>;
         featureGallery?: T | FeatureGalleryBlockSelect<T>;
         productGrid?: T | ProductGridBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
       };
   meta?:
     | T
@@ -1803,6 +1839,43 @@ export interface ProductGridBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  theme?: T;
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        rating?: T;
+        image?: T;
+        avatar?: T;
+        content?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
