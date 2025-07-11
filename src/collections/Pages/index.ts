@@ -9,9 +9,9 @@ import type { CollectionConfig } from 'payload';
 
 import { AboutBlock } from '@/blocks/AboutBlock/config';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config';
-import { Archive } from '@/blocks/ArchiveBlock/config';
-import { CallToAction } from '@/blocks/CallToAction/config';
-import { Content } from '@/blocks/Content/config';
+import { ArchiveBlock } from '@/blocks/ArchiveBlock/config';
+import { CallToActionTextBlock } from '@/blocks/CallToActionTextBlock/config';
+import { ContentBlock } from '@/blocks/ContentBlock/config';
 import { FAQBlock } from '@/blocks/FAQBlock/config';
 import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config';
 import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/config';
@@ -85,10 +85,10 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'layout',
               type: 'blocks',
               blocks: [
-                CallToAction,
-                Content,
+                CallToActionTextBlock,
+                ContentBlock,
                 MediaBlock,
-                Archive,
+                ArchiveBlock,
                 FormBlock,
                 AboutBlock,
                 AboutFeaturesBlock,

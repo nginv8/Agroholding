@@ -4,8 +4,8 @@ import { TypedLocale } from 'payload';
 import { AboutBlock } from '@/blocks/AboutBlock/Component';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/Component';
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component';
-import { CallToActionBlock } from '@/blocks/CallToAction/Component';
-import { ContentBlock } from '@/blocks/Content/Component';
+import { CallToActionTextBlock } from '@/blocks/CallToActionTextBlock/Component';
+import { ContentBlock } from '@/blocks/ContentBlock/Component';
 import { FAQBlock } from '@/blocks/FAQBlock/Component';
 import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/Component';
 import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/Component';
@@ -21,7 +21,7 @@ import type { Page } from '@/payload-types';
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
-  cta: CallToActionBlock,
+  ctaText: CallToActionTextBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   about: AboutBlock,

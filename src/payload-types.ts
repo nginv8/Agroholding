@@ -192,7 +192,7 @@ export interface Page {
     media?: (number | null) | Media;
   };
   layout: (
-    | CallToActionBlock
+    | CallToActionTextBlock
     | ContentBlock
     | MediaBlock
     | ArchiveBlock
@@ -409,9 +409,9 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock".
+ * via the `definition` "CallToActionTextBlock".
  */
-export interface CallToActionBlock {
+export interface CallToActionTextBlock {
   richText?: {
     root: {
       type: string;
@@ -453,7 +453,7 @@ export interface CallToActionBlock {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'cta';
+  blockType: 'ctaText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1467,7 +1467,7 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        cta?: T | CallToActionBlockSelect<T>;
+        ctaText?: T | CallToActionTextBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
@@ -1498,9 +1498,9 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock_select".
+ * via the `definition` "CallToActionTextBlock_select".
  */
-export interface CallToActionBlockSelect<T extends boolean = true> {
+export interface CallToActionTextBlockSelect<T extends boolean = true> {
   richText?: T;
   links?:
     | T
@@ -2535,17 +2535,6 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
