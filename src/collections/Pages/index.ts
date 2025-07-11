@@ -1,34 +1,34 @@
-import type { CollectionConfig } from 'payload'
-
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Archive } from '@/blocks/ArchiveBlock/config'
-import { CallToAction } from '@/blocks/CallToAction/config'
-import { Content } from '@/blocks/Content/config'
-import { FormBlock } from '@/blocks/Form/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { AboutBlock } from '@/blocks/AboutBlock/config'
-import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config'
-import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config'
-import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/config'
-import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/config'
-import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/config'
-import { ProductGridBlock } from '@/blocks/ProductGridBlock/config'
-import { TestimonialBlock } from '@/blocks/TestimonialBlock/config'
-
-import { hero } from '@/heros/config'
-import { slugField } from '@/fields/slug'
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
-
 import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from '@payloadcms/plugin-seo/fields'
+} from '@payloadcms/plugin-seo/fields';
+import type { CollectionConfig } from 'payload';
+
+import { AboutBlock } from '@/blocks/AboutBlock/config';
+import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config';
+import { Archive } from '@/blocks/ArchiveBlock/config';
+import { CallToAction } from '@/blocks/CallToAction/config';
+import { Content } from '@/blocks/Content/config';
+import { FAQBlock } from '@/blocks/FAQBlock/config';
+import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config';
+import { FeatureGalleryBlock } from '@/blocks/FeatureGalleryBlock/config';
+import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/config';
+import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/config';
+import { FormBlock } from '@/blocks/Form/config';
+import { MediaBlock } from '@/blocks/MediaBlock/config';
+import { ProductGridBlock } from '@/blocks/ProductGridBlock/config';
+import { TestimonialBlock } from '@/blocks/TestimonialBlock/config';
+import { slugField } from '@/fields/slug';
+import { hero } from '@/heros/config';
+
+import { authenticated } from '../../access/authenticated';
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
+import { populatePublishedAt } from '../../hooks/populatePublishedAt';
+import { generatePreviewPath } from '../../utilities/generatePreviewPath';
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -53,9 +53,9 @@ export const Pages: CollectionConfig<'pages'> = {
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'pages',
           req,
-        })
+        });
 
-        return path
+        return path;
       },
     },
     preview: (data, { req }) =>
@@ -98,6 +98,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureGalleryBlock,
                 ProductGridBlock,
                 TestimonialBlock,
+                FAQBlock,
               ],
               required: true,
               admin: {
@@ -159,4 +160,4 @@ export const Pages: CollectionConfig<'pages'> = {
     },
     maxPerDoc: 50,
   },
-}
+};

@@ -1,13 +1,12 @@
-import type { Block, Field } from 'payload'
-
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+} from '@payloadcms/richtext-lexical';
+import type { Block, Field } from 'payload';
 
-import { link } from '@/fields/link'
+import { link } from '@/fields/link';
 
 const columnFields: Field[] = [
   {
@@ -43,7 +42,7 @@ const columnFields: Field[] = [
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
-        ]
+        ];
       },
     }),
     label: false,
@@ -59,7 +58,7 @@ const columnFields: Field[] = [
       },
     },
   }),
-]
+];
 
 export const Content: Block = {
   slug: 'content',
@@ -68,10 +67,10 @@ export const Content: Block = {
     {
       name: 'columns',
       type: 'array',
+      fields: columnFields,
       admin: {
         initCollapsed: true,
       },
-      fields: columnFields,
     },
   ],
-}
+};

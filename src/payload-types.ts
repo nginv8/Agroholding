@@ -205,6 +205,7 @@ export interface Page {
     | FeatureGalleryBlock
     | ProductGridBlock
     | TestimonialBlock
+    | FAQBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1143,6 +1144,46 @@ export interface TestimonialBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock".
+ */
+export interface FAQBlock {
+  theme?: ('light' | 'dark') | null;
+  background?: {
+    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  image: number | Media;
+  statistics?:
+    | {
+        title: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  additionalInfoTitle: string;
+  additionalInfo: string;
+  faqs?:
+    | {
+        question: string;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1439,6 +1480,7 @@ export interface PagesSelect<T extends boolean = true> {
         featureGallery?: T | FeatureGalleryBlockSelect<T>;
         productGrid?: T | ProductGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
+        faq?: T | FAQBlockSelect<T>;
       };
   meta?:
     | T
@@ -1874,6 +1916,49 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         image?: T;
         avatar?: T;
         content?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock_select".
+ */
+export interface FAQBlockSelect<T extends boolean = true> {
+  theme?: T;
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  image?: T;
+  statistics?:
+    | T
+    | {
+        title?: T;
+        value?: T;
+        id?: T;
+      };
+  additionalInfoTitle?: T;
+  additionalInfo?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   id?: T;
