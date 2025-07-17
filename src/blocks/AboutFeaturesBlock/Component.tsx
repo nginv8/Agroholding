@@ -1,20 +1,22 @@
-import * as motion from 'motion/react-client'
-import { Check } from 'lucide-react'
-import { CMSLink } from '@/components/Link'
-import { ParallaxPreview } from '@/components/ParallaxPreviewV2'
+import { Check } from 'lucide-react';
+import * as motion from 'motion/react-client';
 
-import type { AboutFeaturesBlock as AboutFeaturesProps } from '@/payload-types'
-import { SectionTitle } from '@/components/SectionTitle'
-import { SectionBackground } from '@/components/SectionBackground'
+import { CMSLink } from '@/components/Link';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+
+import type { AboutFeaturesBlock as AboutFeaturesProps } from '@/payload-types';
+
+import { ParallaxPreview } from './ParallaxPreview';
 
 export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
-  const { title, background, theme, mainImage, secondaryImage, features, cta, stats } = props
+  const { title, background, theme, mainImage, secondaryImage, features, cta, stats } = props;
 
   return (
-    <section className="relative py-32 overflow-hidden" data-theme={theme}>
+    <section className="relative overflow-hidden py-32" data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Left column with images */}
           <ParallaxPreview mainMedia={mainImage} floatingMedia={secondaryImage} />
 
@@ -28,7 +30,7 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
           >
             <SectionTitle {...title} title={title?.title || ''} theme={theme} />
 
-            <div className="grid sm:grid-cols-2 gap-8 mb-12">
+            <div className="mb-12 grid gap-8 sm:grid-cols-2">
               {features?.map((item, index) => (
                 <motion.div
                   key={index}
@@ -38,20 +40,20 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-1">
+                    <div className="mt-1 flex-shrink-0">
                       <div
-                        className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                        className={`flex h-6 w-6 items-center justify-center rounded-full ${
                           theme === 'dark' ? 'bg-white/10' : 'bg-primary/10'
                         }`}
                       >
                         <Check
-                          className={`w-4 h-4 ${theme === 'dark' ? 'text-accent-400' : 'text-primary-600'}`}
+                          className={`h-4 w-4 ${theme === 'dark' ? 'text-accent-400' : 'text-primary-600'}`}
                         />
                       </div>
                     </div>
                     <div>
                       <h3
-                        className={`font-semibold mb-2 ${theme === 'dark' ? 'text-foreground' : 'text-foreground'}`}
+                        className={`mb-2 font-semibold ${theme === 'dark' ? 'text-foreground' : 'text-foreground'}`}
                       >
                         {item.title}
                       </h3>
@@ -68,7 +70,7 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
 
             <div className="flex items-center space-x-4">
               {(cta || []).map(({ link }, i) => {
-                return <CMSLink key={i} size="lg" {...link} />
+                return <CMSLink key={i} size="lg" {...link} />;
               })}
             </div>
           </motion.div>
@@ -80,7 +82,7 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="mt-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
           {stats?.map((stat, index) => (
             <motion.div
@@ -100,12 +102,12 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
               />
               <div className="relative p-8 text-center">
                 <div
-                  className={`text-4xl font-bold mb-2 ${theme === 'dark' ? 'text-accent' : 'text-primary'}`}
+                  className={`mb-2 text-4xl font-bold ${theme === 'dark' ? 'text-accent' : 'text-primary'}`}
                 >
                   {stat.number}
                 </div>
                 <div
-                  className={`font-medium uppercase tracking-wider text-sm ${
+                  className={`text-sm font-medium uppercase tracking-wider ${
                     theme === 'dark' ? 'text-muted-foreground' : 'text-muted-foreground'
                   }`}
                 >
@@ -117,5 +119,5 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};

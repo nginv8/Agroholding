@@ -1,12 +1,14 @@
-import { FC } from 'react'
-import * as motion from 'motion/react-client'
-import { SectionTitle } from '@/components/SectionTitle'
-import { CMSLink } from '@/components/Link'
+import { FC } from 'react';
+import * as motion from 'motion/react-client';
 
-import type { AboutBlock as AboutBlockProps } from '@/payload-types'
-import RichText from '@/components/RichText'
-import { ParallaxPreview } from '@/components/ParallaxPreviewV1'
-import { SectionBackground } from '@/components/SectionBackground'
+import { CMSLink } from '@/components/Link';
+import RichText from '@/components/RichText';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+
+import type { AboutBlock as AboutBlockProps } from '@/payload-types';
+
+import { ParallaxPreview } from './ParallaxPreview';
 
 export const AboutBlock: FC<AboutBlockProps> = ({
   title,
@@ -18,12 +20,12 @@ export const AboutBlock: FC<AboutBlockProps> = ({
   cta,
 }) => {
   return (
-    <section className="py-32 relative overflow-hidden" data-theme={theme}>
+    <section className="relative overflow-hidden py-32" data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
 
-      <div className="container mx-auto px-4 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container relative mx-auto px-4">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Text column */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -52,7 +54,7 @@ export const AboutBlock: FC<AboutBlockProps> = ({
                   className="flex items-center space-x-4"
                 >
                   {(cta || []).map(({ link }, i) => {
-                    return <CMSLink key={i} size="lg" {...link} />
+                    return <CMSLink key={i} size="lg" {...link} />;
                   })}
                 </motion.div>
               </div>
@@ -64,5 +66,5 @@ export const AboutBlock: FC<AboutBlockProps> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
