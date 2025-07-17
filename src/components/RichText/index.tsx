@@ -11,12 +11,12 @@ import {
 } from '@payloadcms/richtext-lexical/react';
 
 import { BannerBlock } from '@/blocks/BannerBlock/Component';
-import { CallToActionTextBlock } from '@/blocks/CallToActionTextBlock/Component';
+import { CallToActionBlock } from '@/blocks/CallToActionBlock/Component';
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component';
 import { MediaBlock } from '@/blocks/MediaBlock/Component';
 import type {
   BannerBlock as BannerBlockProps,
-  CallToActionTextBlock as CTABlockProps,
+  CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types';
 import { cn } from '@/utilities/ui';
@@ -50,7 +50,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
       />
     ),
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
-    cta: ({ node }) => <CallToActionTextBlock {...node.fields} />,
+    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
 });
 

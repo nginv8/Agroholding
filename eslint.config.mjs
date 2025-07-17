@@ -19,12 +19,6 @@ const eslintConfig = [
   ),
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    excludedFiles: [
-      'eslint.config.mjs',
-      'next.config.js',
-      'postcss.config.js',
-      'tailwind.config.mjs',
-    ],
     languageOptions: {
       parser: '@typescript-eslint/parser',
       parserOptions: {
@@ -63,7 +57,7 @@ const eslintConfig = [
       'eslint.config.mjs',
       'next.config.js',
       'postcss.config.js',
-      'tailwind.config.js',
+      'tailwind.config.mjs',
       'redirects.js',
       'prettier.config.js',
     ],

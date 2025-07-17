@@ -192,7 +192,7 @@ export interface Page {
     media?: (number | null) | Media;
   };
   layout: (
-    | CallToActionTextBlock
+    | CallToActionBlock
     | ContentBlock
     | MediaBlock
     | ArchiveBlock
@@ -409,9 +409,20 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionTextBlock".
+ * via the `definition` "CallToActionBlock".
  */
-export interface CallToActionTextBlock {
+export interface CallToActionBlock {
+  theme?: ('light' | 'dark') | null;
+  background?: {
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  layoutStyle: 'none' | 'sm' | 'lg';
+  imageSide?: ('left' | 'right') | null;
+  image?: (number | null) | Media;
+  marginTop: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  marginBottom: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   richText?: {
     root: {
       type: string;
@@ -453,7 +464,7 @@ export interface CallToActionTextBlock {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'ctaText';
+  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -764,7 +775,7 @@ export interface AboutBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -828,7 +839,7 @@ export interface AboutFeaturesBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -892,7 +903,7 @@ export interface FeatureCardsBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -923,7 +934,7 @@ export interface FeatureTabsBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -993,7 +1004,7 @@ export interface FeatureGridBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -1024,7 +1035,7 @@ export interface FeatureGalleryBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -1075,7 +1086,7 @@ export interface ProductGridBlock {
     description?: string | null;
   };
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -1115,7 +1126,7 @@ export interface ProductGridBlock {
 export interface TestimonialBlock {
   theme?: ('light' | 'dark') | null;
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -1149,7 +1160,7 @@ export interface TestimonialBlock {
 export interface FAQBlock {
   theme?: ('light' | 'dark') | null;
   background?: {
-    variant?: ('color' | 'gradient' | 'image' | 'gradient and image') | null;
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     backgroundMedia?: (number | null) | Media;
   };
@@ -1467,7 +1478,7 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        ctaText?: T | CallToActionTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
@@ -1498,9 +1509,22 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionTextBlock_select".
+ * via the `definition` "CallToActionBlock_select".
  */
-export interface CallToActionTextBlockSelect<T extends boolean = true> {
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  theme?: T;
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  layoutStyle?: T;
+  imageSide?: T;
+  image?: T;
+  marginTop?: T;
+  marginBottom?: T;
   richText?: T;
   links?:
     | T

@@ -1,14 +1,18 @@
-'use client'
+'use client';
 
-import type React from 'react'
-import { useState } from 'react'
-import { motion } from 'motion/react'
-import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types'
-import { SectionTitle } from '@/components/SectionTitle'
-import { IconRenderer } from '@/components/IconRenderer'
-import { CMSLink } from '@/components/Link'
-import { SectionBackground } from '@/components/SectionBackground'
-import RichText from '@/components/RichText'
+import type React from 'react';
+import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+
+import { IconRenderer } from '@/components/IconRenderer';
+import { CMSLink } from '@/components/Link';
+import RichText from '@/components/RichText';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+
+import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types';
+import { cn } from '@/utilities/ui';
 
 export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
   title,
@@ -17,64 +21,43 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
   features,
   cta,
 }) => {
-  const [activeTab, setActiveTab] = useState(0)
-  const isDark = theme === 'dark'
-
-  const activeTabButtonAccentColor = isDark
-    ? 'bg-primary-800/80 text-accent-foreground'
-    : 'bg-primary/10 text-primary'
-
-  const inactiveTabButton = isDark
-    ? 'text-white/80 hover:bg-primary-800/40'
-    : 'text-muted-foreground hover:bg-muted/50'
-
-  const activeTabIcon = isDark ? 'text-accent-400' : 'text-primary'
-
-  const inactiveTabIcon = isDark ? 'text-white/80' : 'text-muted-foreground'
-
-  const cardBackground = isDark ? 'bg-primary-800/80' : 'bg-white'
-
-  const cardIconBackground = isDark ? 'bg-white/10' : 'bg-primary/10'
-
-  const cardText = isDark ? 'text-white/90' : 'text-muted-foreground'
-
-  const cardTitle = isDark ? 'text-foreground' : 'text-foreground'
-
-  const cardIcon = isDark ? 'text-accent-400' : 'text-primary'
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden relative" data-theme={theme}>
+    <section className="relative overflow-hidden py-16 md:py-24" data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container relative mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row">
           <div className="lg:w-1/3">
-            <div className="sticky top-24">
-              <ul className="space-y-2">
-                {features?.map((feature, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => setActiveTab(index)}
-                      className={`w-full text-left p-4 rounded-lg transition-all duration-300 flex items-center ${
-                        activeTab === index
-                          ? `${activeTabButtonAccentColor} font-medium shadow-sm`
-                          : inactiveTabButton
-                      }`}
-                    >
-                      {feature.icon && (
-                        <IconRenderer
-                          name={feature.icon}
-                          className={`w-5 h-5 mr-3 ${activeTab === index ? activeTabIcon : inactiveTabIcon}`}
-                        />
-                      )}
-                      {feature.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className="sticky top-24 space-y-2">
+              {features?.map((feature, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => setActiveTab(index)}
+                    className={cn(
+                      'flex w-full items-center rounded-lg p-4 text-left text-muted-foreground transition-all duration-300 hover:bg-secondary/40 dark:hover:bg-primary/20',
+                      {
+                        'bg-secondary/40 font-medium text-foreground shadow-sm dark:bg-primary/20':
+                          activeTab === index,
+                      }
+                    )}
+                  >
+                    {feature.icon && (
+                      <IconRenderer
+                        name={feature.icon}
+                        className={cn('mr-3 h-5 w-5 text-muted-foreground', {
+                          'text-primary dark:text-accent': activeTab === index,
+                        })}
+                      />
+                    )}
+                    {feature.title}
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="lg:w-2/3">
@@ -84,26 +67,26 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className={`${cardBackground} rounded-lg shadow-lg p-8`}
+                className="rounded-lg bg-secondary/30 p-8 shadow-lg dark:bg-primary/20 dark:bg-white"
               >
-                <div className="flex items-center mb-3">
-                  <div
-                    className={`mr-4 w-12 h-12 flex items-center rounded-full justify-center ${cardIconBackground}`}
-                  >
+                <div className="mb-3 flex items-center">
+                  <div className="mr-4 flex size-12 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
                     {features[activeTab].icon && (
                       <IconRenderer
                         name={features[activeTab].icon}
-                        className={`w-6 h-6 ${cardIcon}`}
+                        className="h-6 w-6 text-primary dark:text-accent-400"
                       />
                     )}
                   </div>
-                  <h3 className={`text-2xl font-bold ${cardTitle}`}>{features[activeTab].title}</h3>
+                  <h3 className="text-2xl font-bold text-foreground">
+                    {features[activeTab].title}
+                  </h3>
                 </div>
 
-                <p className={`${cardText} text-lg mb-8`}>{features[activeTab].description}</p>
+                <p className="mb-8 text-lg text-foreground">{features[activeTab].description}</p>
 
                 {features[activeTab].content && (
-                  <div className="prose max-w-none prose-primary">
+                  <div className="prose-primary prose max-w-none">
                     {features[activeTab].content && (
                       <RichText data={features[activeTab].content} enableGutter={false} />
                     )}
@@ -114,28 +97,8 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
 
             {cta?.map(({ link }, i) => (
               <div key={i} className="mt-16">
-                <CMSLink
-                  {...link}
-                  className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-colors duration-300 ${
-                    isDark
-                      ? 'bg-accent-400 text-black hover:bg-accent-500 shadow-sm hover:shadow-md'
-                      : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg'
-                  }`}
-                >
-                  <svg
-                    className="ml-2 w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
+                <CMSLink {...link} size="lg" className="group">
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </CMSLink>
               </div>
             ))}
@@ -143,5 +106,5 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

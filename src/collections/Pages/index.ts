@@ -10,7 +10,7 @@ import type { CollectionConfig } from 'payload';
 import { AboutBlock } from '@/blocks/AboutBlock/config';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config';
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/config';
-import { CallToActionTextBlock } from '@/blocks/CallToActionTextBlock/config';
+import { CallToActionBlock } from '@/blocks/CallToActionBlock/config';
 import { ContentBlock } from '@/blocks/ContentBlock/config';
 import { FAQBlock } from '@/blocks/FAQBlock/config';
 import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config';
@@ -85,7 +85,7 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'layout',
               type: 'blocks',
               blocks: [
-                CallToActionTextBlock,
+                CallToActionBlock,
                 ContentBlock,
                 MediaBlock,
                 ArchiveBlock,

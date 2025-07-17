@@ -4,7 +4,7 @@ import { TypedLocale } from 'payload';
 import { AboutBlock } from '@/blocks/AboutBlock/Component';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/Component';
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component';
-import { CallToActionTextBlock } from '@/blocks/CallToActionTextBlock/Component';
+import { CallToActionBlock } from '@/blocks/CallToActionBlock/Component';
 import { ContentBlock } from '@/blocks/ContentBlock/Component';
 import { FAQBlock } from '@/blocks/FAQBlock/Component';
 import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/Component';
@@ -21,7 +21,7 @@ import type { Page } from '@/payload-types';
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
-  ctaText: CallToActionTextBlock,
+  cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   about: AboutBlock,
@@ -56,7 +56,7 @@ export const RenderBlocks: React.FC<{
               return (
                 <div key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} locale={locale} disableInnerContainer />
+                  <Block key={index} {...block} locale={locale} disableInnerContainer />
                 </div>
               );
             }

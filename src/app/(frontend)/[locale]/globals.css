@@ -16,113 +16,86 @@
   :root {
     scroll-behavior: smooth;
 
-    /* Base colors */
-    --background: 60 10% 98%;
-    --foreground: 120 6% 10%;
+    --background: 0 0% 100%;
+    --foreground: 222 84% 5%;
 
-    --card: 60 15% 96%;
-    --card-foreground: 120 6% 10%;
-
-    --popover: 60 10% 98%;
-    --popover-foreground: 120 6% 10%;
-
-    /* Green as primary color (grass, plants) */
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 100%;
 
-    /* Light brown as secondary color (soil) */
-    --secondary: 35 40% 90%;
-    --secondary-foreground: 35 40% 20%;
+    --secondary: 220 30% 94%;
+    --secondary-foreground: 222 84% 5%;
 
-    /* Muted colors */
-    --muted: 60 15% 92%;
-    --muted-foreground: 120 6% 40%;
+    --accent: 48 95% 50%;
+    --accent-foreground: 222 84% 5%;
 
-    /* Yellow as accent color (wheat, sun) */
-    --accent: 45 96% 58%;
-    --accent-foreground: 45 10% 10%;
-
-    /* Other colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 120 10% 85%;
-    --input: 120 10% 90%;
-    --ring: 142 76% 36%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 50%;
 
-    --radius: 0.3rem;
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 5%;
 
-    /* Status colors */
-    --success: 142 76% 46%;
-    --warning: 45 96% 58%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 5%;
+
+    --success: 142 76% 36%;
     --error: 0 84% 60%;
+    --warning: 40 100% 58%;
 
-    /* Additional colors for agricultural theme */
-    --wheat: 45 80% 80%;
-    --soil: 35 40% 40%;
-    --sky: 200 80% 75%;
-    --leaf: 120 60% 50%;
+    --border: 214 32% 92%;
+    --input: 214 32% 92%;
+    --ring: 142 76% 36%;
+    --radius: 0.5rem;
 
     /* Carousel */
     --slide-height: 10rem;
     --slide-spacing: 2rem;
     --slide-size: 100%;
 
-    --detail-medium-contrast: #d1d5db;
+    --detail-medium-contrast: hsla(var(--foreground), 0.3);;
     --text-high-contrast-rgb-value: 80, 80, 80;
-    --text-body: #111827;
-    --text-body-hover: #4c5874;
-    --detail-high-contrast: #f3f4f6;
+    --text-body: hsl(var(--foreground));
+    --text-body-hover: hsla(var(--foreground), 0.8);
+    --detail-high-contrast: hsl(var(--secondary));
     --text-body-rgb-value: 80, 80, 80;
   }
 
   [data-theme='dark'] {
     scroll-behavior: smooth;
 
-    /* Base colors */
-    --background: 120 10% 5%;
-    --foreground: 60 15% 95%;
+    --background: 144 61% 20%;
+    --foreground: 0 0% 100%;
 
-    --card: 120 10% 8%;
-    --card-foreground: 60 15% 95%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 355.7 100% 97.3%;
 
-    --popover: 120 10% 5%;
-    --popover-foreground: 60 15% 95%;
+    --secondary: 0 0% 38%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Dark green as primary color */
-    --primary: 142 60% 30%;
-    --primary-foreground: 0 0% 100%;
+    --accent: 48 96% 52%;
+    --accent-foreground: 0 0% 5%;
 
-    /* Dark brown as secondary color */
-    --secondary: 35 30% 20%;
-    --secondary-foreground: 35 30% 90%;
-
-    /* Muted colors */
-    --muted: 120 10% 15%;
-    --muted-foreground: 60 15% 70%;
-
-    /* Muted yellow as accent color */
-    --accent: 45 70% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Other colors */
-    --destructive: 0 62% 40%;
+    --destructive: 0 64% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 120 10% 20%;
-    --input: 120 10% 15%;
-    --ring: 142 60% 30%;
+    --muted: 142 20% 10%;
+    --muted-foreground: 200 20% 80%;
 
-    /* Status colors */
-    --success: 142 60% 30%;
-    --warning: 45 70% 40%;
-    --error: 0 62% 40%;
+    --card: 142 76% 10%;
+    --card-foreground: 0 0% 100%;
 
-    /* Additional colors for agricultural theme */
-    --wheat: 45 50% 40%;
-    --soil: 35 30% 25%;
-    --sky: 200 50% 30%;
-    --leaf: 120 40% 25%;
+    --popover: 142 76% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --error: 0 64% 54%;
+    --warning: 40 93% 47%;
+
+    --border: 110 12% 46%;
+    --input: 110 12% 46%;
+    --ring: 142 76% 36%;
   }
   @supports not (scroll-behavior: smooth) {
     :root {
@@ -136,7 +109,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply flex min-h-[100vh] flex-col bg-background text-foreground;
   }
 }
 
@@ -171,12 +144,12 @@ html[data-theme='light'] {
     --slide-spacing: 3rem;
     --slide-height: 12rem;
   }
- }
+}
 
- @media (min-width: 1280px) {
+@media (min-width: 1280px) {
   :root {
     --slide-size: 33%;
     --slide-spacing: 3rem;
     --slide-height: 12rem;
   }
- }
+}

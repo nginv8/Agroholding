@@ -79,9 +79,9 @@ export const FAQBlock: React.FC<FAQProps> = ({
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className="rounded border-none transition-colors data-[state=open]:bg-gray-100/80 dark:data-[state=open]:bg-gray-950/50"
+                    className="rounded border-none transition-colors data-[state=open]:bg-gray-100/80 dark:data-[state=open]:bg-gray-950/20"
                   >
-                    <AccordionTrigger className="px-6 py-4 text-left hover:no-underline data-[state=open]:text-primary-700 dark:text-white dark:data-[state=open]:text-accent-400">
+                    <AccordionTrigger className="px-6 py-4 text-left hover:no-underline data-[state=open]:text-primary-700 dark:text-white dark:data-[state=open]:text-accent">
                       <span className="text-lg font-medium">{faq.question}</span>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-4">
@@ -100,12 +100,10 @@ export const FAQBlock: React.FC<FAQProps> = ({
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                className="mt-8 rounded-xl border border-primary-100 bg-primary-50 p-6 dark:border-accent-400/30 dark:bg-primary-950/50"
+                className="mt-8 rounded-xl border border-primary-100 bg-primary-50 p-6 dark:border-white/20 dark:bg-primary-950/50"
               >
-                <p className="font-medium text-primary-800 dark:text-accent-100">
-                  {additionalInfoTitle}
-                </p>
-                <p className="mt-2 text-primary-600 dark:text-white/80">{additionalInfo}</p>
+                <p className="font-medium text-primary dark:text-accent">{additionalInfoTitle}</p>
+                <p className="mt-2 text-primary-600 dark:text-muted-foreground">{additionalInfo}</p>
               </motion.div>
             )}
           </motion.div>

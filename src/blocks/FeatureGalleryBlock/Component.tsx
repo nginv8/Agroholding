@@ -1,11 +1,13 @@
-import * as motion from 'motion/react-client'
-import { ChevronRight } from 'lucide-react'
-import { IconRenderer } from '@/components/IconRenderer'
-import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types'
-import { SectionTitle } from '@/components/SectionTitle'
-import { Media } from '@/components/Media'
-import { SectionBackground } from '@/components/SectionBackground'
-import { CMSLink } from '@/components/Link'
+import { ChevronRight } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { IconRenderer } from '@/components/IconRenderer';
+import { CMSLink } from '@/components/Link';
+import { Media } from '@/components/Media';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+
+import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types';
 
 export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
   title,
@@ -15,21 +17,21 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
   stats = [],
 }) => {
   return (
-    <section className="relative py-32 overflow-hidden" data-theme={theme}>
+    <section className="relative overflow-hidden py-32" data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          className="mx-auto mb-24 max-w-3xl text-center"
         >
           <SectionTitle {...title} title={title?.title || ''} theme={theme} />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid gap-16 lg:grid-cols-2">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -40,7 +42,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
               className="group"
             >
               <div className="relative">
-                <div className="relative h-[300px] mb-8 overflow-hidden rounded-2xl">
+                <div className="relative mb-8 h-[300px] overflow-hidden rounded-2xl">
                   <Media
                     resource={feature.image}
                     className="size-full"
@@ -51,7 +53,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
                   {/* Icon & title */}
                   <div className="absolute bottom-6 left-6 flex items-center space-x-4">
                     {feature?.icon && (
-                      <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm">
+                      <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
                         <IconRenderer name={feature.icon} size={24} className="text-accent-400" />
                       </div>
                     )}
@@ -61,18 +63,16 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
 
                 <div className="relative">
                   {feature.description && (
-                    <p
-                      className={`text-lg leading-relaxed mb-4 ${theme === 'dark' ? 'text-secondary-300' : 'text-secondary-600'}`}
-                    >
+                    <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
                       {feature.description}
                     </p>
                   )}
                   {feature.link.type && (
                     <CMSLink
                       {...feature.link}
-                      className={`inline-flex items-center  transition-colors group/btn ${theme === 'dark' ? 'text-accent-400 hover:text-accent-300' : 'text-primary-700 hover:text-primary-600'}`}
+                      className="group/btn inline-flex items-center text-primary-700 transition-colors hover:text-primary-600 dark:text-accent-400 dark:hover:text-accent-300"
                     >
-                      <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </CMSLink>
                   )}
                 </div>
@@ -87,26 +87,16 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className={`mt-24 p-8 rounded-2xl backdrop-blur-sm ${theme === 'dark' ? 'bg-white/5' : 'bg-primary-900/5'}`}
+            className="mt-24 rounded-2xl bg-primary-900/5 p-8 backdrop-blur-sm dark:bg-white/5"
           >
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-3">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div
-                    className={`text-3xl font-bold  mb-2 ${theme === 'dark' ? 'text-accent-400' : 'text-primary-600'}`}
-                  >
+                  <div className="mb-2 text-3xl font-bold text-primary dark:text-accent">
                     {stat.number}
                   </div>
-                  <div
-                    className={` font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-secondary-900'}`}
-                  >
-                    {stat.label}
-                  </div>
-                  <div
-                    className={` text-sm ${theme === 'dark' ? 'text-secondary-400' : 'text-secondary-500'}`}
-                  >
-                    {stat.description}
-                  </div>
+                  <div className="mb-2 font-medium text-foreground">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground">{stat.description}</div>
                 </div>
               ))}
             </div>
@@ -114,5 +104,5 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
         )}
       </div>
     </section>
-  )
-}
+  );
+};
