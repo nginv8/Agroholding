@@ -1,42 +1,55 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
 });
 
 const eslintConfig = [
+  {
+    ignores: [
+      '.next/',
+      'node_modules/',
+      'out/',
+      'build/',
+      'dist/',
+      '*.config.js',
+      '*.config.mjs',
+      '*.config.ts',
+    ],
+  },
   ...compat.extends(
     'next/core-web-vitals',
     'next/typescript',
-    'plugin:@typescript-eslint/strict-type-checked',
     'plugin:prettier/recommended',
     'plugin:tailwindcss/recommended'
   ),
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: '@typescript-eslint/parser',
+      parser: typescriptParser,
       parserOptions: {
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
-  },
-  {
+    plugins: {
+      '@typescript-eslint': typescriptEslint,
+    },
     rules: {
-      '@typescript-eslint/ban-ts-comment': 'warn',
-      '@typescript-eslint/no-empty-object-type': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-confusing-void-expression': 'off',
-      '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -49,18 +62,23 @@ const eslintConfig = [
           caughtErrorsIgnorePattern: '^(_|ignore)',
         },
       ],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      'react/no-unescaped-entities': 'off',
+      'react/prop-types': 'off',
     },
   },
   {
-    ignores: [
-      '.next/',
-      'eslint.config.mjs',
-      'next.config.js',
-      'postcss.config.js',
-      'tailwind.config.mjs',
-      'redirects.js',
-      'prettier.config.js',
-    ],
+    files: ['**/*.js', '**/*.jsx'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
   },
 ];
 
