@@ -206,6 +206,7 @@ export interface Page {
     | ProductGridBlock
     | TestimonialBlock
     | FAQBlock
+    | ContactUsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1195,6 +1196,62 @@ export interface FAQBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactUsBlock".
+ */
+export interface ContactUsBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
+  formFields?:
+    | {
+        label: string;
+        type?: ('text' | 'email' | 'textarea' | 'select') | null;
+        placeholder?: string | null;
+        options?:
+          | {
+              label: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactInfo?:
+    | {
+        icon?: string | null;
+        title?: string | null;
+        details?:
+          | {
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  corporate?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactUs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1492,6 +1549,7 @@ export interface PagesSelect<T extends boolean = true> {
         productGrid?: T | ProductGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
         faq?: T | FAQBlockSelect<T>;
+        contactUs?: T | ContactUsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1984,6 +2042,67 @@ export interface FAQBlockSelect<T extends boolean = true> {
         question?: T;
         answer?: T;
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactUsBlock_select".
+ */
+export interface ContactUsBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
+  formFields?:
+    | T
+    | {
+        label?: T;
+        type?: T;
+        placeholder?: T;
+        options?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contactInfo?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        details?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        description?: T;
+        id?: T;
+      };
+  corporate?:
+    | T
+    | {
+        title?: T;
+        description?: T;
       };
   id?: T;
   blockName?: T;

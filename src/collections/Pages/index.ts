@@ -7,10 +7,15 @@ import {
 } from '@payloadcms/plugin-seo/fields';
 import type { CollectionConfig } from 'payload';
 
+import { populatePublishedAt } from '@/hooks/populatePublishedAt';
+
+import { authenticated } from '@/access/authenticated';
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { AboutBlock } from '@/blocks/AboutBlock/config';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config';
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/config';
 import { CallToActionBlock } from '@/blocks/CallToActionBlock/config';
+import { ContactUsBlock } from '@/blocks/ContactUsBlock/config';
 import { ContentBlock } from '@/blocks/ContentBlock/config';
 import { FAQBlock } from '@/blocks/FAQBlock/config';
 import { FeatureCardsBlock } from '@/blocks/FeatureCardsBlock/config';
@@ -23,11 +28,8 @@ import { ProductGridBlock } from '@/blocks/ProductGridBlock/config';
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/config';
 import { slugField } from '@/fields/slug';
 import { hero } from '@/heros/config';
+import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 
-import { authenticated } from '../../access/authenticated';
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
-import { populatePublishedAt } from '../../hooks/populatePublishedAt';
-import { generatePreviewPath } from '../../utilities/generatePreviewPath';
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -99,6 +101,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ProductGridBlock,
                 TestimonialBlock,
                 FAQBlock,
+                ContactUsBlock,
               ],
               required: true,
               admin: {

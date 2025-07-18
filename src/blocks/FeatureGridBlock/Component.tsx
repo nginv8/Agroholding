@@ -1,10 +1,11 @@
-import type React from 'react'
-import * as motion from 'motion/react-client'
-import { IconRenderer } from '@/components/IconRenderer'
-import { SectionTitle } from '@/components/SectionTitle'
+import type React from 'react';
+import * as motion from 'motion/react-client';
 
-import type { FeatureGridBlock as FeatureGridBlockProps } from '@/payload-types'
-import { SectionBackground } from '@/components/SectionBackground'
+import { IconRenderer } from '@/components/IconRenderer';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+
+import type { FeatureGridBlock as FeatureGridBlockProps } from '@/payload-types';
 
 export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
   title,
@@ -13,13 +14,13 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
   advantages = [],
 }) => {
   return (
-    <section className="py-32 relative bg-white" data-theme={theme}>
+    <section className="relative py-32" data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
 
       <div className="container mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+        <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
           {advantages?.map((advantage, index) => (
             <motion.div
               key={index}
@@ -31,10 +32,10 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
                 scale: 1.02,
                 transition: { duration: 0.2 },
               }}
-              className="flex items-start group cursor-pointer z-10"
+              className="group z-10 flex cursor-pointer items-start"
             >
-              <div className="mr-6 relative">
-                <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center group-hover:bg-primary-100 transition-colors dark:bg-primary-800 dark:group-hover:bg-primary-700">
+              <div className="relative mr-6">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-50 transition-colors group-hover:bg-primary-100 dark:bg-primary-800 dark:group-hover:bg-primary-700">
                   <motion.div
                     animate={{ rotate: 0 }}
                     className="group-hover:animate-[wiggle_0.5s_ease-in-out]"
@@ -49,13 +50,13 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
                   </motion.div>
                 </div>
                 {/* Decorative element */}
-                <div className="absolute -z-10 -inset-4 rounded-[30px] bg-primary-50/50 dark:bg-primary-800/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -inset-4 -z-10 rounded-[30px] bg-primary-50/50 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-primary-800/50" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-700 dark:text-white dark:group-hover:text-white transition-colors">
+                <h3 className="mb-3 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-700 dark:text-white dark:group-hover:text-white">
                   {advantage.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {advantage.description}
                 </p>
               </div>
@@ -64,5 +65,5 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

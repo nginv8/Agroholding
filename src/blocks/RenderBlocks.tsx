@@ -17,6 +17,8 @@ import { ProductGridBlock } from '@/blocks/ProductGridBlock/Component';
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component';
 import type { Page } from '@/payload-types';
 
+import { ContactUsBlock } from './ContactUsBlock/Component';
+
 // This is a mapping of block types (slugs) to their respective components
 const blockComponents = {
   archive: ArchiveBlock,
@@ -33,6 +35,7 @@ const blockComponents = {
   productGrid: ProductGridBlock,
   testimonial: TestimonialBlock,
   faq: FAQBlock,
+  contactUs: ContactUsBlock,
 };
 
 export const RenderBlocks: React.FC<{
