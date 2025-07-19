@@ -9,8 +9,8 @@ export const Width: React.FC<{
 }> = ({ children, className, width }) => {
   return (
     <div
-      className={cn('mb-6 last:mb-0', className)}
-      style={{ maxWidth: width ? `${width}%` : '100%' }}
+      className={cn('mb-6 box-border w-full space-y-2 px-3 last:mb-0', className)}
+      style={{ flex: width ? `0 0 ${width}%` : '0 0 100%' }}
     >
       {children}
     </div>

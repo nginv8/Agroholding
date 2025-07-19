@@ -23,8 +23,8 @@ import { cn } from '@/utilities/ui';
 
 import './globals.css';
 
-import { Footer } from '@/globals/Footer/Component';
-import { Header } from '@/globals/Header/Component';
+// import { Footer } from '@/globals/Footer/Component';
+// import { Header } from '@/globals/Header/Component';
 import { getServerSideURL } from '@/utilities/getURL';
 
 type Args = {
@@ -71,9 +71,9 @@ export default async function RootLayout({ children, params }: Args) {
             />
             <LivePreviewListener />
 
-            <Header />
+            {/* <Header /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </NextIntlClientProvider>
         </Providers>
       </body>

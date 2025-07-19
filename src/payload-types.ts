@@ -619,6 +619,7 @@ export interface Form {
             name: string;
             label?: string | null;
             width?: number | null;
+            placeholder?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -649,6 +650,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: number | null;
+            placeholder?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -686,6 +688,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
+            placeholder?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -696,6 +699,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
+            placeholder?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -2326,6 +2330,7 @@ export interface FormsSelect<T extends boolean = true> {
               name?: T;
               label?: T;
               width?: T;
+              placeholder?: T;
               required?: T;
               id?: T;
               blockName?: T;
@@ -2344,6 +2349,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               required?: T;
               id?: T;
               blockName?: T;
@@ -2384,6 +2390,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               required?: T;
               id?: T;
               blockName?: T;
@@ -2395,6 +2402,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               required?: T;
               id?: T;
               blockName?: T;

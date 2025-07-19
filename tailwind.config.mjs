@@ -1,6 +1,7 @@
-import tailwindcssAnimate from 'tailwindcss-animate'
-import typography from '@tailwindcss/typography'
-const colors = require('tailwindcss/colors')
+import typography from '@tailwindcss/typography';
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -11,7 +12,7 @@ const config = {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [tailwindcssAnimate, typography],
+  plugins: [tailwindcssAnimate, typography, require('@tailwindcss/container-queries')],
   prefix: '',
   safelist: [
     'lg:col-span-4',
@@ -152,6 +153,6 @@ const config = {
       }),
     },
   },
-}
+};
 
-export default config
+export default config;
