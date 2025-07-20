@@ -64,6 +64,7 @@ const addPlaceholderToField = (fieldName: keyof typeof formFields): Block => {
             name: 'placeholder',
             label: 'Placeholder Text',
             type: 'text',
+            localized: true,
           },
           ...(requiredField ? [requiredField] : []),
         ],
