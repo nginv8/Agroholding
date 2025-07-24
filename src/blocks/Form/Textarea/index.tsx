@@ -1,20 +1,22 @@
-import type { TextField } from '@payloadcms/plugin-form-builder/types'
-import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form'
+import type { TextField } from '@payloadcms/plugin-form-builder/types';
 
-import { Label } from '@/components/ui/label'
-import { Textarea as TextAreaComponent } from '@/components/ui/textarea'
-import React from 'react'
+import React from 'react';
+import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 
-import { Error } from '../Error'
-import { Width } from '../Width'
+import { Label } from '@/components/ui/label';
+import { Textarea as TextAreaComponent } from '@/components/ui/textarea';
+
+import { Error } from '../Error';
+import { Width } from '../Width';
 
 export const Textarea: React.FC<
   TextField & {
-    errors: Partial<FieldErrorsImpl>
-    register: UseFormRegister<FieldValues>
-    rows?: number
+    errors: Partial<FieldErrorsImpl>;
+    register: UseFormRegister<FieldValues>;
+    rows?: number;
+    placeholder?: string;
   }
-> = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
+> = ({ name, defaultValue, errors, label, register, required, rows = 3, width, placeholder }) => {
   return (
     <Width width={width}>
       <Label htmlFor={name}>
@@ -32,9 +34,10 @@ export const Textarea: React.FC<
         id={name}
         rows={rows}
         {...register(name, { required: required })}
+        placeholder={placeholder}
       />
 
       {errors[name] && <Error />}
     </Width>
-  )
-}
+  );
+};

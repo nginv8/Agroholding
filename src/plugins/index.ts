@@ -25,52 +25,27 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 };
 
 const addPlaceholderToField = (fieldName: keyof typeof formFields): Block => {
-  let baseBlockConfig: Block;
+  const baseField = formFields[fieldName];
 
-  const fieldConfigValue = formFields[fieldName];
-
-  if (typeof fieldConfigValue === 'function') {
-    baseBlockConfig = fieldConfigValue(undefined) as Block;
-  } else {
-    baseBlockConfig = fieldConfigValue;
-  }
-
-  if (!baseBlockConfig.slug) {
-    baseBlockConfig.slug = `${fieldName}-form-field-config`;
-  }
-
-  if (!baseBlockConfig.fields) {
-    baseBlockConfig.fields = [];
-  }
-
-  const currentFields: Field[] = baseBlockConfig.fields;
-
-  const requiredField = currentFields.find(
-    (field): field is Field & { name: string } => 'name' in field && field.name === 'required'
-  );
-
-  const filteredCurrentFields = currentFields.filter(
-    (field) => !('name' in field && field.name === 'required')
-  );
-
-  return {
-    ...baseBlockConfig,
-    fields: [
-      ...filteredCurrentFields,
-      {
-        type: 'row',
-        fields: [
-          {
-            name: 'placeholder',
-            label: 'Placeholder Text',
-            type: 'text',
-            localized: true,
+  if ('fields' in baseField && Array.isArray(baseField.fields)) {
+    return {
+      ...baseField,
+      fields: [
+        ...baseField.fields,
+        {
+          name: 'placeholder',
+          label: 'Placeholder Text',
+          type: 'text',
+          localized: true,
+          admin: {
+            width: '50%',
           },
-          ...(requiredField ? [requiredField] : []),
-        ],
-      },
-    ],
-  };
+        },
+      ],
+    } as Block;
+  }
+
+  return baseField as Block;
 };
 
 export const plugins: Plugin[] = [

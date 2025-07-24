@@ -619,8 +619,8 @@ export interface Form {
             name: string;
             label?: string | null;
             width?: number | null;
-            placeholder?: string | null;
             required?: boolean | null;
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'email';
@@ -650,8 +650,8 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: number | null;
-            placeholder?: string | null;
             required?: boolean | null;
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'number';
@@ -688,8 +688,8 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
-            placeholder?: string | null;
             required?: boolean | null;
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'text';
@@ -699,8 +699,8 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
-            placeholder?: string | null;
             required?: boolean | null;
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'textarea';
@@ -1204,6 +1204,11 @@ export interface FAQBlock {
  */
 export interface ContactUsBlock {
   theme?: ('light' | 'dark') | null;
+  background?: {
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
   title?: {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
@@ -1212,26 +1217,7 @@ export interface ContactUsBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
-    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
-    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
-  };
-  formFields?:
-    | {
-        label: string;
-        type?: ('text' | 'email' | 'textarea' | 'select') | null;
-        placeholder?: string | null;
-        options?:
-          | {
-              label: string;
-              value: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
+  blocks?: FormBlock[] | null;
   contactInfo?:
     | {
         icon?: string | null;
@@ -2056,6 +2042,13 @@ export interface FAQBlockSelect<T extends boolean = true> {
  */
 export interface ContactUsBlockSelect<T extends boolean = true> {
   theme?: T;
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
   title?:
     | T
     | {
@@ -2066,27 +2059,10 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  blocks?:
     | T
     | {
-        variant?: T;
-        gradientType?: T;
-        backgroundMedia?: T;
-      };
-  formFields?:
-    | T
-    | {
-        label?: T;
-        type?: T;
-        placeholder?: T;
-        options?:
-          | T
-          | {
-              label?: T;
-              value?: T;
-              id?: T;
-            };
-        id?: T;
+        formBlock?: T | FormBlockSelect<T>;
       };
   contactInfo?:
     | T
@@ -2330,8 +2306,8 @@ export interface FormsSelect<T extends boolean = true> {
               name?: T;
               label?: T;
               width?: T;
-              placeholder?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -2349,8 +2325,8 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
-              placeholder?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -2390,8 +2366,8 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
-              placeholder?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -2402,8 +2378,8 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
-              placeholder?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
