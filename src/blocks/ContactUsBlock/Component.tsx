@@ -57,21 +57,25 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
                   className="group"
                 >
                   <div className="relative p-6">
-                    <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/5" />
                     <div className="relative">
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition-colors group-hover:bg-yellow-400/20">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 dark:bg-white/10 dark:group-hover:bg-accent/20">
                         {info.icon && (
-                          <IconRenderer name={info.icon} size={24} className="text-yellow-400" />
+                          <IconRenderer
+                            name={info.icon}
+                            size={24}
+                            className="text-primary dark:text-accent"
+                          />
                         )}
                       </div>
-                      <h3 className="mb-2 text-lg font-semibold text-white">{info.title}</h3>
+                      <h3 className="mb-2 text-lg font-semibold text-foreground">{info.title}</h3>
                       {info.details &&
                         info.details.map((detail, i) => (
-                          <p key={i} className="text-gray-300">
+                          <p key={i} className="text-muted-foreground">
                             {detail.text}
                           </p>
                         ))}
-                      <p className="mt-2 text-sm text-gray-400">{info.description}</p>
+                      <p className="mt-2 text-sm text-muted-foreground/70">{info.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -109,10 +113,10 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                className="mt-12 rounded-2xl bg-white/5 p-8 backdrop-blur-sm"
+                className="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-8 backdrop-blur-sm dark:border-white/20 dark:bg-white/5"
               >
-                <h3 className="mb-4 text-xl font-semibold text-white">{corporate.title}</h3>
-                <p className="leading-relaxed text-gray-300">{corporate.description}</p>
+                <h3 className="mb-4 text-xl font-semibold text-foreground">{corporate.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{corporate.description}</p>
               </motion.div>
             )}
           </motion.div>

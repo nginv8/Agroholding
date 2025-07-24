@@ -18,7 +18,7 @@ export const Text: React.FC<
 > = ({ name, defaultValue, errors, label, register, required, width, placeholder }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>
+      <Label htmlFor={name} className="text-sm font-medium text-foreground">
         {label}
 
         {required && (
@@ -32,6 +32,7 @@ export const Text: React.FC<
         id={name}
         placeholder={placeholder}
         type="text"
+        className="h-12 border-input bg-background text-foreground transition-colors placeholder:text-muted-foreground focus:border-ring dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder:text-white/80 dark:focus:border-accent"
         {...register(name, { required })}
       />
       {errors[name] && <Error />}
