@@ -5,6 +5,8 @@ import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
 import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
 import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
 
+import { FormBlock } from '../Form/config';
+
 export const ContactUsBlock: Block = {
   slug: 'contactUs',
   labels: {
@@ -14,66 +16,27 @@ export const ContactUsBlock: Block = {
   interfaceName: 'ContactUsBlock',
   fields: [
     SectionTheme(),
-    SectionTitle(),
     SectionBackground(),
+    SectionTitle(),
     {
-      name: 'formFields',
-      type: 'array',
+      label: 'Content blocks',
+      type: 'group',
       fields: [
         {
-          type: 'row',
-          fields: [
-            {
-              name: 'label',
-              type: 'text',
-              localized: true,
-              required: true,
-            },
-            {
-              name: 'type',
-              type: 'select',
-              defaultValue: 'text',
-              options: [
-                { label: 'Text', value: 'text' },
-                { label: 'Email', value: 'email' },
-                { label: 'Textarea', value: 'textarea' },
-                { label: 'Select', value: 'select' },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'placeholder',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'options',
-          type: 'array',
-          admin: {
-            condition: (_, siblingData) => siblingData?.type === 'select',
+          label: 'Form block',
+          name: 'blocks',
+          type: 'blocks',
+          blocks: [FormBlock],
+          maxRows: 1,
+          defaultValue: {
+            blockType: 'formBlock',
+            form: null,
+            enableIntro: false,
           },
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'label',
-                  type: 'text',
-                  localized: true,
-                  required: true,
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  required: true,
-                },
-              ],
-            },
-          ],
         },
       ],
     },
+
     {
       name: 'contactInfo',
       type: 'array',

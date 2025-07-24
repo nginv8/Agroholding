@@ -1,25 +1,18 @@
 import type React from 'react';
-import { Send } from 'lucide-react';
 import * as motion from 'motion/react-client';
 
+import { FormBlock, FormBlockType } from '@/blocks/Form/Component';
 import { IconRenderer } from '@/components/IconRenderer';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-
 import type { ContactUsBlock as ContactUsBlockProps } from '@/payload-types';
 
-export const ContactUsBlock: React.FC<ContactUsBlockProps> = (props) => {
-  const { title, background, theme, contactInfo = [], formFields = [], corporate } = props;
+type ContactUsBlockType = Omit<ContactUsBlockProps, 'blocks'> & {
+  blocks?: FormBlockType[] | [];
+};
+
+export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
+  const { title, background, theme, contactInfo = [], blocks, corporate } = props;
 
   return (
     <section className="relative py-32" data-theme={theme}>
@@ -34,60 +27,15 @@ export const ContactUsBlock: React.FC<ContactUsBlockProps> = (props) => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="rounded-2xl bg-white/10 p-8 backdrop-blur-md lg:p-12"
             >
-              <form className="space-y-8">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {formFields?.slice(0, 2).map((field, index) => (
-                    <div key={index} className="space-y-2">
-                      <label className="text-sm font-medium text-gray-200">{field.label}</label>
-                      <Input
-                        placeholder={field.placeholder || ''}
-                        className="h-12 border-white/20 bg-white/10 text-white transition-colors placeholder:text-gray-400 focus:border-yellow-400"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {formFields?.slice(2).map((field, index) => (
-                  <div key={index} className="space-y-2">
-                    <label className="text-sm font-medium text-gray-200">{field.label}</label>
-                    {field.type === 'textarea' ? (
-                      <Textarea
-                        placeholder={field.placeholder || ''}
-                        className="min-h-[150px] resize-none border-white/20 bg-white/10 text-white transition-colors placeholder:text-gray-400 focus:border-yellow-400"
-                      />
-                    ) : field.type === 'select' ? (
-                      <Select>
-                        <SelectTrigger className="h-12 border-white/20 bg-white/10 text-white transition-colors focus:border-yellow-400">
-                          <SelectValue placeholder={field.placeholder || 'Select an option'} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {field.options?.map((option, i) => (
-                            <SelectItem key={i} value={option.value || ''}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : (
-                      <Input
-                        type={field.type || 'text'}
-                        placeholder={field.placeholder || ''}
-                        className="h-12 border-white/20 bg-white/10 text-white transition-colors placeholder:text-gray-400 focus:border-yellow-400"
-                      />
-                    )}
-                  </div>
-                ))}
-
-                <Button
-                  size="lg"
-                  className="group h-12 w-full bg-yellow-400 text-base text-black hover:bg-yellow-500"
-                >
-                  Send Message
-                  <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </form>
+              {blocks?.map((block, index) => {
+                switch (block.blockType) {
+                  case 'formBlock':
+                    return <FormBlock key={index} {...block} />;
+                  default:
+                    return null;
+                }
+              })}
             </motion.div>
           </div>
 
