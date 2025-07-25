@@ -23,6 +23,7 @@ const eslintConfig = [
       '*.config.js',
       '*.config.mjs',
       '*.config.ts',
+      '**/(payload)/**/*.*',
     ],
   },
   ...compat.extends(

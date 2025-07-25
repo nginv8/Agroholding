@@ -1,5 +1,4 @@
 **/payload-types.ts
-.tmp
 **/.git
 **/.hg
 **/.pnp.*
@@ -10,4 +9,6 @@
 **/node_modules
 **/temp
 **/docs/**
+**/(payload)/**/*.*
+.tmp
 .tsconfig.json
