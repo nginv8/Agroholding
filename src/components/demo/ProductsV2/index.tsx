@@ -1,8 +1,8 @@
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
+import * as motion from 'motion/react-client';
 
-import { ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button';
 
 const products = [
   {
@@ -30,37 +30,37 @@ const products = [
     rating: 5,
     features: ['Органічний продукт', 'Екологічно чистий', 'Багатий смак'],
   },
-]
+];
 
 export default function ProductsV2() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative overflow-hidden py-32">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-100/80" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-gray-100/80 to-transparent" />
+      <div className="absolute left-1/2 top-0 h-32 w-[120%] -translate-x-1/2 bg-gradient-to-b from-gray-100/80 to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          className="mx-auto mb-24 max-w-3xl text-center"
         >
-          <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+          <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
             Наша продукція
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
             Преміальна якість для
             <span className="block text-green-700">вашого бізнесу</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl leading-relaxed text-gray-600">
             Ми пропонуємо широкий асортимент високоякісної продукції, яка відповідає найвищим
             міжнародним стандартам
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 lg:grid-cols-3">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -70,7 +70,7 @@ export default function ProductsV2() {
               transition={{ delay: index * 0.2 }}
               className="group h-full"
             >
-              <div className="bg-white flex flex-col justify-stretch h-full rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+              <div className="flex h-full flex-col justify-stretch overflow-hidden rounded-2xl bg-white shadow-lg transition-all hover:shadow-xl">
                 <div className="relative h-80 overflow-hidden">
                   <Image
                     src={product.image || '/placeholder.svg'}
@@ -82,23 +82,23 @@ export default function ProductsV2() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 </div>
 
-                <div className="p-8 flex flex-col justify-between flex-1">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{product.name}</h3>
+                <div className="flex flex-1 flex-col justify-between p-8">
+                  <h3 className="mb-4 text-2xl font-bold text-gray-900">{product.name}</h3>
 
-                  <p className="text-gray-600 mb-6">{product.description}</p>
+                  <p className="mb-6 text-gray-600">{product.description}</p>
 
-                  <div className="space-y-3 mb-8">
+                  <div className="mb-8 space-y-3">
                     {product.features.map((feature, i) => (
                       <div key={i} className="flex items-center space-x-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        <div className="size-1.5 rounded-full bg-green-500" />
                         <span className="text-gray-700">{feature}</span>
                       </div>
                     ))}
                   </div>
 
-                  <Button className="w-full group/btn">
+                  <Button className="group/btn w-full">
                     Дізнатися більше
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </div>
               </div>
@@ -112,19 +112,19 @@ export default function ProductsV2() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-24 bg-orange-50 rounded-2xl p-12 border border-slate-300"
+          className="mt-24 rounded-2xl border border-slate-300 bg-orange-50 p-12"
         >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="mb-4 text-2xl font-bold text-gray-900">
                 Шукаєте індивідуальне рішення?
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="mb-6 text-gray-600">
                 Ми можемо розробити спеціальну пропозицію під ваші потреби та масштаби бізнесу.
               </p>
               <Button variant="outline" size="lg" className="group">
                 Зв&apos;язатися з нами
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
             <div className="relative h-64">
@@ -132,12 +132,12 @@ export default function ProductsV2() {
                 src="/demo/rc1.jpg"
                 alt="Консультація"
                 fill
-                className="object-cover rounded-xl"
+                className="rounded-xl object-cover"
               />
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

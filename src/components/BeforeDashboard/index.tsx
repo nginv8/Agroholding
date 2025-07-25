@@ -1,18 +1,22 @@
-import { Banner } from '@payloadcms/ui/elements/Banner'
-import React from 'react'
+import { Banner } from '@payloadcms/ui/elements/Banner';
 
-import { SeedButton } from './SeedButton'
-import './index.scss'
+import React from 'react';
 
-const baseClass = 'before-dashboard'
+import { SeedButton } from './SeedButton';
+
+import './index.scss';
+
+const baseClass = 'before-dashboard';
 
 const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
+      {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <Banner className={`${baseClass}__banner`} type="success">
         <h4>Welcome to your dashboard!</h4>
       </Banner>
       Here&apos;s what to do next:
+      {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <ul className={`${baseClass}__instructions`}>
         <li>
           <SeedButton />
@@ -68,7 +72,7 @@ const BeforeDashboard: React.FC = () => {
       </a>
       , you can remove it at any time by updating your <strong>payload.config</strong>.
     </div>
-  )
-}
+  );
+};
 
-export default BeforeDashboard
+export default BeforeDashboard;

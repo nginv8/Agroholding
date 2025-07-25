@@ -1,14 +1,14 @@
-import type { Block } from 'payload'
-
+import type { Block } from 'payload';
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
-import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
-import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
+} from '@payloadcms/richtext-lexical';
+
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
 
 export const ProductGridBlock: Block = {
   slug: 'productGrid',
@@ -29,7 +29,7 @@ export const ProductGridBlock: Block = {
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
-          ]
+          ];
         },
       }),
       label: 'Intro Content',
@@ -99,4 +99,4 @@ export const ProductGridBlock: Block = {
     plural: 'ProductGrids',
     singular: 'ProductGrid',
   },
-}
+};

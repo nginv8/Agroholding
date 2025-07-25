@@ -1,7 +1,8 @@
-import type { Block } from 'payload'
-import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
-import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
-import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
+import type { Block } from 'payload';
+
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
 
 export const TestimonialBlock: Block = {
   slug: 'testimonial',
@@ -64,4 +65,4 @@ export const TestimonialBlock: Block = {
       ],
     },
   ],
-}
+};

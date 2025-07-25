@@ -1,28 +1,29 @@
-'use client'
+'use client';
 
-import { motion, useScroll, useTransform } from 'motion/react'
-import Image from 'next/image'
-import { useRef } from 'react'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Check } from 'lucide-react'
+import { useRef } from 'react';
+import Image from 'next/image';
+import { ArrowRight, Check } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'motion/react';
+
+import { Button } from '@/components/ui/button';
 
 export default function AboutUsV2() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
-  })
+  });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -120])
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section ref={ref} className="relative overflow-hidden py-32">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute left-1/2 top-0 h-32 w-[120%] -translate-x-1/2 bg-gradient-to-b from-white to-transparent" />
 
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid items-center gap-16 lg:grid-cols-2">
           {/* Ліва колонка з зображеннями */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -55,8 +56,8 @@ export default function AboutUsV2() {
             </div>
 
             {/* Декоративні елементи */}
-            <div className="absolute -top-12 -left-12 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
+            <div className="absolute -left-12 -top-12 size-64 rounded-full bg-yellow-500/10 blur-3xl" />
+            <div className="absolute -bottom-12 -right-12 size-64 rounded-full bg-green-500/10 blur-3xl" />
           </motion.div>
 
           {/* Права колонка з текстом */}
@@ -67,21 +68,21 @@ export default function AboutUsV2() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+            <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
               Про нашу компанію
             </span>
 
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+            <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
               Лідери у вирощуванні
               <span className="block text-green-700">преміальної кукурудзи</span>
             </h2>
 
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="mb-12 text-xl leading-relaxed text-gray-600">
               Наша компанія поєднує багаторічний досвід українського землеробства з найсучаснішими
               технологіями для створення продукції найвищої якості.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-8 mb-12">
+            <div className="mb-12 grid gap-8 sm:grid-cols-2">
               {[
                 {
                   title: 'Інноваційні технології',
@@ -108,13 +109,13 @@ export default function AboutUsV2() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                        <Check className="w-4 h-4 text-green-600" />
+                    <div className="mt-1 shrink-0">
+                      <div className="flex size-6 items-center justify-center rounded-full bg-green-100">
+                        <Check className="size-4 text-green-600" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
+                      <h3 className="mb-2 font-semibold text-gray-900">{item.title}</h3>
                       <p className="text-gray-600">{item.description}</p>
                     </div>
                   </div>
@@ -124,7 +125,7 @@ export default function AboutUsV2() {
 
             <Button size="lg" className="group">
               Дізнатися більше
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>
@@ -163,5 +164,5 @@ export default function AboutUsV2() {
         </motion.div> */}
       </div>
     </section>
-  )
+  );
 }

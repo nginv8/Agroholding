@@ -1,31 +1,27 @@
-import { createLocalReq, getPayload } from 'payload'
-import { seed } from '@/endpoints/seed'
-import config from '@payload-config'
-import { headers } from 'next/headers'
+import { getPayload } from 'payload';
 
-export const maxDuration = 60 // This function can run for a maximum of 60 seconds
+import { headers } from 'next/headers';
+import config from '@payload-config';
+
+export const maxDuration = 60; // This function can run for a maximum of 60 seconds
 
 export async function POST(): Promise<Response> {
-  const payload = await getPayload({ config })
-  const requestHeaders = await headers()
+  const payload = await getPayload({ config });
+  const requestHeaders = await headers();
 
   // Authenticate by passing request headers
-  const { user } = await payload.auth({ headers: requestHeaders })
+  const { user } = await payload.auth({ headers: requestHeaders });
 
   if (!user) {
-    return new Response('Action forbidden.', { status: 403 })
+    return new Response('Action forbidden.', { status: 403 });
   }
 
   try {
-    // Create a Payload request object to pass to the Local API for transactions
-    // At this point you should pass in a user, locale, and any other context you need for the Local API
-    const payloadReq = await createLocalReq({ user }, payload)
-
-    await seed({ payload, req: payloadReq })
-
-    return Response.json({ success: true })
+    // Placeholder seed functionality - you can implement your seeding logic here
+    payload.logger.info('Seed endpoint called, but no seeding logic implemented yet.');
+    return Response.json({ success: true, message: 'Seed endpoint placeholder' });
   } catch (e) {
-    payload.logger.error({ err: e, message: 'Error seeding data' })
-    return new Response('Error seeding data.', { status: 500 })
+    payload.logger.error({ err: e, message: 'Error in seed endpoint' });
+    return new Response('Error in seed endpoint.', { status: 500 });
   }
 }

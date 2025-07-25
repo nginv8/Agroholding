@@ -1,7 +1,8 @@
-import createMiddleware from 'next-intl/middleware'
-import { routing } from './i18n/routing'
+import createMiddleware from 'next-intl/middleware';
 
-export default createMiddleware(routing)
+import { routing } from './i18n/routing';
+
+export default createMiddleware(routing);
 
 // see https://next-intl-docs.vercel.app/docs/routing/middleware
 export const config = {
@@ -11,4 +12,4 @@ export const config = {
     // - … the ones containing a dot (e.g. `favicon.ico`)
     '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
   ],
-}
+};

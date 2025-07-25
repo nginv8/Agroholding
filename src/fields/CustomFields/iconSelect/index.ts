@@ -1,11 +1,12 @@
-import type { Field } from 'payload'
-import deepMerge from '@/utilities/deepMerge'
+import type { Field } from 'payload';
+
+import deepMerge from '@/utilities/deepMerge';
 
 type IconSelectType = (options?: {
-  name?: string
-  label?: string
-  overrides?: Partial<Field>
-}) => Field
+  name?: string;
+  label?: string;
+  overrides?: Partial<Field>;
+}) => Field;
 
 export const iconSelect: IconSelectType = ({
   name = 'icon',
@@ -21,7 +22,7 @@ export const iconSelect: IconSelectType = ({
         Field: '@/fields/CustomFields/iconSelect/IconSelectComponent',
       },
     },
-  }
+  };
 
-  return deepMerge(generatedIconSelect, overrides)
-}
+  return deepMerge(generatedIconSelect, overrides);
+};

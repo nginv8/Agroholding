@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import type React from 'react'
-import * as lucideIcons from 'react-icons/lu'
+import type React from 'react';
+import * as lucideIcons from 'react-icons/lu';
 
 type IconRendererProps = {
-  name?: string
-  size?: number
-  color?: string
-  className?: string
-  onClick?: () => void
-  style?: React.CSSProperties
-}
+  name?: string;
+  size?: number;
+  color?: string;
+  className?: string;
+  onClick?: () => void;
+  style?: React.CSSProperties;
+};
 
 /**
  * IconRenderer component for rendering icons from react-icons/lu library
@@ -31,15 +31,15 @@ export const IconRenderer: React.FC<IconRendererProps> = ({
   onClick,
   style,
 }) => {
-  if (!name) return null
+  if (!name) return null;
 
   const IconComponent = lucideIcons[name as keyof typeof lucideIcons] as
     | React.ElementType
-    | undefined
+    | undefined;
 
   if (!IconComponent) {
-    console.warn(`Icon "${name}" not found in react-icons/lu`)
-    return null
+    console.warn(`Icon "${name}" not found in react-icons/lu`);
+    return null;
   }
 
   return (
@@ -50,5 +50,5 @@ export const IconRenderer: React.FC<IconRendererProps> = ({
       onClick={onClick}
       style={style}
     />
-  )
-}
+  );
+};

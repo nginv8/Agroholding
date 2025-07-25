@@ -1,11 +1,12 @@
-import Image from 'next/image'
-import * as motion from 'motion/react-client'
-import { Button } from '@/components/ui/button'
-import { ChevronRight, ArrowRight } from 'lucide-react'
+import Image from 'next/image';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-end flex-wrap overflow-hidden">
+    <section className="relative flex min-h-[90vh] flex-wrap items-end overflow-hidden">
       {/* Фонове зображення */}
       <div className="fixed inset-0 -z-10 after:absolute after:inset-0 after:bg-black/50">
         <Image
@@ -17,14 +18,14 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container mx-auto px-4 pt-28 relative z-10">
-        <div className="max-w-4xl mx-auto text-center text-white relative">
+      <div className="container relative z-10 mx-auto px-4 pt-28">
+        <div className="relative mx-auto max-w-4xl text-center text-white">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium rounded-full border border-white/30 backdrop-blur-sm">
+            <span className="mb-6 inline-block rounded-full border border-white/30 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
               Лідер у вирощуванні попкорну в Україні
             </span>
           </motion.div>
@@ -33,7 +34,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
           >
             Вирощуємо майбутнє
             <span className="block text-yellow-400">українського агробізнесу</span>
@@ -43,7 +44,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto"
+            className="mx-auto mb-8 max-w-2xl text-lg text-gray-200 md:text-xl"
           >
             Інноваційні підходи до вирощування, сучасні технології та турбота про довкілля — основа
             нашого успіху у створенні продукції найвищої якості
@@ -53,22 +54,22 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button
               size="lg"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black min-w-[200px] w-full md:w-auto group"
+              className="group w-full min-w-[200px] bg-yellow-500 text-black hover:bg-yellow-400 md:w-auto"
             >
               Наша продукція
-              <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ChevronRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="min-w-[200px] border-white bg-black/30 text-white hover:bg-white w-full md:w-auto  hover:text-black group"
+              className="group w-full min-w-[200px] border-white bg-black/30 text-white hover:bg-white hover:text-black md:w-auto"
             >
               Зв&apos;язатися з нами
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>
@@ -77,12 +78,12 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="flex justify-center w-full my-16"
+        className="my-16 flex w-full justify-center"
       >
-        <div className="w-6 h-10 border-2 border-white rounded-full p-1 animate-bounce">
-          <div className="w-1.5 h-1.5 bg-white rounded-full mx-auto" />
+        <div className="h-10 w-6 animate-bounce rounded-full border-2 border-white p-1">
+          <div className="mx-auto size-1.5 rounded-full bg-white" />
         </div>
       </motion.div>
     </section>
-  )
+  );
 }

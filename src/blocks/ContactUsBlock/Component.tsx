@@ -59,7 +59,7 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
                   <div className="relative p-6">
                     <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/5" />
                     <div className="relative">
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 dark:bg-white/10 dark:group-hover:bg-accent/20">
+                      <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 dark:bg-white/10 dark:group-hover:bg-accent/20">
                         {info.icon && (
                           <IconRenderer
                             name={info.icon}
@@ -95,11 +95,11 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
                 <div className="absolute inset-0 bg-gray-800">
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                     <div className="relative">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400">
-                        <div className="h-3 w-3 rounded-full bg-white" />
+                      <div className="flex size-6 items-center justify-center rounded-full bg-yellow-400">
+                        <div className="size-3 rounded-full bg-white" />
                       </div>
                       {/* Pulsing effect */}
-                      <div className="absolute left-0 top-0 h-6 w-6 animate-ping rounded-full bg-yellow-400 opacity-75" />
+                      <div className="absolute left-0 top-0 size-6 animate-ping rounded-full bg-yellow-400 opacity-75" />
                     </div>
                   </div>
                 </div>

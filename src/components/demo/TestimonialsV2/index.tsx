@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Star, Quote } from 'lucide-react'
+import Image from 'next/image';
+import { Quote, Star } from 'lucide-react';
+import * as motion from 'motion/react-client';
 
 const testimonials = [
   {
@@ -35,32 +35,32 @@ const testimonials = [
     image: '/demo/r4.jpg',
     rating: 5,
   },
-]
+];
 
 export default function TestimonialsV2() {
   return (
-    <section className="py-32 bg-gray-50 overflow-hidden">
+    <section className="overflow-hidden bg-gray-50 py-32">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          className="mx-auto mb-24 max-w-3xl text-center"
         >
-          <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+          <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
             Відгуки клієнтів
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
             Що про нас кажуть
             <span className="block text-green-700">наші партнери</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl leading-relaxed text-gray-600">
             Довіра та задоволення наших клієнтів — головний показник якості нашої роботи
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
@@ -70,7 +70,7 @@ export default function TestimonialsV2() {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+              <div className="overflow-hidden rounded-2xl bg-white shadow-lg transition-all hover:shadow-xl">
                 <div className="relative h-48">
                   <Image
                     src={testimonial.image || '/placeholder.svg'}
@@ -81,19 +81,19 @@ export default function TestimonialsV2() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
 
-                <div className="p-8 relative">
+                <div className="relative p-8">
                   {/* Цитата */}
-                  <div className="absolute -top-8 right-8 w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-                    <Quote className="w-8 h-8 text-white" />
+                  <div className="absolute -top-8 right-8 flex size-16 items-center justify-center rounded-full bg-yellow-500 shadow-lg">
+                    <Quote className="size-8 text-white" />
                   </div>
 
-                  <div className="flex items-center mb-6">
+                  <div className="mb-6 flex items-center">
                     <Image
                       src={testimonial.avatar || '/placeholder.svg'}
                       alt={testimonial.name}
                       width={56}
                       height={56}
-                      className="rounded-full aspect-square border-4 border-white shadow-lg"
+                      className="aspect-square rounded-full border-4 border-white shadow-lg"
                     />
                     <div className="ml-4">
                       <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
@@ -101,13 +101,13 @@ export default function TestimonialsV2() {
                     </div>
                   </div>
 
-                  <div className="flex mb-4">
+                  <div className="mb-4 flex">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
+                      <Star key={i} className="size-5 fill-current text-yellow-500" />
                     ))}
                   </div>
 
-                  <p className="text-gray-600 leading-relaxed">{testimonial.content}</p>
+                  <p className="leading-relaxed text-gray-600">{testimonial.content}</p>
                 </div>
               </div>
             </motion.div>
@@ -115,5 +115,5 @@ export default function TestimonialsV2() {
         </div>
       </div>
     </section>
-  )
+  );
 }

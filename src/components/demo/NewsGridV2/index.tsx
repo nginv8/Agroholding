@@ -1,18 +1,19 @@
-'use client'
+'use client';
 
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Calendar, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import Image from 'next/image';
+import { ArrowRight, Calendar } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
 
 type Post = {
-  id: number
-  title: string
-  excerpt: string
-  date: string
-  image: string
-  category: string
-}
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  image: string;
+  category: string;
+};
 
 const samplePosts: Post[] = [
   {
@@ -42,27 +43,27 @@ const samplePosts: Post[] = [
     image: '/demo/t5.jpg',
     category: 'Бізнес',
   },
-]
+];
 
 export default function NewsGridV2() {
   return (
-    <section className="py-32 bg-gray-50 overflow-hidden">
+    <section className="overflow-hidden bg-gray-50 py-32">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row justify-between items-start mb-16">
+        <div className="mb-16 flex flex-col items-start justify-between lg:flex-row">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="max-w-2xl mb-8 lg:mb-0"
+            className="mb-8 max-w-2xl lg:mb-0"
           >
-            <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+            <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
               Новини компанії
             </span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+            <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
               Останні події та досягнення
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl leading-relaxed text-gray-600">
               Слідкуйте за останніми новинами та подіями нашої компанії. Дізнавайтесь першими про
               інновації, досягнення та розвиток.
             </p>
@@ -76,12 +77,12 @@ export default function NewsGridV2() {
           >
             <Button size="lg" variant="outline" className="group">
               Всі новини
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {samplePosts.map((post, index) => (
             <motion.article
               key={post.id}
@@ -91,7 +92,7 @@ export default function NewsGridV2() {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg transition-shadow hover:shadow-xl">
+              <div className="overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-xl">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={post.image || '/placeholder.svg'}
@@ -102,28 +103,28 @@ export default function NewsGridV2() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
                   {/* Категорія */}
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white font-medium">
+                  <div className="absolute left-4 top-4">
+                    <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
                       {post.category}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center text-gray-500 text-sm mb-4">
-                    <Calendar className="w-4 h-4 mr-2" />
+                  <div className="mb-4 flex items-center text-sm text-gray-500">
+                    <Calendar className="mr-2 size-4" />
                     {new Date(post.date).toLocaleDateString('uk-UA')}
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-green-700 transition-colors">
+                  <h3 className="mb-4 text-xl font-bold text-gray-900 transition-colors group-hover:text-green-700">
                     {post.title}
                   </h3>
 
-                  <p className="text-gray-600 mb-6 line-clamp-3">{post.excerpt}</p>
+                  <p className="mb-6 line-clamp-3 text-gray-600">{post.excerpt}</p>
 
-                  <button className="inline-flex items-center text-green-700 hover:text-green-600 font-medium transition-colors group/btn">
+                  <button className="group/btn inline-flex items-center font-medium text-green-700 transition-colors hover:text-green-600">
                     Читати далі
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                   </button>
                 </div>
               </div>
@@ -132,5 +133,5 @@ export default function NewsGridV2() {
         </div>
       </div>
     </section>
-  )
+  );
 }

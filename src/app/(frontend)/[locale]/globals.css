@@ -54,7 +54,7 @@
     --slide-spacing: 2rem;
     --slide-size: 100%;
 
-    --detail-medium-contrast: hsla(var(--foreground), 0.3);;
+    --detail-medium-contrast: hsla(var(--foreground), 0.3);
     --text-high-contrast-rgb-value: 80, 80, 80;
     --text-body: hsl(var(--foreground));
     --text-body-hover: hsla(var(--foreground), 0.8);

@@ -10,9 +10,8 @@ import { CMSLink } from '@/components/Link';
 import RichText from '@/components/RichText';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-
-import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types';
 import { cn } from '@/utilities/ui';
+import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types';
 
 export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
   title,
@@ -67,14 +66,14 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="rounded-lg bg-secondary/30 p-8 shadow-lg dark:bg-primary/20 dark:bg-white"
+                className="rounded-lg bg-secondary/30 p-8 shadow-lg dark:bg-primary/20"
               >
                 <div className="mb-3 flex items-center">
                   <div className="mr-4 flex size-12 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
                     {features[activeTab].icon && (
                       <IconRenderer
                         name={features[activeTab].icon}
-                        className="h-6 w-6 text-primary dark:text-accent-400"
+                        className="size-6 text-primary dark:text-accent-400"
                       />
                     )}
                   </div>
@@ -86,7 +85,7 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
                 <p className="mb-8 text-lg text-foreground">{features[activeTab].description}</p>
 
                 {features[activeTab].content && (
-                  <div className="prose-primary prose max-w-none">
+                  <div className="prose prose-green max-w-none">
                     {features[activeTab].content && (
                       <RichText data={features[activeTab].content} enableGutter={false} />
                     )}
@@ -98,7 +97,7 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
             {cta?.map(({ link }, i) => (
               <div key={i} className="mt-16">
                 <CMSLink {...link} size="lg" className="group">
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                 </CMSLink>
               </div>
             ))}

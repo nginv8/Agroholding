@@ -1,11 +1,12 @@
-import * as motion from 'motion/react-client'
+import Image from 'next/image';
+import * as motion from 'motion/react-client';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordionPlus'
-import Image from 'next/image'
+} from '@/components/ui/accordionPlus';
 
 const faqs = [
   {
@@ -31,40 +32,40 @@ const faqs = [
     answer:
       'Так, ми надаємо зразки нашої продукції для тестування якості перед укладанням контракту.',
   },
-]
+];
 
 export default function FAQ() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="overflow-hidden bg-gradient-to-b from-gray-50 to-white py-20">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Ліва колонка з зображенням */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="order-2 lg:order-1 sticky top-24"
+            className="sticky top-24 order-2 lg:order-1"
           >
-            <div className="relative h-[720px] rounded-2xl overflow-hidden">
+            <div className="relative h-[720px] overflow-hidden rounded-2xl">
               <Image src="/demo/f1.jpg" alt="Поле кукурудзи" fill className="object-cover" />
               {/* Оверлей */}
               <div className="absolute inset-0 bg-gradient-to-t from-green-950/40 to-transparent" />
             </div>
             {/* Декоративні елементи */}
-            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-            <div className="absolute -top-8 -left-8 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-8 -right-8 size-64 rounded-full bg-yellow-500/10 blur-3xl" />
+            <div className="absolute -left-8 -top-8 size-64 rounded-full bg-green-500/10 blur-3xl" />
 
             {/* Статистика */}
-            <div className="absolute bottom-8 left-8 right-8">
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+            <div className="absolute inset-x-8 bottom-8">
+              <div className="rounded-xl bg-white/90 p-6 shadow-lg backdrop-blur-sm">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-700 mb-1">15+</div>
+                    <div className="mb-1 text-3xl font-bold text-green-700">15+</div>
                     <div className="text-sm text-gray-600">років досвіду</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-700 mb-1">1000+</div>
+                    <div className="mb-1 text-3xl font-bold text-green-700">1000+</div>
                     <div className="text-sm text-gray-600">гектарів землі</div>
                   </div>
                 </div>
@@ -80,14 +81,14 @@ export default function FAQ() {
             transition={{ duration: 1 }}
             className="order-1 lg:order-2"
           >
-            <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+            <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
               Часті питання
             </span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+            <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
               Відповіді на ваші
               <span className="block text-green-700">запитання</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="mb-12 text-xl leading-relaxed text-gray-600">
               Знайдіть відповіді на найпоширеніші запитання про нашу компанію та продукцію
             </p>
 
@@ -102,14 +103,14 @@ export default function FAQ() {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className=" data-[state=open]:bg-gray-100/80 rounded transition-colors border-none"
+                    className="rounded border-none transition-colors data-[state=open]:bg-gray-100/80"
                   >
                     <AccordionTrigger className="px-6 py-4 text-left hover:no-underline data-[state=open]:text-green-700">
                       <span className="text-lg font-medium">{faq.question}</span>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-4">
                       <div className="prose prose-green">
-                        <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                        <p className="leading-relaxed text-gray-600">{faq.answer}</p>
                       </div>
                     </AccordionContent>
                   </AccordionItem>
@@ -123,10 +124,10 @@ export default function FAQ() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="mt-8 p-6 bg-green-50 rounded-xl border border-green-100"
+              className="mt-8 rounded-xl border border-green-100 bg-green-50 p-6"
             >
-              <p className="text-green-800 font-medium">Не знайшли відповідь на своє запитання?</p>
-              <p className="text-green-600 mt-2">
+              <p className="font-medium text-green-800">Не знайшли відповідь на своє запитання?</p>
+              <p className="mt-2 text-green-600">
                 Зв&apos;яжіться з нашою службою підтримки, і ми з радістю допоможемо вам.
               </p>
             </motion.div>
@@ -134,5 +135,5 @@ export default function FAQ() {
         </div>
       </div>
     </section>
-  )
+  );
 }

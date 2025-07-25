@@ -1,11 +1,12 @@
-'use client'
+'use client';
 
-import { motion, AnimatePresence } from 'motion/react'
-import { Title } from '@/components/ui/title'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { MapPin, Clock, Briefcase, Plus, Minus, ArrowRight, Users } from 'lucide-react'
-import { useState } from 'react'
+import { useState } from 'react';
+import Image from 'next/image';
+import { ArrowRight, Briefcase, Clock, MapPin, Minus, Plus, Users } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+
+import { Button } from '@/components/ui/button';
+import { Title } from '@/components/ui/title';
 
 const positions = [
   {
@@ -47,15 +48,15 @@ const positions = [
       'Навички ведення переговорів',
     ],
   },
-]
+];
 
 export default function CareersSection() {
-  const [expandedId, setExpandedId] = useState<number | null>(null)
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="bg-gray-50 py-24">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
           {/* Зображення (1/2 ширини) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -64,7 +65,7 @@ export default function CareersSection() {
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24 lg:order-2"
           >
-            <div className="relative h-[720px] rounded-2xl overflow-hidden">
+            <div className="relative h-[720px] overflow-hidden rounded-2xl">
               <Image
                 src="/demo/team2.jpg"
                 alt="Команда AgroHolding"
@@ -75,14 +76,14 @@ export default function CareersSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
               {/* Статистика */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <div className="text-3xl font-bold mb-1">150+</div>
+                    <div className="mb-1 text-3xl font-bold">150+</div>
                     <div className="text-sm opacity-80">співробітників</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-1">12+</div>
+                    <div className="mb-1 text-3xl font-bold">12+</div>
                     <div className="text-sm opacity-80">років досвіду</div>
                   </div>
                 </div>
@@ -107,36 +108,36 @@ export default function CareersSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                  <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
                     {/* Заголовок позиції */}
                     <div
-                      className="p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+                      className="cursor-pointer p-6 transition-colors hover:bg-gray-50"
                       onClick={() => setExpandedId(expandedId === position.id ? null : position.id)}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">{position.title}</h3>
+                          <h3 className="mb-3 text-xl font-semibold">{position.title}</h3>
                           <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                             <span className="flex items-center">
-                              <MapPin className="w-4 h-4 mr-1.5" />
+                              <MapPin className="mr-1.5 size-4" />
                               {position.location}
                             </span>
                             <span className="flex items-center">
-                              <Briefcase className="w-4 h-4 mr-1.5" />
+                              <Briefcase className="mr-1.5 size-4" />
                               {position.type}
                             </span>
                             <span className="flex items-center">
-                              <Clock className="w-4 h-4 mr-1.5" />
+                              <Clock className="mr-1.5 size-4" />
                               {position.experience}
                             </span>
                           </div>
                         </div>
                         <div className="ml-4">
-                          <div className="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center transition-colors group-hover:border-green-500">
+                          <div className="flex size-10 items-center justify-center rounded-full border-2 border-gray-200 transition-colors group-hover:border-green-500">
                             {expandedId === position.id ? (
-                              <Minus className="w-5 h-5 text-green-600" />
+                              <Minus className="size-5 text-green-600" />
                             ) : (
-                              <Plus className="w-5 h-5 text-gray-400" />
+                              <Plus className="size-5 text-gray-400" />
                             )}
                           </div>
                         </div>
@@ -153,12 +154,12 @@ export default function CareersSection() {
                           transition={{ duration: 0.3 }}
                         >
                           <div className="px-6 pb-6">
-                            <div className="pt-6 border-t border-gray-100">
-                              <h4 className="font-medium mb-4 flex items-center">
-                                <Users className="w-5 h-5 mr-2 text-green-600" />
+                            <div className="border-t border-gray-100 pt-6">
+                              <h4 className="mb-4 flex items-center font-medium">
+                                <Users className="mr-2 size-5 text-green-600" />
                                 Вимоги до кандидата:
                               </h4>
-                              <ul className="space-y-3 mb-6">
+                              <ul className="mb-6 space-y-3">
                                 {position.requirements.map((req, index) => (
                                   <motion.li
                                     key={index}
@@ -167,14 +168,14 @@ export default function CareersSection() {
                                     transition={{ delay: index * 0.1 }}
                                     className="flex items-center text-gray-600"
                                   >
-                                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mr-3" />
+                                    <div className="mr-3 size-1.5 rounded-full bg-green-600" />
                                     {req}
                                   </motion.li>
                                 ))}
                               </ul>
-                              <Button className="w-full sm:w-auto group">
+                              <Button className="group w-full sm:w-auto">
                                 Відгукнутися
-                                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                               </Button>
                             </div>
                           </div>
@@ -189,5 +190,5 @@ export default function CareersSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

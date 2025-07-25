@@ -1,7 +1,6 @@
 import { Media } from '@/components/Media';
-
-import { Media as MediaType } from '@/payload-types';
 import { cn } from '@/utilities/ui';
+import { Media as MediaType } from '@/payload-types';
 
 type SectionBackgroundProps = {
   className?: string;

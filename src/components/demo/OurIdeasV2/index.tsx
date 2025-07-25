@@ -1,7 +1,8 @@
-import * as motion from 'motion/react-client'
-import { Lightbulb, Sprout, Recycle, ArrowRight } from 'lucide-react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import Image from 'next/image';
+import { ArrowRight, Lightbulb, Recycle, Sprout } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
 
 const ideas = [
   {
@@ -25,36 +26,36 @@ const ideas = [
       'Збалансований підхід до використання природних ресурсів та впровадження відновлюваних джерел енергії',
     image: '/demo/hub.jpg',
   },
-]
+];
 
 export default function OurIdeasV2() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative overflow-hidden py-32">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          className="mx-auto mb-24 max-w-3xl text-center"
         >
-          <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+          <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
             Наші ідеї
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
             Інновації та розвиток
             <span className="block text-green-700">для майбутнього</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl leading-relaxed text-gray-600">
             Ми постійно розвиваємося та впроваджуємо інноваційні рішення для покращення якості нашої
             продукції та збереження довкілля
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
+        <div className="grid gap-12 lg:grid-cols-3">
           {ideas.map((idea, index) => (
             <motion.div
               key={index}
@@ -64,7 +65,7 @@ export default function OurIdeasV2() {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+              <div className="overflow-hidden rounded-2xl bg-white shadow-lg transition-all hover:shadow-xl">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={idea.image || '/placeholder.svg'}
@@ -75,17 +76,17 @@ export default function OurIdeasV2() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
                   {/* Іконка на зображенні */}
-                  <div className="absolute bottom-6 left-6 p-3 rounded-xl bg-white/10 backdrop-blur-sm">
-                    <idea.icon className="w-6 h-6 text-white" />
+                  <div className="absolute bottom-6 left-6 rounded-xl bg-white/10 p-3 backdrop-blur-sm">
+                    <idea.icon className="size-6 text-white" />
                   </div>
                 </div>
 
                 <div className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{idea.title}</h3>
-                  <p className="text-gray-600 mb-6">{idea.description}</p>
-                  <Button variant="outline" className="w-full group/btn">
+                  <h3 className="mb-4 text-2xl font-bold text-gray-900">{idea.title}</h3>
+                  <p className="mb-6 text-gray-600">{idea.description}</p>
+                  <Button variant="outline" className="group/btn w-full">
                     Дізнатися більше
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </div>
               </div>
@@ -99,9 +100,9 @@ export default function OurIdeasV2() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-24 relative"
+          className="relative mt-24"
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative">
               <Image
                 src="/demo/w4.jpg"
@@ -111,23 +112,23 @@ export default function OurIdeasV2() {
                 className="rounded-2xl shadow-xl"
               />
               {/* Декоративні елементи */}
-              <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-8 -right-8 size-64 rounded-full bg-yellow-500/10 blur-3xl" />
             </div>
 
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Приєднуйтесь до інновацій</h3>
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              <h3 className="mb-6 text-3xl font-bold text-gray-900">Приєднуйтесь до інновацій</h3>
+              <p className="mb-8 text-lg leading-relaxed text-gray-600">
                 Ми запрошуємо до співпраці компанії, які поділяють наші цінності та прагнуть
                 розвивати агробізнес майбутнього разом з нами.
               </p>
               <Button size="lg" className="group">
                 Стати партнером
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

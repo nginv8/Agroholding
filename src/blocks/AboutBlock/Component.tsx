@@ -5,7 +5,6 @@ import { CMSLink } from '@/components/Link';
 import RichText from '@/components/RichText';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-
 import type { AboutBlock as AboutBlockProps } from '@/payload-types';
 
 import { ParallaxPreview } from './ParallaxPreview';

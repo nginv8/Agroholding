@@ -1,9 +1,10 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import * as motion from 'motion/react-client'
-import { Leaf, Award, Users, TrendingUp } from 'lucide-react'
-import { Title } from '@/components/ui/title'
+import Image from 'next/image';
+import { Award, Leaf, TrendingUp, Users } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Title } from '@/components/ui/title';
 
 const features = [
   {
@@ -26,11 +27,11 @@ const features = [
     title: 'Інновації',
     description: 'Впровадження сучасних технологій землеробства',
   },
-]
+];
 
 export default function WhyUs() {
   return (
-    <section className="relative py-20 bg-green-900/90 text-white overflow-hidden">
+    <section className="relative overflow-hidden bg-green-900/90 py-20 text-white">
       <Image
         src="/demo/k5.jpg"
         alt="Background"
@@ -47,7 +48,7 @@ export default function WhyUs() {
           style="light"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -59,12 +60,12 @@ export default function WhyUs() {
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="bg-green-800 p-6 rounded-lg h-full"
+                className="h-full rounded-lg bg-green-800 p-6"
               >
-                <div className="inline-block p-3 bg-green-700 rounded-full mb-4">
-                  <feature.icon className="w-6 h-6 text-yellow-500" />
+                <div className="mb-4 inline-block rounded-full bg-green-700 p-3">
+                  <feature.icon className="size-6 text-yellow-500" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <h3 className="mb-3 text-xl font-semibold">{feature.title}</h3>
                 <p className="text-green-100">{feature.description}</p>
               </motion.div>
             </motion.div>
@@ -72,5 +73,5 @@ export default function WhyUs() {
         </div>
       </div>
     </section>
-  )
+  );
 }

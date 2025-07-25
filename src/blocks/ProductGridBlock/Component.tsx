@@ -1,17 +1,17 @@
-import type { Post, ProductGridBlock as ProductGridBlockProps } from '@/payload-types'
+import { getPayload } from 'payload';
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import RichText from '@/components/RichText'
-import * as motion from 'motion/react-client'
+import configPromise from '@payload-config';
+import * as motion from 'motion/react-client';
 
-import { SectionBackground } from '@/components/SectionBackground'
-import { CollectionProductGrid } from '@/components/CollectionProductGrid'
-import { SectionTitle } from '@/components/SectionTitle'
+import { CollectionProductGrid } from '@/components/CollectionProductGrid';
+import RichText from '@/components/RichText';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+import type { Post, ProductGridBlock as ProductGridBlockProps } from '@/payload-types';
 
 export const ProductGridBlock: React.FC<
   ProductGridBlockProps & {
-    id?: string
+    id?: string;
   }
 > = async (props) => {
   const {
@@ -24,19 +24,19 @@ export const ProductGridBlock: React.FC<
     limit: limitFromProps,
     populateBy,
     selectedDocs,
-  } = props
+  } = props;
 
-  const limit = limitFromProps || 8
+  const limit = limitFromProps || 8;
 
-  let posts: Post[] = []
+  let posts: Post[] = [];
 
   if (populateBy === 'collection') {
-    const payload = await getPayload({ config: configPromise })
+    const payload = await getPayload({ config: configPromise });
 
     const flattenedCategories = categories?.map((category) => {
-      if (typeof category === 'object') return category.id
-      else return category
-    })
+      if (typeof category === 'object') return category.id;
+      else return category;
+    });
 
     const fetchedPosts = await payload.find({
       collection: 'posts',
@@ -51,21 +51,21 @@ export const ProductGridBlock: React.FC<
             },
           }
         : {}),
-    })
+    });
 
-    posts = fetchedPosts.docs
+    posts = fetchedPosts.docs;
   } else {
     if (selectedDocs?.length) {
       const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === 'object') return post.value
-      }) as Post[]
+        if (typeof post.value === 'object') return post.value;
+      }) as Post[];
 
-      posts = filteredSelectedPosts
+      posts = filteredSelectedPosts;
     }
   }
 
   return (
-    <section className="relative py-32 overflow-hidden" id={`block-${id}`} data-theme={theme}>
+    <section className="relative overflow-hidden py-32" id={`block-${id}`} data-theme={theme}>
       <SectionBackground {...background} theme={theme} />
 
       {introContent && (
@@ -75,14 +75,14 @@ export const ProductGridBlock: React.FC<
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="text-center max-w-3xl mx-auto mb-24"
+            className="mx-auto mb-24 max-w-3xl text-center"
           >
             <SectionTitle {...title} title={title?.title || ''} theme={theme} />
           </motion.div>
-          <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
+          <RichText className="ms-0 max-w-3xl" data={introContent} enableGutter={false} />
         </div>
       )}
       <CollectionProductGrid posts={posts} />
     </section>
-  )
-}
+  );
+};

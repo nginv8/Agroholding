@@ -1,6 +1,7 @@
-import * as motion from 'motion/react-client'
-import { Leaf, Award, Users, TrendingUp, Shield, Sprout } from 'lucide-react'
-import { Title } from '@/components/ui/title'
+import { Award, Leaf, Shield, Sprout, TrendingUp, Users } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Title } from '@/components/ui/title';
 
 const advantages = [
   {
@@ -36,11 +37,11 @@ const advantages = [
     title: 'Сталий розвиток',
     description: 'Збалансований підхід до використання ресурсів та турбота про майбутні покоління',
   },
-]
+];
 
 export default function Advantages() {
   return (
-    <section className="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="overflow-hidden bg-gradient-to-b from-gray-50 to-white py-32">
       <div className="container mx-auto px-4">
         <Title
           title="Чому обирають нас"
@@ -49,7 +50,7 @@ export default function Advantages() {
           align="center"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+        <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
           {advantages.map((advantage, index) => (
             <motion.div
               key={index}
@@ -61,27 +62,27 @@ export default function Advantages() {
                 scale: 1.02,
                 transition: { duration: 0.2 },
               }}
-              className="flex items-start group cursor-pointer"
+              className="group flex cursor-pointer items-start"
             >
-              <div className="mr-6 relative">
-                <div className="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
+              <div className="relative mr-6">
+                <div className="flex size-16 items-center justify-center rounded-2xl bg-green-50 transition-colors group-hover:bg-green-100">
                   <div className="group-hover:animate-[wiggle_0.5s_ease-in-out]">
-                    <advantage.icon className="w-8 h-8 text-green-600" />
+                    <advantage.icon className="size-8 text-green-600" />
                   </div>
                 </div>
                 {/* Декоративний елемент */}
-                <div className="absolute -z-10 -inset-4 rounded-[30px] bg-green-50/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -inset-4 -z-10 rounded-[30px] bg-green-50/50 opacity-0 transition-opacity group-hover:opacity-100" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">
+                <h3 className="mb-3 text-xl font-semibold text-gray-900 transition-colors group-hover:text-green-700">
                   {advantage.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
+                <p className="leading-relaxed text-gray-600">{advantage.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

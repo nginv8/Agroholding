@@ -4,7 +4,6 @@ import * as motion from 'motion/react-client';
 import { CMSLink } from '@/components/Link';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-
 import type { AboutFeaturesBlock as AboutFeaturesProps } from '@/payload-types';
 
 import { ParallaxPreview } from './ParallaxPreview';
@@ -40,14 +39,14 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="mt-1 flex-shrink-0">
+                    <div className="mt-1 shrink-0">
                       <div
-                        className={`flex h-6 w-6 items-center justify-center rounded-full ${
+                        className={`flex size-6 items-center justify-center rounded-full ${
                           theme === 'dark' ? 'bg-white/10' : 'bg-primary/10'
                         }`}
                       >
                         <Check
-                          className={`h-4 w-4 ${theme === 'dark' ? 'text-accent-400' : 'text-primary-600'}`}
+                          className={`size-4 ${theme === 'dark' ? 'text-accent-400' : 'text-primary-600'}`}
                         />
                       </div>
                     </div>

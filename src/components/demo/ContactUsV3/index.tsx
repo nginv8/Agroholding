@@ -1,17 +1,19 @@
-import * as motion from 'motion/react-client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import Image from 'next/image';
+import { Mail, Phone, Send } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Phone, Mail, Send } from 'lucide-react'
-import Image from 'next/image'
-import { Title } from '../../ui/title'
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+
+import { Title } from '../../ui/title';
 
 const contactInfo = [
   {
@@ -38,19 +40,19 @@ const contactInfo = [
   //   details: ['Пн-Пт: 9:00 - 18:00', 'Сб-Нд: Вихідний'],
   //   description: 'Час вказано за Києвом',
   // },
-]
+];
 
 export default function ContactFormV2() {
   return (
-    <section className="relative min-h-screen flex items-center py-20">
+    <section className="relative flex min-h-screen items-center py-20">
       {/* Фонове зображення */}
       <div className="absolute inset-0 z-0">
         <Image src="/demo/field6.jpg" alt="Поле пшениці" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-green-950/95 to-green-950/80" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Ліва колонка з формою */}
           <div>
             <Title
@@ -61,7 +63,7 @@ export default function ContactFormV2() {
               style="light"
               className="max-w-full overflow-hidden"
             />
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid gap-8 sm:grid-cols-2">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
@@ -72,18 +74,18 @@ export default function ContactFormV2() {
                   className="group"
                 >
                   <div className="relative p-6">
-                    <div className="absolute inset-0 bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative">
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:bg-yellow-400/20 transition-colors">
-                        <info.icon className="w-6 h-6 text-yellow-400" />
+                      <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-white/10 transition-colors group-hover:bg-yellow-400/20">
+                        <info.icon className="size-6 text-yellow-400" />
                       </div>
-                      <h3 className="text-lg font-semibold text-white mb-2">{info.title}</h3>
+                      <h3 className="mb-2 text-lg font-semibold text-white">{info.title}</h3>
                       {info.details.map((detail, i) => (
                         <p key={i} className="text-gray-300">
                           {detail}
                         </p>
                       ))}
-                      <p className="text-sm text-gray-400 mt-2">{info.description}</p>
+                      <p className="mt-2 text-sm text-gray-400">{info.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -99,22 +101,22 @@ export default function ContactFormV2() {
               className="mt-12 overflow-hidden"
             >
               <a
-                className="relative block h-[360px] rounded-2xl overflow-hidden"
+                className="relative block h-[360px] overflow-hidden rounded-2xl"
                 href="https://www.google.com/maps/search/Semypolky+%D0%B2%D1%83%D0%BB.+%D0%84%D1%81%D0%B5%D0%BD%D1%96%D0%BD%D0%B0,%D0%B1.54/@50.7331267,30.9295843,17z?entry=ttu&g_ep=EgoyMDI1MDIyNi4xIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
               >
                 <Image src="/demo/map.jpg" alt="Карта" fill className="object-cover" />
                 {/* Маркер на карті */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                   <div className="relative">
-                    <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                      <div className="w-3 h-3 bg-white rounded-full" />
+                    <div className="flex size-6 items-center justify-center rounded-full bg-green-600">
+                      <div className="size-3 rounded-full bg-white" />
                     </div>
                     {/* Пульсуючий ефект */}
-                    <div className="absolute top-0 left-0 w-6 h-6 bg-yellow-400 rounded-full animate-ping opacity-75" />
+                    <div className="absolute left-0 top-0 size-6 animate-ping rounded-full bg-yellow-400 opacity-75" />
                   </div>
                 </div>
-                <div className="absolute top-4 left-4 right-4 bg-white py-2 px-6 rounded-full shadow-lg">
+                <div className="absolute inset-x-4 top-4 rounded-full bg-white px-6 py-2 shadow-lg">
                   <span>Україна, Київська обл., с. Семиполки, вул. Єсеніна,б.54</span>
                 </div>
               </a>
@@ -128,22 +130,22 @@ export default function ContactFormV2() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl py-8 px-4 lg:p-12 sticky top-24"
+            className="sticky top-24 rounded-2xl bg-white/10 px-4 py-8 backdrop-blur-md lg:p-12"
           >
             <form className="space-y-8">
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-200">Ім&apos;я</label>
                   <Input
                     placeholder="Ваше ім'я"
-                    className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-yellow-400 transition-colors"
+                    className="h-12 border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/60 focus:border-yellow-400"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-200">Прізвище</label>
                   <Input
                     placeholder="Ваше прізвище"
-                    className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-yellow-400 transition-colors"
+                    className="h-12 border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/60 focus:border-yellow-400"
                   />
                 </div>
               </div>
@@ -153,14 +155,14 @@ export default function ContactFormV2() {
                 <Input
                   type="email"
                   placeholder="ваш@email.com"
-                  className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-yellow-400 transition-colors"
+                  className="h-12 border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/60 focus:border-yellow-400"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-200">Тема звернення</label>
                 <Select>
-                  <SelectTrigger className="h-12 bg-white/10 border-white/20 text-white focus:border-yellow-400 transition-colors">
+                  <SelectTrigger className="h-12 border-white/20 bg-white/10 text-white transition-colors focus:border-yellow-400">
                     <SelectValue placeholder="Оберіть тему" />
                   </SelectTrigger>
                   <SelectContent>
@@ -176,21 +178,21 @@ export default function ContactFormV2() {
                 <label className="text-sm font-medium text-gray-200">Повідомлення</label>
                 <Textarea
                   placeholder="Ваше повідомлення..."
-                  className="min-h-[150px] resize-none bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-yellow-400 transition-colors"
+                  className="min-h-[150px] resize-none border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/60 focus:border-yellow-400"
                 />
               </div>
 
               <Button
                 size="lg"
-                className="w-full h-12 text-base bg-yellow-400 hover:bg-yellow-500 text-black group"
+                className="group h-12 w-full bg-yellow-400 text-base text-black hover:bg-yellow-500"
               >
                 Надіслати повідомлення
-                <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <Send className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </form>
           </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }

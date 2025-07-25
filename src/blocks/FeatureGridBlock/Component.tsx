@@ -4,7 +4,6 @@ import * as motion from 'motion/react-client';
 import { IconRenderer } from '@/components/IconRenderer';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-
 import type { FeatureGridBlock as FeatureGridBlockProps } from '@/payload-types';
 
 export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
@@ -35,7 +34,7 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
               className="group z-10 flex cursor-pointer items-start"
             >
               <div className="relative mr-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-50 transition-colors group-hover:bg-primary-100 dark:bg-primary-800 dark:group-hover:bg-primary-700">
+                <div className="flex size-16 items-center justify-center rounded-2xl bg-primary-50 transition-colors group-hover:bg-primary-100 dark:bg-primary-800 dark:group-hover:bg-primary-700">
                   <motion.div
                     animate={{ rotate: 0 }}
                     className="group-hover:animate-[wiggle_0.5s_ease-in-out]"

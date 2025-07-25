@@ -1,9 +1,10 @@
-'use client'
+'use client';
 
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Star } from 'lucide-react'
-import { Title } from '@/components/ui/title'
+import Image from 'next/image';
+import { Star } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Title } from '@/components/ui/title';
 
 const testimonials = [
   {
@@ -35,11 +36,11 @@ const testimonials = [
   },
 
   // Add more testimonials...
-]
+];
 
 export default function Testimonials() {
   return (
-    <section className="py-20 bg-white overflow-hidden">
+    <section className="overflow-hidden bg-white py-20">
       <div className="container mx-auto px-4">
         <Title
           title="Що про нас кажуть наші партнери"
@@ -48,7 +49,7 @@ export default function Testimonials() {
           align="center"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
@@ -59,9 +60,9 @@ export default function Testimonials() {
             >
               <motion.div
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-lg p-6 shadow-lg border border-gray-100"
+                className="rounded-lg border border-gray-100 bg-white p-6 shadow-lg"
               >
-                <div className="flex items-center mb-4">
+                <div className="mb-4 flex items-center">
                   <Image
                     src={testimonial.avatar || '/placeholder.svg'}
                     alt={testimonial.name}
@@ -74,9 +75,9 @@ export default function Testimonials() {
                     <p className="text-sm text-gray-500">{testimonial.role}</p>
                   </div>
                 </div>
-                <div className="flex mb-4">
+                <div className="mb-4 flex">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
+                    <Star key={i} className="size-5 fill-current text-yellow-500" />
                   ))}
                 </div>
                 <p className="text-gray-600">{testimonial.content}</p>
@@ -86,5 +87,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,23 +1,24 @@
-'use client'
+'use client';
 
-import { Media } from '@/components/Media'
-import { FC, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
-import type { Media as MediaType } from '@/payload-types'
+import { FC, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+
+import { Media } from '@/components/Media';
+import type { Media as MediaType } from '@/payload-types';
 
 type ParallaxPreviewProps = {
-  mainMedia?: MediaType | number | null
-  floatingMedia?: MediaType | number | null
-}
+  mainMedia?: MediaType | number | null;
+  floatingMedia?: MediaType | number | null;
+};
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
-  })
+  });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -120])
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
   return (
     <motion.div
@@ -44,8 +45,8 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute -top-12 -left-12 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-green-500/10 rounded-full blur-3xl" />
+      <div className="absolute -left-12 -top-12 size-64 rounded-full bg-yellow-500/10 blur-3xl" />
+      <div className="absolute -bottom-12 -right-12 size-64 rounded-full bg-green-500/10 blur-3xl" />
     </motion.div>
-  )
-}
+  );
+};

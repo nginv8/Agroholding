@@ -14,12 +14,12 @@ import { BannerBlock } from '@/blocks/BannerBlock/Component';
 import { CallToActionBlock } from '@/blocks/CallToActionBlock/Component';
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component';
 import { MediaBlock } from '@/blocks/MediaBlock/Component';
+import { cn } from '@/utilities/ui';
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types';
-import { cn } from '@/utilities/ui';
 
 type NodeTypes =
   | DefaultNodeTypes

@@ -1,36 +1,35 @@
-'use client'
+'use client';
 
-import type React from 'react'
-
-import { motion, AnimatePresence } from 'motion/react'
-import Link from 'next/link'
+import type React from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
-  Menu,
-  X,
+  Building2,
   ChevronDown,
-  Sprout,
   Info,
+  Menu,
   Newspaper,
   Phone,
   ShoppingBag,
+  Sprout,
   Users,
-  Building2,
-} from 'lucide-react'
-import { useState } from 'react'
-import Image from 'next/image'
+  X,
+} from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 
 // Типи для підменю
 type MenuItem = {
-  label: string
-  href: string
-  icon?: React.ElementType
+  label: string;
+  href: string;
+  icon?: React.ElementType;
   submenu?: {
-    label: string
-    href: string
-    description?: string
-    icon?: React.ElementType
-  }[]
-}
+    label: string;
+    href: string;
+    description?: string;
+    icon?: React.ElementType;
+  }[];
+};
 
 // Структура меню
 const menuItems: MenuItem[] = [
@@ -82,20 +81,20 @@ const menuItems: MenuItem[] = [
     href: '#контакти',
     icon: Phone,
   },
-]
+];
 
 export default function HeaderV2() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b"
+      className="fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-md"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex h-20 items-center justify-between">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -114,7 +113,7 @@ export default function HeaderV2() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden items-center space-x-8 md:flex">
             {menuItems.map((item, index) => (
               <div
                 key={item.label}
@@ -129,11 +128,11 @@ export default function HeaderV2() {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center text-gray-600 hover:text-green-700 transition-colors py-2"
+                    className="flex items-center py-2 text-gray-600 transition-colors hover:text-green-700"
                   >
                     <span>{item.label}</span>
                     {item.submenu && (
-                      <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" />
+                      <ChevronDown className="ml-1 size-4 transition-transform duration-200" />
                     )}
                   </Link>
                 </motion.div>
@@ -146,22 +145,22 @@ export default function HeaderV2() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 w-64 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                      className="absolute left-0 top-full mt-2 w-64 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl"
                     >
                       <div className="p-2">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.label}
                             href={subItem.href}
-                            className="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors group"
+                            className="group flex items-start space-x-3 rounded-lg p-3 transition-colors hover:bg-gray-50"
                           >
                             {subItem.icon && (
-                              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
-                                <subItem.icon className="w-5 h-5 text-green-600" />
+                              <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-green-50 transition-colors group-hover:bg-green-100">
+                                <subItem.icon className="size-5 text-green-600" />
                               </div>
                             )}
                             <div>
-                              <div className="font-medium text-gray-900 group-hover:text-green-700 transition-colors">
+                              <div className="font-medium text-gray-900 transition-colors group-hover:text-green-700">
                                 {subItem.label}
                               </div>
                               {subItem.description && (
@@ -197,21 +196,21 @@ export default function HeaderV2() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden pb-6"
+              className="pb-6 md:hidden"
             >
               <nav className="space-y-2">
                 {menuItems.map((item) => (
                   <div key={item.label}>
                     <Link
                       href={item.href}
-                      className="flex items-center justify-between p-3 text-gray-600 hover:text-green-700 hover:bg-gray-50 rounded-lg transition-colors"
+                      className="flex items-center justify-between rounded-lg p-3 text-gray-600 transition-colors hover:bg-gray-50 hover:text-green-700"
                       onClick={() => setIsOpen(false)}
                     >
                       <div className="flex items-center space-x-3">
-                        {item.icon && <item.icon className="w-5 h-5" />}
+                        {item.icon && <item.icon className="size-5" />}
                         <span>{item.label}</span>
                       </div>
-                      {item.submenu && <ChevronDown className="h-4 w-4" />}
+                      {item.submenu && <ChevronDown className="size-4" />}
                     </Link>
 
                     {/* Мобільне підменю */}
@@ -221,10 +220,10 @@ export default function HeaderV2() {
                           <Link
                             key={subItem.label}
                             href={subItem.href}
-                            className="flex items-center space-x-3 p-3 text-gray-500 hover:text-green-700 hover:bg-gray-50 rounded-lg transition-colors"
+                            className="flex items-center space-x-3 rounded-lg p-3 text-gray-500 transition-colors hover:bg-gray-50 hover:text-green-700"
                             onClick={() => setIsOpen(false)}
                           >
-                            {subItem.icon && <subItem.icon className="w-4 h-4" />}
+                            {subItem.icon && <subItem.icon className="size-4" />}
                             <span>{subItem.label}</span>
                           </Link>
                         ))}
@@ -238,5 +237,5 @@ export default function HeaderV2() {
         </AnimatePresence>
       </div>
     </motion.header>
-  )
+  );
 }

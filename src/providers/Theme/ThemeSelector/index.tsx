@@ -1,4 +1,6 @@
-'use client'
+'use client';
+
+import React, { useState } from 'react';
 
 import {
   Select,
@@ -6,40 +8,39 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import React, { useState } from 'react'
+} from '@/components/ui/select';
 
-import type { Theme } from './types'
+import { useTheme } from '..';
+import type { Theme } from './types';
 
-import { useTheme } from '..'
 // import { themeLocalStorageKey } from './types'
 
 export const ThemeSelector: React.FC = () => {
-  const { setTheme } = useTheme()
-  const [value, setValue] = useState('')
+  const { setTheme } = useTheme();
+  const [value, setValue] = useState('');
 
   const onThemeChange = (themeToSet: Theme & 'auto') => {
     if (themeToSet === 'auto') {
-      setTheme(null)
-      setValue('auto')
+      setTheme(null);
+      setValue('auto');
     } else {
-      setTheme(themeToSet)
-      setValue(themeToSet)
+      setTheme(themeToSet);
+      setValue(themeToSet);
     }
-  }
+  };
 
   React.useEffect(() => {
     // const preference = window.localStorage.getItem(themeLocalStorageKey)
     // setValue(preference ?? 'auto')
 
-    setValue('light')
-  }, [])
+    setValue('light');
+  }, []);
 
   return (
     <Select onValueChange={onThemeChange} value={value}>
       <SelectTrigger
         aria-label="Select a theme"
-        className="w-auto bg-transparent gap-2 pl-0 md:pl-3 border-none"
+        className="w-auto gap-2 border-none bg-transparent pl-0 md:pl-3"
       >
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
@@ -49,5 +50,5 @@ export const ThemeSelector: React.FC = () => {
         {/* <SelectItem value="dark">Dark</SelectItem> */}
       </SelectContent>
     </Select>
-  )
-}
+  );
+};

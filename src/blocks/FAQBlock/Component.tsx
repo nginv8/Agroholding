@@ -9,7 +9,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordionPlus';
-
 import type { FAQBlock as FAQProps } from '@/payload-types';
 
 export const FAQBlock: React.FC<FAQProps> = ({
@@ -40,11 +39,11 @@ export const FAQBlock: React.FC<FAQProps> = ({
               <Media resource={image} className="size-full" imgClassName="size-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 to-transparent" />
             </div>
-            <div className="absolute -bottom-8 -right-8 h-64 w-64 rounded-full bg-accent-500/10 blur-3xl" />
-            <div className="absolute -left-8 -top-8 h-64 w-64 rounded-full bg-primary-500/10 blur-3xl" />
+            <div className="absolute -bottom-8 -right-8 size-64 rounded-full bg-accent-500/10 blur-3xl" />
+            <div className="absolute -left-8 -top-8 size-64 rounded-full bg-primary-500/10 blur-3xl" />
 
             {/* Statistics */}
-            <div className="absolute bottom-8 left-8 right-8">
+            <div className="absolute inset-x-8 bottom-8">
               <div className="grid grid-cols-2 gap-4 rounded-xl bg-white/90 p-6 shadow-lg backdrop-blur-sm">
                 {statistics?.map((statistic, index) => (
                   <div key={statistic.id || index} className="text-center">

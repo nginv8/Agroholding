@@ -6,7 +6,6 @@ import { CMSLink } from '@/components/Link';
 import { Media } from '@/components/Media';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-
 import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types';
 
 export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
@@ -72,7 +71,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
                       {...feature.link}
                       className="group/btn inline-flex items-center text-primary-700 transition-colors hover:text-primary-600 dark:text-accent-400 dark:hover:text-accent-300"
                     >
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                      <ChevronRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                     </CMSLink>
                   )}
                 </div>

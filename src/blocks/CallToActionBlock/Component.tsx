@@ -2,9 +2,8 @@ import { CallToActionLargeImage } from '@/components/CallToActionLargeImage';
 import { CallToActionSmallImage } from '@/components/CallToActionSmallImage';
 import { CallToActionText } from '@/components/CallToActionText';
 import { SectionBackground } from '@/components/SectionBackground';
-
-import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 import { cn } from '@/utilities/ui';
+import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 
 function getMarginClasses({
   marginTop,

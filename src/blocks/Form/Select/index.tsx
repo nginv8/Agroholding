@@ -27,7 +27,7 @@ export const Select: React.FC<
       <Label htmlFor={name} className="text-sm font-medium text-foreground">
         {label}
         {required && (
-          <span className="required">
+          <span className="text-red-500">
             * <span className="sr-only">(required)</span>
           </span>
         )}

@@ -1,4 +1,4 @@
-import { Link } from '@payloadcms/ui'
+import { Link } from '@payloadcms/ui';
 
 export default function NavCMS() {
   return (
@@ -9,5 +9,5 @@ export default function NavCMS() {
         </li>
       </ul>
     </nav>
-  )
+  );
 }

@@ -1,9 +1,10 @@
-'use client'
+'use client';
 
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Title } from '@/components/ui/title'
+import Image from 'next/image';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Title } from '@/components/ui/title';
 
 const products = [
   {
@@ -25,7 +26,7 @@ const products = [
     image: '/agro-media/3.jpg',
   },
   // Add more products...
-]
+];
 
 export default function Products() {
   return (
@@ -38,7 +39,7 @@ export default function Products() {
           align="center"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -49,9 +50,9 @@ export default function Products() {
             >
               <motion.div
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg p-6"
+                className="overflow-hidden rounded-xl bg-white p-6 shadow-lg"
               >
-                <div className="relative h-64 mb-6">
+                <div className="relative mb-6 h-64">
                   <Image
                     src={product.image || '/placeholder.svg'}
                     alt={product.name}
@@ -59,8 +60,8 @@ export default function Products() {
                     className="object-contain"
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-800">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
+                <h3 className="mb-2 text-xl font-semibold text-green-800">{product.name}</h3>
+                <p className="mb-4 text-gray-600">{product.description}</p>
                 <Button className="w-full">Дізнатись більше</Button>
               </motion.div>
             </motion.div>
@@ -68,5 +69,5 @@ export default function Products() {
         </div>
       </div>
     </section>
-  )
+  );
 }

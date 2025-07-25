@@ -16,6 +16,6 @@ const localization = {
       label: 'Ukrainian (Українська)',
     },
   ],
-}
+};
 
-export default localization
+export default localization;

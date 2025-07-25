@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-import { ProductCard, CardPostData } from '@/components/ProductCard'
+import { CardPostData, ProductCard } from '@/components/ProductCard';
 
 export type Props = {
-  posts: CardPostData[]
-}
+  posts: CardPostData[];
+};
 
 export const CollectionProductGrid: React.FC<Props> = (props) => {
-  const { posts } = props
+  const { posts } = props;
 
   return (
-    <div className="container relative z-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 md:gap-y-12">
+    <div className="container relative z-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10 md:gap-y-12 lg:grid-cols-4">
       {posts?.map((result, index) => {
         if (typeof result === 'object' && result !== null) {
           return (
@@ -22,11 +22,11 @@ export const CollectionProductGrid: React.FC<Props> = (props) => {
                 showCategories={false}
               />
             </div>
-          )
+          );
         }
 
-        return null
+        return null;
       })}
     </div>
-  )
-}
+  );
+};

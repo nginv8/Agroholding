@@ -1,6 +1,6 @@
-import * as motion from 'motion/react-client'
-import { Leaf, Award, Users, TrendingUp, ChevronRight } from 'lucide-react'
-import Image from 'next/image'
+import Image from 'next/image';
+import { Award, ChevronRight, Leaf, TrendingUp, Users } from 'lucide-react';
+import * as motion from 'motion/react-client';
 
 const features = [
   {
@@ -31,11 +31,11 @@ const features = [
       'Впровадження сучасних технологій землеробства для досягнення найкращих результатів',
     image: '/demo/l3.jpg',
   },
-]
+];
 
 export default function WhyUsV2() {
   return (
-    <section className="relative py-32 bg-green-950 overflow-hidden">
+    <section className="relative overflow-hidden bg-green-950 py-32">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0">
         <Image
@@ -47,27 +47,27 @@ export default function WhyUsV2() {
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-green-950/50 to-green-950" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center max-w-3xl mx-auto mb-24"
+          className="mx-auto mb-24 max-w-3xl text-center"
         >
-          <span className="inline-block text-yellow-400 text-sm tracking-wider uppercase mb-6 font-medium">
+          <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-400">
             Чому обирають нас
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+          <h2 className="mb-8 text-4xl font-bold leading-tight text-white lg:text-5xl">
             Досконалість у кожній деталі
           </h2>
-          <p className="text-xl text-gray-300 leading-relaxed">
+          <p className="text-xl leading-relaxed text-gray-300">
             Ми прагнемо до досконалості у всьому, що робимо, забезпечуючи найвищу якість продукції
             та сервісу для наших клієнтів
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid gap-16 lg:grid-cols-2">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -78,7 +78,7 @@ export default function WhyUsV2() {
               className="group"
             >
               <div className="relative">
-                <div className="relative h-[300px] mb-8 overflow-hidden rounded-2xl">
+                <div className="relative mb-8 h-[300px] overflow-hidden rounded-2xl">
                   <Image
                     src={feature.image || '/placeholder.svg'}
                     alt={feature.title}
@@ -89,20 +89,20 @@ export default function WhyUsV2() {
 
                   {/* Іконка на зображенні */}
                   <div className="absolute bottom-6 left-6 flex items-center space-x-4">
-                    <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm">
-                      <feature.icon className="w-6 h-6 text-yellow-400" />
+                    <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
+                      <feature.icon className="size-6 text-yellow-400" />
                     </div>
                     <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
                   </div>
                 </div>
 
                 <div className="relative">
-                  <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                  <p className="mb-4 text-lg leading-relaxed text-gray-300">
                     {feature.description}
                   </p>
-                  <button className="inline-flex items-center text-yellow-400 hover:text-yellow-300 transition-colors group/btn">
+                  <button className="group/btn inline-flex items-center text-yellow-400 transition-colors hover:text-yellow-300">
                     Дізнатися більше
-                    <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    <ChevronRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
                   </button>
                 </div>
               </div>
@@ -116,9 +116,9 @@ export default function WhyUsV2() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-24 p-8 rounded-2xl bg-white/5 backdrop-blur-sm"
+          className="mt-24 rounded-2xl bg-white/5 p-8 backdrop-blur-sm"
         >
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             {[
               {
                 number: '97%',
@@ -137,14 +137,14 @@ export default function WhyUsV2() {
               },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">{stat.number}</div>
-                <div className="text-white font-medium mb-2">{stat.label}</div>
-                <div className="text-gray-400 text-sm">{stat.description}</div>
+                <div className="mb-2 text-3xl font-bold text-yellow-400">{stat.number}</div>
+                <div className="mb-2 font-medium text-white">{stat.label}</div>
+                <div className="text-sm text-gray-400">{stat.description}</div>
               </div>
             ))}
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

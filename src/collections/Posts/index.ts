@@ -1,10 +1,4 @@
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields';
+import type { CollectionConfig } from 'payload';
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -13,15 +7,20 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
-import type { CollectionConfig } from 'payload';
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields';
 
+import { BannerBlock } from '@/blocks/BannerBlock/config';
+import { MediaBlock } from '@/blocks/MediaBlock/config';
+import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { authenticated } from '@/access/authenticated';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
-import { BannerBlock } from '@/blocks/BannerBlock/config';
-import { ContentBlock } from '@/blocks/ContentBlock/config';
-import { MediaBlock } from '@/blocks/MediaBlock/config';
 import { slugField } from '@/fields/slug';
-import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 
 import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';

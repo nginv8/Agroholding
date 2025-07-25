@@ -3,9 +3,8 @@ import * as motion from 'motion/react-client';
 
 import { CMSLink } from '@/components/Link';
 import RichText from '@/components/RichText';
-
-import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 import { cn } from '@/utilities/ui';
+import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 
 import { Media } from '../Media';
 
@@ -39,7 +38,7 @@ export const CallToActionSmallImage: React.FC<CallToActionSmallImageProps> = ({
       />
 
       <div className={cn('py-12 pr-12', { 'pl-12 pr-0 md:order-1': imageSide === 'right' })}>
-        {richText && <RichText className="max-w-[48rem]" data={richText} enableGutter={false} />}
+        {richText && <RichText className="max-w-3xl" data={richText} enableGutter={false} />}
 
         {(links || []).map(({ link }, i) => {
           return (

@@ -22,7 +22,7 @@ export const Text: React.FC<
         {label}
 
         {required && (
-          <span className="required">
+          <span className="text-red-500">
             * <span className="sr-only">(required)</span>
           </span>
         )}

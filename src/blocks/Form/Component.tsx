@@ -1,7 +1,7 @@
 'use client';
 
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
-import type { FormFieldBlock, Form as FormType } from '@payloadcms/plugin-form-builder/types';
+import type { Form as FormType } from '@payloadcms/plugin-form-builder/types';
 
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,15 @@ export const FormBlock: React.FC<
   } = props;
 
   const formMethods = useForm({
-    defaultValues: formFromProps.fields as any,
+    defaultValues: formFromProps.fields?.reduce(
+      (acc, field) => {
+        if ('name' in field && 'defaultValue' in field) {
+          acc[field.name] = field.defaultValue;
+        }
+        return acc;
+      },
+      {} as Record<string, string | boolean | undefined>
+    ),
   });
   const {
     control,
@@ -49,7 +57,7 @@ export const FormBlock: React.FC<
   const router = useRouter();
 
   const onSubmit = useCallback(
-    (data: FormFieldBlock[]) => {
+    (data: Record<string, string | boolean | undefined>) => {
       let loadingTimerID: ReturnType<typeof setTimeout>;
       const submitForm = async () => {
         setError(undefined);
@@ -116,7 +124,7 @@ export const FormBlock: React.FC<
   );
 
   return (
-    <div className="mx-auto lg:max-w-[48rem]">
+    <div className="mx-auto lg:max-w-3xl">
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}

@@ -1,77 +1,79 @@
-'use client'
+'use client';
 
-import { useEffect, useState, useRef } from 'react'
-import type { TextFieldClientComponent } from 'payload'
-import { useField } from '@payloadcms/ui'
-import * as lucideIcons from 'react-icons/lu'
-import { FixedSizeList as List } from 'react-window'
-import { LuChevronDown, LuSearch, LuX } from 'react-icons/lu'
+import type { TextFieldClientComponent } from 'payload';
+import { useField } from '@payloadcms/ui';
+
+import { useEffect, useRef, useState } from 'react';
+import * as lucideIcons from 'react-icons/lu';
+import { LuChevronDown, LuSearch, LuX } from 'react-icons/lu';
+import { FixedSizeList as List } from 'react-window';
 
 const IconSelectComponent: TextFieldClientComponent = ({ path, field }) => {
-  const { value, setValue } = useField<string>({ path })
-  const [options, setOptions] = useState<{ label: string; value: string }[]>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
-  const selectRef = useRef<HTMLDivElement>(null)
-  const searchInputRef = useRef<HTMLInputElement>(null)
+  const { value, setValue } = useField<string>({ path });
+  const [options, setOptions] = useState<{ label: string; value: string }[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const selectRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const IconComponent = value
     ? (lucideIcons[value as keyof typeof lucideIcons] as React.ElementType)
-    : null
+    : null;
 
   const handleClear = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation()
-    setValue('')
-    setSearchTerm('')
-  }
+    if (e) e.stopPropagation();
+    setValue('');
+    setSearchTerm('');
+  };
 
   const handleSelect = (optionValue: string) => {
-    setValue(optionValue)
-    setSearchTerm('')
-    setIsSearching(false)
-    setIsOpen(false)
-  }
+    setValue(optionValue);
+    setSearchTerm('');
+    setIsSearching(false);
+    setIsOpen(false);
+  };
 
   const toggleSearch = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setIsSearching(!isSearching)
-    setIsOpen((state) => !state)
+    e.stopPropagation();
+    setIsSearching(!isSearching);
+    setIsOpen((state) => !state);
 
     setTimeout(() => {
       if (!isSearching && searchInputRef.current) {
-        searchInputRef.current.focus()
+        searchInputRef.current.focus();
       }
-    }, 10)
-  }
+    }, 10);
+  };
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
-      setIsOpen(false)
-      setIsSearching(false)
-      setSearchTerm('')
+      setIsOpen(false);
+      setIsSearching(false);
+      setSearchTerm('');
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('mousedown', handleOutsideClick);
     const iconOptions = Object.keys(lucideIcons).map((iconName) => ({
       label: iconName,
       value: iconName,
-    }))
+    }));
 
-    setOptions(iconOptions)
+    setOptions(iconOptions);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [])
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   return (
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="field-type" style={{ flex: '1 1 20%' }}>
       {/* Label */}
       <label
@@ -205,14 +207,14 @@ const IconSelectComponent: TextFieldClientComponent = ({ path, field }) => {
                   style={{ overflowX: 'hidden' }}
                 >
                   {({ index, style }) => {
-                    const option = filteredOptions[index]
-                    if (!option) return null
+                    const option = filteredOptions[index];
+                    if (!option) return null;
 
                     const SelectedIcon = lucideIcons[option?.value as keyof typeof lucideIcons] as
                       | React.ElementType
-                      | undefined
+                      | undefined;
 
-                    const isSelected = option.value === value
+                    const isSelected = option.value === value;
 
                     return (
                       <div
@@ -246,7 +248,7 @@ const IconSelectComponent: TextFieldClientComponent = ({ path, field }) => {
                           {option.label}
                         </span>
                       </div>
-                    )
+                    );
                   }}
                 </List>
               ) : (
@@ -266,7 +268,7 @@ const IconSelectComponent: TextFieldClientComponent = ({ path, field }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default IconSelectComponent
+export default IconSelectComponent;

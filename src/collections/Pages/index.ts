@@ -1,3 +1,4 @@
+import type { CollectionConfig } from 'payload';
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -5,12 +6,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields';
-import type { CollectionConfig } from 'payload';
 
-import { populatePublishedAt } from '@/hooks/populatePublishedAt';
-
-import { authenticated } from '@/access/authenticated';
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { AboutBlock } from '@/blocks/AboutBlock/config';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/config';
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/config';
@@ -26,9 +22,12 @@ import { FormBlock } from '@/blocks/Form/config';
 import { MediaBlock } from '@/blocks/MediaBlock/config';
 import { ProductGridBlock } from '@/blocks/ProductGridBlock/config';
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/config';
-import { slugField } from '@/fields/slug';
+import { populatePublishedAt } from '@/hooks/populatePublishedAt';
 import { hero } from '@/heros/config';
 import { generatePreviewPath } from '@/utilities/generatePreviewPath';
+import { authenticated } from '@/access/authenticated';
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { slugField } from '@/fields/slug';
 
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
 

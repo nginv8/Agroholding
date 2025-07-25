@@ -1,34 +1,35 @@
-'use client'
+'use client';
 
-import { cn } from '@/utilities/ui'
-import useClickableCard from '@/utilities/useClickableCard'
-import Link from 'next/link'
-import type React from 'react'
-import * as motion from 'motion/react-client'
-import { ArrowRight } from 'lucide-react'
-import type { Post } from '@/payload-types'
-import { Media } from '@/components/Media'
+import type React from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import * as motion from 'motion/react-client';
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+import { Media } from '@/components/Media';
+import { cn } from '@/utilities/ui';
+import useClickableCard from '@/utilities/useClickableCard';
+import type { Post } from '@/payload-types';
+
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>;
 
 export const Card: React.FC<{
-  alignItems?: 'center'
-  className?: string
-  doc?: CardPostData
-  relationTo?: 'posts'
-  showCategories?: boolean
-  title?: string
-  index?: number
+  alignItems?: 'center';
+  className?: string;
+  doc?: CardPostData;
+  relationTo?: 'posts';
+  showCategories?: boolean;
+  title?: string;
+  index?: number;
 }> = (props) => {
-  const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps, index = 0 } = props
-  const { slug, categories, meta, title } = doc || {}
-  const { description, image: metaImage } = meta || {}
+  const { card, link } = useClickableCard({});
+  const { className, doc, relationTo, showCategories, title: titleFromProps, index = 0 } = props;
+  const { slug, categories, meta, title } = doc || {};
+  const { description, image: metaImage } = meta || {};
 
-  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
-  const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
-  const href = `/${relationTo}/${slug}`
+  const hasCategories = categories && Array.isArray(categories) && categories.length > 0;
+  const titleToUse = titleFromProps || title;
+  const sanitizedDescription = description?.replace(/\s/g, ' '); // replace non-breaking space with white space
+  const href = `/${relationTo}/${slug}`;
 
   return (
     <motion.article
@@ -40,9 +41,9 @@ export const Card: React.FC<{
       ref={card.ref}
     >
       <Link href={href} ref={link.ref} className="group block">
-        <div className="relative aspect-square mb-6 overflow-hidden rounded-xl bg-muted">
+        <div className="relative mb-6 aspect-square overflow-hidden rounded-xl bg-muted">
           {!metaImage && (
-            <div className="flex items-center justify-center h-full text-muted-foreground">
+            <div className="flex h-full items-center justify-center text-muted-foreground">
               No image
             </div>
           )}
@@ -50,7 +51,7 @@ export const Card: React.FC<{
             <Media
               resource={metaImage}
               size="33vw"
-              className="transition-transform duration-300 group-hover:scale-105 w-full h-full"
+              className="size-full transition-transform duration-300 group-hover:scale-105"
               imgClassName="object-cover w-full h-full"
             />
           )}
@@ -61,39 +62,39 @@ export const Card: React.FC<{
             <div className="flex flex-wrap gap-2">
               {categories?.map((category, categoryIndex) => {
                 if (typeof category === 'object') {
-                  const { title: titleFromCategory } = category
-                  const categoryTitle = titleFromCategory || 'Untitled category'
+                  const { title: titleFromCategory } = category;
+                  const categoryTitle = titleFromCategory || 'Untitled category';
 
                   return (
                     <span
                       key={categoryIndex}
-                      className="inline-block px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+                      className="inline-block rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary"
                     >
                       {categoryTitle}
                     </span>
-                  )
+                  );
                 }
-                return null
+                return null;
               })}
             </div>
           )}
 
           {titleToUse && (
-            <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
               {titleToUse}
             </h3>
           )}
 
           {description && (
-            <p className="text-muted-foreground mb-4 line-clamp-2">{sanitizedDescription}</p>
+            <p className="mb-4 line-clamp-2 text-muted-foreground">{sanitizedDescription}</p>
           )}
 
-          <span className="inline-flex items-center text-primary font-medium group-hover:text-primary/80 transition-colors">
+          <span className="inline-flex items-center font-medium text-primary transition-colors group-hover:text-primary/80">
             Детальніше
-            <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
       </Link>
     </motion.article>
-  )
-}
+  );
+};

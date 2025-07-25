@@ -1,3 +1,5 @@
+import { TypedLocale } from 'payload';
+
 import React from 'react';
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
@@ -6,18 +8,16 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { TypedLocale } from 'payload';
 
 import { AdminBar } from '@/components/AdminBar';
 // import { Footer } from '@/globals/Footer/Component'
 // import { Header } from '@/globals/Header/Component'
 import { LivePreviewListener } from '@/components/LivePreviewListener';
-
 import { routing } from '@/i18n/routing';
-import { Providers } from '@/providers';
 import { InitTheme } from '@/providers/Theme/InitTheme';
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
 import { cn } from '@/utilities/ui';
+import { Providers } from '@/providers';
 
 // import localization from '@/i18n/localization'
 

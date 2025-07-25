@@ -1,15 +1,16 @@
-import * as motion from 'motion/react-client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { ArrowRight, Building, Clock, Mail, MapPin, Phone, Send } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Phone, Mail, MapPin, Clock, Send, Building, ArrowRight } from 'lucide-react'
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 const contactInfo = [
   {
@@ -36,17 +37,17 @@ const contactInfo = [
     details: ['Пн-Пт: 9:00 - 18:00', 'Сб-Нд: Вихідний'],
     description: 'Час вказано за Києвом',
   },
-]
+];
 
 export default function ContactFormV2() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative overflow-hidden py-32">
       {/* Фонові декоративні елементи */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute left-1/2 top-0 h-32 w-[120%] -translate-x-1/2 bg-gradient-to-b from-white to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid gap-20 lg:grid-cols-2">
           {/* Ліва колонка з формою */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -54,20 +55,20 @@ export default function ContactFormV2() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="inline-block text-sm font-medium text-yellow-600 mb-6 tracking-wider uppercase">
+            <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-yellow-600">
               Зв&apos;яжіться з нами
             </span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+            <h2 className="mb-8 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl">
               Готові до співпраці?
               <span className="block text-green-700">Напишіть нам</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="mb-12 text-xl leading-relaxed text-gray-600">
               Заповніть форму нижче, і наші спеціалісти зв&apos;яжуться з вами протягом 24 годин для
               обговорення деталей співпраці.
             </p>
 
             <form className="space-y-8">
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-900">Ім&apos;я</label>
                   <Input placeholder="Ваше ім'я" className="h-12" />
@@ -106,9 +107,9 @@ export default function ContactFormV2() {
                 />
               </div>
 
-              <Button size="lg" className="w-full h-12 text-base group">
+              <Button size="lg" className="group h-12 w-full text-base">
                 Надіслати повідомлення
-                <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <Send className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </form>
           </motion.div>
@@ -137,7 +138,7 @@ export default function ContactFormV2() {
             </div> */}
 
             {/* Контактна інформація */}
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid gap-8 sm:grid-cols-2">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
@@ -145,20 +146,20 @@ export default function ContactFormV2() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative group"
+                  className="group relative"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent rounded-2xl" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-50 to-transparent" />
                   <div className="relative p-6">
-                    <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                      <info.icon className="w-6 h-6 text-green-600" />
+                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-green-100 transition-colors group-hover:bg-green-200">
+                      <info.icon className="size-6 text-green-600" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{info.title}</h3>
+                    <h3 className="mb-2 text-lg font-semibold text-gray-900">{info.title}</h3>
                     {info.details.map((detail, i) => (
                       <p key={i} className="text-gray-600">
                         {detail}
                       </p>
                     ))}
-                    <p className="text-sm text-gray-500 mt-2">{info.description}</p>
+                    <p className="mt-2 text-sm text-gray-500">{info.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -170,23 +171,23 @@ export default function ContactFormV2() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="bg-green-50 rounded-2xl p-8"
+              className="rounded-2xl bg-green-50 p-8"
             >
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
-                  <Building className="w-6 h-6 text-green-600" />
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-green-100">
+                  <Building className="size-6 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900">
                     Відділ корпоративних клієнтів
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="mb-4 text-gray-600">
                     Для великих замовлень та корпоративних клієнтів у нас діє спеціальна програма
                     співпраці
                   </p>
                   <Button variant="outline" size="lg" className="group">
                     Дізнатись більше
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
               </div>
@@ -195,5 +196,5 @@ export default function ContactFormV2() {
         </div>
       </div>
     </section>
-  )
+  );
 }

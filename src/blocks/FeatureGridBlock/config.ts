@@ -1,8 +1,9 @@
-import type { Block } from 'payload'
-import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
-import { iconSelect } from '@/fields/CustomFields/iconSelect'
-import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
-import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
+import type { Block } from 'payload';
+
+import { iconSelect } from '@/fields/CustomFields/iconSelect';
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
 
 export const FeatureGridBlock: Block = {
   slug: 'featureGrid',
@@ -42,4 +43,4 @@ export const FeatureGridBlock: Block = {
       ],
     },
   ],
-}
+};

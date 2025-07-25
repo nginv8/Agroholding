@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
 import { TypedLocale } from 'payload';
+
+import React, { Fragment } from 'react';
 
 import { AboutBlock } from '@/blocks/AboutBlock/Component';
 import { AboutFeaturesBlock } from '@/blocks/AboutFeaturesBlock/Component';

@@ -1,11 +1,11 @@
-import Link from 'next/link'
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
-import { Button } from '@/components/ui/button'
-import { useTranslations } from 'next-intl'
+import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
-  const t = useTranslations()
+  const t = useTranslations();
 
   return (
     <div className="container py-28">
@@ -17,5 +17,5 @@ export default function NotFound() {
         <Link href="/">{t('go-home')}</Link>
       </Button>
     </div>
-  )
+  );
 }

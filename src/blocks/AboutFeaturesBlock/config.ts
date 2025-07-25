@@ -1,9 +1,10 @@
-import type { Block } from 'payload'
-import { linkGroup } from '@/fields/linkGroup'
-import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
-import { iconSelect } from '@/fields/CustomFields/iconSelect'
-import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
-import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
+import type { Block } from 'payload';
+
+import { iconSelect } from '@/fields/CustomFields/iconSelect';
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
+import { linkGroup } from '@/fields/linkGroup';
 
 export const AboutFeaturesBlock: Block = {
   slug: 'aboutFeatures',
@@ -85,4 +86,4 @@ export const AboutFeaturesBlock: Block = {
       ],
     },
   ],
-}
+};

@@ -1,10 +1,11 @@
-import type { Field } from 'payload'
-import deepMerge from '@/utilities/deepMerge'
+import type { Field } from 'payload';
+
+import deepMerge from '@/utilities/deepMerge';
 
 type SectionThemeType = (options?: {
-  theme?: 'dark' | 'light'
-  overrides?: Partial<Field>
-}) => Field
+  theme?: 'dark' | 'light';
+  overrides?: Partial<Field>;
+}) => Field;
 
 export const SectionTheme: SectionThemeType = ({ theme = 'light', overrides = {} } = {}) => {
   const generatedSectionTheme: Field = {
@@ -16,7 +17,7 @@ export const SectionTheme: SectionThemeType = ({ theme = 'light', overrides = {}
       { label: 'Dark', value: 'dark' },
     ],
     defaultValue: theme,
-  }
+  };
 
-  return deepMerge(generatedSectionTheme, overrides)
-}
+  return deepMerge(generatedSectionTheme, overrides);
+};

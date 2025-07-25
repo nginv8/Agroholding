@@ -1,39 +1,37 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/select';
 
 interface LanguageSwitcherProps {
-  currentLocale: string
+  currentLocale: string;
   labels: {
-    language: string
-  }
+    language: string;
+  };
 }
 
-export function LanguageSwitcher({
-  currentLocale,
-  labels,
-}: LanguageSwitcherProps) {
-  const router = useRouter()
+export function LanguageSwitcher({ currentLocale, labels }: LanguageSwitcherProps) {
+  const router = useRouter();
 
   const languages = [
     { code: 'en', name: 'English' },
     { code: 'uk', name: 'Українська' },
-  ]
+  ];
 
   const handleLanguageChange = (locale: string) => {
-    const currentPath = window.location.pathname
-    const segments = currentPath.split('/')
-    segments[1] = locale
-    const newPath = segments.join('/')
-    router.push(newPath)
-  }
+    const currentPath = window.location.pathname;
+    const segments = currentPath.split('/');
+    segments[1] = locale;
+    const newPath = segments.join('/');
+    router.push(newPath);
+  };
 
   return (
     <div className="flex items-center gap-2">
@@ -51,5 +49,5 @@ export function LanguageSwitcher({
         </SelectContent>
       </Select>
     </div>
-  )
+  );
 }

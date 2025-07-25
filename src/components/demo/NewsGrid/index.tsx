@@ -1,18 +1,19 @@
-'use client'
+'use client';
 
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { Calendar } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Title } from '@/components/ui/title'
+import Image from 'next/image';
+import { Calendar } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Title } from '@/components/ui/title';
 
 type Post = {
-  id: number
-  title: string
-  excerpt: string
-  date: string
-  image: string
-}
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  image: string;
+};
 
 const samplePosts: Post[] = [
   {
@@ -36,11 +37,11 @@ const samplePosts: Post[] = [
     date: '2024-02-15',
     image: '/demo/t5.jpg',
   },
-]
+];
 
 export default function NewsGrid() {
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden">
+    <section className="overflow-hidden bg-gray-50 py-20">
       <div className="container mx-auto px-4">
         <Title
           title="Інновації та розвиток для майбутнього"
@@ -49,7 +50,7 @@ export default function NewsGrid() {
           align="center"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {samplePosts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -61,7 +62,7 @@ export default function NewsGrid() {
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="bg-white rounded-lg overflow-hidden shadow-lg"
+                className="overflow-hidden rounded-lg bg-white shadow-lg"
               >
                 <div className="relative h-48">
                   <Image
@@ -72,12 +73,12 @@ export default function NewsGrid() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center text-gray-500 text-sm mb-4">
-                    <Calendar className="w-4 h-4 mr-2" />
+                  <div className="mb-4 flex items-center text-sm text-gray-500">
+                    <Calendar className="mr-2 size-4" />
                     {new Date(post.date).toLocaleDateString('uk-UA')}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-green-800">{post.title}</h3>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                  <h3 className="mb-2 text-xl font-semibold text-green-800">{post.title}</h3>
+                  <p className="mb-4 text-gray-600">{post.excerpt}</p>
                   <Button variant="outline" className="w-full">
                     Читати далі
                   </Button>
@@ -88,5 +89,5 @@ export default function NewsGrid() {
         </div>
       </div>
     </section>
-  )
+  );
 }

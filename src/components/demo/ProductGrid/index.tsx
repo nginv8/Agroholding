@@ -1,9 +1,10 @@
-import * as motion from 'motion/react-client'
-import Image from 'next/image'
-import { ArrowDown, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { Title } from '@/components/ui/title'
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowDown, ArrowRight } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Title } from '@/components/ui/title';
 
 const products = [
   {
@@ -55,11 +56,11 @@ const products = [
     description: 'Надсолодкий сорт кукурудзи з підвищеним вмістом цукру',
     image: '/demo/p8.jpg',
   },
-]
+];
 
 export default function ProductGrid() {
   return (
-    <section className="py-32 bg-gray-50 overflow-hidden">
+    <section className="overflow-hidden bg-gray-50 py-32">
       <div className="container mx-auto px-4">
         <Title
           title="Широкий асортимент якісної продукції"
@@ -68,7 +69,7 @@ export default function ProductGrid() {
           align="center"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -78,7 +79,7 @@ export default function ProductGrid() {
               transition={{ delay: index * 0.1 }}
             >
               <Link href="#" className="group block">
-                <div className="relative aspect-square mb-6 overflow-hidden rounded-xl bg-gray-100">
+                <div className="relative mb-6 aspect-square overflow-hidden rounded-xl bg-gray-100">
                   <Image
                     src={product.image || '/placeholder.svg'}
                     alt={product.name}
@@ -86,13 +87,13 @@ export default function ProductGrid() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
+                <h3 className="mb-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-green-700">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-                <span className="inline-flex items-center text-green-700 font-medium group-hover:text-green-600">
+                <p className="mb-4 line-clamp-2 text-gray-600">{product.description}</p>
+                <span className="inline-flex items-center font-medium text-green-700 group-hover:text-green-600">
                   Детальніше
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             </motion.div>
@@ -104,14 +105,14 @@ export default function ProductGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center mt-16"
+          className="mt-16 text-center"
         >
           <Button size="lg" variant="outline" className="group">
             Показати більше
-            <ArrowDown className="ml-2 w-4 h-4 transition-transform group-hover:translate-y-1" />
+            <ArrowDown className="ml-2 size-4 transition-transform group-hover:translate-y-1" />
           </Button>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

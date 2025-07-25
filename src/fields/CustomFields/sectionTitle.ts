@@ -1,11 +1,12 @@
-import type { Field } from 'payload'
-import deepMerge from '@/utilities/deepMerge'
+import type { Field } from 'payload';
+
+import deepMerge from '@/utilities/deepMerge';
 
 type SectionTitleType = (options?: {
-  variant?: 'colorAccent' | 'weightAccent'
-  align?: 'left' | 'center' | 'right'
-  overrides?: Partial<Field>
-}) => Field
+  variant?: 'colorAccent' | 'weightAccent';
+  align?: 'left' | 'center' | 'right';
+  overrides?: Partial<Field>;
+}) => Field;
 
 export const SectionTitle: SectionTitleType = ({
   variant = 'colorAccent',
@@ -88,7 +89,7 @@ export const SectionTitle: SectionTitleType = ({
     admin: {
       hideGutter: true,
     },
-  }
+  };
 
-  return deepMerge(generatedSectionTitle, overrides)
-}
+  return deepMerge(generatedSectionTitle, overrides);
+};

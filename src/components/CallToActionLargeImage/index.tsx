@@ -3,9 +3,8 @@ import * as motion from 'motion/react-client';
 
 import { CMSLink } from '@/components/Link';
 import RichText from '@/components/RichText';
-
-import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 import { cn } from '@/utilities/ui';
+import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 
 import { Media } from '../Media';
 
@@ -42,7 +41,7 @@ export const CallToActionLargeImage: React.FC<CallToActionLargeImageeProps> = ({
             imgClassName="size-full object-cover object-center"
           />
 
-          <div className="absolute -bottom-8 -right-8 h-64 w-64 rounded-full bg-yellow-500/10 blur-3xl" />
+          <div className="absolute -bottom-8 -right-8 size-64 rounded-full bg-yellow-500/10 blur-3xl" />
         </div>
 
         <div
@@ -50,12 +49,12 @@ export const CallToActionLargeImage: React.FC<CallToActionLargeImageeProps> = ({
             'md:order-1': imageSide === 'right',
           })}
         >
-          {richText && <RichText className="max-w-[48rem]" data={richText} enableGutter={false} />}
+          {richText && <RichText className="max-w-3xl" data={richText} enableGutter={false} />}
 
           {(links || []).map(({ link }, i) => {
             return (
               <CMSLink key={i} size="lg" {...link} className="group mr-4 mt-8">
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </CMSLink>
             );
           })}

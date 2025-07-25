@@ -1,14 +1,15 @@
-import type { Block } from 'payload'
-import { linkGroup } from '@/fields/linkGroup'
-import { SectionTitle } from '@/fields/CustomFields/sectionTitle'
-import { SectionBackground } from '@/fields/CustomFields/sectionBackground'
+import type { Block } from 'payload';
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { SectionTheme } from '@/fields/CustomFields/sectionTheme'
+} from '@payloadcms/richtext-lexical';
+
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
+import { linkGroup } from '@/fields/linkGroup';
 
 export const AboutBlock: Block = {
   slug: 'about',
@@ -32,7 +33,7 @@ export const AboutBlock: Block = {
             HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
-          ]
+          ];
         },
       }),
     },
@@ -62,4 +63,4 @@ export const AboutBlock: Block = {
       },
     }),
   ],
-}
+};

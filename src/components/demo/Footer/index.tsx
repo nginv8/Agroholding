@@ -1,9 +1,10 @@
-import * as motion from 'motion/react-client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Facebook, Instagram, Linkedin, Twitter, Send } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
+import Image from 'next/image';
+import Link from 'next/link';
+import { Facebook, Instagram, Linkedin, Send, Twitter } from 'lucide-react';
+import * as motion from 'motion/react-client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const footerLinks = {
   company: [
@@ -24,21 +25,21 @@ const footerLinks = {
     { name: 'FAQ', href: '#' },
     { name: 'Документація', href: '#' },
   ],
-}
+};
 
 const socialLinks = [
   { name: 'Facebook', icon: Facebook, href: '#' },
   { name: 'Instagram', icon: Instagram, href: '#' },
   { name: 'Twitter', icon: Twitter, href: '#' },
   { name: 'LinkedIn', icon: Linkedin, href: '#' },
-]
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-green-900 text-white overflow-hidden">
+    <footer className="overflow-hidden bg-green-900 text-white">
       {/* Основний контент футера */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Інформація про компанію */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -46,7 +47,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <Link href="/" className="text-2xl font-bold mb-6 block">
+            <Link href="/" className="mb-6 block text-2xl font-bold">
               <Image
                 src="/logo-light.svg"
                 alt="Наша команда"
@@ -55,7 +56,7 @@ export default function Footer() {
                 className="h-14 w-auto"
               />
             </Link>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="mb-6 max-w-md text-gray-300">
               Провідний виробник попкорну та інших зернових культур в Україні. Ми поєднуємо традиції
               землеробства з сучасними технологіями.
             </p>
@@ -64,9 +65,9 @@ export default function Footer() {
                 <Link
                   key={social.name}
                   href={social.href}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
-                  <social.icon className="h-6 w-6" />
+                  <social.icon className="size-6" />
                   <span className="sr-only">{social.name}</span>
                 </Link>
               ))}
@@ -80,13 +81,13 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h3 className="text-lg font-semibold mb-6">Компанія</h3>
+            <h3 className="mb-6 text-lg font-semibold">Компанія</h3>
             <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-gray-300 transition-colors hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -101,13 +102,13 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <h3 className="text-lg font-semibold mb-6">Продукція</h3>
+            <h3 className="mb-6 text-lg font-semibold">Продукція</h3>
             <ul className="space-y-4">
               {footerLinks.products.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-gray-300 transition-colors hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -122,13 +123,13 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <h3 className="text-lg font-semibold mb-6">Ресурси</h3>
+            <h3 className="mb-6 text-lg font-semibold">Ресурси</h3>
             <ul className="space-y-4">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-gray-300 transition-colors hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -144,19 +145,19 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="border-t border-green-800 mt-12 pt-12"
+          className="mt-12 border-t border-green-800 pt-12"
         >
-          <div className="max-w-md mx-auto text-center">
-            <h3 className="text-lg font-semibold mb-4">Підпишіться на наші новини</h3>
-            <p className="text-gray-300 mb-6">Отримуйте останні новини та спеціальні пропозиції</p>
+          <div className="mx-auto max-w-md text-center">
+            <h3 className="mb-4 text-lg font-semibold">Підпишіться на наші новини</h3>
+            <p className="mb-6 text-gray-300">Отримуйте останні новини та спеціальні пропозиції</p>
             <form className="flex gap-2">
               <Input
                 type="email"
                 placeholder="Ваш email"
-                className="bg-green-800 border-green-700 text-white placeholder:text-gray-300"
+                className="border-green-700 bg-green-800 text-white placeholder:text-gray-300"
               />
               <Button type="submit" variant="secondary" size="icon">
-                <Send className="h-4 w-4" />
+                <Send className="size-4" />
                 <span className="sr-only">Підписатися</span>
               </Button>
             </form>
@@ -167,13 +168,13 @@ export default function Footer() {
       {/* Копірайт */}
       <div className="border-t border-green-800">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-300 text-sm">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-gray-300">
               © {new Date().getFullYear()} AgroHolding. Всі права захищені.
             </p>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
