@@ -56,7 +56,7 @@ export const FeatureTabsBlock: Block = {
     linkGroup({
       overrides: {
         name: 'cta',
-        label: 'Call to Action',
+        label: 'Call to Action Buttons',
       },
     }),
   ],

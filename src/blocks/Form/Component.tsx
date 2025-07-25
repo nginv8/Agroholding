@@ -5,6 +5,7 @@ import type { Form as FormType } from '@payloadcms/plugin-form-builder/types';
 
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Send } from 'lucide-react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import RichText from '@/components/RichText';
@@ -137,7 +138,7 @@ export const FormBlock: React.FC<
           {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="-mx-3 mb-6 flex flex-wrap justify-center last:mb-0">
+              <div className="-mx-3 mb-8 flex flex-wrap justify-center last:mb-0">
                 {formFromProps &&
                   formFromProps.fields &&
                   formFromProps.fields?.map((field, index) => {
@@ -160,15 +161,16 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <div className="text-center @container">
+              <div className="text-center">
                 <Button
                   form={formID}
                   type="submit"
-                  className="w-full @md:w-auto"
+                  className="group w-full"
                   variant="default"
                   size="lg"
                 >
                   {submitButtonLabel}
+                  <Send className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>
             </form>

@@ -54,7 +54,6 @@ export const SectionBackground: SectionBackgroundType = ({
             label: 'Background Media',
             type: 'upload',
             relationTo: 'media',
-            required: true,
             admin: {
               condition: (_, siblingData) =>
                 siblingData?.variant === 'image' || siblingData?.variant === 'gradient and image',

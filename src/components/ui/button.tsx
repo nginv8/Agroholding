@@ -20,7 +20,7 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-accent dark:text-accent-foreground dark:hover:bg-accent/90',
+          'bg-primary-600 text-primary-foreground hover:bg-primary-500 dark:bg-accent-500 dark:text-accent-foreground dark:hover:bg-accent-400',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
         ghost: 'text-foreground hover:bg-foreground hover:text-background',
         link: 'text-primary underline-offset-4 hover:underline dark:text-accent',
