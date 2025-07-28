@@ -7,7 +7,7 @@ import { CollectionProductGrid } from '@/components/CollectionProductGrid';
 import RichText from '@/components/RichText';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-import type { Post, ProductGridBlock as ProductGridBlockProps } from '@/payload-types';
+import type { Post, Product, ProductGridBlock as ProductGridBlockProps } from '@/payload-types';
 
 export const ProductGridBlock: React.FC<
   ProductGridBlockProps & {
@@ -23,12 +23,13 @@ export const ProductGridBlock: React.FC<
     introContent,
     limit: limitFromProps,
     populateBy,
+    relationTo,
     selectedDocs,
   } = props;
 
   const limit = limitFromProps || 8;
 
-  let posts: Post[] = [];
+  let posts: (Post | Product)[] = [];
 
   if (populateBy === 'collection') {
     const payload = await getPayload({ config: configPromise });
@@ -38,8 +39,9 @@ export const ProductGridBlock: React.FC<
       else return category;
     });
 
-    const fetchedPosts = await payload.find({
-      collection: 'posts',
+    const collection = relationTo || 'posts';
+    const fetchedDocs = await payload.find({
+      collection: collection as 'posts' | 'products',
       depth: 1,
       limit,
       ...(flattenedCategories && flattenedCategories.length > 0
@@ -53,14 +55,14 @@ export const ProductGridBlock: React.FC<
         : {}),
     });
 
-    posts = fetchedPosts.docs;
+    posts = fetchedDocs.docs;
   } else {
     if (selectedDocs?.length) {
-      const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === 'object') return post.value;
-      }) as Post[];
+      const filteredSelectedDocs = selectedDocs.map((doc) => {
+        if (typeof doc.value === 'object') return doc.value;
+      }) as (Post | Product)[];
 
-      posts = filteredSelectedPosts;
+      posts = filteredSelectedDocs;
     }
   }
 
@@ -82,7 +84,7 @@ export const ProductGridBlock: React.FC<
           <RichText className="ms-0 max-w-3xl" data={introContent} enableGutter={false} />
         </div>
       )}
-      <CollectionProductGrid posts={posts} />
+      <CollectionProductGrid posts={posts} relationTo={relationTo} />
     </section>
   );
 };

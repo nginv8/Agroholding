@@ -9,15 +9,15 @@ import { useTranslations } from 'next-intl';
 import { Media } from '@/components/Media';
 import { cn } from '@/utilities/ui';
 import useClickableCard from '@/utilities/useClickableCard';
-import type { Post } from '@/payload-types';
+import type { Post, Product } from '@/payload-types';
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>;
+export type CardPostData = Pick<Post | Product, 'slug' | 'categories' | 'meta' | 'title'>;
 
 export const ProductCard: React.FC<{
   alignItems?: 'center';
   className?: string;
   doc?: CardPostData;
-  relationTo?: 'posts';
+  relationTo?: 'posts' | 'products';
   showCategories?: boolean;
   title?: string;
   index?: number;

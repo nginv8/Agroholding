@@ -62,6 +62,10 @@ export const ProductGridBlock: Block = {
           label: 'Posts',
           value: 'posts',
         },
+        {
+          label: 'Products',
+          value: 'products',
+        },
       ],
     },
     {
@@ -92,7 +96,7 @@ export const ProductGridBlock: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts'],
+      relationTo: ['posts', 'products'],
     },
   ],
   labels: {
