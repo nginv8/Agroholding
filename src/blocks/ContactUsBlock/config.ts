@@ -1,6 +1,5 @@
 import type { Block } from 'payload';
 
-import { iconSelect } from '@/fields/CustomFields/iconSelect';
 import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
 import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
 import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
@@ -38,54 +37,84 @@ export const ContactUsBlock: Block = {
     },
 
     {
-      name: 'contactInfo',
-      type: 'array',
+      name: 'contactDisplay',
+      type: 'group',
+      label: {
+        en: 'Contact Display Options',
+        uk: 'Налаштування відображення контактів',
+      },
       fields: [
         {
           type: 'row',
           fields: [
-            iconSelect({
-              name: 'icon',
-              label: 'Contact Icon',
-            }),
             {
-              name: 'title',
-              type: 'text',
-              localized: true,
+              name: 'showPhones',
+              type: 'checkbox',
+              label: {
+                en: 'Show Phones',
+                uk: 'Показувати телефони',
+              },
+              defaultValue: true,
+            },
+            {
+              name: 'showEmails',
+              type: 'checkbox',
+              label: {
+                en: 'Show Emails',
+                uk: 'Показувати email адреси',
+              },
+              defaultValue: true,
+            },
+            {
+              name: 'showAddresses',
+              type: 'checkbox',
+              label: {
+                en: 'Show Addresses',
+                uk: 'Показувати адреси',
+              },
+              defaultValue: true,
+            },
+            {
+              name: 'showWorkingHours',
+              type: 'checkbox',
+              label: {
+                en: 'Show Working Hours',
+                uk: 'Показувати години роботи',
+              },
+              defaultValue: true,
+            },
+            {
+              name: 'showSocialMedia',
+              type: 'checkbox',
+              label: {
+                en: 'Show Social Media',
+                uk: 'Показувати соціальні мережі',
+              },
+              defaultValue: false,
             },
           ],
-        },
-        {
-          name: 'details',
-          type: 'array',
-          fields: [
-            {
-              name: 'text',
-              type: 'text',
-              localized: true,
-            },
-          ],
-        },
-        {
-          name: 'description',
-          type: 'text',
-          localized: true,
         },
       ],
     },
+
     {
       name: 'corporate',
       type: 'group',
       fields: [
         {
-          name: 'title',
-          type: 'text',
-          localized: true,
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          localized: true,
+          type: 'row',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              localized: true,
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              localized: true,
+            },
+          ],
         },
       ],
     },

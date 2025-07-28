@@ -2,17 +2,21 @@ import type React from 'react';
 import * as motion from 'motion/react-client';
 
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component';
-import { IconRenderer } from '@/components/IconRenderer';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
+import { getContactInfo } from '@/utilities/getContactInfo';
 import type { ContactUsBlock as ContactUsBlockProps } from '@/payload-types';
+
+import ContactInfo from './ContactInfo';
 
 type ContactUsBlockType = Omit<ContactUsBlockProps, 'blocks'> & {
   blocks?: FormBlockType[] | [];
 };
 
-export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
-  const { title, background, theme, contactInfo = [], blocks, corporate } = props;
+export const ContactUsBlock: React.FC<ContactUsBlockType> = async (props) => {
+  const { title, background, theme, blocks, corporate, contactDisplay } = props;
+
+  const contactData = await getContactInfo();
 
   return (
     <section className="relative py-32" data-theme={theme}>
@@ -46,41 +50,7 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = (props) => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="grid gap-8 sm:grid-cols-2">
-              {contactInfo?.map((info, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group"
-                >
-                  <div className="relative p-6">
-                    <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/5" />
-                    <div className="relative">
-                      <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 dark:bg-white/10 dark:group-hover:bg-accent/20">
-                        {info.icon && (
-                          <IconRenderer
-                            name={info.icon}
-                            size={24}
-                            className="text-primary dark:text-accent"
-                          />
-                        )}
-                      </div>
-                      <h3 className="mb-2 text-lg font-semibold text-foreground">{info.title}</h3>
-                      {info.details &&
-                        info.details.map((detail, i) => (
-                          <p key={i} className="text-muted-foreground">
-                            {detail.text}
-                          </p>
-                        ))}
-                      <p className="mt-2 text-sm text-muted-foreground/70">{info.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <ContactInfo contactData={contactData} displayOptions={contactDisplay} />
 
             {/* Map */}
             <motion.div

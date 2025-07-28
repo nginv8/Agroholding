@@ -103,10 +103,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    contactInfo: ContactInfo;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    contactInfo: ContactInfoSelect<false> | ContactInfoSelect<true>;
   };
   locale: 'en' | 'uk';
   user: User & {
@@ -1218,20 +1220,13 @@ export interface ContactUsBlock {
     description?: string | null;
   };
   blocks?: FormBlock[] | null;
-  contactInfo?:
-    | {
-        icon?: string | null;
-        title?: string | null;
-        details?:
-          | {
-              text?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  contactDisplay?: {
+    showPhones?: boolean | null;
+    showEmails?: boolean | null;
+    showAddresses?: boolean | null;
+    showWorkingHours?: boolean | null;
+    showSocialMedia?: boolean | null;
+  };
   corporate?: {
     title?: string | null;
     description?: string | null;
@@ -2064,19 +2059,14 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
     | {
         formBlock?: T | FormBlockSelect<T>;
       };
-  contactInfo?:
+  contactDisplay?:
     | T
     | {
-        icon?: T;
-        title?: T;
-        details?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        description?: T;
-        id?: T;
+        showPhones?: T;
+        showEmails?: T;
+        showAddresses?: T;
+        showWorkingHours?: T;
+        showSocialMedia?: T;
       };
   corporate?:
     | T
@@ -2572,6 +2562,73 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactInfo".
+ */
+export interface ContactInfo {
+  id: number;
+  phones?: {
+    icon?: string | null;
+    title?: string | null;
+    label?: string | null;
+    items?:
+      | {
+          number: string;
+          isPrimary?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  emails?: {
+    icon?: string | null;
+    title?: string | null;
+    label?: string | null;
+    items?:
+      | {
+          email: string;
+          isPrimary?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  addresses?: {
+    icon?: string | null;
+    title?: string | null;
+    label?: string | null;
+    items?:
+      | {
+          street: string;
+          city: string;
+          region?: string | null;
+          postalCode?: string | null;
+          country?: string | null;
+          isPrimary?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  workingHours?: {
+    icon?: string | null;
+    title?: string | null;
+    label?: string | null;
+    weekdays?: string | null;
+    weekends?: string | null;
+    holidays?: string | null;
+  };
+  socialMedia?: {
+    items?:
+      | {
+          icon?: string | null;
+          name: string;
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2611,6 +2668,83 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactInfo_select".
+ */
+export interface ContactInfoSelect<T extends boolean = true> {
+  phones?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        label?: T;
+        items?:
+          | T
+          | {
+              number?: T;
+              isPrimary?: T;
+              id?: T;
+            };
+      };
+  emails?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        label?: T;
+        items?:
+          | T
+          | {
+              email?: T;
+              isPrimary?: T;
+              id?: T;
+            };
+      };
+  addresses?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        label?: T;
+        items?:
+          | T
+          | {
+              street?: T;
+              city?: T;
+              region?: T;
+              postalCode?: T;
+              country?: T;
+              isPrimary?: T;
+              id?: T;
+            };
+      };
+  workingHours?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        label?: T;
+        weekdays?: T;
+        weekends?: T;
+        holidays?: T;
+      };
+  socialMedia?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              icon?: T;
+              name?: T;
+              url?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

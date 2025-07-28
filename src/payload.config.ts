@@ -17,6 +17,7 @@ import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
 import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
+import { ContactInfo } from './globals/ContactInfo/config';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
 import localization from './i18n/localization';
@@ -82,7 +83,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, ContactInfo],
   plugins: [
     ...plugins,
     cloudinaryStorage({
