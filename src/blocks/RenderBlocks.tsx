@@ -14,7 +14,6 @@ import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/Component';
 import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/Component';
 import { FormBlock } from '@/blocks/Form/Component';
 import { MediaBlock } from '@/blocks/MediaBlock/Component';
-import { ProductGridBlock } from '@/blocks/ProductGridBlock/Component';
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component';
 import type { Page } from '@/payload-types';
 
@@ -33,7 +32,6 @@ const blockComponents = {
   featureTabs: FeatureTabsBlock,
   featureGrid: FeatureGridBlock,
   featureGallery: FeatureGalleryBlock,
-  productGrid: ProductGridBlock,
   testimonial: TestimonialBlock,
   faq: FAQBlock,
   contactUs: ContactUsBlock,

@@ -32,14 +32,16 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = async (props) => {
               viewport={{ once: true }}
               transition={{ duration: 1 }}
             >
-              {blocks?.map((block, index) => {
-                switch (block.blockType) {
-                  case 'formBlock':
-                    return <FormBlock key={index} {...block} />;
-                  default:
-                    return null;
-                }
-              })}
+              {blocks &&
+                Array.isArray(blocks) &&
+                blocks.map((block, index) => {
+                  switch (block.blockType) {
+                    case 'formBlock':
+                      return <FormBlock key={index} {...block} />;
+                    default:
+                      return null;
+                  }
+                })}
             </motion.div>
           </div>
 

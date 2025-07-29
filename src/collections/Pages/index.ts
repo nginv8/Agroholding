@@ -20,7 +20,6 @@ import { FeatureGridBlock } from '@/blocks/FeatureGridBlock/config';
 import { FeatureTabsBlock } from '@/blocks/FeatureTabsBlock/config';
 import { FormBlock } from '@/blocks/Form/config';
 import { MediaBlock } from '@/blocks/MediaBlock/config';
-import { ProductGridBlock } from '@/blocks/ProductGridBlock/config';
 import { TestimonialBlock } from '@/blocks/TestimonialBlock/config';
 import { populatePublishedAt } from '@/hooks/populatePublishedAt';
 import { hero } from '@/heros/config';
@@ -97,7 +96,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureTabsBlock,
                 FeatureGridBlock,
                 FeatureGalleryBlock,
-                ProductGridBlock,
                 TestimonialBlock,
                 FAQBlock,
                 ContactUsBlock,

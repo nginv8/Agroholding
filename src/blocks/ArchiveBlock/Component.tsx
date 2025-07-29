@@ -2,21 +2,37 @@ import { getPayload } from 'payload';
 
 import React from 'react';
 import configPromise from '@payload-config';
+import * as motion from 'motion/react-client';
 
 import { CollectionArchive } from '@/components/CollectionArchive';
 import RichText from '@/components/RichText';
-import type { ArchiveBlock as ArchiveBlockProps, Post } from '@/payload-types';
+import { SectionBackground } from '@/components/SectionBackground';
+import { SectionTitle } from '@/components/SectionTitle';
+import type { ArchiveBlock as ArchiveBlockProps, Post, Product } from '@/payload-types';
+
+export type CollectionTypes = Post | Product;
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
     id?: string;
   }
 > = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props;
+  const {
+    id,
+    title,
+    background,
+    theme,
+    categories,
+    introContent,
+    limit: limitFromProps,
+    populateBy,
+    selectedDocs,
+    relationTo,
+  } = props;
+  const collectionName = relationTo ? relationTo : 'posts';
+  const limit = limitFromProps || 8;
 
-  const limit = limitFromProps || 3;
-
-  let posts: Post[] = [];
+  let collection: CollectionTypes[] = [];
 
   if (populateBy === 'collection') {
     const payload = await getPayload({ config: configPromise });
@@ -26,8 +42,8 @@ export const ArchiveBlock: React.FC<
       else return category;
     });
 
-    const fetchedPosts = await payload.find({
-      collection: 'posts',
+    const fetchedCollection = await payload.find({
+      collection: collectionName,
       depth: 1,
       limit,
       ...(flattenedCategories && flattenedCategories.length > 0
@@ -41,25 +57,29 @@ export const ArchiveBlock: React.FC<
         : {}),
     });
 
-    posts = fetchedPosts.docs;
+    collection = fetchedCollection.docs;
   } else {
     if (selectedDocs?.length) {
-      const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === 'object') return post.value;
-      }) as Post[];
+      const filteredSelectedCollection = selectedDocs.map((item) => {
+        if (typeof item.value === 'object') return item.value;
+      }) as CollectionTypes[];
 
-      posts = filteredSelectedPosts;
+      collection = filteredSelectedCollection;
     }
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
-      {introContent && (
-        <div className="container mb-16">
+    <section className="relative overflow-hidden py-32" id={`block-${id}`} data-theme={theme}>
+      <SectionBackground {...background} theme={theme} />
+
+      <div className="container relative z-10">
+        <SectionTitle {...title} theme={theme} />
+
+        {introContent && (
           <RichText className="ms-0 max-w-3xl" data={introContent} enableGutter={false} />
-        </div>
-      )}
-      <CollectionArchive posts={posts} />
-    </div>
+        )}
+      </div>
+      <CollectionArchive collection={collection} collectionName={collectionName} />
+    </section>
   );
 };

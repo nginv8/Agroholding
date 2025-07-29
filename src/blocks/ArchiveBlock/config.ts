@@ -6,10 +6,19 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 
+import { SectionBackground } from '@/fields/CustomFields/sectionBackground';
+import { SectionTheme } from '@/fields/CustomFields/sectionTheme';
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
+
 export const ArchiveBlock: Block = {
   slug: 'archive',
   interfaceName: 'ArchiveBlock',
   fields: [
+    SectionTheme(),
+    SectionTitle({
+      align: 'center',
+    }),
+    SectionBackground(),
     {
       name: 'introContent',
       type: 'richText',
@@ -53,6 +62,10 @@ export const ArchiveBlock: Block = {
           label: 'Posts',
           value: 'posts',
         },
+        {
+          label: 'Products',
+          value: 'products',
+        },
       ],
     },
     {
@@ -83,7 +96,7 @@ export const ArchiveBlock: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts'],
+      relationTo: ['posts', 'products'],
     },
   ],
   labels: {

@@ -18,24 +18,12 @@ export const ContactUsBlock: Block = {
     SectionBackground(),
     SectionTitle(),
     {
-      label: 'Content blocks',
-      type: 'group',
-      fields: [
-        {
-          label: 'Form block',
-          name: 'blocks',
-          type: 'blocks',
-          blocks: [FormBlock],
-          maxRows: 1,
-          defaultValue: {
-            blockType: 'formBlock',
-            form: null,
-            enableIntro: false,
-          },
-        },
-      ],
+      label: 'Form block',
+      name: 'blocks',
+      type: 'blocks',
+      blocks: [FormBlock],
+      maxRows: 1,
     },
-
     {
       name: 'contactDisplay',
       type: 'group',

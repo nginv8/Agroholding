@@ -4,32 +4,41 @@ import type React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import * as motion from 'motion/react-client';
+import { useTranslations } from 'next-intl';
 
 import { Media } from '@/components/Media';
 import { cn } from '@/utilities/ui';
 import useClickableCard from '@/utilities/useClickableCard';
-import type { Post } from '@/payload-types';
+import type { Post, Product } from '@/payload-types';
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>;
+export type CardCollectionData = Pick<Post | Product, 'slug' | 'categories' | 'meta' | 'title'>;
 
 export const Card: React.FC<{
   alignItems?: 'center';
   className?: string;
-  doc?: CardPostData;
-  relationTo?: 'posts';
+  doc?: CardCollectionData;
+  collectionName: 'posts' | 'products';
   showCategories?: boolean;
   title?: string;
   index?: number;
 }> = (props) => {
   const { card, link } = useClickableCard({});
-  const { className, doc, relationTo, showCategories, title: titleFromProps, index = 0 } = props;
+  const {
+    className,
+    doc,
+    collectionName,
+    showCategories,
+    title: titleFromProps,
+    index = 0,
+  } = props;
   const { slug, categories, meta, title } = doc || {};
   const { description, image: metaImage } = meta || {};
+  const t = useTranslations();
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0;
   const titleToUse = titleFromProps || title;
   const sanitizedDescription = description?.replace(/\s/g, ' '); // replace non-breaking space with white space
-  const href = `/${relationTo}/${slug}`;
+  const href = `/${collectionName}/${slug}`;
 
   return (
     <motion.article
@@ -52,7 +61,7 @@ export const Card: React.FC<{
               resource={metaImage}
               size="33vw"
               className="size-full transition-transform duration-300 group-hover:scale-105"
-              imgClassName="object-cover w-full h-full"
+              imgClassName="object-cover size-full"
             />
           )}
         </div>
@@ -80,17 +89,19 @@ export const Card: React.FC<{
           )}
 
           {titleToUse && (
-            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
               {titleToUse}
             </h3>
           )}
 
           {description && (
-            <p className="mb-4 line-clamp-2 text-muted-foreground">{sanitizedDescription}</p>
+            <p className="mb-4 line-clamp-2 text-muted-foreground dark:text-white/80">
+              {sanitizedDescription}
+            </p>
           )}
 
-          <span className="inline-flex items-center font-medium text-primary transition-colors group-hover:text-primary/80">
-            Детальніше
+          <span className="inline-flex items-center font-medium text-primary transition-colors group-hover:text-primary/80 dark:text-accent-500 dark:group-hover:text-accent-400">
+            {t('read-more')}
             <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>

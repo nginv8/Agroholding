@@ -207,7 +207,6 @@ export interface Page {
     | FeatureTabsBlock
     | FeatureGridBlock
     | FeatureGalleryBlock
-    | ProductGridBlock
     | TestimonialBlock
     | FAQBlock
     | ContactUsBlock
@@ -536,6 +535,20 @@ export interface MediaBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
+  theme?: ('light' | 'dark') | null;
+  title?: {
+    variant?: ('colorAccent' | 'weightAccent') | null;
+    alignment?: ('left' | 'center' | 'right') | null;
+    subtitle?: string | null;
+    title?: string | null;
+    accentPart?: string | null;
+    description?: string | null;
+  };
+  background?: {
+    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
+    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
+    backgroundMedia?: (number | null) | Media;
+  };
   introContent?: {
     root: {
       type: string;
@@ -552,18 +565,71 @@ export interface ArchiveBlock {
     [k: string]: unknown;
   } | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
+  relationTo?: ('posts' | 'products') | null;
   categories?: (number | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: number | Post;
-      }[]
+    | (
+        | {
+            relationTo: 'posts';
+            value: number | Post;
+          }
+        | {
+            relationTo: 'products';
+            value: number | Product;
+          }
+      )[]
     | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  title: string;
+  heroImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedProducts?: (number | Product)[] | null;
+  categories?: (number | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (number | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1082,107 +1148,6 @@ export interface FeatureGalleryBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProductGridBlock".
- */
-export interface ProductGridBlock {
-  theme?: ('light' | 'dark') | null;
-  title?: {
-    variant?: ('colorAccent' | 'weightAccent') | null;
-    alignment?: ('left' | 'center' | 'right') | null;
-    subtitle?: string | null;
-    title?: string | null;
-    accentPart?: string | null;
-    description?: string | null;
-  };
-  background?: {
-    variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
-    gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
-  };
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: ('posts' | 'products') | null;
-  categories?: (number | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
-    | (
-        | {
-            relationTo: 'posts';
-            value: number | Post;
-          }
-        | {
-            relationTo: 'products';
-            value: number | Product;
-          }
-      )[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'productGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  title: string;
-  heroImage?: (number | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedProducts?: (number | Product)[] | null;
-  categories?: (number | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (number | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TestimonialBlock".
  */
 export interface TestimonialBlock {
@@ -1590,7 +1555,6 @@ export interface PagesSelect<T extends boolean = true> {
         featureTabs?: T | FeatureTabsBlockSelect<T>;
         featureGrid?: T | FeatureGridBlockSelect<T>;
         featureGallery?: T | FeatureGalleryBlockSelect<T>;
-        productGrid?: T | ProductGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
         faq?: T | FAQBlockSelect<T>;
         contactUs?: T | ContactUsBlockSelect<T>;
@@ -1686,6 +1650,24 @@ export interface MediaBlockSelect<T extends boolean = true> {
  * via the `definition` "ArchiveBlock_select".
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
+  theme?: T;
+  title?:
+    | T
+    | {
+        variant?: T;
+        alignment?: T;
+        subtitle?: T;
+        title?: T;
+        accentPart?: T;
+        description?: T;
+      };
+  background?:
+    | T
+    | {
+        variant?: T;
+        gradientType?: T;
+        backgroundMedia?: T;
+      };
   introContent?: T;
   populateBy?: T;
   relationTo?: T;
@@ -1975,38 +1957,6 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProductGridBlock_select".
- */
-export interface ProductGridBlockSelect<T extends boolean = true> {
-  theme?: T;
-  title?:
-    | T
-    | {
-        variant?: T;
-        alignment?: T;
-        subtitle?: T;
-        title?: T;
-        accentPart?: T;
-        description?: T;
-      };
-  background?:
-    | T
-    | {
-        variant?: T;
-        gradientType?: T;
-        backgroundMedia?: T;
-      };
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
   id?: T;
   blockName?: T;
 }
