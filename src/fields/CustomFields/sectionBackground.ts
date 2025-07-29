@@ -14,7 +14,7 @@ export const SectionBackground: SectionBackgroundType = ({
   overrides = {},
 } = {}) => {
   const generatedSectionBackground: Field = {
-    name: 'background',
+    name: 'sbg',
     label: 'Section Background',
     type: 'group',
     fields: [
@@ -50,8 +50,8 @@ export const SectionBackground: SectionBackgroundType = ({
             },
           },
           {
-            name: 'backgroundMedia',
-            label: 'Background Media',
+            name: 'img',
+            label: 'Background Image',
             type: 'upload',
             relationTo: 'media',
             admin: {

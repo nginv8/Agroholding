@@ -2,7 +2,6 @@ import { getPayload } from 'payload';
 
 import React from 'react';
 import configPromise from '@payload-config';
-import * as motion from 'motion/react-client';
 
 import { CollectionArchive } from '@/components/CollectionArchive';
 import RichText from '@/components/RichText';
@@ -20,7 +19,7 @@ export const ArchiveBlock: React.FC<
   const {
     id,
     title,
-    background,
+    sbg,
     theme,
     categories,
     introContent,
@@ -70,7 +69,7 @@ export const ArchiveBlock: React.FC<
 
   return (
     <section className="relative overflow-hidden py-32" id={`block-${id}`} data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative z-10">
         <SectionTitle {...title} theme={theme} />

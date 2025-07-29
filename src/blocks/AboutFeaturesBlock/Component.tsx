@@ -9,11 +9,11 @@ import type { AboutFeaturesBlock as AboutFeaturesProps } from '@/payload-types';
 import { ParallaxPreview } from './ParallaxPreview';
 
 export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
-  const { title, background, theme, mainImage, secondaryImage, features, cta, stats } = props;
+  const { title, sbg, theme, mainImage, secondaryImage, features, cta, stats } = props;
 
   return (
     <section className="relative overflow-hidden py-32" data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Left column with images */}

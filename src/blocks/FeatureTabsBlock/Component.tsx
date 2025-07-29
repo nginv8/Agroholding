@@ -15,7 +15,7 @@ import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types';
 
 export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
   title,
-  background,
+  sbg,
   theme,
   features,
   cta,
@@ -24,7 +24,7 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24" data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />

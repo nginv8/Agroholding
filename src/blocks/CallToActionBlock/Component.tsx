@@ -38,7 +38,7 @@ function getMarginClasses({
 }
 
 export const CallToActionBlock: React.FC<CTABlockProps> = ({
-  background,
+  sbg,
   theme,
   marginTop,
   marginBottom,
@@ -51,7 +51,7 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({
   const marginClasses = getMarginClasses({ marginTop, marginBottom });
   return (
     <section className={cn('relative overflow-hidden', marginClasses)} data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
       <div className="container relative z-10 mx-auto px-4">
         {layoutStyle === 'none' && <CallToActionText richText={richText} links={links} />}
         {layoutStyle === 'sm' && (

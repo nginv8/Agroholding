@@ -10,14 +10,14 @@ import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types
 
 export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
   title,
-  background,
+  sbg,
   theme,
   features = [],
   stats = [],
 }) => {
   return (
     <section className="relative overflow-hidden py-32" data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative z-10 mx-auto px-4">
         <motion.div

@@ -5,7 +5,7 @@ import { Media as MediaType } from '@/payload-types';
 type SectionBackgroundProps = {
   className?: string;
   theme?: 'dark' | 'light' | null;
-  backgroundMedia?: MediaType | number | null;
+  img?: MediaType | number | null;
   variant?: 'gradient' | 'image' | 'gradient and image' | 'none' | null;
   gradientType?: 'bottom' | 'top' | 'top and bottom' | null;
 };
@@ -47,7 +47,7 @@ const getBgClasses = ({ variant, gradientType, theme }: getBgClassesArgs): strin
 export const SectionBackground = ({
   className = '',
   theme = 'light',
-  backgroundMedia = null,
+  img = null,
   variant = 'none',
   gradientType = 'top and bottom',
 }: SectionBackgroundProps) => {
@@ -55,9 +55,9 @@ export const SectionBackground = ({
 
   return (
     <div className={cn('absolute inset-0 z-0', gradientClasses, className)}>
-      {(variant === 'image' || variant === 'gradient and image') && backgroundMedia && (
+      {(variant === 'image' || variant === 'gradient and image') && img && (
         <Media
-          resource={backgroundMedia}
+          resource={img}
           alt="Background image"
           fill
           className={cn(

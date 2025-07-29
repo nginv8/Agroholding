@@ -27,15 +27,10 @@ const itemVariants = {
   },
 };
 
-export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({
-  title,
-  background,
-  theme,
-  features,
-}) => {
+export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({ title, sbg, theme, features }) => {
   return (
     <section className="relative overflow-hidden py-20" data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative z-10 mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />

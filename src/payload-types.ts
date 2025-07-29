@@ -417,10 +417,10 @@ export interface User {
  */
 export interface CallToActionBlock {
   theme?: ('light' | 'dark') | null;
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   layoutStyle: 'none' | 'sm' | 'lg';
   imageSide?: ('left' | 'right') | null;
@@ -544,10 +544,10 @@ export interface ArchiveBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   introContent?: {
     root: {
@@ -849,10 +849,10 @@ export interface AboutBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   richText?: {
     root: {
@@ -913,10 +913,10 @@ export interface AboutFeaturesBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   mainImage?: (number | null) | Media;
   secondaryImage?: (number | null) | Media;
@@ -977,10 +977,10 @@ export interface FeatureCardsBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   features?:
     | {
@@ -1008,10 +1008,10 @@ export interface FeatureTabsBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   features?:
     | {
@@ -1078,10 +1078,10 @@ export interface FeatureGridBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   advantages?:
     | {
@@ -1109,10 +1109,10 @@ export interface FeatureGalleryBlock {
     accentPart?: string | null;
     description?: string | null;
   };
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   features: {
     title: string;
@@ -1152,10 +1152,10 @@ export interface FeatureGalleryBlock {
  */
 export interface TestimonialBlock {
   theme?: ('light' | 'dark') | null;
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   title?: {
     variant?: ('colorAccent' | 'weightAccent') | null;
@@ -1186,10 +1186,10 @@ export interface TestimonialBlock {
  */
 export interface FAQBlock {
   theme?: ('light' | 'dark') | null;
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   title?: {
     variant?: ('colorAccent' | 'weightAccent') | null;
@@ -1226,10 +1226,10 @@ export interface FAQBlock {
  */
 export interface ContactUsBlock {
   theme?: ('light' | 'dark') | null;
-  background?: {
+  sbg?: {
     variant?: ('none' | 'gradient' | 'image' | 'gradient and image') | null;
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
-    backgroundMedia?: (number | null) | Media;
+    img?: (number | null) | Media;
   };
   title?: {
     variant?: ('colorAccent' | 'weightAccent') | null;
@@ -1579,12 +1579,12 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
   theme?: T;
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   layoutStyle?: T;
   imageSide?: T;
@@ -1661,12 +1661,12 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   introContent?: T;
   populateBy?: T;
@@ -1704,12 +1704,12 @@ export interface AboutBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   richText?: T;
   mainImage?: T;
@@ -1748,12 +1748,12 @@ export interface AboutFeaturesBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   mainImage?: T;
   secondaryImage?: T;
@@ -1806,12 +1806,12 @@ export interface FeatureCardsBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   features?:
     | T
@@ -1840,12 +1840,12 @@ export interface FeatureTabsBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   features?:
     | T
@@ -1890,12 +1890,12 @@ export interface FeatureGridBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   advantages?:
     | T
@@ -1924,12 +1924,12 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
         accentPart?: T;
         description?: T;
       };
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   features?:
     | T
@@ -1966,12 +1966,12 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
  */
 export interface TestimonialBlockSelect<T extends boolean = true> {
   theme?: T;
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   title?:
     | T
@@ -2003,12 +2003,12 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
  */
 export interface FAQBlockSelect<T extends boolean = true> {
   theme?: T;
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   title?:
     | T
@@ -2046,12 +2046,12 @@ export interface FAQBlockSelect<T extends boolean = true> {
  */
 export interface ContactUsBlockSelect<T extends boolean = true> {
   theme?: T;
-  background?:
+  sbg?:
     | T
     | {
         variant?: T;
         gradientType?: T;
-        backgroundMedia?: T;
+        img?: T;
       };
   title?:
     | T

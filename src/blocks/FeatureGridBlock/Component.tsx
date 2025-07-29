@@ -8,13 +8,13 @@ import type { FeatureGridBlock as FeatureGridBlockProps } from '@/payload-types'
 
 export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
   title,
-  background,
+  sbg,
   theme,
   advantages = [],
 }) => {
   return (
     <section className="relative py-32" data-theme={theme}>
-      <SectionBackground {...background} theme={theme} />
+      <SectionBackground {...sbg} theme={theme} />
 
       <div className="container mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} theme={theme} />
