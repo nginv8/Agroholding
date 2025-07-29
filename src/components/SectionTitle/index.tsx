@@ -1,7 +1,7 @@
 import * as motion from 'motion/react-client';
 
 interface TitleProps {
-  title: string;
+  title?: string | null;
   accentPart?: string | null;
   subtitle?: string | null;
   description?: string | null;
@@ -21,10 +21,11 @@ const decorAlignmentClasses = {
   center: 'justify-center',
   right: 'justify-end',
 };
-const getTitleParts = (title: string, accentText?: string) => {
-  if (!accentText) {
-    return { beforeText: title, accentText: '', afterText: '' };
+const getTitleParts = (title?: string, accentText?: string) => {
+  if (!title || !accentText) {
+    return { beforeText: title || '', accentText: accentText || '', afterText: '' };
   }
+
   const titleParts = title.split(accentText);
   const beforeText = titleParts[0];
   const afterText = titleParts[1] || '';
@@ -35,13 +36,14 @@ const getTitleParts = (title: string, accentText?: string) => {
 export function SectionTitle({
   title,
   accentPart,
-  subtitle = '',
-  description = '',
+  subtitle,
+  description,
   variant = 'colorAccent',
   theme = 'light',
   alignment = 'left',
   className = '',
 }: TitleProps) {
+  if (!title) return null;
   const { beforeText, accentText, afterText } = getTitleParts(title, accentPart || '');
 
   return (
@@ -52,20 +54,17 @@ export function SectionTitle({
       transition={{ duration: 0.7 }}
       className={`relative mb-16 max-w-2xl ${textAlignmentClasses[alignment || 'left']} ${className}`}
     >
-      {' '}
       {variant === 'weightAccent' ? (
         <>
-          {' '}
           <h2
             className={`mb-4 text-3xl font-light capitalize leading-tight md:text-4xl lg:text-5xl ${theme === 'light' ? 'text-secondary-800' : 'text-white'}`}
           >
-            {' '}
-            {beforeText} {accentText && <span className="font-semibold">{accentText}</span>}{' '}
-            {afterText}{' '}
+            {beforeText} {accentText && <span className="font-semibold">{accentText}</span>}
+            {afterText}
           </h2>
           <div
             className={`mb-5 flex after:block after:h-1 after:w-32 after:bg-accent-500 ${decorAlignmentClasses[alignment || 'left']}`}
-          />{' '}
+          />
           {description && (
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -74,20 +73,17 @@ export function SectionTitle({
               transition={{ duration: 0.7, delay: 0.2 }}
               className={`text-lg font-light leading-relaxed md:text-xl ${theme === 'light' ? 'text-secondary-600' : 'text-secondary-200'}`}
             >
-              {' '}
-              {description}{' '}
+              {description}
             </motion.p>
-          )}{' '}
+          )}
         </>
       ) : (
         <>
-          {' '}
           {subtitle && (
             <span
               className={`mb-6 inline-block text-sm font-medium uppercase tracking-wider ${theme === 'light' ? 'text-accent-600' : 'text-accent-400'}`}
             >
-              {' '}
-              {subtitle}{' '}
+              {subtitle}
             </span>
           )}
           <h2
@@ -98,8 +94,7 @@ export function SectionTitle({
               <span
                 className={`inline ${theme === 'light' ? '!text-primary-700' : '!text-accent-400'}`}
               >
-                {' '}
-                {accentText}{' '}
+                {accentText}
               </span>
             )}
             {afterText}
