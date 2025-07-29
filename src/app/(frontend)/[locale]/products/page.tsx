@@ -13,7 +13,6 @@ import PageClient from './page.client';
 
 export const dynamic = 'force-static';
 export const revalidate = 600;
-export const itemsLimit = 8;
 
 type Args = {
   params: Promise<{
@@ -22,17 +21,15 @@ type Args = {
 };
 
 export default async function Page({ params }: Args) {
-  const collectionName = 'posts';
-
   const { locale = 'uk' } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });
 
-  const posts = await payload.find({
-    collection: collectionName,
+  const products = await payload.find({
+    collection: 'products',
     locale,
     depth: 1,
-    limit: itemsLimit,
+    limit: 12,
     overrideAccess: false,
     select: {
       title: true,
@@ -47,24 +44,24 @@ export default async function Page({ params }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose max-w-none dark:prose-invert">
-          <h1>{t(collectionName)}</h1>
+          <h1>{t('products')}</h1>
         </div>
       </div>
 
       <div className="container mb-8">
         <PageRange
-          collection={collectionName}
-          currentPage={posts.page}
-          limit={itemsLimit}
-          totalDocs={posts.totalDocs}
+          collection="products"
+          currentPage={products.page}
+          limit={12}
+          totalDocs={products.totalDocs}
         />
       </div>
 
-      <CollectionArchive collection={posts.docs} collectionName={collectionName} />
+      <CollectionArchive posts={products.docs} relationTo="products" useProductGrid={true} />
 
       <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+        {products.totalPages > 1 && products.page && (
+          <Pagination page={products.page} totalPages={products.totalPages} />
         )}
       </div>
     </div>
@@ -73,6 +70,6 @@ export default async function Page({ params }: Args) {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Posts`,
+    title: `Products`,
   };
 }

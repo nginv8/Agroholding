@@ -10,6 +10,7 @@ import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
 
+import { itemsLimit } from '../../page';
 import PageClient from './page.client';
 
 export const revalidate = 600;
@@ -22,6 +23,7 @@ type Args = {
 };
 
 export default async function Page({ params: paramsPromise }: Args) {
+  const collectionName = 'posts';
   const { pageNumber, locale } = await paramsPromise;
   const payload = await getPayload({ config: configPromise });
   const t = await getTranslations();
@@ -31,9 +33,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   if (!Number.isInteger(sanitizedPageNumber)) notFound();
 
   const posts = await payload.find({
-    collection: 'posts',
+    collection: collectionName,
     depth: 1,
-    limit: 12,
+    limit: itemsLimit,
     locale,
     page: sanitizedPageNumber,
     overrideAccess: false,
@@ -44,20 +46,20 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose max-w-none dark:prose-invert">
-          <h1>{t('posts')}</h1>
+          <h1>{t(collectionName)}</h1>
         </div>
       </div>
 
       <div className="container mb-8">
         <PageRange
-          collection="posts"
+          collection={collectionName}
           currentPage={posts.page}
-          limit={12}
+          limit={itemsLimit}
           totalDocs={posts.totalDocs}
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CollectionArchive collection={posts.docs} collectionName={collectionName} />
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (
@@ -82,7 +84,7 @@ export async function generateStaticParams() {
     overrideAccess: false,
   });
 
-  const totalPages = Math.ceil(totalDocs / 10);
+  const totalPages = Math.ceil(totalDocs / itemsLimit);
 
   const pages: { pageNumber: string }[] = [];
 
