@@ -6,7 +6,7 @@ import type { Metadata } from 'next/types';
 import configPromise from '@payload-config';
 import { getTranslations } from 'next-intl/server';
 
-import { CardPostData } from '@/components/Card';
+import { CardCollectionData } from '@/components/Card';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { Search } from '@/search/Component';
 
@@ -86,7 +86,7 @@ export default async function Page({
       </div>
 
       {posts.totalDocs > 0 ? (
-        <CollectionArchive posts={posts.docs as CardPostData[]} />
+        <CollectionArchive collection={posts.docs as CardCollectionData[]} collectionName="posts" />
       ) : (
         <div className="container">{t('no-results')}</div>
       )}

@@ -10,7 +10,6 @@ import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
 
-import { itemsLimit } from '../../page';
 import PageClient from './page.client';
 
 export const revalidate = 600;
@@ -21,6 +20,8 @@ type Args = {
     locale: TypedLocale;
   }>;
 };
+
+const itemsLimit = 8;
 
 export default async function Page({ params: paramsPromise }: Args) {
   const collectionName = 'posts';

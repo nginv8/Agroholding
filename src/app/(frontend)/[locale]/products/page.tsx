@@ -57,7 +57,7 @@ export default async function Page({ params }: Args) {
         />
       </div>
 
-      <CollectionArchive posts={products.docs} relationTo="products" useProductGrid={true} />
+      <CollectionArchive collection={products.docs} collectionName="products" />
 
       <div className="container">
         {products.totalPages > 1 && products.page && (

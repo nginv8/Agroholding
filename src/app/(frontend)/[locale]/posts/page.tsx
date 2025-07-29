@@ -13,7 +13,6 @@ import PageClient from './page.client';
 
 export const dynamic = 'force-static';
 export const revalidate = 600;
-export const itemsLimit = 8;
 
 type Args = {
   params: Promise<{
@@ -23,7 +22,7 @@ type Args = {
 
 export default async function Page({ params }: Args) {
   const collectionName = 'posts';
-
+  const itemsLimit = 8;
   const { locale = 'uk' } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });

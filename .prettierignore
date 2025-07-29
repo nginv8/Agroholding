@@ -1,3 +1,21 @@
+build
+dist / media
+node_modules
+sqlt.db
+README.md
+.DS_Store
+.env
+.next
+.vercel
+.tmp
+.tsconfig.json
+.pnpm-lock.yaml
+
+# Payload default media upload directory
+public/media/
+
+public/robots.txt
+public/sitemap*.xml
 **/payload-types.ts
 **/.git
 **/.hg
@@ -10,5 +28,3 @@
 **/temp
 **/docs/**
 **/(payload)/**/*.*
-.tmp
-.tsconfig.json

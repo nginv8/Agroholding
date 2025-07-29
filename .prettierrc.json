@@ -43,8 +43,6 @@
     "",
     "^[./]"
   ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
   "tailwindConfig": "./tailwind.config.mjs",
   "tailwindFunctions": ["clsx", "cn"]
 }
