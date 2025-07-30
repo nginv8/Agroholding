@@ -59,7 +59,11 @@ export default async function Page({ params }: Args) {
         />
       </div>
 
-      <CollectionArchive collection={posts.docs} collectionName={collectionName} />
+      <CollectionArchive
+        collection={posts.docs}
+        collectionName={collectionName}
+        animationType="immediate"
+      />
 
       <div className="container">
         {posts.totalPages > 1 && posts.page && (

@@ -21,6 +21,7 @@ export const Card: React.FC<{
   showCategories?: boolean;
   title?: string;
   index?: number;
+  animationType?: 'onView' | 'immediate';
 }> = (props) => {
   const { card, link } = useClickableCard({});
   const {
@@ -30,6 +31,7 @@ export const Card: React.FC<{
     showCategories,
     title: titleFromProps,
     index = 0,
+    animationType = 'onView',
   } = props;
   const { slug, categories, meta, title } = doc || {};
   const { description, image: metaImage } = meta || {};
@@ -40,15 +42,22 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' '); // replace non-breaking space with white space
   const href = `/${collectionName}/${slug}`;
 
+  const animationProps =
+    animationType === 'onView'
+      ? {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true },
+          transition: { delay: index * 0.06 },
+        }
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { delay: index * 0.06 },
+        };
+
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className={cn('group block', className)}
-      ref={card.ref}
-    >
+    <motion.article {...animationProps} className={cn('group block', className)} ref={card.ref}>
       <Link href={href} ref={link.ref} className="group block">
         <div className="relative mb-6 aspect-square overflow-hidden rounded-xl bg-muted">
           {!metaImage && (

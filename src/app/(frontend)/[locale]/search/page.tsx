@@ -86,7 +86,11 @@ export default async function Page({
       </div>
 
       {posts.totalDocs > 0 ? (
-        <CollectionArchive collection={posts.docs as CardCollectionData[]} collectionName="posts" />
+        <CollectionArchive
+          collection={posts.docs as CardCollectionData[]}
+          collectionName="posts"
+          animationType="immediate"
+        />
       ) : (
         <div className="container">{t('no-results')}</div>
       )}

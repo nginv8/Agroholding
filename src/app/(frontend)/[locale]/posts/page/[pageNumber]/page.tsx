@@ -60,7 +60,11 @@ export default async function Page({ params: paramsPromise }: Args) {
         />
       </div>
 
-      <CollectionArchive collection={posts.docs} collectionName={collectionName} />
+      <CollectionArchive
+        collection={posts.docs}
+        collectionName={collectionName}
+        animationType="immediate"
+      />
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (
