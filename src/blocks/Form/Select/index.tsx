@@ -42,13 +42,10 @@ export const Select: React.FC<
           return (
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
               <SelectTrigger
-                className="h-12 w-full border-input bg-background text-foreground dark:border-white/20 dark:bg-white/10 dark:text-white"
+                className="h-12 w-full border-input bg-background text-foreground dark:bg-white/10"
                 id={name}
               >
-                <SelectValue
-                  placeholder={label}
-                  className="placeholder:text-muted-foreground dark:placeholder:text-white/80"
-                />
+                <SelectValue placeholder={label} className="placeholder:text-muted-foreground" />
               </SelectTrigger>
               <SelectContent>
                 {options.map(({ label, value }) => {

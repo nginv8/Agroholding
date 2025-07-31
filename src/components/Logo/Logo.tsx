@@ -1,14 +1,25 @@
 import React from 'react';
-import clsx from 'clsx';
+
+import { cn } from '@/utilities/ui';
 
 interface Props {
   className?: string;
+  variant?: 'dark' | 'light';
   loading?: 'lazy' | 'eager';
   priority?: 'auto' | 'high' | 'low';
 }
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props;
+  const {
+    loading: loadingFromProps,
+    priority: priorityFromProps,
+    className,
+    variant = 'dark',
+  } = props;
+  const logoUrls = {
+    light: '/logo-light.svg',
+    dark: '/logo.svg',
+  };
 
   const loading = loadingFromProps || 'lazy';
   const priority = priorityFromProps || 'low';
@@ -17,13 +28,13 @@ export const Logo = (props: Props) => {
     /* eslint-disable @next/next/no-img-element */
     <img
       alt="Payload Logo"
-      width={193}
-      height={34}
+      width={176}
+      height={56}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('h-[34px] w-full max-w-[9.375rem]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      className={cn('h-14 w-full max-w-44', className)}
+      src={logoUrls[variant]}
     />
   );
 };

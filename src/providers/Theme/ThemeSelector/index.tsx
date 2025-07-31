@@ -40,9 +40,12 @@ export const ThemeSelector: React.FC = () => {
     <Select onValueChange={onThemeChange} value={value}>
       <SelectTrigger
         aria-label="Select a theme"
-        className="w-auto gap-2 border-none bg-transparent pl-0 md:pl-3"
+        className="w-auto min-w-20 gap-2 border-input text-foreground"
       >
-        <SelectValue placeholder="Theme" />
+        <SelectValue
+          placeholder="Theme"
+          className="placeholder:text-muted-foreground dark:placeholder:text-white/80"
+        />
       </SelectTrigger>
       <SelectContent>
         {/* <SelectItem value="auto">Auto</SelectItem> */}

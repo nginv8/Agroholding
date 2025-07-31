@@ -1,33 +1,19 @@
 import React from 'react';
-import Link from 'next/link';
 
-import { CMSLink } from '@/components/Link';
-import { Logo } from '@/components/Logo/Logo';
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector';
 import { getCachedGlobal } from '@/utilities/getGlobals';
-import type { Footer } from '@/payload-types';
+import type { Footer as FooterType } from '@/payload-types';
+
+import { FooterV1 } from './FooterV1';
+import { FooterV2 } from './FooterV2';
 
 export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)();
+  const footerData = (await getCachedGlobal('footer', 1)()) as FooterType;
 
-  const navItems = footerData?.navItems || [];
+  const { layout = 'v1' } = footerData || {};
 
-  return (
-    <footer className="mt-auto border-t border-border bg-black text-white dark:bg-card">
-      <div className="container flex flex-col gap-8 py-8 md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <Logo />
-        </Link>
+  if (layout === 'v2') {
+    return <FooterV2 footerData={footerData} />;
+  }
 
-        <div className="flex flex-col-reverse items-start gap-4 md:flex-row md:items-center">
-          <ThemeSelector />
-          <nav className="flex flex-col gap-4 md:flex-row">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />;
-            })}
-          </nav>
-        </div>
-      </div>
-    </footer>
-  );
+  return <FooterV1 footerData={footerData} />;
 }

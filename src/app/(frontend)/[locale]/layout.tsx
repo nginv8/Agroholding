@@ -10,9 +10,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
 import { AdminBar } from '@/components/AdminBar';
-// import { Footer } from '@/globals/Footer/Component'
-// import { Header } from '@/globals/Header/Component'
 import { LivePreviewListener } from '@/components/LivePreviewListener';
+import { Footer } from '@/globals/Footer/Component';
+import { Header } from '@/globals/Header/Component';
 import { routing } from '@/i18n/routing';
 import { InitTheme } from '@/providers/Theme/InitTheme';
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
@@ -71,9 +71,9 @@ export default async function RootLayout({ children, params }: Args) {
             />
             <LivePreviewListener />
 
-            {/* <Header /> */}
+            <Header />
             {children}
-            {/* <Footer /> */}
+            <Footer />
           </NextIntlClientProvider>
         </Providers>
       </body>

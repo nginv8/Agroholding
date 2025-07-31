@@ -6,6 +6,7 @@
   "loading": "Loading, please wait...",
   "posts": "Posts",
   "post": "Post",
+  "contacts": "Contacts",
   "products": "Products",
   "product": "Product",
   "showing": "Showing",
@@ -16,5 +17,14 @@
   "next": "Next",
   "more-pages": "More pages",
   "no-results": "No results found",
-  "read-more": "Read more"
+  "read-more": "Read more",
+  "navigation": "Navigation",
+  "your-email": "Your email",
+  "subscribe": "Subscribe",
+  "subscribing": "Subscribing...",
+  "enter-email": "Please enter your email address",
+  "enter-valid-email": "Please enter a valid email address",
+  "subscribe-success": "You have successfully subscribed to our newsletter!",
+  "subscribe-error": "Something went wrong. Please try again.",
+  "subscribe-network-error": "Failed to subscribe. Please check your internet connection."
 }
