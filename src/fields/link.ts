@@ -102,16 +102,16 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         condition: (_, siblingData) => siblingData?.type === 'reference',
       },
       label: 'Document to link to',
-      relationTo: ['pages', 'posts'],
+      relationTo: ['pages', 'posts', 'products'],
       required: true,
     },
     {
+      label: 'Custom URL',
       name: 'url',
       type: 'text',
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
-      label: 'Custom URL',
       required: true,
     },
   ];
@@ -132,10 +132,11 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         {
           name: 'label',
           type: 'text',
+          label: 'Label',
           admin: {
             width: '50%',
           },
-          label: 'Label',
+          localized: true,
           required: true,
         },
       ],
