@@ -1247,7 +1247,6 @@ export interface ContactUsBlock {
     showEmails?: boolean | null;
     showAddresses?: boolean | null;
     showWorkingHours?: boolean | null;
-    showSocialMedia?: boolean | null;
   };
   corporate?: {
     title?: string | null;
@@ -2094,7 +2093,6 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
         showEmails?: T;
         showAddresses?: T;
         showWorkingHours?: T;
-        showSocialMedia?: T;
       };
   corporate?:
     | T

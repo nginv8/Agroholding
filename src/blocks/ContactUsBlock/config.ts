@@ -71,15 +71,6 @@ export const ContactUsBlock: Block = {
               },
               defaultValue: true,
             },
-            {
-              name: 'showSocialMedia',
-              type: 'checkbox',
-              label: {
-                en: 'Show Social Media',
-                uk: 'Показувати соціальні мережі',
-              },
-              defaultValue: false,
-            },
           ],
         },
       ],

@@ -2,6 +2,12 @@ import * as motion from 'motion/react-client';
 import type { Config } from 'src/payload-types';
 
 import { IconRenderer } from '@/components/IconRenderer';
+import {
+  formatAddressInline,
+  getAllAddressesSorted,
+  getAllEmailsSorted,
+  getAllPhonesSorted,
+} from '@/utilities/contactInfo';
 import { cn } from '@/utilities/ui';
 
 type ContactInfoFromPayload = Config['globals']['contactInfo'];
@@ -13,16 +19,7 @@ interface ContactInfoProps {
     showEmails?: boolean | null;
     showAddresses?: boolean | null;
     showWorkingHours?: boolean | null;
-    showSocialMedia?: boolean | null;
   };
-}
-
-function primaryFirst<
-  T extends {
-    isPrimary?: boolean | null;
-  },
->(items: T[]): T[] {
-  return [...items].sort((a, b) => (b.isPrimary ? 1 : 0) - (a.isPrimary ? 1 : 0));
 }
 
 export default function ContactInfo({ contactData, displayOptions }: ContactInfoProps) {
@@ -33,7 +30,7 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
       {/* Add phones */}
       {displayOptions?.showPhones !== false && contactData.phones?.items
         ? (() => {
-            const sortedPhones = primaryFirst(contactData.phones.items);
+            const sortedPhones = getAllPhonesSorted(contactData);
 
             return (
               <ItemsWrapper
@@ -59,7 +56,7 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
       {/* Add emails */}
       {displayOptions?.showEmails !== false && contactData.emails?.items
         ? (() => {
-            const sortedEmails = primaryFirst(contactData.emails.items);
+            const sortedEmails = getAllEmailsSorted(contactData);
 
             return (
               <ItemsWrapper
@@ -85,7 +82,7 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
       {/* Add addresses */}
       {displayOptions?.showAddresses !== false && contactData.addresses?.items
         ? (() => {
-            const sortedAddresses = primaryFirst(contactData.addresses.items);
+            const sortedAddresses = getAllAddressesSorted(contactData);
 
             return (
               <ItemsWrapper
@@ -95,19 +92,14 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
                 description={contactData.addresses.label || ''}
                 index={wrapperIndex++}
               >
-                {sortedAddresses.map((item, index) => {
-                  const fullAddress = [item.street, item.city, item.region, item.country]
-                    .filter(Boolean)
-                    .join(', ');
-                  return (
-                    <p
-                      key={`address-item-${item.id || index}`}
-                      className={cn(item.isPrimary ? 'text-foreground' : 'text-muted-foreground')}
-                    >
-                      {fullAddress}
-                    </p>
-                  );
-                })}
+                {sortedAddresses.map((item, index) => (
+                  <p
+                    key={`address-item-${item.id || index}`}
+                    className={cn(item.isPrimary ? 'text-foreground' : 'text-muted-foreground')}
+                  >
+                    {formatAddressInline(item)}
+                  </p>
+                ))}
               </ItemsWrapper>
             );
           })()

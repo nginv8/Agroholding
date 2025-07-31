@@ -11,6 +11,13 @@ import { Media } from '@/components/Media';
 import { NewsletterForm } from '@/components/NewsletterForm';
 import { SectionBackground } from '@/components/SectionBackground';
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector';
+import {
+  formatAddress,
+  getPrimaryAddress,
+  getPrimaryEmail,
+  getPrimaryPhone,
+  getSocialLinks,
+} from '@/utilities/contactInfo';
 import { getCachedGlobal } from '@/utilities/getGlobals';
 import type { ContactInfo, Footer as FooterType } from '@/payload-types';
 
@@ -25,29 +32,10 @@ export async function FooterV2({ footerData }: FooterV2Props) {
 
   // Get contact info from global
   const contactInfo: ContactInfo = await getCachedGlobal('contactInfo', 1)();
-  const socialLinks = contactInfo?.socialMedia?.items || [];
-
-  // Get primary contact details
-  const primaryAddress =
-    contactInfo?.addresses?.items?.find((addr) => addr.isPrimary) ||
-    contactInfo?.addresses?.items?.[0];
-  const primaryPhone =
-    contactInfo?.phones?.items?.find((phone) => phone.isPrimary) || contactInfo?.phones?.items?.[0];
-  const primaryEmail =
-    contactInfo?.emails?.items?.find((email) => email.isPrimary) || contactInfo?.emails?.items?.[0];
-
-  const formatAddress = (
-    address: NonNullable<NonNullable<ContactInfo['addresses']>['items']>[0]
-  ) => {
-    if (!address) return '';
-    const parts = [
-      address.street,
-      address.city && address.postalCode ? `${address.city}, ${address.postalCode}` : address.city,
-      address.region,
-      address.country,
-    ].filter(Boolean);
-    return parts.join('\n');
-  };
+  const socialLinks = getSocialLinks(contactInfo);
+  const primaryAddress = getPrimaryAddress(contactInfo);
+  const primaryPhone = getPrimaryPhone(contactInfo);
+  const primaryEmail = getPrimaryEmail(contactInfo);
 
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>
@@ -119,13 +107,13 @@ export async function FooterV2({ footerData }: FooterV2Props) {
                   {primaryPhone && (
                     <div className="flex items-center space-x-3">
                       <Phone className="size-5 text-primary dark:text-accent" />
-                      <p className="text-muted-foreground">{primaryPhone.number}</p>
+                      <p className="text-muted-foreground">{primaryPhone}</p>
                     </div>
                   )}
                   {primaryEmail && (
                     <div className="flex items-center space-x-3">
                       <Mail className="size-5 text-primary dark:text-accent" />
-                      <p className="text-muted-foreground">{primaryEmail.email}</p>
+                      <p className="text-muted-foreground">{primaryEmail}</p>
                     </div>
                   )}
                   {primaryAddress && (
