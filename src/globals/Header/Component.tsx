@@ -20,7 +20,7 @@ export async function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 z-50 border-b bg-white/80 backdrop-blur-md',
+        'sticky inset-x-0 z-50 border-b bg-white/80 backdrop-blur-md',
         primaryPhone || primaryEmail ? '-top-8' : 'top-0'
       )}
     >
