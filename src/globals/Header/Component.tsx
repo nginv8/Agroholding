@@ -1,12 +1,72 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Mail, Phone } from 'lucide-react';
 
+import { getPrimaryEmail, getPrimaryPhone } from '@/utilities/contactInfo';
 import { getCachedGlobal } from '@/utilities/getGlobals';
-import type { Header } from '@/payload-types';
+import { cn } from '@/utilities/ui';
 
-import { HeaderClient } from './Component.client';
+import { HeaderNav } from './Nav';
 
 export async function Header() {
-  const headerData: Header = await getCachedGlobal('header', 1)();
+  const [headerData, contactInfoData] = await Promise.all([
+    getCachedGlobal('header', 1)(),
+    getCachedGlobal('contactInfo', 1)(),
+  ]);
+  const primaryPhone = getPrimaryPhone(contactInfoData);
+  const primaryEmail = getPrimaryEmail(contactInfoData);
 
-  return <HeaderClient data={headerData} />;
+  return (
+    <header
+      className={cn(
+        'fixed inset-x-0 z-50 border-b bg-white/80 backdrop-blur-md',
+        primaryPhone || primaryEmail ? '-top-8' : 'top-0'
+      )}
+    >
+      {/* Contacts */}
+      {(primaryPhone || primaryEmail) && (
+        <div className="bg-green-700">
+          <div className="container mx-auto flex h-8 items-center justify-center gap-8 px-4 md:justify-between">
+            {primaryPhone && (
+              <Link
+                href={`tel:${primaryPhone}`}
+                className="flex items-center font-light text-white transition-colors hover:text-orange-200"
+              >
+                <Phone size={18} className="mr-2" />
+                {primaryPhone}
+              </Link>
+            )}
+            {primaryEmail && (
+              <Link
+                href={`mailto:${primaryEmail}`}
+                className="ml-4 hidden items-center font-light text-white transition-colors hover:text-orange-200 md:flex"
+              >
+                <Mail size={18} className="mr-2" />
+                {primaryEmail}
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Header content */}
+      <div className="container mx-auto px-4">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/logo.svg"
+              alt="Наша команда"
+              width="160"
+              height="48"
+              className="h-14 w-auto"
+            />
+          </Link>
+
+          <HeaderNav data={headerData} />
+        </div>
+      </div>
+    </header>
+  );
 }

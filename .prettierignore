@@ -9,7 +9,7 @@ README.md
 .vercel
 .tmp
 .tsconfig.json
-.pnpm-lock.yaml
+pnpm-lock.yaml
 
 # Payload default media upload directory
 public/media/

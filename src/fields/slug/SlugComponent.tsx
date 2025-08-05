@@ -72,10 +72,12 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="field-type slug-field-component">
+      {}
       {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <div className="label-wrapper">
         <FieldLabel htmlFor={`field-${path}`} label={label} />
 
+        {}
         {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
         <Button className="lock-button" buttonStyle="none" onClick={handleLock}>
           {checkboxValue ? 'Unlock' : 'Lock'}

@@ -80,6 +80,7 @@ export const SeedButton: React.FC = () => {
 
   return (
     <Fragment>
+      {}
       {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <button className="seedButton" onClick={handleClick}>
         Seed your database

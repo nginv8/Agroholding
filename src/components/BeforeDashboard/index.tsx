@@ -11,11 +11,13 @@ const baseClass = 'before-dashboard';
 const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
+      {}
       {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Welcome to your dashboard!</h4>
+        <h4>Welcome to your dashboard! </h4>
       </Banner>
       Here&apos;s what to do next:
+      {}
       {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <ul className={`${baseClass}__instructions`}>
         <li>

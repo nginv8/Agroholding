@@ -8,9 +8,11 @@ import {
   Building2,
   ChevronDown,
   Info,
+  Mail,
   Menu,
   Newspaper,
   Phone,
+  SearchIcon,
   ShoppingBag,
   Sprout,
   Users,
@@ -91,10 +93,32 @@ export default function HeaderV2() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-md"
+      className="sticky inset-x-0 -top-8 z-50 border-b bg-white/80 backdrop-blur-md"
     >
+      {/* Contacts */}
+      <div className="bg-green-700">
+        <div className="container mx-auto flex h-8 items-center justify-center gap-8 px-4 md:justify-between">
+          <Link
+            href="tel:+96 733 324 996"
+            className="flex items-center font-light text-white transition-colors hover:text-orange-200"
+          >
+            <Phone size={18} className="mr-2" />
+            +96 733 324 996
+          </Link>
+          <Link
+            href="mailto:agroholdeing@gmail.com"
+            className="ml-4 hidden items-center font-light text-white transition-colors hover:text-orange-200 md:flex"
+          >
+            <Mail size={18} className="mr-2" />
+            agroholdeing@gmail.com
+          </Link>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4">
+        {/* Header content */}
         <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -175,6 +199,10 @@ export default function HeaderV2() {
                 </AnimatePresence>
               </div>
             ))}
+            <Link href="/search">
+              <span className="sr-only">Search</span>
+              <SearchIcon className="w-5 text-gray-600 transition-colors hover:text-green-700" />
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -199,6 +227,14 @@ export default function HeaderV2() {
               className="pb-6 md:hidden"
             >
               <nav className="space-y-2">
+                <Link
+                  href="/search"
+                  className="flex items-center space-x-3 p-3 text-gray-600 transition-colors hover:bg-gray-50 hover:text-green-700"
+                >
+                  <SearchIcon className="size-5" />
+                  <span>Пошук</span>
+                  <span className="sr-only">Search</span>
+                </Link>
                 {menuItems.map((item) => (
                   <div key={item.label}>
                     <Link
