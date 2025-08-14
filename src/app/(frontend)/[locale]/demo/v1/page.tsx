@@ -15,47 +15,50 @@ import WhyUs from '@/components/demo/WhyUs';
 export default async function Page() {
   const mockSlides = [
     {
-      title: "Sustainable Agriculture Solutions",
-      subtitle: "Innovation in Farming",
-      description: "Leading the way in sustainable agricultural practices with cutting-edge technology and eco-friendly solutions.",
-      backgroundImage: "/agricultural-landscape.png",
+      title: 'Sustainable Agriculture Solutions',
+      subtitle: 'Innovation in Farming',
+      description:
+        'Leading the way in sustainable agricultural practices with cutting-edge technology and eco-friendly solutions.',
+      backgroundImage: '/agricultural-landscape.png',
       primaryButton: {
-        text: "Learn More",
-        url: "/services"
+        text: 'Learn More',
+        url: '/services',
       },
       secondaryButton: {
-        text: "Contact Us",
-        url: "/contact"
-      }
+        text: 'Contact Us',
+        url: '/contact',
+      },
     },
     {
-      title: "Premium Crop Production",
-      subtitle: "Quality & Excellence",
-      description: "Delivering high-quality crops through advanced farming techniques and meticulous attention to detail.",
-      backgroundImage: "/agricultural-landscape.png",
+      title: 'Premium Crop Production',
+      subtitle: 'Quality & Excellence',
+      description:
+        'Delivering high-quality crops through advanced farming techniques and meticulous attention to detail.',
+      backgroundImage: '/agricultural-landscape.png',
       primaryButton: {
-        text: "Our Products",
-        url: "/products"
+        text: 'Our Products',
+        url: '/products',
       },
       secondaryButton: {
-        text: "View Portfolio",
-        url: "/portfolio"
-      }
+        text: 'View Portfolio',
+        url: '/portfolio',
+      },
     },
     {
-      title: "Agricultural Technology",
-      subtitle: "Future of Farming",
-      description: "Embracing modern technology to optimize crop yields and enhance agricultural sustainability.",
-      backgroundImage: "/agricultural-landscape.png",
+      title: 'Agricultural Technology',
+      subtitle: 'Future of Farming',
+      description:
+        'Embracing modern technology to optimize crop yields and enhance agricultural sustainability.',
+      backgroundImage: '/agricultural-landscape.png',
       primaryButton: {
-        text: "Technology",
-        url: "/technology"
+        text: 'Technology',
+        url: '/technology',
       },
       secondaryButton: {
-        text: "Learn More",
-        url: "/about"
-      }
-    }
+        text: 'Learn More',
+        url: '/about',
+      },
+    },
   ];
 
   return (

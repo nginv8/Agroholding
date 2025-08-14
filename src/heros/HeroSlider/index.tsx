@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
-import * as motion from 'motion/react-client';
 
 import { cn } from '@/utilities/ui';
 
@@ -12,20 +11,27 @@ interface HeroSliderProps {
   children: React.ReactNode[];
 }
 
-export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [progress, setProgress] = React.useState(0);
-  const [isMobile, setIsMobile] = React.useState(false);
+const MOBILE_BREAKPOINT = 768;
+const AUTOPLAY_DELAY = 8000;
+const PROGRESS_UPDATE_INTERVAL = 50;
 
-  const mobileBreakpoint = 768;
-  const autoplayOptions = {
-    delay: 4000,
-    stopOnInteraction: true,
-    playOnInit: true,
-    stopOnMouseEnter: false,
-    stopOnFocusIn: true,
-    stopOnLastSnap: false,
-  };
+export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const autoplayOptions = useMemo(
+    () => ({
+      delay: AUTOPLAY_DELAY,
+      stopOnInteraction: true,
+      playOnInit: true,
+      stopOnMouseEnter: false,
+      stopOnFocusIn: false,
+      stopOnLastSnap: false,
+    }),
+    []
+  );
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -35,24 +41,41 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
     [Autoplay(autoplayOptions)]
   );
 
-  const getAutoplay = useCallback(() => {
+  const autoplay = useMemo(() => {
     if (!emblaApi) return null;
     return emblaApi.plugins().autoplay;
   }, [emblaApi]);
 
-  const isPlaying = getAutoplay()?.isPlaying() || false;
-
   const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
+    emblaApi?.scrollPrev();
   }, [emblaApi]);
 
   const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
+    emblaApi?.scrollNext();
   }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      emblaApi?.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const toggleAutoplay = useCallback(() => {
+    if (!autoplay) return;
+
+    if (autoplay.isPlaying()) {
+      autoplay.stop();
+      setIsPlaying(false);
+    } else {
+      autoplay.play();
+      setIsPlaying(true);
+    }
+  }, [autoplay]);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < mobileBreakpoint);
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     };
 
     checkScreenSize();
@@ -63,102 +86,70 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
   useEffect(() => {
     if (!emblaApi) return;
 
-    const selectHandler = () => {
+    const updateSelectedIndex = () => {
       setSelectedIndex(emblaApi.selectedScrollSnap());
       setProgress(0);
     };
 
-    emblaApi.on('select', selectHandler);
-    emblaApi.on('init', selectHandler);
+    const updateAutoplayState = () => {
+      setIsPlaying(autoplay?.isPlaying() ?? false);
+    };
 
-    const autoplay = getAutoplay();
-    if (autoplay && isMobile) {
-      autoplay.stop();
-    } else if (autoplay && !isMobile && !autoplay.isPlaying()) {
-      autoplay.play();
-    }
+    emblaApi.on('select', updateSelectedIndex);
+    emblaApi.on('init', updateSelectedIndex);
+    emblaApi.on('autoplay:play', updateAutoplayState);
+    emblaApi.on('autoplay:stop', updateAutoplayState);
+
+    updateSelectedIndex();
+    updateAutoplayState();
 
     return () => {
-      emblaApi.off('select', selectHandler);
-      emblaApi.off('init', selectHandler);
+      emblaApi.off('select', updateSelectedIndex);
+      emblaApi.off('init', updateSelectedIndex);
+      emblaApi.off('autoplay:play', updateAutoplayState);
+      emblaApi.off('autoplay:stop', updateAutoplayState);
     };
-  }, [emblaApi, isMobile, getAutoplay]);
+  }, [emblaApi, autoplay]);
 
   useEffect(() => {
-    if (!emblaApi || isMobile) return;
-
-    const autoplay = getAutoplay();
     if (!autoplay) return;
+
+    if (isMobile) {
+      autoplay.stop();
+    } else if (!autoplay.isPlaying()) {
+      autoplay.play();
+    }
+  }, [autoplay, isMobile]);
+
+  useEffect(() => {
+    if (!autoplay || isMobile || !isPlaying) return;
 
     const updateProgress = () => {
       const timeUntilNext = autoplay.timeUntilNext();
       if (timeUntilNext !== null) {
-        const progressPercent =
-          ((autoplayOptions.delay - timeUntilNext) / autoplayOptions.delay) * 100;
+        const progressPercent = ((AUTOPLAY_DELAY - timeUntilNext) / AUTOPLAY_DELAY) * 100;
         setProgress(Math.max(0, Math.min(100, progressPercent)));
       } else {
         setProgress(0);
       }
     };
 
-    const handleTimerSet = () => {
-      setProgress(0);
-    };
+    const resetProgress = () => setProgress(0);
 
-    const handleTimerStopped = () => {
-      setProgress(0);
-    };
+    emblaApi?.on('autoplay:timerset', resetProgress);
+    emblaApi?.on('autoplay:timerstopped', resetProgress);
 
-    emblaApi.on('autoplay:timerset', handleTimerSet);
-    emblaApi.on('autoplay:timerstopped', handleTimerStopped);
-
-    const interval = setInterval(updateProgress, 50);
+    const interval = setInterval(updateProgress, PROGRESS_UPDATE_INTERVAL);
 
     return () => {
       clearInterval(interval);
-      emblaApi.off('autoplay:timerset', handleTimerSet);
-      emblaApi.off('autoplay:timerstopped', handleTimerStopped);
+      emblaApi?.off('autoplay:timerset', resetProgress);
+      emblaApi?.off('autoplay:timerstopped', resetProgress);
     };
-  }, [emblaApi, selectedIndex, isMobile, autoplayOptions.delay, getAutoplay]);
-
-  const scrollTo = useCallback(
-    (index: number) => {
-      if (emblaApi) emblaApi.scrollTo(index);
-    },
-    [emblaApi]
-  );
-
-  const toggleAutoplay = useCallback(() => {
-    const autoplay = getAutoplay();
-    if (!autoplay) return;
-
-    if (autoplay.isPlaying()) {
-      autoplay.stop();
-    } else {
-      autoplay.play();
-    }
-  }, [getAutoplay]);
-
-  const handleMouseEnter = useCallback(() => {
-    const autoplay = getAutoplay();
-    if (autoplay && autoplay.isPlaying()) {
-      autoplay.stop();
-    }
-  }, [getAutoplay]);
-
-  const handleMouseLeave = useCallback(() => {
-    const autoplay = getAutoplay();
-    if (autoplay && !autoplay.isPlaying()) {
-      autoplay.play();
-    }
-  }, [getAutoplay]);
+  }, [emblaApi, autoplay, isMobile, isPlaying]);
 
   return (
-    <div
-      className="relative flex min-h-[calc(100vh-112px)] select-none flex-col"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative flex min-h-[calc(100vh-112px)] select-none flex-col">
       <div className="flex flex-1 overflow-hidden" ref={emblaRef}>
         <div className="flex flex-1 touch-pan-y touch-pinch-zoom">
           {React.Children.map(children, (child, index) => (
@@ -228,7 +219,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
                 }}
               >
                 {/* Progress indicator for active slide */}
-                {index === selectedIndex && getAutoplay()?.isPlaying() && !isMobile && (
+                {index === selectedIndex && isPlaying && !isMobile && (
                   <div
                     className="absolute inset-x-0 top-0 bg-gradient-to-b from-accent-600 to-accent-400 transition-all duration-75 ease-linear"
                     style={{
@@ -252,43 +243,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ children }) => {
           ))}
         </div>
       )}
-
-      {/* Scroll Indicator - Bottom Right */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="absolute bottom-8 left-8 z-20 hidden w-4 flex-col items-center space-y-2 lg:flex"
-      >
-        <span className="mb-4 origin-center rotate-90 text-xs font-medium text-white/60">
-          SCROLL
-        </span>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          className="h-12 w-px bg-gradient-to-b from-transparent via-white/60 to-transparent"
-        />
-      </motion.div>
-
-      {/* Progress Counter - Bottom Right */}
-      <div className="absolute bottom-8 right-8 z-30 flex items-center gap-4 rounded-lg bg-black/20 p-4 opacity-50 backdrop-blur-md transition-all hover:opacity-100">
-        <div className="text-white">
-          <span className="font-mono text-2xl font-bold">
-            {String(selectedIndex + 1).padStart(2, '0')}
-          </span>
-          <span className="mx-2 text-white/60">/</span>
-          <span className="text-sm text-white/80">{String(children.length).padStart(2, '0')}</span>
-        </div>
-
-        <div className="h-1 w-16 overflow-hidden rounded-full bg-white/20">
-          <motion.div
-            className="h-full bg-gradient-to-r from-primary-400 to-primary-600"
-            initial={{ width: '0%' }}
-            animate={{ width: `${((selectedIndex + 1) / children.length) * 100}%` }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-      </div>
     </div>
   );
 };
