@@ -7,7 +7,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { en } from '@payloadcms/translations/languages/en';
 import { uk } from '@payloadcms/translations/languages/uk';
 
-import { cloudinaryStorage } from 'payload-cloudinary';
 import sharp from 'sharp';
 
 import { defaultLexical } from '@/fields/defaultLexical';
@@ -37,11 +36,7 @@ export default buildConfig({
   localization,
   admin: {
     components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
@@ -71,7 +66,6 @@ export default buildConfig({
       ],
     },
   },
-  // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   // db: sqliteAdapter({
   //   client: {
@@ -86,21 +80,7 @@ export default buildConfig({
   collections: [Pages, Posts, Products, Media, Categories, Subscribers, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, ContactInfo],
-  plugins: [
-    ...plugins,
-    cloudinaryStorage({
-      config: {
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
-        api_key: process.env.CLOUDINARY_API_KEY || '',
-        api_secret: process.env.CLOUDINARY_API_SECRET || '',
-      },
-      collections: {
-        media: true,
-      },
-      disableLocalStorage: true,
-      enabled: true,
-    }),
-  ],
+  plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
@@ -109,12 +89,8 @@ export default buildConfig({
   jobs: {
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
-        // Allow logged in users to execute this endpoint (default)
         if (req.user) return true;
 
-        // If there is no logged in user, then check
-        // for the Vercel Cron secret to be present as an
-        // Authorization header:
         const authHeader = req.headers.get('authorization');
         return authHeader === `Bearer ${process.env.CRON_SECRET}`;
       },

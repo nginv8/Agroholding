@@ -8,17 +8,19 @@ import { searchPlugin } from '@payloadcms/plugin-search';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
 
+import { cloudinaryStorage } from 'payload-cloudinary';
+
 import { revalidateRedirects } from '@/hooks/revalidateRedirects';
 import { getServerSideURL } from '@/utilities/getURL';
 import { beforeSyncWithSearch } from '@/search/beforeSync';
 import { searchFields } from '@/search/fieldOverrides';
-import { Page, Post } from '@/payload-types';
+import { Page, Post, Product } from '@/payload-types';
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
+const generateTitle: GenerateTitle<Post | Product | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Agrholding Website` : 'Agrholding Website';
 };
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+const generateURL: GenerateURL<Post | Product | Page> = ({ doc }) => {
   const url = getServerSideURL();
 
   return doc?.slug ? `${url}/${doc.slug}` : url;
@@ -70,6 +72,18 @@ export const plugins: Plugin[] = [
         afterChange: [revalidateRedirects],
       },
     },
+  }),
+  cloudinaryStorage({
+    config: {
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+      api_key: process.env.CLOUDINARY_API_KEY || '',
+      api_secret: process.env.CLOUDINARY_API_SECRET || '',
+    },
+    collections: {
+      media: true,
+    },
+    disableLocalStorage: true,
+    enabled: true,
   }),
   nestedDocsPlugin({
     collections: ['categories'],

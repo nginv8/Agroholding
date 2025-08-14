@@ -23,8 +23,6 @@ import { Providers } from '@/providers';
 
 import './globals.css';
 
-// import { Footer } from '@/globals/Footer/Component';
-// import { Header } from '@/globals/Header/Component';
 import { getServerSideURL } from '@/utilities/getURL';
 
 type Args = {
@@ -55,6 +53,7 @@ export default async function RootLayout({ children, params }: Args) {
       className={cn(GeistSans.variable, GeistMono.variable)}
       lang={locale}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head>
         <InitTheme />

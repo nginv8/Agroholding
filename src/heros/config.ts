@@ -1,71 +1,115 @@
 import type { Field } from 'payload';
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical';
 
+import { SectionTitle } from '@/fields/CustomFields/sectionTitle';
 import { linkGroup } from '@/fields/linkGroup';
 
 export const hero: Field = {
   name: 'hero',
-  type: 'group',
+  type: 'array',
+  admin: {
+    components: {
+      RowLabel: '@/heros/RowLabel#RowLabel',
+    },
+  },
   fields: [
     {
-      name: 'type',
-      type: 'select',
-      defaultValue: 'lowImpact',
-      label: 'Type',
-      options: [
+      type: 'row',
+      fields: [
         {
-          label: 'None',
-          value: 'none',
+          name: 'layout',
+          type: 'select',
+          label: 'Hero layout',
+          options: [
+            {
+              label: 'Hero Layout 1 (Title center aligned)',
+              value: 'hero1',
+            },
+            {
+              label: 'Hero Layout 2 (Two column with stats)',
+              value: 'hero2',
+            },
+          ],
+          defaultValue: 'hero1',
+          required: true,
         },
         {
-          label: 'High Impact',
-          value: 'highImpact',
-        },
-        {
-          label: 'Medium Impact',
-          value: 'mediumImpact',
-        },
-        {
-          label: 'Low Impact',
-          value: 'lowImpact',
+          label: 'Image side',
+          name: 'imageSide',
+          type: 'radio',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Right', value: 'right' },
+          ],
+          required: true,
+          defaultValue: 'left',
+          admin: {
+            condition: (_, { layout } = {}) => layout === 'hero2',
+          },
         },
       ],
-      required: true,
     },
+    SectionTitle(),
     {
-      name: 'richText',
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ];
+      type: 'row',
+      fields: [
+        {
+          name: 'backgroundImage',
+          type: 'upload',
+          label: 'Background Image',
+          relationTo: 'media',
+          required: true,
         },
-      }),
-      label: false,
+        {
+          name: 'sideImage',
+          type: 'upload',
+          label: 'Side Image (for Hero Layout 2)',
+          relationTo: 'media',
+          admin: {
+            condition: (_, { layout } = {}) => layout === 'hero2',
+          },
+        },
+      ],
     },
+
     linkGroup({
       overrides: {
         maxRows: 2,
       },
     }),
     {
-      name: 'media',
-      type: 'upload',
-      admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+      name: 'stats',
+      type: 'array',
+      label: 'Statistics (for Hero Layout 2)',
+      labels: {
+        singular: 'Statistic',
+        plural: 'Statistics',
       },
-      relationTo: 'media',
-      required: true,
+      admin: {
+        condition: (_, { layout } = {}) => layout === 'hero2',
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'number',
+          type: 'text',
+          label: 'Number',
+          required: true,
+        },
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Label',
+          required: true,
+        },
+      ],
+      maxRows: 4,
     },
   ],
+  minRows: 1,
+  maxRows: 5,
   label: false,
+  labels: {
+    singular: 'Hero',
+    plural: 'Heroes',
+  },
 };
