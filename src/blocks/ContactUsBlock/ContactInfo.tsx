@@ -7,7 +7,7 @@ import {
   getAllAddressesSorted,
   getAllEmailsSorted,
   getAllPhonesSorted,
-} from '@/utilities/contactInfo';
+} from '@/utilities/formatContactInfo';
 import { cn } from '@/utilities/ui';
 
 type ContactInfoFromPayload = Config['globals']['contactInfo'];

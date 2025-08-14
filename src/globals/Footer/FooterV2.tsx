@@ -17,25 +17,23 @@ import {
   getPrimaryEmail,
   getPrimaryPhone,
   getSocialLinks,
-} from '@/utilities/contactInfo';
-import { getCachedGlobal } from '@/utilities/getGlobals';
-import type { ContactInfo, Footer as FooterType } from '@/payload-types';
+} from '@/utilities/formatContactInfo';
+import type { ContactInfo as ContactInfoType, Footer as FooterType } from '@/payload-types';
 
 interface FooterV2Props {
   footerData: FooterType;
+  contactInfoData: ContactInfoType;
 }
 
-export async function FooterV2({ footerData }: FooterV2Props) {
+export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
   const { logo, description, sbg, theme, navGroups = [], newsletter, copyright } = footerData;
   const logoStyle = theme === 'dark' ? 'light' : 'dark';
   const t = await getTranslations();
 
-  // Get contact info from global
-  const contactInfo: ContactInfo = await getCachedGlobal('contactInfo', 1)();
-  const socialLinks = getSocialLinks(contactInfo);
-  const primaryAddress = getPrimaryAddress(contactInfo);
-  const primaryPhone = getPrimaryPhone(contactInfo);
-  const primaryEmail = getPrimaryEmail(contactInfo);
+  const socialLinks = getSocialLinks(contactInfoData);
+  const primaryAddress = getPrimaryAddress(contactInfoData);
+  const primaryPhone = getPrimaryPhone(contactInfoData);
+  const primaryEmail = getPrimaryEmail(contactInfoData);
 
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>

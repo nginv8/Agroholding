@@ -4,7 +4,7 @@ import * as motion from 'motion/react-client';
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
-import { getContactInfo } from '@/utilities/getContactInfo';
+import { getCachedGlobal } from '@/utilities/getGlobals';
 import type { ContactUsBlock as ContactUsBlockProps } from '@/payload-types';
 
 import ContactInfo from './ContactInfo';
@@ -16,7 +16,7 @@ type ContactUsBlockType = Omit<ContactUsBlockProps, 'blocks'> & {
 export const ContactUsBlock: React.FC<ContactUsBlockType> = async (props) => {
   const { title, sbg, theme, blocks, corporate, contactDisplay } = props;
 
-  const contactData = await getContactInfo();
+  const contactData = await getCachedGlobal('contactInfo', 1)();
 
   return (
     <section className="relative py-32" data-theme={theme}>

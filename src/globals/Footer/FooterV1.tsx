@@ -10,15 +10,15 @@ import { Media } from '@/components/Media';
 import { NewsletterForm } from '@/components/NewsletterForm';
 import { SectionBackground } from '@/components/SectionBackground';
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector';
-import { getSocialLinks } from '@/utilities/contactInfo';
-import { getCachedGlobal } from '@/utilities/getGlobals';
+import { getSocialLinks } from '@/utilities/formatContactInfo';
 import type { ContactInfo as ContactInfoType, Footer as FooterType } from '@/payload-types';
 
 interface FooterV1Props {
   footerData: FooterType;
+  contactInfoData: ContactInfoType;
 }
 
-export async function FooterV1({ footerData }: FooterV1Props) {
+export async function FooterV1({ footerData, contactInfoData }: FooterV1Props) {
   const {
     logo,
     sbg,
@@ -30,8 +30,7 @@ export async function FooterV1({ footerData }: FooterV1Props) {
   } = footerData;
   const logoStyle = theme === 'dark' ? 'light' : 'dark';
   const t = await getTranslations();
-  const contactInfo: ContactInfoType = await getCachedGlobal('contactInfo', 1)();
-  const socialLinks = getSocialLinks(contactInfo);
+  const socialLinks = getSocialLinks(contactInfoData);
 
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>

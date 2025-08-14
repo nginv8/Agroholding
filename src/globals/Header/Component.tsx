@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, Phone } from 'lucide-react';
 
-import { getPrimaryEmail, getPrimaryPhone } from '@/utilities/contactInfo';
+import { getPrimaryEmail, getPrimaryPhone } from '@/utilities/formatContactInfo';
 import { getCachedGlobal } from '@/utilities/getGlobals';
 import { cn } from '@/utilities/ui';
 
