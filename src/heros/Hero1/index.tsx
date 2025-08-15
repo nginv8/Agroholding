@@ -10,7 +10,7 @@ import { HeroSubtitle } from './HeroSubtitle';
 import { HeroTitle } from './HeroTitle';
 import type { HeroBlock } from './types';
 
-export const Hero1: React.FC<HeroBlock> = ({ layout, title, backgroundImage, links }) => {
+export const Hero1: React.FC<HeroBlock> = ({ layout, title, backgroundImage, links, isFirst }) => {
   if (layout !== 'hero1') return null;
 
   const { beforeText, accentText, afterText } = getTitleParts(
@@ -27,11 +27,8 @@ export const Hero1: React.FC<HeroBlock> = ({ layout, title, backgroundImage, lin
   const alignmentClasses = getAlignmentClasses(title?.alignment);
 
   return (
-    <section
-      className="relative flex w-full items-center overflow-hidden bg-black"
-      data-theme="dark"
-    >
-      <BackgroundImage backgroundImage={backgroundImage} />
+    <section className="relative flex grow items-center overflow-hidden bg-black" data-theme="dark">
+      <BackgroundImage backgroundImage={backgroundImage} isFirst={isFirst} />
 
       <div
         className={cn(

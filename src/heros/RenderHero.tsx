@@ -12,8 +12,8 @@ export const RenderHero: React.FC<{ hero?: Page['hero'] }> = ({ hero }) => {
   if (hero.length === 1) {
     return (
       <div className="flex min-h-[calc(100vh-112px)] select-none items-stretch justify-stretch">
-        {hero[0]?.layout === 'hero1' && <Hero1 {...hero[0]} />}
-        {hero[0]?.layout === 'hero2' && <Hero2 {...hero[0]} />}
+        {hero[0]?.layout === 'hero1' && <Hero1 {...hero[0]} isFirst />}
+        {hero[0]?.layout === 'hero2' && <Hero2 {...hero[0]} isFirst />}
       </div>
     );
   }
@@ -22,8 +22,8 @@ export const RenderHero: React.FC<{ hero?: Page['hero'] }> = ({ hero }) => {
   return (
     <HeroSlider>
       {hero.map((slide, index) => {
-        if (slide?.layout === 'hero1') return <Hero1 key={index} {...slide} />;
-        if (slide?.layout === 'hero2') return <Hero2 key={index} {...slide} />;
+        if (slide?.layout === 'hero1') return <Hero1 key={index} {...slide} isFirst={index === 0} />;
+        if (slide?.layout === 'hero2') return <Hero2 key={index} {...slide} isFirst={index === 0} />;
       })}
     </HeroSlider>
   );

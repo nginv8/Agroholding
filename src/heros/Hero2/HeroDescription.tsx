@@ -8,7 +8,7 @@ export const HeroDescription: React.FC<HeroDescriptionProps> = ({ description })
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 0.4, duration: 1 }}
-    className="mb-12 max-w-full text-balance text-xl text-secondary-200"
+    className="mb-12 text-balance text-xl text-secondary-200"
   >
     {description}
   </motion.p>

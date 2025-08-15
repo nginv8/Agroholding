@@ -8,7 +8,7 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({ beforeText, accentStyles, 
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 0.3, duration: 1 }}
-    className="mb-4 text-balance text-4xl font-bold leading-tight sm:text-5xl lg:mb-8 xl:text-6xl"
+    className="mb-4 text-pretty text-4xl font-bold leading-tight sm:text-5xl lg:mb-8 xl:text-6xl"
   >
     {beforeText}
     {accentStyles && <span className={accentStyles.className}>{accentStyles.text}</span>}
