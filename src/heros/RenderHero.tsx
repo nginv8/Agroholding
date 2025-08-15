@@ -11,7 +11,7 @@ export const RenderHero: React.FC<{ hero?: Page['hero'] }> = ({ hero }) => {
   // If only one slide
   if (hero.length === 1) {
     return (
-      <div className="h-[calc(100vh-112px)] min-h-[540px] flex-[0_0_100%] select-none">
+      <div className="flex min-h-[calc(100vh-112px)] select-none items-stretch justify-stretch">
         {hero[0]?.layout === 'hero1' && <Hero1 {...hero[0]} />}
         {hero[0]?.layout === 'hero2' && <Hero2 {...hero[0]} />}
       </div>

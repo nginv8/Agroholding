@@ -1,5 +1,7 @@
 import * as motion from 'motion/react-client';
 
+import { getAccentTextStyles, getTitleParts } from '@/utilities/titleHelpers';
+
 interface TitleProps {
   title?: string | null;
   accentPart?: string | null;
@@ -21,17 +23,6 @@ const decorAlignmentClasses = {
   center: 'justify-center',
   right: 'justify-end',
 };
-const getTitleParts = (title?: string, accentText?: string) => {
-  if (!title || !accentText) {
-    return { beforeText: title || '', accentText: accentText || '', afterText: '' };
-  }
-
-  const titleParts = title.split(accentText);
-  const beforeText = titleParts[0];
-  const afterText = titleParts[1] || '';
-
-  return { beforeText, accentText, afterText };
-};
 
 export function SectionTitle({
   title,
@@ -45,6 +36,11 @@ export function SectionTitle({
 }: TitleProps) {
   if (!title) return null;
   const { beforeText, accentText, afterText } = getTitleParts(title, accentPart || '');
+  const accentStyles = getAccentTextStyles({
+    accentText,
+    variant: variant || 'colorAccent',
+    theme,
+  });
 
   return (
     <motion.div
@@ -90,13 +86,7 @@ export function SectionTitle({
             className={`mb-8 text-4xl font-bold leading-tight lg:text-5xl ${theme === 'light' ? 'text-secondary-900' : 'text-white'}`}
           >
             {beforeText}
-            {accentText && (
-              <span
-                className={`inline ${theme === 'light' ? '!text-primary-700' : '!text-accent-400'}`}
-              >
-                {accentText}
-              </span>
-            )}
+            {accentStyles && <span className={accentStyles.className}>{accentStyles.text}</span>}
             {afterText}
           </h2>
           {description && (

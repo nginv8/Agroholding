@@ -19,7 +19,7 @@
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-    "start:clean": "cross-env NODE_OPTIONS=--no-deprecation pnpm exec rimraf .next && pnpm build && pnpm postbuild && pnpm start"
+    "start:clean": "cross-env NODE_OPTIONS=--no-deprecation pnpm exec rimraf .next && pnpm lint:fix && pnpm prettier:fix && pnpm build && pnpm postbuild && pnpm start"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.48.0",
