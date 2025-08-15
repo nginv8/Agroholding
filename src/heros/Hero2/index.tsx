@@ -65,13 +65,23 @@ export const Hero2: React.FC<HeroBlock> = ({
           {title?.description && <HeroDescription description={title.description} />}
 
           {/* Mobile Image */}
-          <SideImage sideImage={sideImage} imageSide={imageSide} className="my-12 lg:hidden" isFirst={isFirst} />
+          <SideImage
+            sideImage={sideImage}
+            imageSide={imageSide}
+            className="my-12 lg:hidden"
+            isFirst={isFirst}
+          />
 
           {links && links.length > 0 && <HeroLinks links={links} alignment={title?.alignment} />}
         </div>
 
         {/* Desktop Image */}
-        <SideImage sideImage={sideImage} imageSide={imageSide} className="hidden lg:block" isFirst={isFirst} />
+        <SideImage
+          sideImage={sideImage}
+          imageSide={imageSide}
+          className="hidden lg:block"
+          isFirst={isFirst}
+        />
       </div>
 
       {stats && stats.length > 0 && <StatsSection stats={stats} />}

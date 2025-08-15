@@ -22,8 +22,10 @@ export const RenderHero: React.FC<{ hero?: Page['hero'] }> = ({ hero }) => {
   return (
     <HeroSlider>
       {hero.map((slide, index) => {
-        if (slide?.layout === 'hero1') return <Hero1 key={index} {...slide} isFirst={index === 0} />;
-        if (slide?.layout === 'hero2') return <Hero2 key={index} {...slide} isFirst={index === 0} />;
+        if (slide?.layout === 'hero1')
+          return <Hero1 key={index} {...slide} isFirst={index === 0} />;
+        if (slide?.layout === 'hero2')
+          return <Hero2 key={index} {...slide} isFirst={index === 0} />;
       })}
     </HeroSlider>
   );

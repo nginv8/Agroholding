@@ -4,7 +4,10 @@ import { Media } from '@/components/Media';
 
 import type { BackgroundSectionProps } from './types';
 
-export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ backgroundImage, isFirst }) => (
+export const BackgroundSection: React.FC<BackgroundSectionProps> = ({
+  backgroundImage,
+  isFirst,
+}) => (
   <div className="absolute inset-0">
     {backgroundImage && typeof backgroundImage === 'object' && (
       <Media resource={backgroundImage} fill imgClassName="object-cover" priority={isFirst} />

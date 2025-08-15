@@ -6,7 +6,12 @@ import { cn } from '@/utilities/ui';
 
 import type { SideImageProps } from './types';
 
-export const SideImage: React.FC<SideImageProps> = ({ sideImage, imageSide, className, isFirst }) => (
+export const SideImage: React.FC<SideImageProps> = ({
+  sideImage,
+  imageSide,
+  className,
+  isFirst,
+}) => (
   <motion.div
     initial={{ opacity: 0, x: imageSide === 'left' ? -50 : 50 }}
     animate={{ opacity: 1, x: 0 }}
