@@ -19,28 +19,34 @@ export default function DocumentsTab({ product, settings }: DocumentsTabProps) {
 
   return (
     <div>
-      <h3 className="mb-6 text-xl font-semibold text-secondary-900">{t('documentation')}</h3>
+      <h3 className="mb-4 text-lg font-semibold text-secondary-900 sm:mb-6 sm:text-xl">
+        {t('documentation')}
+      </h3>
       {allDocuments.length > 0 ? (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {allDocuments.map((doc, index) => {
             const fileUrl = typeof doc.file === 'object' ? doc.file.url : '#';
             return (
               <div
                 key={index}
-                className="flex items-center justify-between rounded-lg border border-secondary-200 p-4 transition-colors hover:bg-secondary-50"
+                className="flex flex-col gap-3 rounded-lg border border-secondary-200 p-3 transition-colors hover:bg-secondary-50 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:p-4"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-red-100">
-                    <span className="text-xs font-semibold text-red-600">{doc.type}</span>
+                <div className="flex flex-1 items-center space-x-3">
+                  <div className="flex size-8 items-center justify-center rounded-lg bg-red-100 sm:size-10">
+                    <span className="text-xs font-semibold text-red-600 sm:text-xs">
+                      {doc.type}
+                    </span>
                   </div>
                   <div>
-                    <div className="font-medium text-secondary-900">{doc.name}</div>
+                    <div className="text-sm font-medium text-secondary-900 sm:text-base">
+                      {doc.name}
+                    </div>
                     {doc.size && <div className="text-sm text-secondary-500">{doc.size}</div>}
                   </div>
                 </div>
-                <Button size="sm" variant="outline" asChild>
+                <Button size="sm" variant="outline" className="w-full sm:w-auto" asChild>
                   <a href={fileUrl || '#'} download>
-                    <Download className="mr-2 size-4" />
+                    <Download className="mr-2 size-4 sm:size-4" />
                     {t('download')}
                   </a>
                 </Button>

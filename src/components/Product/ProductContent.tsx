@@ -17,7 +17,7 @@ export default function ProductContent({ product, settings }: ProductContentProp
   }
 
   return (
-    <section className="py-16">
+    <section className="py-8 lg:py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl">
           {hasProductContent && product.content && (

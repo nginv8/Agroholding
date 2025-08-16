@@ -23,7 +23,7 @@ export default function ProductBenefits({ product, settings }: ProductBenefitsPr
   }
 
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-8 lg:py-16">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

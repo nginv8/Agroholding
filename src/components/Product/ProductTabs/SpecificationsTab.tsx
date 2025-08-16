@@ -38,7 +38,7 @@ export default function SpecificationsTab({ product, settings }: SpecificationsT
             {specifications.map((item, index) => (
               <div
                 key={item?.id || item?.name || index}
-                className="flex justify-between border-b border-secondary-200 py-2"
+                className="flex justify-between border-b border-secondary-200/60 py-2"
               >
                 <span className="font-medium text-secondary-700">{item?.name}:</span>
                 <span className="text-secondary-600">{item?.value}</span>

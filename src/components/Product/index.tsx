@@ -23,20 +23,18 @@ export default async function Product({ product, relatedProducts = [] }: Product
   const productPageSettings = await getCachedGlobal('productPageSettings', 1)();
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="pt-20">
-        <ProductNavigation />
+    <main className="min-h-screen bg-white">
+      <ProductNavigation product={product} />
 
-        <div className="container grid gap-12 px-4 py-12 lg:grid-cols-2">
-          <ProductImageSlider product={product} />
-          <ProductInfo product={product} />
-        </div>
+      <div className="container grid gap-12 px-4 py-8 lg:grid-cols-2 lg:pt-16">
+        <ProductImageSlider product={product} />
+        <ProductInfo product={product} />
+      </div>
 
-        <ProductTabs product={product} settings={productPageSettings} />
-        <ProductBenefits product={product} settings={productPageSettings} />
-        <ProductContent product={product} settings={productPageSettings} />
-        <RelatedProducts relatedProducts={relatedProducts} />
-      </main>
-    </div>
+      <ProductTabs product={product} settings={productPageSettings} />
+      <ProductBenefits product={product} settings={productPageSettings} />
+      <ProductContent product={product} settings={productPageSettings} />
+      <RelatedProducts relatedProducts={relatedProducts} />
+    </main>
   );
 }

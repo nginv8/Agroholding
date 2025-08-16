@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
+import ProductsBreadcrumbs from '@/components/ProductsBreadcrumbs';
 
 import PageClient from './page.client';
 
@@ -42,6 +43,7 @@ export default async function Page({ params }: Args) {
   return (
     <div className="py-24">
       <PageClient />
+      <ProductsBreadcrumbs />
       <div className="container mb-16">
         <div className="prose max-w-none dark:prose-invert">
           <h1>{t('products')}</h1>

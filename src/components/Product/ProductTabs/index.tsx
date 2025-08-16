@@ -43,19 +43,29 @@ export default function ProductTabs({ product, settings }: ProductTabsProps) {
     visibleTabs.length === 1
       ? 'grid-cols-1'
       : visibleTabs.length === 2
-        ? 'grid-cols-2'
-        : 'grid-cols-3';
+        ? 'grid-cols-1 sm:grid-cols-2'
+        : 'grid-cols-1 sm:grid-cols-3';
 
   return (
-    <section className="py-16">
+    <section className="py-8 lg:py-16">
       <div className="container px-4">
         <Tabs defaultValue={defaultValue} className="w-full">
-          <TabsList className={cn('grid w-full', gridCols)}>
-            {hasDescription && <TabsTrigger value="description">{t('description')}</TabsTrigger>}
-            {hasSpecifications && (
-              <TabsTrigger value="specifications">{t('specifications')}</TabsTrigger>
+          <TabsList className={cn('grid h-auto w-full gap-2', gridCols)}>
+            {hasDescription && (
+              <TabsTrigger value="description" className="min-h-6 truncate py-3 text-sm">
+                {t('description')}
+              </TabsTrigger>
             )}
-            {hasDocuments && <TabsTrigger value="documents">{t('documents')}</TabsTrigger>}
+            {hasSpecifications && (
+              <TabsTrigger value="specifications" className="min-h-6 truncate py-3 text-sm">
+                {t('specifications')}
+              </TabsTrigger>
+            )}
+            {hasDocuments && (
+              <TabsTrigger value="documents" className="min-h-6 truncate py-3 text-sm">
+                {t('documents')}
+              </TabsTrigger>
+            )}
           </TabsList>
 
           {hasDescription && (

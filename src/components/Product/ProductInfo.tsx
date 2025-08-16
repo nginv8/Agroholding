@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/utilities/ui';
 import type { Product } from '@/payload-types';
 
 interface ProductInfoProps {
@@ -30,6 +31,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         )}
         <h1 className="mb-4 text-4xl font-bold text-secondary-900">{product.title}</h1>
 
+        {product.partNumber && (
+          <div className="mb-4 text-sm font-bold text-secondary-500">
+            <span className="font-medium">{t('part-number')}: </span> {product.partNumber}
+          </div>
+        )}
+
         {product.ratingEnabled && (
           <div className="mb-6 flex items-center space-x-4">
             <div className="flex items-center">
@@ -49,13 +56,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </p>
         )}
 
-        <div className="mb-8 flex items-center space-x-6">
+        <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0">
           <div>
-            <span className="text-3xl font-bold text-primary-600">
+            <span className="text-2xl font-bold text-primary-600">
               {product.price || t('price-on-request')}
             </span>
           </div>
-          <div className="flex items-center text-primary-600">
+          <div
+            className={cn('flex items-center', {
+              'text-error': product.availability === 'out_of_stock',
+              'text-warning': product.availability === 'pre_order',
+              'text-success': product.availability === 'in_stock',
+            })}
+          >
             <Package className="mr-2 size-5" />
             <span className="font-medium">
               {product.availability === 'in_stock' && t('in-stock')}
@@ -81,23 +94,15 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         )}
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <Button size="lg" className="flex-1">
+          <Button size="lg" className="w-full sm:w-auto sm:flex-1">
             <Phone className="mr-2 size-5" />
             {t('call-us')}
           </Button>
-          <Button size="lg" variant="outline" className="flex-1 bg-transparent">
+          <Button size="lg" variant="outline" className="w-full sm:w-auto sm:flex-1">
             <Mail className="mr-2 size-5" />
             {t('send-email')}
           </Button>
         </div>
-
-        {product.partNumber && (
-          <div className="border-t border-secondary-200 pt-6">
-            <div className="text-sm text-secondary-500">
-              <span className="font-medium">{t('part-number')}</span> {product.partNumber}
-            </div>
-          </div>
-        )}
       </div>
     </motion.div>
   );

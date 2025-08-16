@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Autoplay from 'embla-carousel-autoplay';
+import Fade from 'embla-carousel-fade';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import * as motion from 'motion/react-client';
@@ -17,9 +17,7 @@ interface ProductImageSliderProps {
 
 export default function ProductImageSlider({ product }: ProductImageSliderProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ playOnInit: false, delay: 4000 }),
-  ]);
+  const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true }, [Fade()]);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: 'keepSnaps',
     dragFree: true,
@@ -90,6 +88,7 @@ export default function ProductImageSlider({ product }: ProductImageSliderProps)
                       fill
                       className="object-cover"
                       priority={index === 0}
+                      loading={index === 0 ? 'eager' : 'lazy'}
                     />
                   </div>
                 </div>
@@ -100,22 +99,25 @@ export default function ProductImageSlider({ product }: ProductImageSliderProps)
 
         {/* Navigation arrows */}
         {product.images.length > 1 && (
-          <>
+          <div className="group/panel absolute bottom-6 right-6 z-30 hidden items-center gap-1 rounded-lg backdrop-blur-md transition-colors duration-300 hover:bg-black/10 md:flex">
+            {/* Previous Button */}
             <button
               onClick={scrollPrev}
-              className="absolute left-4 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary-700 shadow-lg transition-colors hover:bg-white hover:text-secondary-900"
+              className="group relative size-10 rounded-md transition-all duration-200 hover:bg-black/20"
               aria-label="Previous image"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft className="absolute left-1/2 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 text-white/50 transition-transform hover:text-white group-hover:scale-125 group-hover/panel:text-white/70" />
             </button>
+
+            {/* Next Button */}
             <button
               onClick={scrollNext}
-              className="absolute right-4 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-secondary-700 shadow-lg transition-colors hover:bg-white hover:text-secondary-900"
+              className="group relative size-10 rounded-md transition-all duration-200 hover:bg-black/20"
               aria-label="Next image"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight className="absolute left-1/2 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 text-white/50 transition-transform hover:text-white group-hover:scale-125 group-hover/panel:text-white/70" />
             </button>
-          </>
+          </div>
         )}
       </div>
 
@@ -139,6 +141,7 @@ export default function ProductImageSlider({ product }: ProductImageSliderProps)
                       alt={`${product.title} thumbnail ${index + 1}`}
                       fill
                       className="object-cover"
+                      loading="lazy"
                     />
                   </button>
                 </div>
