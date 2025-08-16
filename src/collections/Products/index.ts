@@ -20,6 +20,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/config';
 import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { authenticated } from '@/access/authenticated';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { iconSelect } from '@/fields/CustomFields/iconSelect';
 import { slugField } from '@/fields/slug';
 
 import { populateAuthors } from './hooks/populateAuthors';
@@ -33,9 +34,6 @@ export const Products: CollectionConfig<'products'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a product is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'products'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -71,20 +69,166 @@ export const Products: CollectionConfig<'products'> = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       type: 'tabs',
       tabs: [
         {
+          label: 'Basic Info',
           fields: [
             {
-              name: 'heroImage',
-              type: 'upload',
-              relationTo: 'media',
+              type: 'row',
+              fields: [
+                {
+                  name: 'shortDescription',
+                  type: 'textarea',
+                  required: true,
+                  localized: true,
+                  admin: {
+                    description:
+                      'Short description displayed on the product page and in the product list.',
+                  },
+                },
+                {
+                  name: 'partNumber',
+                  type: 'text',
+                  admin: {
+                    description: 'Part number or SKU of the product.',
+                  },
+                },
+              ],
             },
+
             {
+              type: 'row',
+              fields: [
+                {
+                  name: 'price',
+                  type: 'text',
+                  localized: true,
+                  defaultValue: 'Price on request',
+                  admin: {
+                    description:
+                      'Price of the product. Can be a string for custom pricing. Defaults to "Price on request".',
+                  },
+                },
+                {
+                  name: 'availability',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'In stock', value: 'in_stock' },
+                    { label: 'Out of stock', value: 'out_of_stock' },
+                    { label: 'Pre-order', value: 'pre_order' },
+                  ],
+                  defaultValue: 'in_stock',
+                },
+              ],
+            },
+
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'ratingEnabled',
+                  type: 'checkbox',
+                  label: {
+                    en: 'Rating Enabled',
+                    uk: 'Рейтинг Увімкнено',
+                  },
+                  defaultValue: true,
+                },
+                {
+                  name: 'rating',
+                  type: 'number',
+                  min: 1,
+                  max: 5,
+                  defaultValue: 5,
+                },
+                {
+                  name: 'reviewsCount',
+                  type: 'number',
+                  defaultValue: 0,
+                },
+              ],
+            },
+
+            {
+              name: 'features',
+              type: 'array',
+              admin: {
+                initCollapsed: true,
+                description: 'Features list displayed in the main product information.',
+              },
+              fields: [
+                {
+                  name: 'feature',
+                  type: 'text',
+                  required: true,
+                  localized: true,
+                },
+              ],
+            },
+
+            {
+              name: 'images',
+              type: 'array',
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Product images displayed in the image slider. The first image is the main one.',
+              },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+            },
+
+            {
+              label: 'Benefit section',
+              name: 'benefits',
+              type: 'array',
+              maxRows: 4,
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Benefits displayed below the main product information and tabs. Can override benefits from the global "Product Page Settings".',
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    iconSelect(),
+                    {
+                      name: 'title',
+                      type: 'text',
+                      required: true,
+                      localized: true,
+                    },
+                  ],
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  localized: true,
+                },
+              ],
+            },
+
+            {
+              label: 'Content section',
               name: 'content',
               type: 'richText',
+              localized: true,
+              admin: {
+                description:
+                  'Content displayed below the main product information, tabs, and benefits. This can be extended with content from the global "Product Page Settings".',
+              },
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
@@ -97,13 +241,140 @@ export const Products: CollectionConfig<'products'> = {
                   ];
                 },
               }),
-              label: false,
-              required: true,
             },
           ],
-          label: 'Content',
         },
+
         {
+          label: 'Tabs Info',
+          fields: [
+            {
+              name: 'fullDescription',
+              type: 'richText',
+              localized: true,
+              admin: {
+                description:
+                  'Full product description displayed in the "Description" tab. Leave empty to hide the tab.',
+              },
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    BlocksFeature({ blocks: [BannerBlock, MediaBlock] }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                    HorizontalRuleFeature(),
+                  ];
+                },
+              }),
+            },
+
+            {
+              label: 'Product Technical characteristics',
+              name: 'specifications',
+              type: 'array',
+              admin: {
+                initCollapsed: true,
+                description: 'Technical specifications displayed in the "Specifications" tab.',
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'name',
+                      type: 'text',
+                      required: true,
+                      localized: true,
+                    },
+                    {
+                      name: 'value',
+                      type: 'text',
+                      required: true,
+                      localized: true,
+                    },
+                  ],
+                },
+              ],
+            },
+
+            {
+              label: 'Additional Information',
+              name: 'additionalSpecifications',
+              type: 'array',
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Additional info displayed in the "Specifications" tab. Can be extended with global settings.',
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    iconSelect(),
+                    {
+                      name: 'name',
+                      type: 'text',
+                      required: true,
+                      localized: true,
+                    },
+                    {
+                      name: 'description',
+                      type: 'textarea',
+                      required: true,
+                      localized: true,
+                    },
+                  ],
+                },
+              ],
+            },
+
+            {
+              name: 'documents',
+              type: 'array',
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Documents displayed in the "Documents" tab. Can be extended with documents in global "Product Page Settings".',
+              },
+              fields: [
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  localized: true,
+                },
+                {
+                  name: 'file',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'type',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'PDF', value: 'PDF' },
+                    { label: 'DOC', value: 'DOC' },
+                    { label: 'XLS', value: 'XLS' },
+                  ],
+                },
+                {
+                  name: 'size',
+                  type: 'text',
+                  admin: {
+                    description: 'Faile size (e.g., "2.1 MB")',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          label: 'Meta',
           fields: [
             {
               name: 'relatedProducts',
@@ -121,6 +392,7 @@ export const Products: CollectionConfig<'products'> = {
               hasMany: true,
               relationTo: 'products',
             },
+
             {
               name: 'categories',
               type: 'relationship',
@@ -131,8 +403,8 @@ export const Products: CollectionConfig<'products'> = {
               relationTo: 'categories',
             },
           ],
-          label: 'Meta',
         },
+
         {
           name: 'meta',
           label: 'SEO',
@@ -225,7 +497,7 @@ export const Products: CollectionConfig<'products'> = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 100,
       },
       schedulePublish: true,
     },

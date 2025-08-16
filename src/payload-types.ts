@@ -108,11 +108,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     contactInfo: ContactInfo;
+    productPageSettings: ProductPageSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     contactInfo: ContactInfoSelect<false> | ContactInfoSelect<true>;
+    productPageSettings: ProductPageSettingsSelect<false> | ProductPageSettingsSelect<true>;
   };
   locale: 'en' | 'uk';
   user: User & {
@@ -429,8 +431,55 @@ export interface User {
 export interface Product {
   id: number;
   title: string;
-  heroImage?: (number | null) | Media;
-  content: {
+  /**
+   * Short description displayed on the product page and in the product list.
+   */
+  shortDescription: string;
+  /**
+   * Part number or SKU of the product.
+   */
+  partNumber?: string | null;
+  /**
+   * Price of the product. Can be a string for custom pricing. Defaults to "Price on request".
+   */
+  price?: string | null;
+  availability: 'in_stock' | 'out_of_stock' | 'pre_order';
+  ratingEnabled?: boolean | null;
+  rating?: number | null;
+  reviewsCount?: number | null;
+  /**
+   * Features list displayed in the main product information.
+   */
+  features?:
+    | {
+        feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Product images displayed in the image slider. The first image is the main one.
+   */
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Benefits displayed below the main product information and tabs. Can override benefits from the global "Product Page Settings".
+   */
+  benefits?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Content displayed below the main product information, tabs, and benefits. This can be extended with content from the global "Product Page Settings".
+   */
+  content?: {
     root: {
       type: string;
       children: {
@@ -444,7 +493,61 @@ export interface Product {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
+  /**
+   * Full product description displayed in the "Description" tab. Leave empty to hide the tab.
+   */
+  fullDescription?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Technical specifications displayed in the "Specifications" tab.
+   */
+  specifications?:
+    | {
+        name: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Additional info displayed in the "Specifications" tab. Can be extended with global settings.
+   */
+  additionalSpecifications?:
+    | {
+        icon?: string | null;
+        name: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Documents displayed in the "Documents" tab. Can be extended with documents in global "Product Page Settings".
+   */
+  documents?:
+    | {
+        name: string;
+        file: number | Media;
+        type: 'PDF' | 'DOC' | 'XLS';
+        /**
+         * Faile size (e.g., "2.1 MB")
+         */
+        size?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   relatedProducts?: (number | Product)[] | null;
   categories?: (number | Category)[] | null;
   meta?: {
@@ -2192,8 +2295,59 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
-  heroImage?: T;
+  shortDescription?: T;
+  partNumber?: T;
+  price?: T;
+  availability?: T;
+  ratingEnabled?: T;
+  rating?: T;
+  reviewsCount?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  benefits?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   content?: T;
+  fullDescription?: T;
+  specifications?:
+    | T
+    | {
+        name?: T;
+        value?: T;
+        id?: T;
+      };
+  additionalSpecifications?:
+    | T
+    | {
+        icon?: T;
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  documents?:
+    | T
+    | {
+        name?: T;
+        file?: T;
+        type?: T;
+        size?: T;
+        id?: T;
+      };
   relatedProducts?: T;
   categories?: T;
   meta?:
@@ -2828,6 +2982,70 @@ export interface ContactInfo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productPageSettings".
+ */
+export interface ProductPageSetting {
+  id: number;
+  /**
+   * Extendes Additional Information in the "Specifications" tab on all product pages.
+   */
+  globalAdditionalInfo?:
+    | {
+        icon?: string | null;
+        name: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Extendes documents in the "Documents" tab on all product pages.
+   */
+  globalDocuments?:
+    | {
+        name: string;
+        file: number | Media;
+        type: 'PDF' | 'DOC' | 'XLS';
+        /**
+         * Faile size (e.g., "2.1 MB")
+         */
+        size?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Default benefits displayed on all product pages. Can be overridden in individual products.
+   */
+  defaultBenefits?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Global content displayed after product-specific content section
+   */
+  globalContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2993,6 +3211,41 @@ export interface ContactInfoSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productPageSettings_select".
+ */
+export interface ProductPageSettingsSelect<T extends boolean = true> {
+  globalAdditionalInfo?:
+    | T
+    | {
+        icon?: T;
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  globalDocuments?:
+    | T
+    | {
+        name?: T;
+        file?: T;
+        type?: T;
+        size?: T;
+        id?: T;
+      };
+  defaultBenefits?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  globalContent?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

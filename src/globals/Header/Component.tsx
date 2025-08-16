@@ -57,7 +57,9 @@ export async function Header() {
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logo.svg"
-              alt="Наша команда"
+              priority
+              loading="eager"
+              alt="logo"
               width="160"
               height="48"
               className="h-14 w-auto"

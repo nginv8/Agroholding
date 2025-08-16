@@ -5,9 +5,9 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import configPromise from '@payload-config';
 
-import Product from '@/components/demo/Product';
 import { LivePreviewListener } from '@/components/LivePreviewListener';
 import { PayloadRedirects } from '@/components/PayloadRedirects';
+import Product from '@/components/Product';
 import { generateMeta } from '@/utilities/generateMeta';
 
 import PageClient from './page.client';
@@ -47,6 +47,25 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
 
   if (!product) return <PayloadRedirects url={url} />;
 
+  // Отримуємо схожі продукти
+  const relatedProducts = product.relatedProducts
+    ? await Promise.all(
+        product.relatedProducts.map(async (relatedId) => {
+          if (typeof relatedId === 'object') {
+            return relatedId;
+          }
+          // Якщо це ID, отримуємо повний продукт
+          const payload = await getPayload({ config: configPromise });
+          const result = await payload.findByID({
+            collection: 'products',
+            id: relatedId,
+            locale,
+          });
+          return result;
+        })
+      ).then((results) => results.filter(Boolean))
+    : [];
+
   return (
     <article>
       <PageClient />
@@ -56,7 +75,7 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <Product />
+      <Product product={product} relatedProducts={relatedProducts} />
     </article>
   );
 }
