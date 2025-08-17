@@ -5,11 +5,9 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import configPromise from '@payload-config';
 
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component';
 import { LivePreviewListener } from '@/components/LivePreviewListener';
 import { PayloadRedirects } from '@/components/PayloadRedirects';
-import RichText from '@/components/RichText';
-import { PostHero } from '@/heros/PostHero';
+import PostComponent from '@/components/Post';
 import { generateMeta } from '@/utilities/generateMeta';
 import type { Post } from '@/payload-types';
 
@@ -50,8 +48,14 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />;
 
+  const relatedPosts = post.relatedPosts
+    ? post.relatedPosts.filter(
+        (relatedPost): relatedPost is Post => typeof relatedPost === 'object'
+      )
+    : [];
+
   return (
-    <article className="py-16">
+    <>
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -59,20 +63,8 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <PostHero post={post} />
-
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="mx-auto max-w-3xl" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="col-span-3 col-start-1 mt-12 max-w-[52rem] grid-rows-[2fr] lg:grid lg:grid-cols-subgrid"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
-        </div>
-      </div>
-    </article>
+      <PostComponent post={post} relatedPosts={relatedPosts} />
+    </>
   );
 }
 
@@ -99,6 +91,25 @@ const queryPost = cache(async ({ slug, locale }: { slug: string; locale: TypedLo
         equals: slug,
       },
     },
+    // select: {
+    //   id: true,
+    //   title: true,
+    //   excerpt: true,
+    //   content: true,
+    //   heroImage: true,
+    //   gallery: true,
+    //   tags: true,
+    //   readTime: true,
+    //   categories: true,
+    //   relatedPosts: true,
+    //   authors: true,
+    //   populatedAuthors: true,
+    //   publishedAt: true,
+    //   slug: true,
+    //   meta: true,
+    //   updatedAt: true,
+    //   createdAt: true,
+    // },
   });
 
   return result.docs?.[0] || null;

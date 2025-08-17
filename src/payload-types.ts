@@ -109,12 +109,14 @@ export interface Config {
     footer: Footer;
     contactInfo: ContactInfo;
     productPageSettings: ProductPageSetting;
+    postPageSettings: PostPageSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     contactInfo: ContactInfoSelect<false> | ContactInfoSelect<true>;
     productPageSettings: ProductPageSettingsSelect<false> | ProductPageSettingsSelect<true>;
+    postPageSettings: PostPageSettingsSelect<false> | PostPageSettingsSelect<true>;
   };
   locale: 'en' | 'uk';
   user: User & {
@@ -338,7 +340,24 @@ export interface Media {
 export interface Post {
   id: number;
   title: string;
+  /**
+   * Short summary of the post, used in listings and previews
+   */
+  excerpt?: string | null;
+  /**
+   * Main image for the post
+   */
   heroImage?: (number | null) | Media;
+  /**
+   * Gallery of images for the post at the bottom
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   content: {
     root: {
       type: string;
@@ -354,8 +373,21 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (number | Post)[] | null;
   categories?: (number | Category)[] | null;
+  relatedPosts?: (number | Post)[] | null;
+  /**
+   * Tags for the post, used for filtering and searching
+   */
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Reading time estimate (e.g., "5 min read")
+   */
+  readTime?: string | null;
   meta?: {
     title?: string | null;
     /**
@@ -370,6 +402,7 @@ export interface Post {
     | {
         id?: string | null;
         name?: string | null;
+        role?: string | null;
       }[]
     | null;
   slug?: string | null;
@@ -2264,10 +2297,25 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   heroImage?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
   content?: T;
-  relatedPosts?: T;
   categories?: T;
+  relatedPosts?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  readTime?: T;
   meta?:
     | T
     | {
@@ -2282,6 +2330,7 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         id?: T;
         name?: T;
+        role?: T;
       };
   slug?: T;
   slugLock?: T;
@@ -3046,6 +3095,27 @@ export interface ProductPageSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postPageSettings".
+ */
+export interface PostPageSetting {
+  id: number;
+  /**
+   * Select the hero layout for post pages
+   */
+  heroLayout: 'simple' | 'full';
+  /**
+   * Title for the related posts section
+   */
+  relatedPostsTitle: string;
+  /**
+   * Description for the related posts section
+   */
+  relatedPostsDescription: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3246,6 +3316,18 @@ export interface ProductPageSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   globalContent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postPageSettings_select".
+ */
+export interface PostPageSettingsSelect<T extends boolean = true> {
+  heroLayout?: T;
+  relatedPostsTitle?: T;
+  relatedPostsDescription?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

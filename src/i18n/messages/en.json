@@ -29,6 +29,7 @@
   "subscribe-error": "Something went wrong. Please try again.",
   "subscribe-network-error": "Failed to subscribe. Please check your internet connection.",
   "back-to-products": "Back to products",
+  "back-to-posts": "Back to posts",
   "reviews": "reviews",
   "price-on-request": "Price on request",
   "in-stock": "In stock",
@@ -47,6 +48,15 @@
   "documents": "Documents",
   "production-process": "Production process",
   "production-process-description": "Our products are grown on the best lands of Ukraine using modern agricultural technologies. We control the entire process from sowing to harvesting, ensuring the highest quality of products.",
+  "share": "Share:",
+  "close": "Close",
+  "unknown-author": "Unknown Author",
+  "untitled-category": "Untitled category",
+  "share-on-facebook": "Share on Facebook",
+  "share-on-twitter": "Share on Twitter",
+  "share-on-linkedin": "Share on LinkedIn",
+  "copy-link": "Copy link to clipboard",
+  "page": "Page",
   "quality-control": "Quality control",
   "quality-control-description": "Each batch of products undergoes thorough quality control in our certified laboratory. We guarantee compliance with all international standards and food safety requirements.",
   "technical-specifications": "Technical specifications",
@@ -66,5 +76,8 @@
   "related-products-description": "Other products that might interest you",
   "product-not-found": "Product not found",
   "product-not-found-description": "Sorry, but the product you are looking for does not exist or has been removed.",
-  "go-back-to-products": "Go back to product catalog"
+  "go-back-to-products": "Go back to product catalog",
+  "tags": "Tags:",
+  "photo-gallery": "Photo Gallery",
+  "gallery-item": "Gallery"
 }

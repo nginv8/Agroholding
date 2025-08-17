@@ -12,7 +12,7 @@ export const CollectionArchive: React.FC<Props> = (props) => {
   const { collection, collectionName = 'posts', animationType } = props;
 
   return (
-    <div className="container relative z-10 grid min-h-80 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10 md:gap-y-12 lg:grid-cols-4">
+    <div className="container relative z-10 grid min-h-80 gap-8 px-4 sm:grid-cols-2 md:grid-cols-3 md:gap-10 md:gap-y-12 lg:grid-cols-4">
       {collection?.map((result, index) => {
         if (typeof result === 'object' && result !== null) {
           return (

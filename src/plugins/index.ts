@@ -1,5 +1,4 @@
 import { Block, Field, Plugin } from 'payload';
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { formBuilderPlugin, fields as formFields } from '@payloadcms/plugin-form-builder';
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
@@ -50,7 +49,7 @@ const addPlaceholderToField = (fieldName: keyof typeof formFields): Block => {
   return baseField as Block;
 };
 
-export const plugins: Plugin[] = [
+const basePlugins: Plugin[] = [
   redirectsPlugin({
     collections: ['pages', 'posts'],
     overrides: {
@@ -153,5 +152,6 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  payloadCloudPlugin(),
 ];
+
+export const plugins: Plugin[] = basePlugins;

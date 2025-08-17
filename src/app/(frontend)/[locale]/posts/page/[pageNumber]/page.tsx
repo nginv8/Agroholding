@@ -76,9 +76,11 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { pageNumber } = await paramsPromise;
+  const { pageNumber, locale = 'uk' } = await paramsPromise;
+  const t = await getTranslations({ locale });
+
   return {
-    title: `Posts Page ${pageNumber || ''}`,
+    title: `${t('posts')} - ${t('page')} ${pageNumber || ''}`,
   };
 }
 

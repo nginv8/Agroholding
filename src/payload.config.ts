@@ -21,6 +21,7 @@ import { Users } from './collections/Users';
 import { ContactInfo } from './globals/ContactInfo/config';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
+import { PostPageSettings } from './globals/PostPageSettings/config';
 import { ProductPageSettings } from './globals/ProductPageSettings/config';
 import localization from './i18n/localization';
 import { plugins } from './plugins';
@@ -80,7 +81,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Products, Media, Categories, Subscribers, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, ContactInfo, ProductPageSettings],
+  globals: [Header, Footer, ContactInfo, ProductPageSettings, PostPageSettings],
   plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

@@ -5,6 +5,7 @@ import type { Metadata } from 'next/types';
 import configPromise from '@payload-config';
 import { getTranslations } from 'next-intl/server';
 
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
@@ -23,6 +24,7 @@ type Args = {
 export default async function Page({ params }: Args) {
   const collectionName = 'posts';
   const itemsLimit = 8;
+
   const { locale = 'uk' } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });
@@ -42,20 +44,24 @@ export default async function Page({ params }: Args) {
   });
 
   return (
-    <div className="py-24">
+    <div className="pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose max-w-none dark:prose-invert">
-          <h1>{t(collectionName)}</h1>
-        </div>
+
+      <Breadcrumbs items={[{ label: t(collectionName), isActive: true }]} withSection={true} />
+
+      <div className="container my-8 px-4">
+        <h1 className="text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
+          {t(collectionName)}
+        </h1>
       </div>
 
-      <div className="container mb-8">
+      <div className="container px-4">
         <PageRange
           collection={collectionName}
           currentPage={posts.page}
           limit={itemsLimit}
           totalDocs={posts.totalDocs}
+          className="mb-8"
         />
       </div>
 
@@ -65,7 +71,7 @@ export default async function Page({ params }: Args) {
         animationType="immediate"
       />
 
-      <div className="container">
+      <div className="container px-4">
         {posts.totalPages > 1 && posts.page && (
           <Pagination page={posts.page} totalPages={posts.totalPages} />
         )}
@@ -74,8 +80,11 @@ export default async function Page({ params }: Args) {
   );
 }
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { locale = 'uk' } = await params;
+  const t = await getTranslations({ locale });
+
   return {
-    title: `Posts`,
+    title: t('posts'),
   };
 }

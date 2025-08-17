@@ -22,6 +22,7 @@ import { authenticated } from '@/access/authenticated';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { slugField } from '@/fields/slug';
 
+import { autoGenerateSEO } from './hooks/generateSEO';
 import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
@@ -33,9 +34,6 @@ export const Posts: CollectionConfig<'posts'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a post is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -73,18 +71,52 @@ export const Posts: CollectionConfig<'posts'> = {
       required: true,
     },
     {
+      name: 'excerpt',
+      type: 'textarea',
+      required: false,
+      admin: {
+        description: 'Short summary of the post, used in listings and previews',
+      },
+    },
+
+    {
       type: 'tabs',
       tabs: [
         {
+          label: 'Content',
           fields: [
             {
               name: 'heroImage',
               type: 'upload',
               relationTo: 'media',
+              admin: {
+                description: 'Main image for the post',
+              },
             },
             {
+              name: 'gallery',
+              type: 'array',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                },
+              ],
+              admin: {
+                description: 'Gallery of images for the post at the bottom',
+              },
+            },
+            {
+              label: false,
               name: 'content',
               type: 'richText',
+              required: true,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
@@ -97,17 +129,27 @@ export const Posts: CollectionConfig<'posts'> = {
                   ];
                 },
               }),
-              label: false,
-              required: true,
             },
           ],
-          label: 'Content',
         },
         {
+          label: 'Meta',
           fields: [
+            {
+              name: 'categories',
+              type: 'relationship',
+              hasMany: true,
+              relationTo: 'categories',
+              admin: {
+                position: 'sidebar',
+              },
+            },
+
             {
               name: 'relatedPosts',
               type: 'relationship',
+              relationTo: 'posts',
+              hasMany: true,
               admin: {
                 position: 'sidebar',
               },
@@ -118,24 +160,34 @@ export const Posts: CollectionConfig<'posts'> = {
                   },
                 };
               },
-              hasMany: true,
-              relationTo: 'posts',
+            },
+
+            {
+              name: 'tags',
+              type: 'array',
+              fields: [
+                {
+                  name: 'tag',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+              admin: {
+                description: 'Tags for the post, used for filtering and searching',
+              },
             },
             {
-              name: 'categories',
-              type: 'relationship',
+              name: 'readTime',
+              type: 'text',
               admin: {
-                position: 'sidebar',
+                description: 'Reading time estimate (e.g., "5 min read")',
               },
-              hasMany: true,
-              relationTo: 'categories',
             },
           ],
-          label: 'Meta',
         },
         {
-          name: 'meta',
           label: 'SEO',
+          name: 'meta',
           fields: [
             OverviewField({
               titlePath: 'meta.title',
@@ -148,7 +200,6 @@ export const Posts: CollectionConfig<'posts'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
               // if the `generateUrl` function is configured
@@ -213,11 +264,16 @@ export const Posts: CollectionConfig<'posts'> = {
           name: 'name',
           type: 'text',
         },
+        {
+          name: 'role',
+          type: 'text',
+        },
       ],
     },
     ...slugField(),
   ],
   hooks: {
+    beforeChange: [autoGenerateSEO],
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
@@ -229,6 +285,6 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       schedulePublish: true,
     },
-    maxPerDoc: 50,
+    maxPerDoc: 1,
   },
 };
