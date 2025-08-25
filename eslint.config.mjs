@@ -2,8 +2,6 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import { FlatCompat } from '@eslint/eslintrc';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,14 +14,14 @@ const eslintConfig = [
   {
     ignores: [
       '.next/',
-      'node_modules/',
-      'out/',
-      'build/',
-      'dist/',
-      '*.config.js',
-      '*.config.mjs',
-      '*.config.ts',
-      '**/(payload)/**/*.*',
+      // 'node_modules/',
+      // 'out/',
+      // 'build/',
+      // 'dist/',
+      // '*.config.js',
+      // '*.config.mjs',
+      // '*.config.ts',
+      // '**/(payload)/**/*.*',
     ],
   },
   ...compat.extends(
@@ -33,22 +31,6 @@ const eslintConfig = [
     'plugin:tailwindcss/recommended'
   ),
   {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-    },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
@@ -66,18 +48,6 @@ const eslintConfig = [
       '@typescript-eslint/ban-ts-comment': 'warn',
       'react/no-unescaped-entities': 'off',
       'react/prop-types': 'off',
-    },
-  },
-  {
-    files: ['**/*.js', '**/*.jsx'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
     },
   },
 ];

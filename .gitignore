@@ -1,13 +1,13 @@
 build
 dist / media
 node_modules
-sqlt.db
 tsconfig.tsbuildinfo
 .claude
 .DS_Store
 .env
 .next
 .vercel
+*.db
 
 # Payload default media upload directory
 public/media/
