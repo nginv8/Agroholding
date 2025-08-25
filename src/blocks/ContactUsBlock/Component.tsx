@@ -20,7 +20,7 @@ export const ContactUsBlock: React.FC<ContactUsBlockType> = async (props) => {
 
   return (
     <section className="relative py-32" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">

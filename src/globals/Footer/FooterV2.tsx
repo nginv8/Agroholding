@@ -37,7 +37,7 @@ export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
 
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="relative z-10">
         {/* Main Content */}

@@ -34,7 +34,7 @@ export async function FooterV1({ footerData, contactInfoData }: FooterV1Props) {
 
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
       <div className="container relative z-10 mx-auto px-4 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}

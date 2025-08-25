@@ -24,7 +24,7 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} />

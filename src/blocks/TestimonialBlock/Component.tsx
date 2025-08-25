@@ -10,7 +10,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = (props) => {
 
   return (
     <section className="relative overflow-hidden py-32" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
       <div className="container mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} />
         <TestimonialCarousel

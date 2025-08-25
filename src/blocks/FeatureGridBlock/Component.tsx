@@ -14,7 +14,7 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
 }) => {
   return (
     <section className="relative py-32" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container mx-auto px-4">
         <SectionTitle {...title} title={title?.title || ''} />

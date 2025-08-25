@@ -17,7 +17,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
 }) => {
   return (
     <section className="relative overflow-hidden py-32" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative z-10 mx-auto px-4">
         <motion.div

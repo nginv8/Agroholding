@@ -23,7 +23,7 @@ export const FAQBlock: React.FC<FAQProps> = ({
 }) => {
   return (
     <section className="relative overflow-hidden py-20" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">

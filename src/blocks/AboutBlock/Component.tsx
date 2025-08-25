@@ -20,7 +20,7 @@ export const AboutBlock: FC<AboutBlockProps> = ({
 }) => {
   return (
     <section className="relative overflow-hidden py-32" data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative mx-auto px-4">
         <div className="mx-auto max-w-7xl">

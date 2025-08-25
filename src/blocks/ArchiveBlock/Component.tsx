@@ -69,7 +69,7 @@ export const ArchiveBlock: React.FC<
 
   return (
     <section className="relative overflow-hidden py-32" id={`block-${id}`} data-theme={theme}>
-      <SectionBackground {...sbg} theme={theme} />
+      <SectionBackground {...sbg} />
 
       <div className="container relative z-10">
         <SectionTitle {...title} />
