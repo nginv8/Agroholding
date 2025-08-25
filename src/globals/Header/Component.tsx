@@ -26,12 +26,12 @@ export async function Header() {
     >
       {/* Contacts */}
       {(primaryPhone || primaryEmail) && (
-        <div className="bg-green-700">
+        <div className="bg-primary-700">
           <div className="container mx-auto flex h-8 items-center justify-center gap-8 px-4 md:justify-between">
             {primaryPhone && (
               <Link
                 href={`tel:${primaryPhone}`}
-                className="flex items-center font-light text-white transition-colors hover:text-orange-200"
+                className="flex items-center font-light text-white transition-colors hover:text-accent-200"
               >
                 <Phone size={18} className="mr-2" />
                 {primaryPhone}
@@ -40,7 +40,7 @@ export async function Header() {
             {primaryEmail && (
               <Link
                 href={`mailto:${primaryEmail}`}
-                className="ml-4 hidden items-center font-light text-white transition-colors hover:text-orange-200 md:flex"
+                className="ml-4 hidden items-center font-light text-white transition-colors hover:text-accent-200 md:flex"
               >
                 <Mail size={18} className="mr-2" />
                 {primaryEmail}

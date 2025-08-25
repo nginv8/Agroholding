@@ -49,7 +49,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             <CMSLink
               {...item.link}
               appearance="link"
-              className="flex items-center py-2 text-gray-600 transition-colors hover:text-green-700 hover:no-underline"
+              className="flex items-center py-2 text-secondary-600 transition-colors hover:text-primary-700 hover:no-underline"
             >
               {item.submenu && item.submenu.length > 0 && (
                 <ChevronDown className="ml-1 size-4 transition-transform duration-200" />
@@ -64,30 +64,30 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full w-64 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl"
+                  className="absolute left-0 top-full w-64 overflow-hidden rounded-xl border border-secondary-100 bg-white shadow-xl"
                 >
                   <div className="p-2">
                     {item.submenu.map((subItem, subIndex) => (
                       <CMSLink
                         key={subIndex}
                         {...{ ...subItem.link, label: null }}
-                        className="group flex items-start space-x-3 rounded-lg p-3 transition-colors hover:bg-gray-100"
+                        className="group flex items-start space-x-3 rounded-lg p-3 transition-colors hover:bg-secondary-100"
                       >
                         {subItem.icon && (
-                          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-green-50 transition-colors group-hover:bg-green-100">
+                          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 transition-colors group-hover:bg-primary-100">
                             <IconRenderer
                               name={subItem.icon}
                               size={20}
-                              className="size-5 text-green-600"
+                              className="size-5 text-primary-600"
                             />
                           </div>
                         )}
                         <div>
-                          <div className="font-medium text-gray-900 transition-colors group-hover:text-green-700">
+                          <div className="font-medium text-secondary-900 transition-colors group-hover:text-primary-700">
                             {subItem.link.label}
                           </div>
                           {subItem.description && (
-                            <div className="text-sm text-gray-500">{subItem.description}</div>
+                            <div className="text-sm text-secondary-500">{subItem.description}</div>
                           )}
                         </div>
                       </CMSLink>
@@ -101,7 +101,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
 
         <Link href="/search">
           <span className="sr-only">Search</span>
-          <SearchIcon className="w-5 text-gray-600 transition-colors hover:text-green-700" />
+          <SearchIcon className="w-5 text-secondary-600 transition-colors hover:text-primary-700" />
         </Link>
       </nav>
 
@@ -124,12 +124,12 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute inset-x-0 top-28 z-50 bg-white py-6 shadow-lg md:hidden"
+            className="absolute inset-x-0 top-full z-50 bg-white py-6 shadow-lg md:hidden"
           >
             <nav className="container mx-auto max-h-[calc(100vh-160px)] space-y-2 overflow-y-auto px-4">
               <Link
                 href="/search"
-                className="flex items-center gap-x-3 rounded-lg p-3 text-gray-600 transition-colors hover:bg-gray-100 hover:text-green-700"
+                className="flex items-center gap-x-3 rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
               >
                 <SearchIcon className="size-5" />
                 <span>Пошук</span>
@@ -140,7 +140,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 <div key={i}>
                   <div
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between rounded-lg p-3 text-gray-600 transition-colors hover:bg-gray-100 hover:text-green-700"
+                    className="flex items-center justify-between rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
                   >
                     <CMSLink
                       {...{ ...item.link, label: null }}
@@ -159,7 +159,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                         <div
                           key={subIndex}
                           onClick={() => setIsOpen(false)}
-                          className="flex items-center space-x-3 rounded-lg p-3 text-gray-500 transition-colors hover:bg-gray-100 hover:text-green-700"
+                          className="flex items-center space-x-3 rounded-lg p-3 text-secondary-500 transition-colors hover:bg-secondary-100 hover:text-primary-700"
                         >
                           <CMSLink
                             {...{ ...subItem.link, label: null }}
