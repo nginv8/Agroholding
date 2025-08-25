@@ -1,5 +1,3 @@
-'use client';
-
 import RichText from '@/components/RichText';
 import type { Product, ProductPageSetting } from '@/payload-types';
 
@@ -9,8 +7,15 @@ interface ProductContentProps {
 }
 
 export default function ProductContent({ product, settings }: ProductContentProps) {
-  const hasProductContent = product.content;
-  const hasGlobalContent = settings?.globalContent;
+  const hasProductContent =
+    product.content &&
+    product.content?.root.children.length &&
+    !!(product.content?.root.children[0]?.children as any[])?.length; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+  const hasGlobalContent =
+    settings?.globalContent &&
+    settings?.globalContent?.root.children.length &&
+    !!(settings?.globalContent?.root.children[0]?.children as any[])?.length; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   if (!hasProductContent && !hasGlobalContent) {
     return null;

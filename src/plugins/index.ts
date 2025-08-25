@@ -5,7 +5,7 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
 import { redirectsPlugin } from '@payloadcms/plugin-redirects';
 import { searchPlugin } from '@payloadcms/plugin-search';
 import { seoPlugin } from '@payloadcms/plugin-seo';
-import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
+import { GenerateDescription, GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
 
 import { cloudinaryStorage } from 'payload-cloudinary';
 
@@ -16,7 +16,26 @@ import { searchFields } from '@/search/fieldOverrides';
 import { Page, Post, Product } from '@/payload-types';
 
 const generateTitle: GenerateTitle<Post | Product | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Agrholding Website` : 'Agrholding Website';
+  const SITE_NAME = 'Agrholding Website';
+  return doc?.title ? `${doc.title} | ${SITE_NAME}` : SITE_NAME;
+};
+
+const generateDescription: GenerateDescription<Post | Product | Page> = ({
+  doc,
+  collectionConfig,
+}) => {
+  if (collectionConfig?.slug === 'products' && 'shortDescription' in doc && doc.shortDescription) {
+    const description = doc.shortDescription.trim();
+    return description.length > 157 ? description.substring(0, 157) + '...' : description;
+  }
+
+  if (collectionConfig?.slug === 'posts') {
+    if ('excerpt' in doc && doc.excerpt && typeof doc.excerpt === 'string') {
+      return doc.excerpt;
+    }
+  }
+
+  return '';
 };
 
 const generateURL: GenerateURL<Post | Product | Page> = ({ doc }) => {
@@ -90,6 +109,7 @@ const basePlugins: Plugin[] = [
   }),
   seoPlugin({
     generateTitle,
+    generateDescription,
     generateURL,
   }),
   formBuilderPlugin({
@@ -144,7 +164,7 @@ const basePlugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['posts', 'products'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       fields: ({ defaultFields }) => {

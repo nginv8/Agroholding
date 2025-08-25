@@ -47,14 +47,13 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
 
   if (!product) return <PayloadRedirects url={url} />;
 
-  // Отримуємо схожі продукти
   const relatedProducts = product.relatedProducts
     ? await Promise.all(
         product.relatedProducts.map(async (relatedId) => {
           if (typeof relatedId === 'object') {
             return relatedId;
           }
-          // Якщо це ID, отримуємо повний продукт
+
           const payload = await getPayload({ config: configPromise });
           const result = await payload.findByID({
             collection: 'products',

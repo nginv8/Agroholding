@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import * as motion from 'motion/react-client';

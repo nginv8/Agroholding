@@ -1,9 +1,8 @@
 import * as motion from 'motion/react-client';
 import { useTranslations } from 'next-intl';
 
+import { IconRenderer } from '@/components/IconRenderer';
 import type { Product, ProductPageSetting } from '@/payload-types';
-
-import { IconRenderer } from '../IconRenderer';
 
 interface ProductBenefitsProps {
   product: Product;

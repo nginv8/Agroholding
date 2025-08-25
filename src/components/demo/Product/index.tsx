@@ -235,7 +235,7 @@ export default function Product() {
 
                   <div className="border-t border-gray-200 pt-6">
                     <div className="text-sm text-gray-500">
-                      <span className="font-medium">Артикул:</span> {productData.sku}
+                      <span className="font-medium">Код продукту:</span> {productData.sku}
                     </div>
                   </div>
                 </div>

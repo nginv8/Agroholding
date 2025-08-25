@@ -2,8 +2,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { buildConfig, PayloadRequest } from 'payload';
-// import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { postgresAdapter } from '@payloadcms/db-postgres';
+import { sqliteAdapter } from '@payloadcms/db-sqlite';
 import { en } from '@payloadcms/translations/languages/en';
 import { uk } from '@payloadcms/translations/languages/uk';
 
@@ -13,6 +13,7 @@ import { defaultLexical } from '@/fields/defaultLexical';
 
 import { Categories } from './collections/Categories';
 import { Media } from './collections/Media';
+import { OrderSubmissions } from './collections/OrderSubmissions';
 import { Pages } from './collections/Pages';
 import { Posts } from './collections/Posts';
 import { Products } from './collections/Products';
@@ -29,6 +30,25 @@ import { getServerSideURL } from './utilities/getURL';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+const getDatabaseAdapter = () => {
+  const databaseUri = process.env.DATABASE_URI;
+  const useSqlite = process.env.USE_SQLITE === 'true' || databaseUri?.startsWith('file:');
+
+  if (useSqlite) {
+    return sqliteAdapter({
+      client: {
+        url: databaseUri || 'file:./payload.db',
+      },
+    });
+  }
+
+  return postgresAdapter({
+    pool: {
+      connectionString: databaseUri,
+    },
+  });
+};
 
 export default buildConfig({
   i18n: {
@@ -69,19 +89,10 @@ export default buildConfig({
     },
   },
   editor: defaultLexical,
-  // db: sqliteAdapter({
-  //   client: {
-  //     url: process.env.DATABASE_URI || '',
-  //   },
-  // }),
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI,
-    },
-  }),
-  collections: [Pages, Posts, Products, Media, Categories, Subscribers, Users],
+  db: getDatabaseAdapter(),
+  collections: [Pages, Categories, Products, Posts, Media, OrderSubmissions, Subscribers, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, ContactInfo, ProductPageSettings, PostPageSettings],
+  globals: [ContactInfo, ProductPageSettings, PostPageSettings, Header, Footer],
   plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

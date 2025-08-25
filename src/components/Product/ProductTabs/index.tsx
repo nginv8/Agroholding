@@ -47,7 +47,7 @@ export default function ProductTabs({ product, settings }: ProductTabsProps) {
         : 'grid-cols-1 sm:grid-cols-3';
 
   return (
-    <section className="py-8 lg:py-16">
+    <section className="my-8">
       <div className="container px-4">
         <Tabs defaultValue={defaultValue} className="w-full">
           <TabsList className={cn('grid h-auto w-full gap-2', gridCols)}>

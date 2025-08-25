@@ -23,6 +23,7 @@ import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { iconSelect } from '@/fields/CustomFields/iconSelect';
 import { slugField } from '@/fields/slug';
 
+import { autoFillSEO } from './hooks/autoFillSEO';
 import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidateProduct } from './hooks/revalidateProduct';
 
@@ -91,10 +92,11 @@ export const Products: CollectionConfig<'products'> = {
                   },
                 },
                 {
-                  name: 'partNumber',
+                  name: 'itemCode',
                   type: 'text',
+                  localized: true,
                   admin: {
-                    description: 'Part number or SKU of the product.',
+                    description: 'Item code or SKU of the product.',
                   },
                 },
               ],
@@ -137,7 +139,7 @@ export const Products: CollectionConfig<'products'> = {
                     en: 'Rating Enabled',
                     uk: 'Рейтинг Увімкнено',
                   },
-                  defaultValue: true,
+                  defaultValue: false,
                 },
                 {
                   name: 'rating',
@@ -364,6 +366,7 @@ export const Products: CollectionConfig<'products'> = {
                 {
                   name: 'size',
                   type: 'text',
+                  localized: true,
                   admin: {
                     description: 'Faile size (e.g., "2.1 MB")',
                   },
@@ -421,12 +424,12 @@ export const Products: CollectionConfig<'products'> = {
               relationTo: 'media',
             }),
 
-            MetaDescriptionField({}),
+            MetaDescriptionField({
+              hasGenerateFn: true,
+            }),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
 
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -487,9 +490,14 @@ export const Products: CollectionConfig<'products'> = {
         },
       ],
     },
-    ...slugField(),
+    ...slugField('title', {
+      slugOverrides: {
+        localized: true,
+      },
+    }),
   ],
   hooks: {
+    beforeChange: [autoFillSEO],
     afterChange: [revalidateProduct],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
@@ -501,6 +509,6 @@ export const Products: CollectionConfig<'products'> = {
       },
       schedulePublish: true,
     },
-    maxPerDoc: 50,
+    maxPerDoc: 1,
   },
 };
