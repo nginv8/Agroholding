@@ -22,7 +22,7 @@ import { authenticated } from '@/access/authenticated';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { slugField } from '@/fields/slug';
 
-import { autoGenerateSEO } from './hooks/generateSEO';
+import { autoFillSEO } from './hooks/autoFillSEO';
 import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
@@ -69,11 +69,13 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'excerpt',
       type: 'textarea',
       required: false,
+      localized: true,
       admin: {
         description: 'Short summary of the post, used in listings and previews',
       },
@@ -106,6 +108,7 @@ export const Posts: CollectionConfig<'posts'> = {
                 {
                   name: 'caption',
                   type: 'text',
+                  localized: true,
                 },
               ],
               admin: {
@@ -117,6 +120,7 @@ export const Posts: CollectionConfig<'posts'> = {
               name: 'content',
               type: 'richText',
               required: true,
+              localized: true,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
@@ -170,6 +174,7 @@ export const Posts: CollectionConfig<'posts'> = {
                   name: 'tag',
                   type: 'text',
                   required: true,
+                  localized: true,
                 },
               ],
               admin: {
@@ -179,6 +184,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'readTime',
               type: 'text',
+              localized: true,
               admin: {
                 description: 'Reading time estimate (e.g., "5 min read")',
               },
@@ -200,7 +206,9 @@ export const Posts: CollectionConfig<'posts'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-            MetaDescriptionField({}),
+            MetaDescriptionField({
+              hasGenerateFn: true,
+            }),
             PreviewField({
               // if the `generateUrl` function is configured
               hasGenerateFn: true,
@@ -270,10 +278,14 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    ...slugField(),
+    ...slugField('title', {
+      slugOverrides: {
+        localized: true,
+      },
+    }),
   ],
   hooks: {
-    beforeChange: [autoGenerateSEO],
+    beforeChange: [autoFillSEO],
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
