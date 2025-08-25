@@ -65,7 +65,7 @@ export const FAQBlock: React.FC<FAQProps> = ({
             transition={{ duration: 1 }}
             className="order-1 lg:order-2"
           >
-            <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+            <SectionTitle {...title} title={title?.title || ''} />
 
             <Accordion type="single" collapsible className="space-y-4">
               {faqs?.map((faq, index) => (

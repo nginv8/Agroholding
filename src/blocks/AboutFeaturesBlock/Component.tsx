@@ -27,7 +27,7 @@ export const AboutFeaturesBlock: React.FC<AboutFeaturesProps> = (props) => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+            <SectionTitle {...title} title={title?.title || ''} />
 
             <div className="mb-12 grid gap-8 sm:grid-cols-2">
               {features?.map((item, index) => (

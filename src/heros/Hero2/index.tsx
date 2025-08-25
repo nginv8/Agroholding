@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { getAccentTextStyles, getAlignmentClasses, getTitleParts } from '@/utilities/titleHelpers';
 import { cn } from '@/utilities/ui';
 
 import { BackgroundSection } from './BackgroundSection';
@@ -24,18 +23,8 @@ export const Hero2: React.FC<HeroBlock> = ({
 }) => {
   if (layout !== 'hero2') return null;
 
-  const { beforeText, accentText, afterText } = getTitleParts(
-    title?.title ?? undefined,
-    title?.accentPart || ''
-  );
-
-  const accentStyles = getAccentTextStyles({
-    accentText,
-    variant: title?.variant || 'colorAccent',
-    theme: 'dark',
-  });
-
-  const alignmentClasses = getAlignmentClasses(title?.alignment);
+  const alignment = title?.alignment || 'left';
+  const variant = title?.variant || 'colorAccent';
 
   return (
     <section data-theme="dark" className="relative flex flex-1 flex-col overflow-hidden">
@@ -49,18 +38,17 @@ export const Hero2: React.FC<HeroBlock> = ({
       >
         {/* Content column */}
         <div
-          className={cn(
-            'order-1 max-w-xl text-white lg:order-none',
-            imageSide === 'left' && 'lg:col-start-2',
-            imageSide !== 'left' && 'lg:col-start-1',
-            alignmentClasses
-          )}
+          className={cn('order-1 max-w-xl text-white lg:order-none', {
+            'lg:col-start-2': imageSide === 'left',
+            'lg:col-start-1': imageSide !== 'left',
+            'items-start justify-start text-left': alignment === 'left',
+            'items-center justify-center text-center': alignment === 'center',
+            'items-end justify-end text-right': alignment === 'right',
+          })}
         >
           {title?.subtitle && <HeroSubtitle subtitle={title.subtitle} />}
 
-          {title?.title && (
-            <HeroTitle beforeText={beforeText} accentStyles={accentStyles} afterText={afterText} />
-          )}
+          {title?.title && <HeroTitle title={title.title} variant={variant} />}
 
           {title?.description && <HeroDescription description={title.description} />}
 
@@ -72,7 +60,7 @@ export const Hero2: React.FC<HeroBlock> = ({
             isFirst={isFirst}
           />
 
-          {links && links.length > 0 && <HeroLinks links={links} alignment={title?.alignment} />}
+          {links && links.length > 0 && <HeroLinks links={links} alignment={alignment} />}
         </div>
 
         {/* Desktop Image */}

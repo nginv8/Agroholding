@@ -17,7 +17,7 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
       <SectionBackground {...sbg} theme={theme} />
 
       <div className="container mx-auto px-4">
-        <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+        <SectionTitle {...title} title={title?.title || ''} />
 
         <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
           {advantages?.map((advantage, index) => (

@@ -1,46 +1,28 @@
 import * as motion from 'motion/react-client';
 
-import { getAccentTextStyles, getTitleParts } from '@/utilities/titleHelpers';
+import { getTitleParts } from '@/utilities/titleHelpers';
+import { cn } from '@/utilities/ui';
 
-interface TitleProps {
+interface SectionTitleProps {
   title?: string | null;
-  accentPart?: string | null;
   subtitle?: string | null;
   description?: string | null;
   variant?: 'colorAccent' | 'weightAccent' | null;
   alignment?: 'left' | 'center' | 'right' | null;
-  className?: string | null;
-  theme?: 'dark' | 'light' | null;
+  className?: string;
 }
-
-const textAlignmentClasses = {
-  left: 'text-left',
-  center: 'text-center mx-auto',
-  right: 'text-right ml-auto',
-};
-const decorAlignmentClasses = {
-  left: 'justify-start',
-  center: 'justify-center',
-  right: 'justify-end',
-};
 
 export function SectionTitle({
   title,
-  accentPart,
   subtitle,
   description,
   variant = 'colorAccent',
-  theme = 'light',
   alignment = 'left',
-  className = '',
-}: TitleProps) {
+  className,
+}: SectionTitleProps) {
   if (!title) return null;
-  const { beforeText, accentText, afterText } = getTitleParts(title, accentPart || '');
-  const accentStyles = getAccentTextStyles({
-    accentText,
-    variant: variant || 'colorAccent',
-    theme,
-  });
+
+  const { parts } = getTitleParts(title);
 
   return (
     <motion.div
@@ -48,18 +30,35 @@ export function SectionTitle({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
-      className={`relative mb-16 max-w-2xl ${textAlignmentClasses[alignment || 'left']} ${className}`}
+      className={cn(
+        'relative mb-16 max-w-2xl',
+        {
+          'text-left': alignment === 'left',
+          'mx-auto text-center': alignment === 'center',
+          'ml-auto text-right': alignment === 'right',
+        },
+        className
+      )}
     >
-      {variant === 'weightAccent' ? (
+      {variant === 'weightAccent' && (
         <>
-          <h2
-            className={`mb-4 text-3xl font-light capitalize leading-tight md:text-4xl lg:text-5xl ${theme === 'light' ? 'text-secondary-800' : 'text-white'}`}
-          >
-            {beforeText} {accentText && <span className="font-semibold">{accentText}</span>}
-            {afterText}
+          <h2 className="mb-4 text-3xl font-light capitalize leading-tight text-secondary-800 md:text-4xl lg:text-5xl dark:text-white">
+            {parts.map((part, index) =>
+              part.isAccent ? (
+                <span key={index} className="font-semibold">
+                  {part.text}
+                </span>
+              ) : (
+                <span key={index}>{part.text}</span>
+              )
+            )}
           </h2>
           <div
-            className={`mb-5 flex after:block after:h-1 after:w-32 after:bg-accent-500 ${decorAlignmentClasses[alignment || 'left']}`}
+            className={cn('mb-5 flex after:block after:h-1 after:w-32 after:bg-accent-500', {
+              'justify-start': alignment === 'left',
+              'justify-center': alignment === 'center',
+              'justify-end': alignment === 'right',
+            })}
           />
           {description && (
             <motion.p
@@ -67,27 +66,31 @@ export function SectionTitle({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className={`text-lg font-light leading-relaxed md:text-xl ${theme === 'light' ? 'text-secondary-600' : 'text-secondary-200'}`}
+              className="text-lg font-light leading-relaxed text-secondary-600 md:text-xl dark:text-secondary-200"
             >
               {description}
             </motion.p>
           )}
         </>
-      ) : (
+      )}
+
+      {variant === 'colorAccent' && (
         <>
           {subtitle && (
-            <span
-              className={`mb-6 inline-block text-sm font-medium uppercase tracking-wider ${theme === 'light' ? 'text-accent-600' : 'text-accent-400'}`}
-            >
+            <span className="mb-6 inline-block text-sm font-medium uppercase tracking-wider text-accent-600 dark:text-accent-400">
               {subtitle}
             </span>
           )}
-          <h2
-            className={`mb-8 text-4xl font-bold leading-tight lg:text-5xl ${theme === 'light' ? 'text-secondary-900' : 'text-white'}`}
-          >
-            {beforeText}
-            {accentStyles && <span className={accentStyles.className}>{accentStyles.text}</span>}
-            {afterText}
+          <h2 className="mb-8 text-4xl font-bold leading-tight text-secondary-900 lg:text-5xl dark:text-white">
+            {parts.map((part, index) =>
+              part.isAccent ? (
+                <span key={index} className="text-primary-700 dark:text-accent-400">
+                  {part.text}
+                </span>
+              ) : (
+                <span key={index}>{part.text}</span>
+              )
+            )}
           </h2>
           {description && (
             <motion.p
@@ -95,7 +98,7 @@ export function SectionTitle({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className={`mb-12 text-xl leading-relaxed ${theme === 'light' ? 'text-secondary-600' : 'text-secondary-100'}`}
+              className="mb-12 text-xl leading-relaxed text-secondary-600 dark:text-secondary-100"
             >
               {description}
             </motion.p>

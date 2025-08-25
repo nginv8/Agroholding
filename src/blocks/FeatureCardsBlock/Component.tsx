@@ -33,7 +33,7 @@ export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({ title, sbg, the
       <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative z-10 mx-auto px-4">
-        <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+        <SectionTitle {...title} title={title?.title || ''} />
 
         <motion.div
           className="flex flex-wrap justify-center gap-6 text-white xl:gap-8"

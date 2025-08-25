@@ -1,39 +1,25 @@
-export const getTitleParts = (title?: string, accentText?: string) => {
-  if (!title || !accentText) {
-    return { beforeText: title || '', accentText: accentText || '', afterText: '' };
+export const getTitleParts = (title?: string) => {
+  if (!title) {
+    return { parts: [{ text: '', isAccent: false }] };
   }
 
-  const titleParts = title.split(accentText);
-  const beforeText = titleParts[0];
-  const afterText = titleParts[1] || '';
+  const parts: { text: string; isAccent: boolean }[] = [];
+  const regex = /{{(.+?)}}/g;
+  let lastIndex = 0;
+  let match;
 
-  return { beforeText, accentText, afterText };
-};
+  while ((match = regex.exec(title)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ text: title.slice(lastIndex, match.index), isAccent: false });
+    }
 
-interface AccentTextProps {
-  accentText: string;
-  variant?: 'colorAccent' | 'weightAccent' | null;
-  theme?: 'dark' | 'light' | null;
-}
-
-export const getAccentTextStyles = ({ accentText, variant, theme }: AccentTextProps) => {
-  if (!accentText) return null;
-
-  if (variant === 'weightAccent') {
-    return { text: accentText, className: 'font-light' };
+    parts.push({ text: match[1], isAccent: true });
+    lastIndex = regex.lastIndex;
   }
 
-  // Default colorAccent behavior
-  const colorClass = theme === 'light' ? 'text-primary-700' : 'text-accent-400';
-  return { text: accentText, className: colorClass };
-};
+  if (lastIndex < title.length) {
+    parts.push({ text: title.slice(lastIndex), isAccent: false });
+  }
 
-export const getAlignmentClasses = (alignment?: 'left' | 'center' | 'right' | null) => {
-  const alignmentClasses = {
-    left: 'text-left items-start justify-start',
-    center: 'text-center items-center justify-center',
-    right: 'text-right items-end justify-end',
-  };
-
-  return alignmentClasses[alignment || 'left'];
+  return { parts: parts.length > 0 ? parts : [{ text: title, isAccent: false }] };
 };

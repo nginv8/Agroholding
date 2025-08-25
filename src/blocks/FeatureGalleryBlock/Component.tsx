@@ -27,7 +27,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
           transition={{ duration: 1 }}
           className="mx-auto mb-24 max-w-3xl text-center"
         >
-          <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+          <SectionTitle {...title} title={title?.title || ''} />
         </motion.div>
 
         <div className="grid gap-16 lg:grid-cols-2">

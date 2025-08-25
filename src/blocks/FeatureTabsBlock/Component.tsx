@@ -27,7 +27,7 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
       <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative mx-auto px-4">
-        <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+        <SectionTitle {...title} title={title?.title || ''} />
 
         <div className="flex flex-col gap-8 lg:flex-row">
           <div className="lg:w-1/3">

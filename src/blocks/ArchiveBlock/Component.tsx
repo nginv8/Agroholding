@@ -72,7 +72,7 @@ export const ArchiveBlock: React.FC<
       <SectionBackground {...sbg} theme={theme} />
 
       <div className="container relative z-10">
-        <SectionTitle {...title} theme={theme} />
+        <SectionTitle {...title} />
 
         {introContent && (
           <RichText className="ms-0 max-w-3xl" data={introContent} enableGutter={false} />

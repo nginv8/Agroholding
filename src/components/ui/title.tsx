@@ -1,8 +1,9 @@
 import * as motion from 'motion/react-client';
 
+import { getTitleParts } from '@/utilities/titleHelpers';
+
 interface TitleProps {
   title: string;
-  boldPart: string;
   subtitle?: string;
   align?: 'left' | 'center' | 'right';
   className?: string;
@@ -11,15 +12,12 @@ interface TitleProps {
 
 export function Title({
   title,
-  boldPart,
   subtitle,
   style = 'dark',
   align = 'left',
   className = '',
 }: TitleProps) {
-  const titleParts = title.split(boldPart);
-  const beforeText = titleParts[0];
-  const afterText = titleParts[1] || '';
+  const { parts } = getTitleParts(title);
 
   const textAlignmentClasses = {
     left: 'text-left',
@@ -43,9 +41,15 @@ export function Title({
       <h2
         className={`mb-4 text-3xl font-light capitalize leading-tight md:text-4xl lg:text-5xl ${style === 'dark' ? 'text-gray-800' : 'text-white'}`}
       >
-        {beforeText}
-        <span className="font-semibold">{boldPart}</span>
-        {afterText}
+        {parts.map((part, index) =>
+          part.isAccent ? (
+            <span key={index} className="font-semibold">
+              {part.text}
+            </span>
+          ) : (
+            <span key={index}>{part.text}</span>
+          )
+        )}
       </h2>
       <div
         className={`mb-5 flex after:block after:h-1 after:w-32 after:bg-yellow-500 ${decorAlignmentClasses[align]}`}

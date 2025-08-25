@@ -168,8 +168,10 @@ export interface Page {
           variant?: ('colorAccent' | 'weightAccent') | null;
           alignment?: ('left' | 'center' | 'right') | null;
           subtitle?: string | null;
+          /**
+           * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+           */
           title?: string | null;
-          accentPart?: string | null;
           description?: string | null;
         };
         backgroundImage: number | Media;
@@ -744,8 +746,10 @@ export interface ArchiveBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1002,8 +1006,10 @@ export interface AboutBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1070,8 +1076,10 @@ export interface AboutFeaturesBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1138,8 +1146,10 @@ export interface FeatureCardsBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1169,8 +1179,10 @@ export interface FeatureTabsBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1243,8 +1255,10 @@ export interface FeatureGridBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1274,8 +1288,10 @@ export interface FeatureGalleryBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   sbg?: {
@@ -1334,8 +1350,10 @@ export interface TestimonialBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   testimonials?:
@@ -1368,8 +1386,10 @@ export interface FAQBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   image: number | Media;
@@ -1408,8 +1428,10 @@ export interface ContactUsBlock {
     variant?: ('colorAccent' | 'weightAccent') | null;
     alignment?: ('left' | 'center' | 'right') | null;
     subtitle?: string | null;
+    /**
+     * To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.
+     */
     title?: string | null;
-    accentPart?: string | null;
     description?: string | null;
   };
   blocks?: FormBlock[] | null;
@@ -1760,7 +1782,6 @@ export interface PagesSelect<T extends boolean = true> {
               alignment?: T;
               subtitle?: T;
               title?: T;
-              accentPart?: T;
               description?: T;
             };
         backgroundImage?: T;
@@ -1906,7 +1927,6 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -1949,7 +1969,6 @@ export interface AboutBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -1993,7 +2012,6 @@ export interface AboutFeaturesBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -2051,7 +2069,6 @@ export interface FeatureCardsBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -2085,7 +2102,6 @@ export interface FeatureTabsBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -2135,7 +2151,6 @@ export interface FeatureGridBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -2169,7 +2184,6 @@ export interface FeatureGalleryBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   sbg?:
@@ -2228,7 +2242,6 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   testimonials?:
@@ -2265,7 +2278,6 @@ export interface FAQBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   image?: T;
@@ -2308,7 +2320,6 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
         alignment?: T;
         subtitle?: T;
         title?: T;
-        accentPart?: T;
         description?: T;
       };
   blocks?:

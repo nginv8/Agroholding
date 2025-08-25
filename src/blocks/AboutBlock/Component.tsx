@@ -33,7 +33,7 @@ export const AboutBlock: FC<AboutBlockProps> = ({
               transition={{ duration: 1 }}
               className="relative"
             >
-              <SectionTitle {...title} title={title?.title || ''} theme={theme} />
+              <SectionTitle {...title} title={title?.title || ''} />
               <div className="space-y-8">
                 {richText && (
                   <motion.div

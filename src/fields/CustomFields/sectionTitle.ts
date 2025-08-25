@@ -72,11 +72,10 @@ export const SectionTitle: SectionTitleType = ({
             name: 'title',
             type: 'text',
             localized: true,
-          },
-          {
-            name: 'accentPart',
-            type: 'text',
-            localized: true,
+            admin: {
+              description:
+                'To accent a word or phrase, wrap it in double curly braces {{ }}. For example: This is {{accented}} text.',
+            },
           },
         ],
       },

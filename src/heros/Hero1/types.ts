@@ -14,9 +14,8 @@ export interface HeroSubtitleProps {
 }
 
 export interface HeroTitleProps {
-  beforeText: string;
-  accentStyles: { text: string; className: string } | null;
-  afterText: string;
+  title: string;
+  variant?: 'colorAccent' | 'weightAccent';
 }
 
 export interface HeroDescriptionProps {
