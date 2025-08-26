@@ -4,7 +4,7 @@ import React from 'react';
 import type { StaticImageData } from 'next/image';
 import NextImage from 'next/image';
 
-import { getClientSideURL } from '@/utilities/getURL';
+import { getMediaUrl } from '@/utilities/getMediaUrl';
 import { cn } from '@/utilities/ui';
 import { cssVariables } from '@/cssVariables';
 
@@ -20,6 +20,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   const {
     alt: altFromProps,
     fill,
+    pictureClassName,
     imgClassName,
     priority,
     resource,
@@ -42,7 +43,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
     const cacheTag = resource.updatedAt;
 
-    src = `${getClientSideURL()}${url}?${cacheTag}`;
+    src = getMediaUrl(url, cacheTag);
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined);
@@ -55,7 +56,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .join(', ');
 
   return (
-    src && (
+    <picture className={cn(pictureClassName)}>
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
@@ -64,12 +65,12 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         placeholder="blur"
         blurDataURL={placeholderBlur}
         priority={priority}
-        quality={85}
+        quality={100}
         loading={loading}
         sizes={sizes}
         src={src}
         width={!fill ? width : undefined}
       />
-    )
+    </picture>
   );
 };

@@ -10,7 +10,7 @@
 
   "// === PAGINATION ===": "",
   "showing": "Showing",
-  "of": "of", 
+  "of": "of",
   "previous": "Previous",
   "next": "Next",
   "more-pages": "More pages",
@@ -23,7 +23,7 @@
 
   "// === PRODUCTS ===": "",
   "products": "Products",
-  "product": "Product", 
+  "product": "Product",
   "item-code": "SKU",
   "price-on-request": "Price on request",
   "in-stock": "In stock",
@@ -61,7 +61,7 @@
 
   "// === FORMS ===": "",
   "your-name": "Your Name",
-  "enter-name": "Enter your name", 
+  "enter-name": "Enter your name",
   "your-email": "Your email",
   "enter-email": "Please enter your email address",
   "enter-valid-email": "Please enter a valid email address",
@@ -95,7 +95,7 @@
   "// === SHARING ===": "",
   "share": "Share:",
   "share-on-facebook": "Share on Facebook",
-  "share-on-twitter": "Share on Twitter", 
+  "share-on-twitter": "Share on Twitter",
   "share-on-linkedin": "Share on LinkedIn",
   "copy-link": "Copy link to clipboard",
 
