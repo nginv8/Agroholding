@@ -1,21 +1,23 @@
 import type { Metadata } from 'next';
 
-import type { Config, Media, Page, Post } from '../payload-types';
+import type { Media, Page, Post } from '../payload-types';
 import { getServerSideURL } from './getURL';
 import { mergeOpenGraph } from './mergeOpenGraph';
 
-const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
+const getImageURL = (image?: Media | number | null) => {
   const serverUrl = getServerSideURL();
 
-  let url = serverUrl + '/website-template-OG.webp';
+  const fallbackUrl = serverUrl + '/website-template-OG.webp';
 
-  if (image && typeof image === 'object' && 'url' in image) {
-    const ogUrl = image.sizes?.og?.url;
+  if (image && typeof image === 'object' && image.cloudinary?.secure_url) {
+    const baseUrl = image.cloudinary.secure_url;
 
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url;
+    const transformations = 'w_1200,h_630,c_fill,q_auto';
+
+    return baseUrl.replace('/upload/', `/upload/${transformations}/`);
   }
 
-  return url;
+  return fallbackUrl;
 };
 
 export const generateMeta = async (args: {
