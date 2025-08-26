@@ -43,8 +43,7 @@ export default function Testimonials() {
     <section className="overflow-hidden bg-white py-20">
       <div className="container mx-auto px-4">
         <Title
-          title="Що про нас кажуть наші партнери"
-          boldPart="наші партнери"
+          title="Що про нас кажуть {{наші партнери}}"
           subtitle="Довіра та задоволення наших клієнтів — головний показник якості нашої роботи"
           align="center"
         />

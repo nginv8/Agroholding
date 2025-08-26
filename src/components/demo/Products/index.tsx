@@ -33,8 +33,7 @@ export default function Products() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <Title
-          title="Преміальна якість для вашого бізнесу"
-          boldPart="вашого бізнесу"
+          title="Преміальна якість для {{вашого бізнесу}}"
           subtitle="Ми пропонуємо широкий асортимент сільськогосподарської продукції найвищої якості"
           align="center"
         />

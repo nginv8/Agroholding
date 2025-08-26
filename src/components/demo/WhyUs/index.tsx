@@ -41,8 +41,7 @@ export default function WhyUs() {
       />
       <div className="container mx-auto px-4">
         <Title
-          title="Досконалість у кожній деталі"
-          boldPart="кожній деталі"
+          title="Досконалість у {{кожній деталі}}"
           subtitle="Ми прагнемо до досконалості у всьому, що робимо, забезпечуючи найвищу якість продукції та сервісу для наших клієнтів"
           align="center"
           style="light"

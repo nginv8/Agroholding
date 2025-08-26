@@ -44,8 +44,7 @@ export default function NewsGrid() {
     <section className="overflow-hidden bg-gray-50 py-20">
       <div className="container mx-auto px-4">
         <Title
-          title="Інновації та розвиток для майбутнього"
-          boldPart="Інновації та розвиток"
+          title="{{Інновації та розвиток}} для майбутнього"
           subtitle="Ми постійно розвиваємося та впроваджуємо інноваційні рішення для покращення якості нашої продукції та збереження довкілля"
           align="center"
         />

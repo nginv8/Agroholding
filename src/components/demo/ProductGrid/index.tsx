@@ -63,8 +63,7 @@ export default function ProductGrid() {
     <section className="overflow-hidden bg-gray-50 py-32">
       <div className="container mx-auto px-4">
         <Title
-          title="Широкий асортимент якісної продукції"
-          boldPart="якісної продукції"
+          title="Широкий асортимент {{якісної продукції}}"
           subtitle="Ми пропонуємо різноманітні сорти кукурудзи та інших культур, які відповідають найвищим стандартам якості"
           align="center"
         />

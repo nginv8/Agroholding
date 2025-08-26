@@ -36,11 +36,7 @@ export default function AboutSectionStory() {
               transition={{ duration: 1 }}
               className="relative"
             >
-              <Title
-                title="Лідери у вирощуванні преміальної кукурудзи"
-                boldPart="преміальної кукурудзи"
-                align="left"
-              />
+              <Title title="Лідери у вирощуванні {{преміальної кукурудзи}}" align="left" />
               <div className="space-y-8">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}

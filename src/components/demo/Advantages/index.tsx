@@ -44,8 +44,7 @@ export default function Advantages() {
     <section className="overflow-hidden bg-gradient-to-b from-gray-50 to-white py-32">
       <div className="container mx-auto px-4">
         <Title
-          title="Чому обирають нас"
-          boldPart="нас"
+          title="Чому обирають {{нас}}"
           subtitle="Ми поєднуємо традиції та інновації для досягнення найкращих результатів у сільському господарстві"
           align="center"
         />

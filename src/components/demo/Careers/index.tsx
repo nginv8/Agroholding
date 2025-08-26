@@ -94,8 +94,7 @@ export default function CareersSection() {
           {/* Контент (2/3 ширини) */}
           <div className="lg:col-span-1">
             <Title
-              title="Кар'єра в нашій компанії"
-              boldPart="нашій компанії"
+              title="Кар'єра в {{нашій компанії}}"
               subtitle="Приєднуйтесь до команди професіоналів та розвивайтеся разом з нами"
             />
 
