@@ -72,7 +72,7 @@ export interface Config {
     products: Product;
     posts: Post;
     media: Media;
-    'order-submissions': OrderSubmission;
+    orders: Order;
     subscribers: Subscriber;
     users: User;
     redirects: Redirect;
@@ -91,7 +91,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'order-submissions': OrderSubmissionsSelect<false> | OrderSubmissionsSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -204,6 +204,9 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Best with 3, 4 items
+         */
         stats?:
           | {
               number: string;
@@ -251,7 +254,7 @@ export interface Page {
  */
 export interface Media {
   id: number;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
@@ -268,65 +271,26 @@ export interface Media {
     [k: string]: unknown;
   } | null;
   /**
-   * Cloudinary Media Information
+   * Cloudinary metadata
    */
   cloudinary?: {
-    /**
-     * Cloudinary Public ID (used for transformations)
-     */
-    public_id?: string | null;
-    /**
-     * Type of the resource (image, video, raw)
-     */
-    resource_type?: string | null;
-    /**
-     * File format
-     */
-    format?: string | null;
-    /**
-     * Secure delivery URL
-     */
-    secure_url?: string | null;
-    /**
-     * File size in bytes
-     */
-    bytes?: number | null;
-    /**
-     * Creation timestamp
-     */
-    created_at?: string | null;
-    /**
-     * Current version number
-     */
-    version?: string | null;
-    /**
-     * Unique version identifier
-     */
-    version_id?: string | null;
-    /**
-     * Width in pixels
-     */
+    assetId?: string | null;
+    publicId?: string | null;
+    version?: number | null;
+    signature?: string | null;
     width?: number | null;
-    /**
-     * Height in pixels
-     */
     height?: number | null;
-    /**
-     * Duration in seconds (for videos)
-     */
+    format?: string | null;
+    resourceType?: string | null;
+    createdAt?: string | null;
+    bytes?: number | null;
+    type?: string | null;
+    url?: string | null;
+    secureUrl?: string | null;
+    folder?: string | null;
+    displayName?: string | null;
     duration?: number | null;
-    /**
-     * Number of pages (for PDFs)
-     */
-    pages?: number | null;
-    /**
-     * Which page of the PDF to use for thumbnails (changes will apply after saving)
-     */
-    selected_page?: number | null;
-    /**
-     * URL for the thumbnail image (automatically generated for PDFs)
-     */
-    thumbnail_url?: string | null;
+    eager?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -506,7 +470,7 @@ export interface Product {
       }[]
     | null;
   /**
-   * Benefits displayed below the main product information and tabs. Can override benefits from the global "Product Page Settings".
+   * Benefits displayed below the main product information and tabs. Best with 3 or 6 items. Can override benefits from the global "Product Page Settings".
    */
   benefits?:
     | {
@@ -579,12 +543,7 @@ export interface Product {
   documents?:
     | {
         name: string;
-        file: number | Media;
-        type: 'PDF' | 'DOC' | 'XLS';
-        /**
-         * Faile size (e.g., "2.1 MB")
-         */
-        size?: string | null;
+        file?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -1092,6 +1051,9 @@ export interface AboutFeaturesBlock {
   };
   mainImage?: (number | null) | Media;
   secondaryImage?: (number | null) | Media;
+  /**
+   * Best used with 2, 4 or 6 items.
+   */
   features?:
     | {
         icon?: string | null;
@@ -1128,6 +1090,9 @@ export interface AboutFeaturesBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Best used with 2, 3 or 4 items.
+   */
   stats?:
     | {
         number: string;
@@ -1160,6 +1125,9 @@ export interface FeatureCardsBlock {
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     img?: (number | null) | Media;
   };
+  /**
+   * Best used with 4 or 8 items.
+   */
   features?:
     | {
         icon?: string | null;
@@ -1193,6 +1161,9 @@ export interface FeatureTabsBlock {
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     img?: (number | null) | Media;
   };
+  /**
+   * Best for 3 - 10 features
+   */
   features?:
     | {
         icon?: string | null;
@@ -1269,14 +1240,15 @@ export interface FeatureGridBlock {
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     img?: (number | null) | Media;
   };
-  advantages?:
-    | {
-        icon?: string | null;
-        title: string;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Best used with 3 or 6 items.
+   */
+  advantages: {
+    icon?: string | null;
+    title: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'featureGrid';
@@ -1302,6 +1274,9 @@ export interface FeatureGalleryBlock {
     gradientType?: ('top' | 'bottom' | 'top and bottom') | null;
     img?: (number | null) | Media;
   };
+  /**
+   * Best used with 2, 4, or 6 items.
+   */
   features: {
     title: string;
     description: string;
@@ -1328,12 +1303,17 @@ export interface FeatureGalleryBlock {
     };
     id?: string | null;
   }[];
-  stats: {
-    number: string;
-    label: string;
-    description: string;
-    id?: string | null;
-  }[];
+  /**
+   * Best used with 3 or 4 items.
+   */
+  stats?:
+    | {
+        number: string;
+        label: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'featureGallery';
@@ -1359,6 +1339,9 @@ export interface TestimonialBlock {
     title?: string | null;
     description?: string | null;
   };
+  /**
+   * Best for 3-10 testimonials
+   */
   testimonials?:
     | {
         name: string;
@@ -1396,6 +1379,9 @@ export interface FAQBlock {
     description?: string | null;
   };
   image: number | Media;
+  /**
+   * Add up to 2 statistics to display next to the FAQ section.
+   */
   statistics?:
     | {
         title: string;
@@ -1405,6 +1391,9 @@ export interface FAQBlock {
     | null;
   additionalInfoTitle: string;
   additionalInfo: string;
+  /**
+   * Best used with 5 - 10 items.
+   */
   faqs?:
     | {
         question: string;
@@ -1443,6 +1432,7 @@ export interface ContactUsBlock {
     showEmails?: boolean | null;
     showAddresses?: boolean | null;
     showWorkingHours?: boolean | null;
+    showMap?: boolean | null;
   };
   corporate?: {
     title?: string | null;
@@ -1454,14 +1444,14 @@ export interface ContactUsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "order-submissions".
+ * via the `definition` "orders".
  */
-export interface OrderSubmission {
+export interface Order {
   id: number;
-  name: string;
-  email: string;
-  phone?: string | null;
-  message?: string | null;
+  /**
+   * Title of the related product
+   */
+  productTitle?: string | null;
   /**
    * Product item code from the form
    */
@@ -1470,16 +1460,16 @@ export interface OrderSubmission {
    * ID of the related product
    */
   productId?: string | null;
-  /**
-   * Title of the related product
-   */
-  productTitle?: string | null;
   submittedAt: string;
   status?: ('new' | 'in_progress' | 'resolved' | 'closed') | null;
   /**
    * Internal notes for handling this submission
    */
   notes?: string | null;
+  name: string;
+  phone?: string | null;
+  email: string;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1694,8 +1684,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'order-submissions';
-        value: number | OrderSubmission;
+        relationTo: 'orders';
+        value: number | Order;
       } | null)
     | ({
         relationTo: 'subscribers';
@@ -2337,6 +2327,7 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
         showEmails?: T;
         showAddresses?: T;
         showWorkingHours?: T;
+        showMap?: T;
       };
   corporate?:
     | T
@@ -2422,8 +2413,6 @@ export interface ProductsSelect<T extends boolean = true> {
     | {
         name?: T;
         file?: T;
-        type?: T;
-        size?: T;
         id?: T;
       };
   relatedProducts?: T;
@@ -2506,20 +2495,23 @@ export interface MediaSelect<T extends boolean = true> {
   cloudinary?:
     | T
     | {
-        public_id?: T;
-        resource_type?: T;
-        format?: T;
-        secure_url?: T;
-        bytes?: T;
-        created_at?: T;
+        assetId?: T;
+        publicId?: T;
         version?: T;
-        version_id?: T;
+        signature?: T;
         width?: T;
         height?: T;
+        format?: T;
+        resourceType?: T;
+        createdAt?: T;
+        bytes?: T;
+        type?: T;
+        url?: T;
+        secureUrl?: T;
+        folder?: T;
+        displayName?: T;
         duration?: T;
-        pages?: T;
-        selected_page?: T;
-        thumbnail_url?: T;
+        eager?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2535,19 +2527,19 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "order-submissions_select".
+ * via the `definition` "orders_select".
  */
-export interface OrderSubmissionsSelect<T extends boolean = true> {
-  name?: T;
-  email?: T;
-  phone?: T;
-  message?: T;
+export interface OrdersSelect<T extends boolean = true> {
+  productTitle?: T;
   itemCode?: T;
   productId?: T;
-  productTitle?: T;
   submittedAt?: T;
   status?: T;
   notes?: T;
+  name?: T;
+  phone?: T;
+  email?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2851,9 +2843,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface ContactInfo {
   id: number;
   phones?: {
-    icon?: string | null;
+    /**
+     * Used as a heading for the phone numbers section
+     */
     title?: string | null;
-    label?: string | null;
+    /**
+     * A short description or subtitle for the phone numbers section
+     */
+    description?: string | null;
     items?:
       | {
           number: string;
@@ -2863,9 +2860,14 @@ export interface ContactInfo {
       | null;
   };
   emails?: {
-    icon?: string | null;
+    /**
+     * Used as a heading for the email addresses section
+     */
     title?: string | null;
-    label?: string | null;
+    /**
+     * A short description or subtitle for the email addresses section
+     */
+    description?: string | null;
     items?:
       | {
           email: string;
@@ -2875,9 +2877,14 @@ export interface ContactInfo {
       | null;
   };
   addresses?: {
-    icon?: string | null;
+    /**
+     * Used as a heading for the addresses section
+     */
     title?: string | null;
-    label?: string | null;
+    /**
+     * A short description or subtitle for the addresses section
+     */
+    description?: string | null;
     items?:
       | {
           street: string;
@@ -2889,11 +2896,20 @@ export interface ContactInfo {
           id?: string | null;
         }[]
       | null;
+    /**
+     * You can paste either a direct URL or full iframe embed code from Google Maps. The system will automatically extract the URL from iframe code.
+     */
+    mapSrc?: string | null;
   };
   workingHours?: {
-    icon?: string | null;
+    /**
+     * Used as a heading for the working hours section
+     */
     title?: string | null;
-    label?: string | null;
+    /**
+     * A short description or subtitle for the working hours section
+     */
+    description?: string | null;
     weekdays?: string | null;
     weekends?: string | null;
     holidays?: string | null;
@@ -2917,6 +2933,10 @@ export interface ContactInfo {
  */
 export interface ProductPageSetting {
   id: number;
+  /**
+   * Enable or disable product ratings site-wide.
+   */
+  isRatingEnabled?: boolean | null;
   /**
    * Extendes Additional Information in the "Specifications" tab on all product pages.
    */
@@ -3002,6 +3022,16 @@ export interface PostPageSetting {
  */
 export interface Header {
   id: number;
+  logo?: {
+    /**
+     * Header logo (leave empty to use default)
+     */
+    light?: (number | null) | Media;
+    /**
+     * Header logo (leave empty to use default)
+     */
+    dark?: (number | null) | Media;
+  };
   navItems?:
     | {
         icon?: string | null;
@@ -3140,9 +3170,8 @@ export interface ContactInfoSelect<T extends boolean = true> {
   phones?:
     | T
     | {
-        icon?: T;
         title?: T;
-        label?: T;
+        description?: T;
         items?:
           | T
           | {
@@ -3154,9 +3183,8 @@ export interface ContactInfoSelect<T extends boolean = true> {
   emails?:
     | T
     | {
-        icon?: T;
         title?: T;
-        label?: T;
+        description?: T;
         items?:
           | T
           | {
@@ -3168,9 +3196,8 @@ export interface ContactInfoSelect<T extends boolean = true> {
   addresses?:
     | T
     | {
-        icon?: T;
         title?: T;
-        label?: T;
+        description?: T;
         items?:
           | T
           | {
@@ -3182,13 +3209,13 @@ export interface ContactInfoSelect<T extends boolean = true> {
               isPrimary?: T;
               id?: T;
             };
+        mapSrc?: T;
       };
   workingHours?:
     | T
     | {
-        icon?: T;
         title?: T;
-        label?: T;
+        description?: T;
         weekdays?: T;
         weekends?: T;
         holidays?: T;
@@ -3214,6 +3241,7 @@ export interface ContactInfoSelect<T extends boolean = true> {
  * via the `definition` "productPageSettings_select".
  */
 export interface ProductPageSettingsSelect<T extends boolean = true> {
+  isRatingEnabled?: T;
   globalAdditionalInfo?:
     | T
     | {
@@ -3261,6 +3289,12 @@ export interface PostPageSettingsSelect<T extends boolean = true> {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?:
+    | T
+    | {
+        light?: T;
+        dark?: T;
+      };
   navItems?:
     | T
     | {

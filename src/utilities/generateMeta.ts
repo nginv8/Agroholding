@@ -7,14 +7,24 @@ import { mergeOpenGraph } from './mergeOpenGraph';
 const getImageURL = (image?: Media | number | null) => {
   const serverUrl = getServerSideURL();
 
-  const fallbackUrl = serverUrl + '/website-template-OG.webp';
+  const fallbackUrl = serverUrl + '/polisky-agroholding-og.webp';
 
-  if (image && typeof image === 'object' && image.cloudinary?.secure_url) {
-    const baseUrl = image.cloudinary.secure_url;
+  if (image && typeof image === 'object') {
+    if (image.url) {
+      const transformations = 'w_1200,h_630,c_fill,q_auto';
+      return image.url.replace('/upload/', `/upload/${transformations}/`);
+    }
 
-    const transformations = 'w_1200,h_630,c_fill,q_auto';
+    if (image.filename) {
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      const folder = process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME;
 
-    return baseUrl.replace('/upload/', `/upload/${transformations}/`);
+      if (cloudName) {
+        const publicId = image.filename.replace(/\.[^/.]+$/, '');
+        const transformations = 'w_1200,h_630,c_fill,q_auto';
+        return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}${folder ? '/' + folder : ''}/${publicId}`;
+      }
+    }
   }
 
   return fallbackUrl;
@@ -27,7 +37,9 @@ export const generateMeta = async (args: {
 
   const ogImage = getImageURL(doc?.meta?.image);
 
-  const title = doc?.meta?.title ? doc?.meta?.title + ' | Payload Website' : 'Payload Website';
+  const title = doc?.meta?.title
+    ? doc?.meta?.title + ' | Polisky Agroholding'
+    : 'Polisky Agroholding';
 
   return {
     description: doc?.meta?.description,

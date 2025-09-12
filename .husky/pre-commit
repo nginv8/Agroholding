@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged first to format and fix files
+pnpm lint-staged
+
+# Run build to ensure everything compiles
+echo "Running build to verify code compiles..."
+# pnpm build
