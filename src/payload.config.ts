@@ -2,8 +2,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { buildConfig, PayloadRequest } from 'payload';
-import { postgresAdapter } from '@payloadcms/db-postgres';
-import { sqliteAdapter } from '@payloadcms/db-sqlite';
 import { en } from '@payloadcms/translations/languages/en';
 import { uk } from '@payloadcms/translations/languages/uk';
 
@@ -13,7 +11,7 @@ import { defaultLexical } from '@/fields/defaultLexical';
 
 import { Categories } from './collections/Categories';
 import { Media } from './collections/Media';
-import { OrderSubmissions } from './collections/OrderSubmissions';
+import { Orders } from './collections/Orders';
 import { Pages } from './collections/Pages';
 import { Posts } from './collections/Posts';
 import { Products } from './collections/Products';
@@ -26,29 +24,11 @@ import { PostPageSettings } from './globals/PostPageSettings/config';
 import { ProductPageSettings } from './globals/ProductPageSettings/config';
 import localization from './i18n/localization';
 import { plugins } from './plugins';
+import { getDatabaseAdapter } from './utilities/getDatabaseAdapter';
 import { getServerSideURL } from './utilities/getURL';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-
-const getDatabaseAdapter = () => {
-  const databaseUri = process.env.DATABASE_URI;
-  const useSqlite = process.env.USE_SQLITE === 'true' || databaseUri?.startsWith('file:');
-
-  if (useSqlite) {
-    return sqliteAdapter({
-      client: {
-        url: databaseUri || 'file:./payload.db',
-      },
-    });
-  }
-
-  return postgresAdapter({
-    pool: {
-      connectionString: databaseUri,
-    },
-  });
-};
 
 export default buildConfig({
   i18n: {
@@ -90,7 +70,7 @@ export default buildConfig({
   },
   editor: defaultLexical,
   db: getDatabaseAdapter(),
-  collections: [Pages, Categories, Products, Posts, Media, OrderSubmissions, Subscribers, Users],
+  collections: [Pages, Categories, Products, Posts, Media, Orders, Subscribers, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [ContactInfo, ProductPageSettings, PostPageSettings, Header, Footer],
   plugins: [...plugins],

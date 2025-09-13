@@ -21,6 +21,15 @@ export const ProductPageSettings: GlobalConfig = {
   },
   fields: [
     {
+      name: 'isRatingEnabled',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        description: 'Enable or disable product ratings site-wide.',
+      },
+    },
+
+    {
       name: 'globalAdditionalInfo',
       type: 'array',
       admin: {

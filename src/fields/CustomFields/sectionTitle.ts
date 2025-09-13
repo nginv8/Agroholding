@@ -17,6 +17,7 @@ export const SectionTitle: SectionTitleType = ({
     name: 'title',
     label: 'Section Title',
     type: 'group',
+    localized: true,
     fields: [
       {
         type: 'row',

@@ -133,10 +133,10 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           name: 'label',
           type: 'text',
           label: 'Label',
+          localized: true,
           admin: {
             width: '50%',
           },
-          localized: true,
           required: true,
         },
       ],

@@ -4,12 +4,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, Menu, SearchIcon, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { IconRenderer } from '@/components/IconRenderer';
 import { CMSLink } from '@/components/Link';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
+import { isValidIconName } from '@/utilities/validateIcon';
 import type { Header as HeaderType } from '@/payload-types';
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -100,7 +104,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         ))}
 
         <Link href="/search">
-          <span className="sr-only">Search</span>
+          <span className="sr-only">{t('search')}</span>
           <SearchIcon className="w-5 text-secondary-600 transition-colors hover:text-primary-700" />
         </Link>
       </nav>
@@ -126,14 +130,19 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             exit={{ opacity: 0, height: 0 }}
             className="absolute inset-x-0 top-full z-50 bg-white py-6 shadow-lg md:hidden"
           >
-            <nav className="container mx-auto max-h-[calc(100vh-160px)] space-y-2 overflow-y-auto px-4">
+            <motion.nav
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="content-container max-h-[calc(100vh-180px)] space-y-2 overflow-y-auto"
+            >
               <Link
                 href="/search"
+                onClick={() => setIsOpen(false)}
                 className="flex items-center gap-x-3 rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
               >
                 <SearchIcon className="size-5" />
-                <span>Пошук</span>
-                <span className="sr-only">Search</span>
+                <span>{t('search')}</span>
               </Link>
 
               {navItems.map((item, i) => (
@@ -144,9 +153,11 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                   >
                     <CMSLink
                       {...{ ...item.link, label: null }}
-                      className="flex items-center space-x-3"
+                      className="flex items-center space-x-4"
                     >
-                      {item.icon && <IconRenderer name={item.icon} size={20} className="size-5" />}
+                      {item.icon && isValidIconName(item.icon) && (
+                        <IconRenderer name={item.icon} size={20} className="size-5" />
+                      )}
                       <span>{item.link.label}</span>
                     </CMSLink>
                     {item.submenu && item.submenu.length > 0 && <ChevronDown className="size-4" />}
@@ -163,9 +174,9 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                         >
                           <CMSLink
                             {...{ ...subItem.link, label: null }}
-                            className="flex items-center space-x-3"
+                            className="flex items-center space-x-4"
                           >
-                            {subItem.icon && (
+                            {subItem.icon && isValidIconName(subItem.icon) && (
                               <IconRenderer name={subItem.icon} size={16} className="size-4" />
                             )}
                             <span>{subItem.link.label}</span>
@@ -176,7 +187,9 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                   )}
                 </div>
               ))}
-            </nav>
+
+              <LocaleSwitcher className="mx-auto" />
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>

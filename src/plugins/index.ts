@@ -1,5 +1,6 @@
 import { Block, Field, Plugin } from 'payload';
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage';
 import { formBuilderPlugin, fields as formFields } from '@payloadcms/plugin-form-builder';
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
 import { redirectsPlugin } from '@payloadcms/plugin-redirects';
@@ -7,13 +8,13 @@ import { searchPlugin } from '@payloadcms/plugin-search';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { GenerateDescription, GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
 
-import { cloudinaryStorage } from 'payload-cloudinary';
-
 import { revalidateRedirects } from '@/hooks/revalidateRedirects';
 import { getServerSideURL } from '@/utilities/getURL';
 import { beforeSyncWithSearch } from '@/search/beforeSync';
 import { searchFields } from '@/search/fieldOverrides';
 import { Page, Post, Product } from '@/payload-types';
+
+import { cloudinaryAdapter, generateURL as generateCloudinaryFileURL } from './cloudinary';
 
 const generateTitle: GenerateTitle<Post | Product | Page> = ({ doc }) => {
   const SITE_NAME = 'Agrholding Website';
@@ -91,18 +92,17 @@ const basePlugins: Plugin[] = [
       },
     },
   }),
-  cloudinaryStorage({
-    config: {
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
-      api_key: process.env.CLOUDINARY_API_KEY || '',
-      api_secret: process.env.CLOUDINARY_API_SECRET || '',
-    },
+
+  cloudStoragePlugin({
     collections: {
-      media: true,
+      media: {
+        adapter: cloudinaryAdapter,
+        disableLocalStorage: true,
+        generateFileURL: generateCloudinaryFileURL,
+      },
     },
-    disableLocalStorage: true,
-    enabled: true,
   }),
+
   nestedDocsPlugin({
     collections: ['categories'],
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),

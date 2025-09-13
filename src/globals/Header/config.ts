@@ -12,8 +12,41 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      type: 'group',
+      name: 'logo',
+      localized: true,
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              label: 'Light variant',
+              name: 'light',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Header logo (leave empty to use default)',
+              },
+            },
+            {
+              label: 'Dark variant',
+              name: 'dark',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Header logo (leave empty to use default)',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'navItems',
       type: 'array',
+      localized: true,
       fields: [
         iconSelect(),
         link({
@@ -30,7 +63,6 @@ export const Header: GlobalConfig = {
                 {
                   name: 'description',
                   type: 'textarea',
-                  localized: true,
                 },
               ],
             },

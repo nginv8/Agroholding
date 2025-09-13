@@ -42,6 +42,7 @@ export const Footer: GlobalConfig = {
       type: 'group',
       name: 'logo',
       label: 'Logo',
+      localized: true,
       fields: [
         {
           type: 'row',

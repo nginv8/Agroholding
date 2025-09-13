@@ -6,11 +6,11 @@ import { getTranslations } from 'next-intl/server';
 
 import { IconRenderer } from '@/components/IconRenderer';
 import { CMSLink } from '@/components/Link';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { Logo } from '@/components/Logo/Logo';
 import { Media } from '@/components/Media';
 import { NewsletterForm } from '@/components/NewsletterForm';
 import { SectionBackground } from '@/components/SectionBackground';
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector';
 import {
   formatAddress,
   getPrimaryAddress,
@@ -18,6 +18,7 @@ import {
   getPrimaryPhone,
   getSocialLinks,
 } from '@/utilities/formatContactInfo';
+import { validateIconName } from '@/utilities/validateIcon';
 import type { ContactInfo as ContactInfoType, Footer as FooterType } from '@/payload-types';
 
 interface FooterV2Props {
@@ -41,7 +42,7 @@ export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
 
       <div className="relative z-10">
         {/* Main Content */}
-        <div className="container mx-auto px-4 py-20">
+        <div className="content-container py-20">
           <div className="grid gap-20 lg:grid-cols-2">
             {/* Left Column */}
             <motion.div
@@ -80,7 +81,7 @@ export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
                       className="rounded-full bg-muted/20 p-3 text-foreground transition-colors hover:bg-muted/30 hover:text-primary-700 dark:bg-white/5 dark:hover:bg-white/10 dark:hover:text-accent-300"
                     >
                       <IconRenderer
-                        name={social.icon || 'LuMessageCircleMore'}
+                        name={validateIconName(social.icon, 'LuMessageCircleMore')}
                         size={24}
                         className="size-6"
                       />
@@ -149,8 +150,8 @@ export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
 
         {/* Bottom Section */}
         <div className="border-t border-secondary-200 dark:border-primary-800">
-          <div className="container flex flex-col items-center justify-between gap-4 px-4 py-8 md:flex-row">
-            <Link href="/">
+          <div className="content-container flex flex-col items-center justify-between gap-4 py-8 lg:flex-row">
+            <Link href="/" className="lg:order-1">
               {logo?.[logoStyle] && typeof logo[logoStyle] !== 'string' ? (
                 <Media
                   resource={logo[logoStyle]}
@@ -162,10 +163,11 @@ export async function FooterV2({ footerData, contactInfoData }: FooterV2Props) {
               )}
             </Link>
 
-            <p className="text-sm text-muted-foreground dark:text-gray-400">
+            <LocaleSwitcher className="lg:order-3" />
+
+            <p className="text-sm text-muted-foreground lg:order-2 dark:text-gray-400">
               {copyright ? `Copyright © ${new Date().getFullYear()} ${copyright}` : ''}
             </p>
-            <ThemeSelector />
           </div>
         </div>
       </div>

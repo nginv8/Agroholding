@@ -5,12 +5,13 @@ import { getTranslations } from 'next-intl/server';
 
 import { IconRenderer } from '@/components/IconRenderer';
 import { CMSLink } from '@/components/Link';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { Logo } from '@/components/Logo/Logo';
 import { Media } from '@/components/Media';
 import { NewsletterForm } from '@/components/NewsletterForm';
 import { SectionBackground } from '@/components/SectionBackground';
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector';
 import { getSocialLinks } from '@/utilities/formatContactInfo';
+import { validateIconName } from '@/utilities/validateIcon';
 import type { ContactInfo as ContactInfoType, Footer as FooterType } from '@/payload-types';
 
 interface FooterV1Props {
@@ -35,7 +36,7 @@ export async function FooterV1({ footerData, contactInfoData }: FooterV1Props) {
   return (
     <footer className="relative overflow-hidden" data-theme={theme}>
       <SectionBackground {...sbg} />
-      <div className="container relative z-10 mx-auto px-4 py-16">
+      <div className="content-container py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
           <motion.div
@@ -66,9 +67,8 @@ export async function FooterV1({ footerData, contactInfoData }: FooterV1Props) {
                     className="text-foreground transition-colors hover:text-primary-700 dark:hover:text-accent-300"
                   >
                     <IconRenderer
-                      name={social.icon || 'LuMessageCircleMore'}
-                      size={24}
-                      className="size-6"
+                      name={validateIconName(social.icon, 'LuMessageCircleMore')}
+                      size={20}
                     />
                     <span className="sr-only">{social.name}</span>
                   </Link>
@@ -129,11 +129,12 @@ export async function FooterV1({ footerData, contactInfoData }: FooterV1Props) {
 
       {/* Copyright */}
       <div className="relative z-10 border-t border-secondary-200 dark:border-primary-800">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 md:flex-row">
-          <p className="text-sm text-muted-foreground">
+        <div className="content-container flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
+          <LocaleSwitcher className="md:order-2" />
+
+          <p className="text-sm text-muted-foreground md:order-1">
             {copyright ? `Copyright © ${new Date().getFullYear()} ${copyright}` : ''}
           </p>
-          <ThemeSelector />
         </div>
       </div>
     </footer>

@@ -159,6 +159,7 @@ export const Products: CollectionConfig<'products'> = {
             {
               name: 'features',
               type: 'array',
+              localized: true,
               admin: {
                 initCollapsed: true,
                 description: 'Features list displayed in the main product information.',
@@ -168,7 +169,6 @@ export const Products: CollectionConfig<'products'> = {
                   name: 'feature',
                   type: 'text',
                   required: true,
-                  localized: true,
                 },
               ],
             },
@@ -195,11 +195,12 @@ export const Products: CollectionConfig<'products'> = {
               label: 'Benefit section',
               name: 'benefits',
               type: 'array',
+              localized: true,
               maxRows: 4,
               admin: {
                 initCollapsed: true,
                 description:
-                  'Benefits displayed below the main product information and tabs. Can override benefits from the global "Product Page Settings".',
+                  'Benefits displayed below the main product information and tabs. Best with 3 or 6 items. Can override benefits from the global "Product Page Settings".',
               },
               fields: [
                 {
@@ -210,14 +211,12 @@ export const Products: CollectionConfig<'products'> = {
                       name: 'title',
                       type: 'text',
                       required: true,
-                      localized: true,
                     },
                   ],
                 },
                 {
                   name: 'description',
                   type: 'textarea',
-                  localized: true,
                 },
               ],
             },
@@ -276,6 +275,7 @@ export const Products: CollectionConfig<'products'> = {
               label: 'Product Technical characteristics',
               name: 'specifications',
               type: 'array',
+              localized: true,
               admin: {
                 initCollapsed: true,
                 description: 'Technical specifications displayed in the "Specifications" tab.',
@@ -288,13 +288,11 @@ export const Products: CollectionConfig<'products'> = {
                       name: 'name',
                       type: 'text',
                       required: true,
-                      localized: true,
                     },
                     {
                       name: 'value',
                       type: 'text',
                       required: true,
-                      localized: true,
                     },
                   ],
                 },
@@ -305,6 +303,7 @@ export const Products: CollectionConfig<'products'> = {
               label: 'Additional Information',
               name: 'additionalSpecifications',
               type: 'array',
+              localized: true,
               admin: {
                 initCollapsed: true,
                 description:
@@ -319,13 +318,11 @@ export const Products: CollectionConfig<'products'> = {
                       name: 'name',
                       type: 'text',
                       required: true,
-                      localized: true,
                     },
                     {
                       name: 'description',
                       type: 'textarea',
                       required: true,
-                      localized: true,
                     },
                   ],
                 },
@@ -335,6 +332,7 @@ export const Products: CollectionConfig<'products'> = {
             {
               name: 'documents',
               type: 'array',
+              localized: true,
               admin: {
                 initCollapsed: true,
                 description:
@@ -345,31 +343,11 @@ export const Products: CollectionConfig<'products'> = {
                   name: 'name',
                   type: 'text',
                   required: true,
-                  localized: true,
                 },
                 {
                   name: 'file',
                   type: 'upload',
                   relationTo: 'media',
-                  required: true,
-                },
-                {
-                  name: 'type',
-                  type: 'select',
-                  required: true,
-                  options: [
-                    { label: 'PDF', value: 'PDF' },
-                    { label: 'DOC', value: 'DOC' },
-                    { label: 'XLS', value: 'XLS' },
-                  ],
-                },
-                {
-                  name: 'size',
-                  type: 'text',
-                  localized: true,
-                  admin: {
-                    description: 'Faile size (e.g., "2.1 MB")',
-                  },
                 },
               ],
             },

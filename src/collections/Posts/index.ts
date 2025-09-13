@@ -74,7 +74,6 @@ export const Posts: CollectionConfig<'posts'> = {
     {
       name: 'excerpt',
       type: 'textarea',
-      required: false,
       localized: true,
       admin: {
         description: 'Short summary of the post, used in listings and previews',
@@ -278,11 +277,7 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    ...slugField('title', {
-      slugOverrides: {
-        localized: true,
-      },
-    }),
+    ...slugField(),
   ],
   hooks: {
     beforeChange: [autoFillSEO],

@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { processMapInput } from '@/utilities/mapEmbedUtils';
 import { iconSelect } from '@/fields/CustomFields/iconSelect';
 
 import { revalidateContactInfo } from './hooks/revalidateContactInfo';
@@ -13,33 +14,26 @@ export const ContactInfo: GlobalConfig = {
     {
       name: 'phones',
       type: 'group',
-      label: {
-        en: 'Phone Numbers',
-        uk: 'Номери телефонів',
-      },
+      label: 'Phone Numbers',
+      localized: true,
       fields: [
         {
           type: 'row',
           fields: [
-            iconSelect(),
             {
               name: 'title',
               type: 'text',
-              label: {
-                en: 'title',
-                uk: 'Заголовок',
-              },
-              localized: true,
               defaultValue: 'Phones',
+              admin: {
+                description: 'Used as a heading for the phone numbers section',
+              },
             },
             {
-              name: 'label',
+              name: 'description',
               type: 'text',
-              label: {
-                en: 'Label',
-                uk: 'Назва',
+              admin: {
+                description: 'A short description or subtitle for the phone numbers section',
               },
-              localized: true,
             },
           ],
         },
@@ -53,10 +47,7 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'number',
                   type: 'text',
-                  label: {
-                    en: 'Phone Number',
-                    uk: 'Номер телефону',
-                  },
+                  label: 'Phone Number',
                   required: true,
                   validate: (value: unknown) => {
                     if (!value || typeof value !== 'string') return 'Phone number is required';
@@ -70,10 +61,7 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'isPrimary',
                   type: 'checkbox',
-                  label: {
-                    en: 'Primary Number',
-                    uk: 'Основний номер',
-                  },
+
                   defaultValue: false,
                 },
               ],
@@ -88,39 +76,33 @@ export const ContactInfo: GlobalConfig = {
     {
       name: 'emails',
       type: 'group',
-      label: {
-        en: 'Email Addresses',
-        uk: 'Email адреси',
-      },
+      label: 'Email Addresses',
+      localized: true,
       fields: [
         {
           type: 'row',
           fields: [
-            iconSelect(),
             {
               name: 'title',
               type: 'text',
-              label: {
-                en: 'title',
-                uk: 'Заголовок',
-              },
-              localized: true,
+
               defaultValue: 'Email',
+              admin: { description: 'Used as a heading for the email addresses section' },
             },
             {
-              name: 'label',
+              name: 'description',
               type: 'text',
-              label: {
-                en: 'Label',
-                uk: 'Назва',
+
+              admin: {
+                description: 'A short description or subtitle for the email addresses section',
               },
-              localized: true,
             },
           ],
         },
         {
           name: 'items',
           type: 'array',
+          localized: true,
           fields: [
             {
               type: 'row',
@@ -128,19 +110,13 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'email',
                   type: 'email',
-                  label: {
-                    en: 'Email Address',
-                    uk: 'Email адреса',
-                  },
+                  label: 'Email Address',
                   required: true,
                 },
                 {
                   name: 'isPrimary',
                   type: 'checkbox',
-                  label: {
-                    en: 'Primary Email',
-                    uk: 'Основний email',
-                  },
+
                   defaultValue: false,
                 },
               ],
@@ -155,33 +131,21 @@ export const ContactInfo: GlobalConfig = {
     {
       name: 'addresses',
       type: 'group',
-      label: {
-        en: 'Addresses',
-        uk: 'Адреси',
-      },
+      localized: true,
       fields: [
         {
           type: 'row',
           fields: [
-            iconSelect(),
             {
               name: 'title',
               type: 'text',
-              label: {
-                en: 'title',
-                uk: 'Заголовок',
-              },
-              localized: true,
               defaultValue: 'Address',
+              admin: { description: 'Used as a heading for the addresses section' },
             },
             {
-              name: 'label',
+              name: 'description',
               type: 'text',
-              label: {
-                en: 'Label',
-                uk: 'Назва',
-              },
-              localized: true,
+              admin: { description: 'A short description or subtitle for the addresses section' },
             },
           ],
         },
@@ -195,22 +159,14 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'street',
                   type: 'text',
-                  label: {
-                    en: 'Street and House Number',
-                    uk: 'Вулиця і номер будинку',
-                  },
+                  label: 'Street and House Number',
                   required: true,
-                  localized: true,
                 },
                 {
                   name: 'city',
                   type: 'text',
-                  label: {
-                    en: 'City',
-                    uk: 'Місто',
-                  },
+
                   required: true,
-                  localized: true,
                 },
               ],
             },
@@ -220,38 +176,21 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'region',
                   type: 'text',
-                  label: {
-                    en: 'Region/State',
-                    uk: 'Область/Регіон',
-                  },
-                  localized: true,
+                  label: 'Region/State',
                 },
                 {
                   name: 'postalCode',
                   type: 'text',
-                  label: {
-                    en: 'Postal Code',
-                    uk: 'Поштовий індекс',
-                  },
                 },
                 {
                   name: 'country',
                   type: 'text',
-                  label: {
-                    en: 'Country',
-                    uk: 'Країна',
-                  },
-                  localized: true,
                 },
               ],
             },
             {
               name: 'isPrimary',
               type: 'checkbox',
-              label: {
-                en: 'Primary Address',
-                uk: 'Основна адреса',
-              },
               defaultValue: false,
             },
           ],
@@ -259,38 +198,62 @@ export const ContactInfo: GlobalConfig = {
             initCollapsed: true,
           },
         },
+        {
+          label: 'Map Embed URL',
+          name: 'mapSrc',
+          type: 'text',
+          admin: {
+            description:
+              'You can paste either a direct URL or full iframe embed code from Google Maps. The system will automatically extract the URL from iframe code.',
+            placeholder: 'https://www.google.com/maps/embed?pb=... or full <iframe> code',
+          },
+          validate: (value: unknown) => {
+            if (!value || typeof value !== 'string') {
+              return true; // Optional field
+            }
+
+            const result = processMapInput(value);
+            if (!result.isValid && result.error) {
+              return result.error;
+            }
+
+            return true;
+          },
+          hooks: {
+            beforeChange: [
+              ({ value }) => {
+                if (!value || typeof value !== 'string') {
+                  return value;
+                }
+
+                const result = processMapInput(value);
+                return result.url || value;
+              },
+            ],
+          },
+        },
       ],
     },
     {
       name: 'workingHours',
       type: 'group',
-      label: {
-        en: 'Working Hours',
-        uk: 'Години роботи',
-      },
+      localized: true,
       fields: [
         {
           type: 'row',
           fields: [
-            iconSelect(),
             {
               name: 'title',
               type: 'text',
-              label: {
-                en: 'title',
-                uk: 'Заголовок',
-              },
-              localized: true,
               defaultValue: 'Working Hours',
+              admin: { description: 'Used as a heading for the working hours section' },
             },
             {
-              name: 'label',
+              name: 'description',
               type: 'text',
-              label: {
-                en: 'Label',
-                uk: 'Назва',
+              admin: {
+                description: 'A short description or subtitle for the working hours section',
               },
-              localized: true,
             },
           ],
         },
@@ -300,29 +263,14 @@ export const ContactInfo: GlobalConfig = {
             {
               name: 'weekdays',
               type: 'text',
-              label: {
-                en: 'Weekdays',
-                uk: 'Будні дні',
-              },
-              localized: true,
             },
             {
               name: 'weekends',
               type: 'text',
-              label: {
-                en: 'Weekends',
-                uk: 'Вихідні',
-              },
-              localized: true,
             },
             {
               name: 'holidays',
               type: 'text',
-              label: {
-                en: 'Holidays',
-                uk: 'Святкові дні',
-              },
-              localized: true,
             },
           ],
         },
@@ -331,10 +279,7 @@ export const ContactInfo: GlobalConfig = {
     {
       name: 'socialMedia',
       type: 'group',
-      label: {
-        en: 'Social Media',
-        uk: 'Соціальні мережі',
-      },
+      localized: true,
       fields: [
         {
           name: 'items',
@@ -347,20 +292,12 @@ export const ContactInfo: GlobalConfig = {
                 {
                   name: 'name',
                   type: 'text',
-                  label: {
-                    en: 'Social Media Name',
-                    uk: 'Назва соціальної мережі',
-                  },
+                  label: 'Social Media Name',
                   required: true,
-                  localized: true,
                 },
                 {
                   name: 'url',
                   type: 'text',
-                  label: {
-                    en: 'URL',
-                    uk: 'Посилання',
-                  },
                   required: true,
                   validate: (value: unknown) => {
                     if (!value || typeof value !== 'string') return 'URL is required';
