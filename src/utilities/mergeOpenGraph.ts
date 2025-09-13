@@ -4,14 +4,14 @@ import { getServerSideURL } from './getURL';
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description: 'Polisky Agroholding - надійний партнер в аграрній сфері',
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/polisky-agroholding-og.webp`,
     },
   ],
-  siteName: 'Payload Website',
-  title: 'Payload Website',
+  siteName: 'Polisky Agroholding',
+  title: 'Polisky Agroholding',
 };
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {
