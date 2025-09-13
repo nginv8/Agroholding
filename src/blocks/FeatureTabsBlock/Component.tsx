@@ -11,6 +11,7 @@ import RichText from '@/components/RichText';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
 import { cn } from '@/utilities/ui';
+import { isValidIconName } from '@/utilities/validateIcon';
 import type { FeatureTabsBlock as FeatureTabsProps } from '@/payload-types';
 
 export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
@@ -23,10 +24,10 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container relative mx-auto px-4">
+      <div className="content-container">
         <SectionTitle {...title} title={title?.title || ''} />
 
         <div className="flex flex-col gap-8 lg:flex-row">
@@ -37,18 +38,18 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
                   <button
                     onClick={() => setActiveTab(index)}
                     className={cn(
-                      'flex w-full items-center rounded-lg p-4 text-left text-muted-foreground transition-all duration-300 hover:bg-secondary/40 dark:hover:bg-primary/20',
+                      'flex w-full items-center rounded-lg p-4 text-left text-foreground/70 transition-all duration-300 hover:bg-slate-200/50 md:px-6 dark:hover:bg-primary/20',
                       {
-                        'bg-secondary/40 font-medium text-foreground shadow-sm dark:bg-primary/20':
+                        'bg-slate-200/50 font-medium text-foreground dark:bg-primary/20':
                           activeTab === index,
                       }
                     )}
                   >
-                    {feature.icon && (
+                    {feature.icon && isValidIconName(feature.icon) && (
                       <IconRenderer
                         name={feature.icon}
-                        className={cn('mr-3 h-5 w-5 text-muted-foreground', {
-                          'text-primary dark:text-accent': activeTab === index,
+                        className={cn('mr-3 h-5 w-5 text-foreground/70', {
+                          'text-primary-700 dark:text-accent': activeTab === index,
                         })}
                       />
                     )}
@@ -66,17 +67,17 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="rounded-lg bg-secondary/30 p-8 shadow-lg dark:bg-primary/20"
+                className="rounded-lg border border-slate-200/80 bg-white p-8 shadow-lg dark:border-none dark:bg-primary/20"
               >
                 <div className="mb-3 flex items-center">
-                  <div className="mr-4 flex size-12 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
-                    {features[activeTab].icon && (
+                  {features[activeTab].icon && isValidIconName(features[activeTab].icon) && (
+                    <div className="mr-4 flex size-12 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
                       <IconRenderer
                         name={features[activeTab].icon}
                         className="size-6 text-primary dark:text-accent-400"
                       />
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <h3 className="text-2xl font-bold text-foreground">
                     {features[activeTab].title}
                   </h3>
@@ -94,13 +95,13 @@ export const FeatureTabsBlock: React.FC<FeatureTabsProps> = ({
               </motion.div>
             )}
 
-            {cta?.map(({ link }, i) => (
-              <div key={i} className="mt-16">
-                <CMSLink {...link} size="lg" className="group">
+            <div className="mt-16 flex flex-col gap-4 md:flex-row">
+              {cta?.map(({ link }, i) => (
+                <CMSLink key={i} {...link} size="lg" className="group w-full md:w-auto">
                   <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                 </CMSLink>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

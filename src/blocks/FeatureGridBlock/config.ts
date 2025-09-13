@@ -19,6 +19,13 @@ export const FeatureGridBlock: Block = {
     {
       name: 'advantages',
       type: 'array',
+      required: true,
+      minRows: 1,
+      maxRows: 12,
+      admin: {
+        description: 'Best used with 3 or 6 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           type: 'row',

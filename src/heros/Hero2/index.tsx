@@ -32,7 +32,7 @@ export const Hero2: React.FC<HeroBlock> = ({
 
       <div
         className={cn(
-          'container relative grid grow items-center justify-center gap-12 px-4 py-10 lg:grid-cols-2 lg:py-16',
+          'content-container grid grow items-center justify-center gap-12 py-10 lg:grid-cols-2 lg:py-16',
           imageSide === 'left' && 'lg:grid-flow-col-dense'
         )}
       >

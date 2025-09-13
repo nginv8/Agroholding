@@ -27,6 +27,10 @@ const config = {
     'bg-success/30',
     'border-warning',
     'bg-warning/30',
+    'border-info',
+    'bg-info/30',
+    'border-info/80',
+    'bg-info/10',
   ],
   theme: {
     container: {
@@ -97,6 +101,7 @@ const config = {
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
+        info: 'hsl(var(--info))',
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],

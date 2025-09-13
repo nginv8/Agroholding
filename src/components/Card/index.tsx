@@ -76,6 +76,11 @@ export const Card: React.FC<{
         </div>
 
         <div className="space-y-3">
+          {titleToUse && (
+            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
+              {titleToUse}
+            </h3>
+          )}
           {showCategories && hasCategories && (
             <div className="flex flex-wrap gap-2">
               {categories?.map((category, categoryIndex) => {
@@ -95,12 +100,6 @@ export const Card: React.FC<{
                 return null;
               })}
             </div>
-          )}
-
-          {titleToUse && (
-            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
-              {titleToUse}
-            </h3>
           )}
 
           {description && (

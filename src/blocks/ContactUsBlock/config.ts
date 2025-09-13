@@ -71,6 +71,15 @@ export const ContactUsBlock: Block = {
               },
               defaultValue: true,
             },
+            {
+              name: 'showMap',
+              type: 'checkbox',
+              label: {
+                en: 'Show Map',
+                uk: 'Показувати карту',
+              },
+              defaultValue: true,
+            },
           ],
         },
       ],

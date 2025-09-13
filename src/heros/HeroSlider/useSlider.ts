@@ -38,12 +38,14 @@ export const useSlider = () => {
   }, [emblaApi]);
 
   const scrollPrev = useCallback(() => {
+    autoplay?.stop();
     emblaApi?.scrollPrev();
-  }, [emblaApi]);
+  }, [emblaApi, autoplay]);
 
   const scrollNext = useCallback(() => {
+    autoplay?.stop();
     emblaApi?.scrollNext();
-  }, [emblaApi]);
+  }, [emblaApi, autoplay]);
 
   const scrollTo = useCallback(
     (index: number) => {

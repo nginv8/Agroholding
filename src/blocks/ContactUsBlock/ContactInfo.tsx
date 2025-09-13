@@ -1,4 +1,5 @@
 import * as motion from 'motion/react-client';
+import { useTranslations } from 'next-intl';
 import type { Config } from 'src/payload-types';
 
 import { IconRenderer } from '@/components/IconRenderer';
@@ -23,10 +24,11 @@ interface ContactInfoProps {
 }
 
 export default function ContactInfo({ contactData, displayOptions }: ContactInfoProps) {
+  const t = useTranslations();
   let wrapperIndex = 0;
 
   return (
-    <div className="grid gap-8 sm:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2 md:gap-8">
       {/* Add phones */}
       {displayOptions?.showPhones !== false && contactData.phones?.items
         ? (() => {
@@ -35,9 +37,9 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
             return (
               <ItemsWrapper
                 key={`phone-wrapper-${contactData.id}`}
-                iconName={contactData.phones.icon || 'LuPhone'}
-                title={contactData.phones.title || ''}
-                description={contactData.phones.label || ''}
+                iconName="LuPhone"
+                title={contactData.phones.title || t('phones-title')}
+                description={contactData.phones.description || ''}
                 index={wrapperIndex++}
               >
                 {sortedPhones.map((item, index) => (
@@ -61,9 +63,9 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
             return (
               <ItemsWrapper
                 key={`emails-wrapper-${contactData.id}`}
-                iconName={contactData.emails.icon || 'LuMail'}
-                title={contactData.emails.title || ''}
-                description={contactData.emails.label || ''}
+                iconName="LuMail"
+                title={contactData.emails.title || t('emails-title')}
+                description={contactData.emails.description || ''}
                 index={wrapperIndex++}
               >
                 {sortedEmails.map((item, index) => (
@@ -87,9 +89,9 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
             return (
               <ItemsWrapper
                 key={`addresses-wrapper-${contactData.id}`}
-                iconName={contactData.addresses.icon || 'LuMapPin'}
-                title={contactData.addresses.title || ''}
-                description={contactData.addresses.label || ''}
+                iconName="LuMapPin"
+                title={contactData.addresses.title || t('addresses-title')}
+                description={contactData.addresses.description || ''}
                 index={wrapperIndex++}
               >
                 {sortedAddresses.map((item, index) => (
@@ -117,9 +119,9 @@ export default function ContactInfo({ contactData, displayOptions }: ContactInfo
             return (
               <ItemsWrapper
                 key={`workingHours-wrapper-${contactData.id}`}
-                iconName={contactData.workingHours.icon || 'LuClock'}
-                title={contactData.workingHours.title || ''}
-                description={contactData.workingHours.label || ''}
+                iconName="LuClock"
+                title={contactData.workingHours.title || t('working-hours-title')}
+                description={contactData.workingHours.description || ''}
                 index={wrapperIndex++}
               >
                 {weekdays && (
@@ -160,7 +162,7 @@ const ItemsWrapper: React.FC<{
       transition={{ delay: index * 0.2 }}
       className="group"
     >
-      <div className="relative p-6">
+      <div className="relative p-4 md:p-6">
         <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/5" />
         <div className="relative">
           <div className="mb-4 flex items-center gap-4">
@@ -171,7 +173,7 @@ const ItemsWrapper: React.FC<{
           </div>
 
           {children}
-          <p className="mt-2 text-sm text-gray-400">{description}</p>
+          <p className="mt-2 text-gray-400">{description}</p>
         </div>
       </div>
     </motion.div>

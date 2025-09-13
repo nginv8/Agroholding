@@ -6,6 +6,8 @@ import { CMSLink } from '@/components/Link';
 import { Media } from '@/components/Media';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
+import { cn } from '@/utilities/ui';
+import { isValidIconName } from '@/utilities/validateIcon';
 import type { FeatureGalleryBlock as FeatureGalleryProps } from '@/payload-types';
 
 export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
@@ -16,10 +18,10 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
   stats = [],
 }) => {
   return (
-    <section className="relative overflow-hidden py-32" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="content-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +53,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
 
                   {/* Icon & title */}
                   <div className="absolute bottom-6 left-6 flex items-center space-x-4">
-                    {feature?.icon && (
+                    {feature?.icon && isValidIconName(feature.icon) && (
                       <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
                         <IconRenderer name={feature.icon} size={24} className="text-accent-400" />
                       </div>
@@ -80,7 +82,7 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
           ))}
         </div>
 
-        {stats.length > 0 && (
+        {stats && stats?.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -88,7 +90,14 @@ export const FeatureGalleryBlock: React.FC<FeatureGalleryProps> = ({
             transition={{ delay: 0.5 }}
             className="mt-24 rounded-2xl bg-primary-900/5 p-8 backdrop-blur-sm dark:bg-white/5"
           >
-            <div className="grid gap-8 md:grid-cols-3">
+            <div
+              className={cn('grid justify-items-center gap-8', {
+                'mx-auto max-w-md grid-cols-1': stats && stats.length === 1,
+                'mx-auto max-w-2xl grid-cols-1 md:grid-cols-2': stats && stats.length === 2,
+                'grid-cols-1 md:grid-cols-3': stats && stats.length === 3,
+                'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': stats && stats.length >= 4,
+              })}
+            >
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="mb-2 text-3xl font-bold text-primary dark:text-accent">

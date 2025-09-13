@@ -20,6 +20,11 @@ export const TestimonialBlock: Block = {
     {
       name: 'testimonials',
       type: 'array',
+      admin: {
+        description: 'Best for 3-10 testimonials',
+      },
+      minRows: 1,
+      maxRows: 10,
       fields: [
         {
           type: 'row',

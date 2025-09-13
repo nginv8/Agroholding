@@ -6,6 +6,7 @@ import { linkGroup } from '@/fields/linkGroup';
 export const hero: Field = {
   name: 'hero',
   type: 'array',
+  localized: true,
   admin: {
     components: {
       RowLabel: '@/heros/RowLabel#RowLabel',
@@ -77,16 +78,18 @@ export const hero: Field = {
       },
     }),
     {
-      name: 'stats',
-      type: 'array',
-      label: 'Statistics (for Hero Layout 2)',
       labels: {
         singular: 'Statistic',
         plural: 'Statistics',
       },
+      name: 'stats',
+      type: 'array',
+      label: 'Statistics (for Hero Layout 2)',
+      localized: true,
       admin: {
         condition: (_, { layout } = {}) => layout === 'hero2',
         initCollapsed: true,
+        description: 'Best with 3, 4 items',
       },
       fields: [
         {

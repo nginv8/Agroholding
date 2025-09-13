@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -55,17 +56,31 @@ export function NewsletterForm({
       if (response.ok) {
         setMessage({ type: 'success', text: t('subscribe-success') });
         setEmail('');
+
+        toast.success(t('subscribe-success'), {
+          duration: 5000,
+        });
       } else {
         const errorData = await response.json();
+        const errorMessage = errorData.message || t('subscribe-error');
         setMessage({
           type: 'error',
-          text: errorData.message || t('subscribe-error'),
+          text: errorMessage,
+        });
+
+        toast.error(t('subscribe-error'), {
+          description: errorMessage,
+          duration: 5000,
         });
       }
     } catch (_error) {
       setMessage({
         type: 'error',
         text: t('subscribe-network-error'),
+      });
+
+      toast.error(t('subscribe-network-error'), {
+        duration: 5000,
       });
     } finally {
       setIsLoading(false);
@@ -74,7 +89,7 @@ export function NewsletterForm({
 
   if (variant === 'v2') {
     return (
-      <div className={`max-w-md ${className}`}>
+      <div className={`lg:max-w-md ${className}`}>
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input
             type="email"
@@ -119,7 +134,7 @@ export function NewsletterForm({
       </form>
       {message && (
         <div
-          className={`mt-2 text-sm ${message.type === 'success' ? 'text-success' : 'text-error'}`}
+          className={`mt-2 text-left text-sm ${message.type === 'success' ? 'text-success' : 'text-error'}`}
         >
           {message.text}
         </div>

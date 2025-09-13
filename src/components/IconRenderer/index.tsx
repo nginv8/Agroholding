@@ -1,6 +1,8 @@
 import type React from 'react';
 import * as lucideIcons from 'react-icons/lu';
 
+import { isValidIconName, suggestIconNames } from '@/utilities/validateIcon';
+
 type IconRendererProps = {
   name?: string;
   size?: number;
@@ -31,14 +33,18 @@ export const IconRenderer: React.FC<IconRendererProps> = ({
 }) => {
   if (!name) return null;
 
-  const IconComponent = lucideIcons[name as keyof typeof lucideIcons] as
-    | React.ElementType
-    | undefined;
-
-  if (!IconComponent) {
-    console.warn(`Icon "${name}" not found in react-icons/lu`);
+  // Validate and get the correct icon name
+  if (!isValidIconName(name)) {
+    const suggestions = suggestIconNames(name, 3);
+    console.warn(
+      `Icon "${name}" not found in react-icons/lu.${
+        suggestions.length > 0 ? ` Did you mean: ${suggestions.join(', ')}?` : ''
+      }`
+    );
     return null;
   }
+
+  const IconComponent = lucideIcons[name] as React.ElementType;
 
   return (
     <IconComponent

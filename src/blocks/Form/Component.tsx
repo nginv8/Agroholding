@@ -6,7 +6,9 @@ import type { Form as FormType } from '@payloadcms/plugin-form-builder/types';
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import RichText from '@/components/RichText';
 import { Button } from '@/components/ui/button';
@@ -56,6 +58,7 @@ export const FormBlock: React.FC<
   const [hasSubmitted, setHasSubmitted] = useState<boolean>();
   const [error, setError] = useState<{ message: string; status?: string } | undefined>();
   const router = useRouter();
+  const t = useTranslations();
 
   const onSubmit = useCallback(
     (data: Record<string, string | boolean | undefined>) => {
@@ -92,9 +95,16 @@ export const FormBlock: React.FC<
           if (req.status >= 400) {
             setIsLoading(false);
 
+            const errorMessage = res.errors?.[0]?.message || 'Помилка сервера';
+
             setError({
-              message: res.errors?.[0]?.message || 'Internal Server Error',
+              message: errorMessage,
               status: res.status,
+            });
+
+            toast.error(t('contact-form-error'), {
+              description: errorMessage,
+              duration: 5000,
             });
 
             return;
@@ -102,6 +112,11 @@ export const FormBlock: React.FC<
 
           setIsLoading(false);
           setHasSubmitted(true);
+
+          toast.success(t('contact-form-success'), {
+            description: t('contact-form-success-description'),
+            duration: 5000,
+          });
 
           if (confirmationType === 'redirect' && redirect) {
             const { url } = redirect;
@@ -113,15 +128,22 @@ export const FormBlock: React.FC<
         } catch (err) {
           console.warn(err);
           setIsLoading(false);
+          const errorMessage = t('contact-form-network-error-description');
+
           setError({
-            message: 'Something went wrong.',
+            message: errorMessage,
+          });
+
+          toast.error(t('contact-form-network-error'), {
+            description: errorMessage,
+            duration: 5000,
           });
         }
       };
 
       void submitForm();
     },
-    [router, formID, redirect, confirmationType]
+    [router, formID, redirect, confirmationType, t]
   );
 
   return (
@@ -168,8 +190,9 @@ export const FormBlock: React.FC<
                   className="group w-full"
                   variant="default"
                   size="lg"
+                  disabled={isLoading}
                 >
-                  {submitButtonLabel}
+                  {isLoading ? t('sending') || 'Sending...' : submitButtonLabel}
                   <Send className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>

@@ -4,6 +4,7 @@ import * as motion from 'motion/react-client';
 import { IconRenderer } from '@/components/IconRenderer';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
+import { isValidIconName } from '@/utilities/validateIcon';
 import type { FeatureGridBlock as FeatureGridBlockProps } from '@/payload-types';
 
 export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
@@ -13,10 +14,10 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
   advantages = [],
 }) => {
   return (
-    <section className="relative py-32" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container mx-auto px-4">
+      <div className="content-container">
         <SectionTitle {...title} title={title?.title || ''} />
 
         <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
@@ -33,24 +34,24 @@ export const FeatureGridBlock: React.FC<FeatureGridBlockProps> = ({
               }}
               className="group z-10 flex cursor-pointer items-start"
             >
-              <div className="relative mr-6">
-                <div className="flex size-16 items-center justify-center rounded-2xl bg-primary-50 transition-colors group-hover:bg-primary-100 dark:bg-primary-800 dark:group-hover:bg-primary-700">
-                  <motion.div
-                    animate={{ rotate: 0 }}
-                    className="group-hover:animate-[wiggle_0.5s_ease-in-out]"
-                  >
-                    {advantage?.icon && (
+              {advantage?.icon && isValidIconName(advantage.icon) && (
+                <div className="relative mr-6">
+                  <div className="flex size-16 items-center justify-center rounded-2xl bg-primary-50 transition-colors group-hover:bg-primary-100 dark:bg-primary-800 dark:group-hover:bg-primary-700">
+                    <motion.div
+                      animate={{ rotate: 0 }}
+                      className="group-hover:animate-[wiggle_0.5s_ease-in-out]"
+                    >
                       <IconRenderer
                         name={advantage.icon}
                         size={24}
                         className="text-primary-600 dark:text-accent-400 dark:group-hover:text-accent-300"
                       />
-                    )}
-                  </motion.div>
+                    </motion.div>
+                  </div>
+                  {/* Decorative element */}
+                  <div className="absolute -inset-4 -z-10 rounded-[30px] bg-primary-50/50 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-primary-800/50" />
                 </div>
-                {/* Decorative element */}
-                <div className="absolute -inset-4 -z-10 rounded-[30px] bg-primary-50/50 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-primary-800/50" />
-              </div>
+              )}
               <div>
                 <h3 className="mb-3 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-700 dark:text-white dark:group-hover:text-white">
                   {advantage.title}

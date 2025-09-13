@@ -20,7 +20,7 @@ export const Hero1: React.FC<HeroBlock> = ({ layout, title, backgroundImage, lin
       <BackgroundImage backgroundImage={backgroundImage} isFirst={isFirst} />
 
       <div
-        className={cn('container relative z-20 mx-auto px-4 py-10 text-white lg:py-16', {
+        className={cn('content-container relative z-20 py-10 text-white lg:py-16', {
           'items-start justify-start text-left': alignment === 'left',
           'items-center justify-center text-center': alignment === 'center',
           'items-end justify-end text-right': alignment === 'right',

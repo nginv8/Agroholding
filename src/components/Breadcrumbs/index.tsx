@@ -35,7 +35,7 @@ export const Breadcrumbs = ({
       transition={{ duration: 0.6 }}
       className={className}
     >
-      <nav className="flex items-center space-x-2 text-sm">
+      <nav className="flex max-w-full items-center space-x-2 overflow-hidden text-sm">
         <Link
           href="/"
           className="text-primary-600 transition-colors hover:text-primary-700 dark:text-white dark:hover:text-accent-400"
@@ -69,7 +69,7 @@ export const Breadcrumbs = ({
   if (withSection) {
     return (
       <section className={cn('my-8', sectionClassName)}>
-        <div className="container px-4">{breadcrumbContent}</div>
+        <div className="content-container">{breadcrumbContent}</div>
       </section>
     );
   }

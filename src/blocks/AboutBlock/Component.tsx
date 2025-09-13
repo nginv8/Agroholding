@@ -19,50 +19,46 @@ export const AboutBlock: FC<AboutBlockProps> = ({
   cta,
 }) => {
   return (
-    <section className="relative overflow-hidden py-32" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container relative mx-auto px-4">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Text column */}
+      <div className="content-container grid items-center gap-16 lg:grid-cols-2">
+        {/* Text column */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="relative"
+        >
+          <SectionTitle {...title} title={title?.title || ''} />
+          <div className="space-y-8 overflow-hidden">
+            {richText && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                {richText && <RichText data={richText} enableGutter={false} />}
+              </motion.div>
+            )}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="relative"
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap items-center gap-4"
             >
-              <SectionTitle {...title} title={title?.title || ''} />
-              <div className="space-y-8">
-                {richText && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    {richText && <RichText data={richText} enableGutter={false} />}
-                  </motion.div>
-                )}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 }}
-                  className="flex items-center space-x-4"
-                >
-                  {(cta || []).map(({ link }, i) => {
-                    return <CMSLink key={i} size="lg" {...link} />;
-                  })}
-                </motion.div>
-              </div>
+              {(cta || []).map(({ link }, i) => {
+                return <CMSLink key={i} size="lg" className="w-full sm:w-auto" {...link} />;
+              })}
             </motion.div>
-
-            {/* Image column */}
-            <ParallaxPreview mainMedia={mainImage} floatingMedia={secondaryImage} />
           </div>
-        </div>
+        </motion.div>
+
+        {/* Image column */}
+        <ParallaxPreview mainMedia={mainImage} floatingMedia={secondaryImage} />
       </div>
     </section>
   );

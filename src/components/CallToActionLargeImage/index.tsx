@@ -28,16 +28,16 @@ export const CallToActionLargeImage: React.FC<CallToActionLargeImageeProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.6 }}
-        className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20"
+        className="grid items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-20"
       >
         <div
           className={cn('relative', {
-            'md:order-2': imageSide === 'right',
+            'lg:order-2': imageSide === 'right',
           })}
         >
           <Media
             resource={image}
-            className="aspect-square overflow-hidden rounded-2xl shadow-xl"
+            className="aspect-video overflow-hidden rounded-2xl shadow-xl lg:aspect-square"
             imgClassName="size-full object-cover object-center"
           />
 
@@ -45,19 +45,23 @@ export const CallToActionLargeImage: React.FC<CallToActionLargeImageeProps> = ({
         </div>
 
         <div
-          className={cn({
-            'md:order-1': imageSide === 'right',
+          className={cn('space-y-8 lg:space-y-12 lg:py-8', {
+            'lg:order-1': imageSide === 'right',
           })}
         >
           {richText && <RichText className="max-w-3xl" data={richText} enableGutter={false} />}
 
-          {(links || []).map(({ link }, i) => {
-            return (
-              <CMSLink key={i} size="lg" {...link} className="group mr-4 mt-8">
-                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
-              </CMSLink>
-            );
-          })}
+          {links && links.length && (
+            <div className="flex flex-wrap gap-4">
+              {links?.map(({ link }, i) => {
+                return (
+                  <CMSLink key={i} size="lg" {...link} className="group w-full sm:w-auto">
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                  </CMSLink>
+                );
+              })}
+            </div>
+          )}
         </div>
       </motion.div>
     </>

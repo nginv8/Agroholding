@@ -4,11 +4,13 @@ import { FC, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 
 import { Media } from '@/components/Media';
+import { cn } from '@/utilities/ui';
 import type { Media as MediaType } from '@/payload-types';
 
 type ParallaxPreviewProps = {
   mainMedia?: MediaType | number | null;
   floatingMedia?: MediaType | number | null;
+  className?: string;
 };
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
@@ -23,7 +25,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
 
   return (
-    <div ref={containerRef} className="relative h-[500px]">
+    <div ref={containerRef} className={cn('relative h-[500px]', props?.className)}>
       {/* Main elements */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -31,7 +33,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2 }}
         style={{ y: y1 }}
-        className="absolute inset-x-0 top-20 z-20 h-[400px] w-11/12 overflow-hidden rounded-2xl shadow-2xl"
+        className="absolute inset-x-0 top-8 z-20 h-[400px] w-11/12 overflow-hidden rounded-2xl shadow-2xl"
       >
         <Media
           resource={props.mainMedia}
@@ -47,7 +49,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
         viewport={{ once: true }}
         transition={{ duration: 1 }}
         style={{ y: y2, opacity }}
-        className="absolute left-1/4 right-0 top-1/3 z-10 h-[300px] overflow-hidden rounded-2xl shadow-xl"
+        className="absolute left-1/4 right-0 top-1/4 z-10 h-[300px] overflow-hidden rounded-2xl shadow-xl"
       >
         <Media
           resource={props.floatingMedia}

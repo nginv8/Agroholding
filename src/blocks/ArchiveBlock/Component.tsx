@@ -1,13 +1,16 @@
-import { getPayload } from 'payload';
+import { getPayload, TypedLocale } from 'payload';
 
 import React from 'react';
 import configPromise from '@payload-config';
+import { getLocale } from 'next-intl/server';
 
 import { CollectionArchive } from '@/components/CollectionArchive';
 import RichText from '@/components/RichText';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
 import type { ArchiveBlock as ArchiveBlockProps, Post, Product } from '@/payload-types';
+
+import { ArchiveButton } from './ArchiveButton';
 
 export type CollectionTypes = Post | Product;
 
@@ -30,6 +33,7 @@ export const ArchiveBlock: React.FC<
   } = props;
   const collectionName = relationTo ? relationTo : 'posts';
   const limit = limitFromProps || 8;
+  const locale = (await getLocale()) as TypedLocale;
 
   let collection: CollectionTypes[] = [];
 
@@ -45,6 +49,7 @@ export const ArchiveBlock: React.FC<
       collection: collectionName,
       depth: 1,
       limit,
+      locale,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {
@@ -68,10 +73,10 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <section className="relative overflow-hidden py-32" id={`block-${id}`} data-theme={theme}>
+    <section className="content-section" id={`block-${id}`} data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container relative z-10">
+      <div className="content-container">
         <SectionTitle {...title} />
 
         {introContent && (
@@ -79,6 +84,7 @@ export const ArchiveBlock: React.FC<
         )}
       </div>
       <CollectionArchive collection={collection} collectionName={collectionName} />
+      <ArchiveButton collectionName={collectionName} hasItems={collection.length > 0} />
     </section>
   );
 };

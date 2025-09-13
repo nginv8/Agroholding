@@ -9,9 +9,9 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = (props) => {
   if (!testimonials || testimonials.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden py-32" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
-      <div className="container mx-auto px-4">
+      <div className="content-container">
         <SectionTitle {...title} title={title?.title || ''} />
         <TestimonialCarousel
           slides={testimonials}

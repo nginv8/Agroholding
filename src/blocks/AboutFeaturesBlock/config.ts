@@ -36,6 +36,11 @@ export const AboutFeaturesBlock: Block = {
     {
       name: 'features',
       type: 'array',
+      maxRows: 8,
+      admin: {
+        description: 'Best used with 2, 4 or 6 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           type: 'row',
@@ -66,6 +71,11 @@ export const AboutFeaturesBlock: Block = {
     {
       name: 'stats',
       type: 'array',
+      maxRows: 4,
+      admin: {
+        description: 'Best used with 2, 3 or 4 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           type: 'row',

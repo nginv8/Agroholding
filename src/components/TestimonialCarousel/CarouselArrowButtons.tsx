@@ -63,13 +63,12 @@ export const PrevButton: React.FC<ArrowButtonProps> = (props) => {
     <button
       type="button"
       className={cn(
-        'relative flex size-14 transform cursor-pointer items-center justify-center rounded-full text-primary-500 transition-all duration-200 ease-in-out hover:scale-125 hover:text-primary-600 dark:text-accent-400 dark:hover:text-accent-300',
-        { 'text-secondary-200': props.disabled },
+        'group relative size-10 rounded-md transition-all duration-200 hover:bg-black/20 disabled:hover:bg-transparent',
         className
       )}
       {...restProps}
     >
-      <ChevronLeft className="size-4/5" />
+      <ChevronLeft className="absolute left-1/2 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 text-white/50 transition-transform group-hover:scale-125 group-hover:text-white group-[:disabled:hover]:text-white/50" />
       {children}
     </button>
   );
@@ -82,13 +81,12 @@ export const NextButton: React.FC<ArrowButtonProps> = (props) => {
     <button
       type="button"
       className={cn(
-        'relative flex size-14 transform cursor-pointer items-center justify-center rounded-full text-primary-500 transition-all duration-200 ease-in-out hover:scale-125 hover:text-primary-600 dark:text-accent-400 dark:hover:text-accent-300',
-        { 'text-secondary-200': props.disabled },
+        'group peer relative size-10 rounded-md transition-all duration-200 hover:bg-black/20 disabled:hover:bg-transparent',
         className
       )}
       {...restProps}
     >
-      <ChevronRight className="size-4/5" />
+      <ChevronRight className="absolute left-1/2 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 text-white/50 transition-transform group-hover:scale-125 group-hover:text-white group-[:disabled:hover]:text-white/50" />
       {children}
     </button>
   );

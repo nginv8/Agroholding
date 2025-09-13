@@ -4,6 +4,7 @@ import * as motion from 'motion/react-client';
 import { IconRenderer } from '@/components/IconRenderer';
 import { SectionBackground } from '@/components/SectionBackground';
 import { SectionTitle } from '@/components/SectionTitle';
+import { isValidIconName } from '@/utilities/validateIcon';
 import type { FeatureCardsBlock as FeatureCardsProps } from '@/payload-types';
 
 const containerVariants = {
@@ -29,10 +30,10 @@ const itemVariants = {
 
 export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({ title, sbg, theme, features }) => {
   return (
-    <section className="relative overflow-hidden py-20" data-theme={theme}>
+    <section className="content-section" data-theme={theme}>
       <SectionBackground {...sbg} />
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="content-container">
         <SectionTitle {...title} title={title?.title || ''} />
 
         <motion.div
@@ -48,18 +49,15 @@ export const FeatureCardsBlock: React.FC<FeatureCardsProps> = ({ title, sbg, the
               variants={itemVariants}
               className="w-full shrink grow text-center md:max-w-[calc(50%-12px)] lg:max-w-[calc(33.333%-16px)] xl:max-w-[calc(25%-24px)]"
             >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="h-full rounded-lg bg-primary-800 p-6"
-              >
-                <div className="mb-4 inline-block rounded-full bg-primary-700 p-3">
-                  {feature.icon && (
+              <div className="h-full rounded-lg bg-primary-800 p-6">
+                {feature.icon && isValidIconName(feature.icon) && (
+                  <div className="mb-4 inline-block rounded-full bg-primary-700 p-3">
                     <IconRenderer name={feature.icon} className="size-8 text-accent-400" />
-                  )}
-                </div>
+                  </div>
+                )}
                 <h3 className="mb-3 text-xl font-semibold">{feature.title}</h3>
                 <p className="text-stone-300">{feature.description}</p>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>

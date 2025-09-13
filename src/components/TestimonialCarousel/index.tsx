@@ -36,22 +36,22 @@ export const TestimonialCarousel: FC<CarouselProps> = (props) => {
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi, onNavButtonClick);
 
-  return (
-    <div className="relative z-10 mx-auto w-full xl:-mt-32">
-      <div className="mb-16 hidden items-center justify-end gap-4 px-4 xl:flex">
-        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-      </div>
+  const canNavigate = scrollSnaps.length > 1;
 
+  return (
+    <div className="relative z-10 mx-auto w-full select-none space-y-8">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y" style={{ marginLeft: 'calc(var(--slide-spacing) * -1)' }}>
+        <div
+          className="flex touch-pan-y"
+          style={{ marginLeft: 'calc(var(--testimonials-slide-spacing) * -1)' }}
+        >
           {slides?.map((slide) => (
             <CarouselSlide
               key={slide.id}
               className="min-w-0 flex-none"
               style={{
-                flexBasis: 'var(--slide-size)',
-                paddingLeft: 'var(--slide-spacing)',
+                flexBasis: 'var(--testimonials-slide-size)',
+                paddingLeft: 'var(--testimonials-slide-spacing)',
               }}
               slide={slide}
             />
@@ -59,27 +59,49 @@ export const TestimonialCarousel: FC<CarouselProps> = (props) => {
         </div>
       </div>
 
-      <div className="flex w-full items-center justify-between">
-        <div className="flex flex-wrap items-center justify-center gap-4 xl:absolute xl:-right-16 xl:top-1/2 xl:-translate-y-1/2 xl:flex-col xl:gap-y-6">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={cn(
-                'cursor-pointer rounded-xl transition-colors duration-200 ease-in-out',
-                index === selectedIndex
-                  ? 'h-4 w-2 bg-primary-500 xl:h-2 xl:w-4 dark:bg-accent-300'
-                  : 'size-2 bg-secondary-200 dark:bg-white/30'
-              )}
-            />
-          ))}
-        </div>
+      {canNavigate && (
+        <div className="flex w-full items-end justify-between">
+          <div className="flex items-center space-x-2">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className="group relative"
+              >
+                <div
+                  className={cn(
+                    'relative h-1.5 overflow-hidden transition-all duration-500 ease-in-out',
+                    index === selectedIndex
+                      ? 'w-10 bg-gradient-to-r from-green-400 to-green-600 shadow-lg shadow-green-400/50'
+                      : 'w-6 bg-black/10 group-hover:w-8 group-hover:bg-black/20 dark:bg-white/20 group-hover:dark:bg-white/30'
+                  )}
+                  style={{
+                    clipPath:
+                      index === selectedIndex
+                        ? 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)'
+                        : 'polygon(20% 0, 100% 0, 80% 100%, 0 100%)',
+                  }}
+                />
+                <div
+                  className={cn(
+                    'absolute -top-10 left-1/2 -translate-x-1/2 rounded bg-black/60 text-white/80 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100',
+                    { 'text-green-400': index === selectedIndex }
+                  )}
+                >
+                  <span className="px-2 py-1 font-mono text-xs">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+              </DotButton>
+            ))}
+          </div>
 
-        <div className="flex items-center justify-end xl:hidden">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+          <div className="group/panel flex items-center gap-1 rounded-lg bg-black/10 backdrop-blur-md">
+            <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+            <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

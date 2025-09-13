@@ -31,7 +31,7 @@ export const Email: React.FC<
         defaultValue={defaultValue}
         id={name}
         type="text"
-        className="h-12 border-input bg-background text-foreground transition-colors placeholder:text-muted-foreground focus:border-ring dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder:text-white/80 dark:focus:border-accent"
+        className="h-12"
         {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
         placeholder={placeholder}
       />

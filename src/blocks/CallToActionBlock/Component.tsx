@@ -5,38 +5,6 @@ import { SectionBackground } from '@/components/SectionBackground';
 import { cn } from '@/utilities/ui';
 import type { CallToActionBlock as CTABlockProps } from '@/payload-types';
 
-function getMarginClasses({
-  marginTop,
-  marginBottom,
-}: {
-  marginTop?: CTABlockProps['marginTop'];
-  marginBottom?: CTABlockProps['marginBottom'];
-}) {
-  if (!marginTop || !marginBottom) return '';
-
-  const marginValueList = {
-    mobile: {
-      none: '0',
-      sm: '4',
-      md: '8',
-      lg: '12',
-      xl: '16',
-    },
-    desktop: {
-      none: '0',
-      sm: '8',
-      md: '16',
-      lg: '24',
-      xl: '32',
-    },
-  };
-
-  return cn(
-    `pt-${marginValueList.mobile[marginTop || 'none']} md:pt-${marginValueList.desktop[marginTop || 'none']}`,
-    `pb-${marginValueList.mobile[marginBottom || 'none']} md:pb-${marginValueList.desktop[marginBottom || 'none']}`
-  );
-}
-
 export const CallToActionBlock: React.FC<CTABlockProps> = ({
   sbg,
   theme,
@@ -48,11 +16,29 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({
   links,
   richText,
 }) => {
-  const marginClasses = getMarginClasses({ marginTop, marginBottom });
   return (
-    <section className={cn('relative overflow-hidden', marginClasses)} data-theme={theme}>
+    <section
+      className={cn(
+        'relative overflow-hidden',
+        {
+          'pt-0': marginTop === 'none',
+          'pt-4 md:pt-8': marginTop === 'sm',
+          'pt-8 md:pt-16': marginTop === 'md',
+          'pt-12 md:pt-20': marginTop === 'lg',
+          'pt-16 md:pt-24': marginTop === 'xl',
+        },
+        {
+          'pb-0': marginBottom === 'none',
+          'pb-4 md:pb-8': marginBottom === 'sm',
+          'pb-8 md:pb-16': marginBottom === 'md',
+          'pb-12 md:pb-20': marginBottom === 'lg',
+          'pb-16 md:pb-24': marginBottom === 'xl',
+        }
+      )}
+      data-theme={theme}
+    >
       <SectionBackground {...sbg} />
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="content-container">
         {layoutStyle === 'none' && <CallToActionText richText={richText} links={links} />}
         {layoutStyle === 'sm' && (
           <CallToActionSmallImage

@@ -23,6 +23,11 @@ export const FeatureTabsBlock: Block = {
       name: 'features',
       type: 'array',
       label: 'Features',
+      admin: {
+        description: 'Best for 3 - 10 features',
+      },
+      minRows: 2,
+      maxRows: 10,
       fields: [
         {
           type: 'row',

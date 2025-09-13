@@ -24,6 +24,11 @@ export const FeatureGalleryBlock: Block = {
       type: 'array',
       required: true,
       minRows: 1,
+      maxRows: 12,
+      admin: {
+        description: 'Best used with 2, 4, or 6 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           type: 'row',
@@ -63,8 +68,11 @@ export const FeatureGalleryBlock: Block = {
     {
       name: 'stats',
       type: 'array',
-      required: true,
-      minRows: 1,
+      maxRows: 4,
+      admin: {
+        description: 'Best used with 3 or 4 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           name: 'number',

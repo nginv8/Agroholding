@@ -28,8 +28,10 @@ export const FAQBlock: Block = {
       name: 'statistics',
       type: 'array',
       label: 'Statistics',
+      maxRows: 2,
       admin: {
         initCollapsed: true,
+        description: 'Add up to 2 statistics to display next to the FAQ section.',
       },
       fields: [
         {
@@ -47,7 +49,6 @@ export const FAQBlock: Block = {
           required: true,
         },
       ],
-      maxRows: 2,
     },
     {
       type: 'row',
@@ -73,8 +74,11 @@ export const FAQBlock: Block = {
       name: 'faqs',
       type: 'array',
       label: 'FAQs',
+      minRows: 1,
+      maxRows: 12,
       admin: {
         initCollapsed: true,
+        description: 'Best used with 5 - 10 items.',
       },
       fields: [
         {

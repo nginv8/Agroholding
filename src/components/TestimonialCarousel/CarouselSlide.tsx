@@ -14,7 +14,7 @@ export function CarouselSlide({ slide, className, style }: CarouselSlideProps) {
   return (
     <div className={cn('group', className)} style={style}>
       {slide.image && (
-        <div className="relative h-48 overflow-hidden rounded-lg">
+        <div className="relative h-56 overflow-hidden rounded-lg">
           <Media
             resource={slide.image}
             className="size-full"
@@ -35,7 +35,7 @@ export function CarouselSlide({ slide, className, style }: CarouselSlideProps) {
         <div className="mb-6 flex items-center">
           <Media
             resource={slide.avatar}
-            className="aspect-square size-14 overflow-hidden rounded-full border-4 border-white shadow-lg"
+            className="aspect-square size-14 flex-none overflow-hidden rounded-full border-4 border-white shadow-lg"
             imgClassName="size-full object-cover"
           />
           <div className="ml-4">

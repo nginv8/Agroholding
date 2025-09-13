@@ -4,11 +4,13 @@ import { FC, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 
 import { Media } from '@/components/Media';
+import { cn } from '@/utilities/ui';
 import type { Media as MediaType } from '@/payload-types';
 
 type ParallaxPreviewProps = {
   mainMedia?: MediaType | number | null;
   floatingMedia?: MediaType | number | null;
+  className?: string;
 };
 
 export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
@@ -27,7 +29,7 @@ export const ParallaxPreview: FC<ParallaxPreviewProps> = (props) => {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="relative"
+      className={cn('relative', props?.className)}
     >
       <div className="relative z-10">
         {props.mainMedia && (

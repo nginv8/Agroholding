@@ -22,6 +22,12 @@ export const FeatureCardsBlock: Block = {
       name: 'features',
       type: 'array',
       label: 'Features',
+      minRows: 1,
+      maxRows: 12,
+      admin: {
+        description: 'Best used with 4 or 8 items.',
+        initCollapsed: true,
+      },
       fields: [
         {
           type: 'row',
