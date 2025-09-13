@@ -45,13 +45,13 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <div className="py-24">
       <PageClient />
-      <div className="container mb-16">
+      <div className="content-container mb-16">
         <div className="prose max-w-none dark:prose-invert">
           <h1>{t(collectionName)}</h1>
         </div>
       </div>
 
-      <div className="container mb-8">
+      <div className="content-container mb-8">
         <PageRange
           collection={collectionName}
           currentPage={posts.page}
@@ -66,9 +66,9 @@ export default async function Page({ params: paramsPromise }: Args) {
         animationType="immediate"
       />
 
-      <div className="container">
+      <div className="content-container">
         {posts?.page && posts?.totalPages > 1 && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page} totalPages={posts.totalPages} collectionName="posts" />
         )}
       </div>
     </div>

@@ -21,6 +21,9 @@ type Args = {
   }>;
 };
 
+const COLLECTION_NAME = 'products';
+const ITEMS_LIMIT = 8;
+
 export default async function Page({ params }: Args) {
   const { pageNumber, locale = 'uk' } = await params;
   const currentPage = parseInt(pageNumber, 10);
@@ -33,10 +36,10 @@ export default async function Page({ params }: Args) {
   const payload = await getPayload({ config: configPromise });
 
   const products = await payload.find({
-    collection: 'products',
+    collection: COLLECTION_NAME,
     locale,
     depth: 1,
-    limit: 12,
+    limit: ITEMS_LIMIT,
     page: currentPage,
     overrideAccess: false,
     select: {
@@ -54,30 +57,34 @@ export default async function Page({ params }: Args) {
   return (
     <div className="py-24">
       <PageClient />
-      <div className="container mb-16">
+      <div className="content-container mb-16">
         <div className="prose max-w-none dark:prose-invert">
-          <h1>{t('products')}</h1>
+          <h1>{t(COLLECTION_NAME)}</h1>
         </div>
       </div>
 
-      <div className="container mb-8">
+      <div className="content-container mb-8">
         <PageRange
-          collection="products"
+          collection={COLLECTION_NAME}
           currentPage={products.page}
-          limit={12}
+          limit={ITEMS_LIMIT}
           totalDocs={products.totalDocs}
         />
       </div>
 
       <CollectionArchive
         collection={products.docs}
-        collectionName="products"
+        collectionName={COLLECTION_NAME}
         animationType="immediate"
       />
 
-      <div className="container">
+      <div className="content-container">
         {products.totalPages > 1 && products.page && (
-          <Pagination page={products.page} totalPages={products.totalPages} />
+          <Pagination
+            page={products.page}
+            totalPages={products.totalPages}
+            collectionName={COLLECTION_NAME}
+          />
         )}
       </div>
     </div>

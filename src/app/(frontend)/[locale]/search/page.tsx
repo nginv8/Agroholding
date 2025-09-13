@@ -75,7 +75,7 @@ export default async function Page({
   return (
     <div className="py-24">
       <PageClient />
-      <div className="container mb-16">
+      <div className="content-container mb-16">
         <div className="prose max-w-none text-center dark:prose-invert">
           <h1 className="mb-8 lg:mb-16">{t('search')}</h1>
 
@@ -92,7 +92,7 @@ export default async function Page({
           animationType="immediate"
         />
       ) : (
-        <div className="container">{t('no-results')}</div>
+        <div className="content-container">{t('no-results')}</div>
       )}
     </div>
   );

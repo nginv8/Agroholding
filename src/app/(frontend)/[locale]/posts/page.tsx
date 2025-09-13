@@ -49,13 +49,11 @@ export default async function Page({ params }: Args) {
 
       <Breadcrumbs items={[{ label: t(collectionName), isActive: true }]} withSection={true} />
 
-      <div className="container my-8 px-4">
-        <h1 className="text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
+      <div className="content-container">
+        <h1 className="my-8 text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
           {t(collectionName)}
         </h1>
-      </div>
 
-      <div className="container px-4">
         <PageRange
           collection={collectionName}
           currentPage={posts.page}
@@ -71,9 +69,9 @@ export default async function Page({ params }: Args) {
         animationType="immediate"
       />
 
-      <div className="container px-4">
+      <div className="content-container">
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page} totalPages={posts.totalPages} collectionName="posts" />
         )}
       </div>
     </div>

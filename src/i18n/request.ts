@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server';
 
-import uk from './messages/en.json';
+import uk from './messages/uk.json';
 import { routing, type Locale } from './routing';
 
 type Messages = typeof uk;

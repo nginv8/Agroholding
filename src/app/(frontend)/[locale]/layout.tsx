@@ -19,8 +19,6 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
 import { cn } from '@/utilities/ui';
 import { Providers } from '@/providers';
 
-// import localization from '@/i18n/localization'
-
 import './globals.css';
 
 import { getServerSideURL } from '@/utilities/getURL';
@@ -34,7 +32,6 @@ type Args = {
 
 export default async function RootLayout({ children, params }: Args) {
   const { locale } = await params;
-  // const currentLocale = localization.locales.find((loc) => loc.code === locale)
 
   if (!routing.locales.includes(locale)) {
     notFound();
@@ -85,8 +82,9 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@polisagro',
   },
+  manifest: '/site.webmanifest',
 };
 
 export function generateStaticParams() {

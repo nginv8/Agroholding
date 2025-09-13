@@ -2,6 +2,7 @@
   "// === NAVIGATION & GENERAL ===": "",
   "home": "Home",
   "navigation": "Navigation",
+  "language": "Language",
   "back-to-products": "Back to products",
   "back-to-posts": "Back to posts",
   "go-home": "Go home",
@@ -35,6 +36,7 @@
   "product-not-found": "Product not found",
   "product-not-found-description": "Sorry, but the product you are looking for does not exist or has been removed.",
   "go-back-to-products": "Go back to product catalog",
+  "all-products": "All Products",
   "why-choose-our-products": "Why choose our products",
   "industry-leader-benefits": "Benefits that make us industry leaders",
 
@@ -59,6 +61,12 @@
   "phone-not-available": "Phone number not available",
   "email-not-available": "Email not available",
 
+  "// === CONTACT INFO SECTIONS ===": "",
+  "phones-title": "Phone",
+  "emails-title": "Email",
+  "addresses-title": "Address",
+  "working-hours-title": "Working Hours",
+
   "// === FORMS ===": "",
   "your-name": "Your Name",
   "enter-name": "Enter your name",
@@ -81,9 +89,22 @@
   "subscribe-error": "Something went wrong. Please try again.",
   "subscribe-network-error": "Failed to subscribe. Please check your internet connection.",
 
+  "// === CONTACT FORM TOASTS ===": "",
+  "contact-form-success": "Thank you! Your message has been sent successfully.",
+  "contact-form-success-description": "We will contact you shortly.",
+  "contact-form-error": "Form submission error",
+  "contact-form-network-error": "Connection error",
+  "contact-form-network-error-description": "Something went wrong. Please try again later.",
+  "sending": "Sending...",
+
+  "// === ORDER FORM ===": "",
+  "order-success": "Thank you for your order!",
+  "order-success-description": "We will contact you shortly to confirm the details.",
+
   "// === POSTS ===": "",
   "posts": "Posts",
   "post": "Post",
+  "all-posts": "All News",
   "author": "Author",
   "unknown-author": "Unknown Author",
   "date-published": "Date Published",

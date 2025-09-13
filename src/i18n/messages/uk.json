@@ -2,6 +2,7 @@
   "// === NAVIGATION & GENERAL ===": "",
   "home": "Головна",
   "navigation": "Навігація",
+  "language": "Мова",
   "back-to-products": "Повернутися до продукції",
   "back-to-posts": "Повернутися до новин",
   "go-home": "На Головну",
@@ -35,6 +36,7 @@
   "product-not-found": "Продукт не знайдено",
   "product-not-found-description": "Вибачте, але продукт, який ви шукаете, не існує або був видалений.",
   "go-back-to-products": "Повернутися до каталогу продукції",
+  "all-products": "Вся продукція",
   "why-choose-our-products": "Чому обирають нашу продукцію",
   "industry-leader-benefits": "Переваги, які роблять нас лідерами галузі",
 
@@ -59,6 +61,12 @@
   "phone-not-available": "Номер телефону недоступний",
   "email-not-available": "Email недоступний",
 
+  "// === CONTACT INFO SECTIONS ===": "",
+  "phones-title": "Телефон",
+  "emails-title": "Електронна пошта",
+  "addresses-title": "Адреса",
+  "working-hours-title": "Робочі години",
+
   "// === FORMS ===": "",
   "your-name": "Ваше ім'я",
   "enter-name": "Введіть ваше ім'я",
@@ -81,9 +89,22 @@
   "subscribe-error": "Щось пішло не так. Спробуйте ще раз.",
   "subscribe-network-error": "Не вдалося підписатися. Перевірте підключення до інтернету.",
 
+  "// === CONTACT FORM TOASTS ===": "",
+  "contact-form-success": "Дякуємо! Ваше повідомлення успішно надіслано.",
+  "contact-form-success-description": "Ми зв'яжемося з вами найближчим часом.",
+  "contact-form-error": "Помилка відправки форми",
+  "contact-form-network-error": "Помилка з'єднання",
+  "contact-form-network-error-description": "Щось пішло не так. Спробуйте пізніше.",
+  "sending": "Відправляємо...",
+
+  "// === ORDER FORM ===": "",
+  "order-success": "Дякуємо за ваше замовлення!",
+  "order-success-description": "Ми зв'яжемося з вами найближчим часом для підтвердження деталей.",
+
   "// === POSTS ===": "",
   "posts": "Пости",
   "post": "Пост",
+  "all-posts": "Всі новини",
   "author": "Автор",
   "unknown-author": "Невідомий автор",
   "date-published": "Дата публікації",

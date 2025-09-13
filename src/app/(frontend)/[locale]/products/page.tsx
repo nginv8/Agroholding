@@ -21,19 +21,19 @@ type Args = {
   }>;
 };
 
-export default async function Page({ params }: Args) {
-  const collectionName = 'products';
-  const itemsLimit = 8;
+const COLLECTION_NAME = 'products';
+const ITEMS_LIMIT = 8;
 
+export default async function Page({ params }: Args) {
   const { locale = 'uk' } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });
 
   const products = await payload.find({
-    collection: collectionName,
+    collection: COLLECTION_NAME,
     locale,
     depth: 1,
-    limit: itemsLimit,
+    limit: ITEMS_LIMIT,
     overrideAccess: false,
     select: {
       title: true,
@@ -47,19 +47,19 @@ export default async function Page({ params }: Args) {
     <div className="pb-24">
       <PageClient />
 
-      <Breadcrumbs items={[{ label: t(collectionName), isActive: true }]} withSection={true} />
+      <Breadcrumbs items={[{ label: t(COLLECTION_NAME), isActive: true }]} withSection={true} />
 
-      <div className="container my-8 px-4">
+      <div className="content-container my-8 px-4">
         <h1 className="text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
-          {t(collectionName)}
+          {t(COLLECTION_NAME)}
         </h1>
       </div>
 
-      <div className="container px-4">
+      <div className="content-container px-4">
         <PageRange
-          collection={collectionName}
+          collection={COLLECTION_NAME}
           currentPage={products.page}
-          limit={itemsLimit}
+          limit={ITEMS_LIMIT}
           totalDocs={products.totalDocs}
           className="mb-8"
         />
@@ -67,13 +67,17 @@ export default async function Page({ params }: Args) {
 
       <CollectionArchive
         collection={products.docs}
-        collectionName={collectionName}
+        collectionName={COLLECTION_NAME}
         animationType="immediate"
       />
 
-      <div className="container px-4">
+      <div className="content-container px-4">
         {products.totalPages > 1 && products.page && (
-          <Pagination page={products.page} totalPages={products.totalPages} />
+          <Pagination
+            page={products.page}
+            totalPages={products.totalPages}
+            collectionName={COLLECTION_NAME}
+          />
         )}
       </div>
     </div>
@@ -82,6 +86,6 @@ export default async function Page({ params }: Args) {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Products`,
+    title: COLLECTION_NAME,
   };
 }

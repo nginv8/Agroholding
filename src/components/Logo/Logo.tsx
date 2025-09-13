@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocale } from 'next-intl';
 
 import { cn } from '@/utilities/ui';
 
@@ -16,9 +17,12 @@ export const Logo = (props: Props) => {
     className,
     variant = 'dark',
   } = props;
+
+  const locale = useLocale();
+
   const logoUrls = {
-    light: '/logo-light.svg',
-    dark: '/logo.svg',
+    light: `/logo-light-${locale}.svg`,
+    dark: `/logo-${locale}.svg`,
   };
 
   const loading = loadingFromProps || 'lazy';
@@ -27,7 +31,7 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
+      alt="Logo"
       width={176}
       height={56}
       loading={loading}
