@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     const orderSubmission = await payload.create({
-      collection: 'order-submissions',
+      collection: 'orders',
       data: {
         name,
         email,

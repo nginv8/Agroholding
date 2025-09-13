@@ -68,17 +68,17 @@ export default function ProductInfo({ product, contactInfo }: ProductInfoProps) 
         </div>
       )}
 
-      <div className="flex gap-4 pt-4">
+      <div className="flex flex-wrap gap-4 pt-4">
         <OrderFormPopup
           product={product}
-          buttonClassName="flex-1"
+          buttonClassName="flex-none w-full md:w-auto"
           buttonSize="default"
           buttonVariant="default"
         />
         {primaryPhone && (
           <a
             href={`tel:${primaryPhone}`}
-            className="inline-flex size-10 flex-none items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="inline-flex size-10 flex-1 items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:flex-none"
             aria-label={t('call-us')}
             title={`${t('call-us')}: ${primaryPhone}`}
           >
@@ -89,7 +89,7 @@ export default function ProductInfo({ product, contactInfo }: ProductInfoProps) 
         {primaryEmail && (
           <a
             href={`mailto:${primaryEmail}`}
-            className="inline-flex size-10 flex-none items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="inline-flex size-10 flex-1 items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:flex-none"
             aria-label={t('send-email')}
             title={`${t('send-email')}: ${primaryEmail}`}
           >

@@ -1,3 +1,7 @@
+import { TypedLocale } from 'payload';
+
+import { getLocale } from 'next-intl/server';
+
 import { getCachedGlobal } from '@/utilities/getGlobals';
 import type { Product as ProductType } from '@/payload-types';
 
@@ -21,16 +25,18 @@ export default async function Product({ product, relatedProducts = [] }: Product
     return <ProductNotFound />;
   }
 
+  const locale = (await getLocale()) as TypedLocale;
+
   const [productPageSettings, contactInfo] = await Promise.all([
-    getCachedGlobal('productPageSettings', 1)(),
-    getCachedGlobal('contactInfo', 1)(),
+    getCachedGlobal('productPageSettings', 1, locale)(),
+    getCachedGlobal('contactInfo', 1, locale)(),
   ]);
 
   return (
     <main className="min-h-screen bg-white">
       <ProductNavigation product={product} />
 
-      <div className="container my-8 grid grid-cols-1 gap-y-6 px-4 lg:grid-cols-12 lg:gap-12">
+      <div className="content-container my-8 grid grid-cols-1 gap-y-6 lg:mb-12 lg:grid-cols-12 lg:gap-12">
         <ProductHeader product={product} className="lg:hidden" />
 
         <ProductImageSlider product={product} className="col-span-7" />
@@ -40,10 +46,23 @@ export default async function Product({ product, relatedProducts = [] }: Product
         </div>
       </div>
 
-      <ProductTabs product={product} settings={productPageSettings} />
-      <ProductBenefits product={product} settings={productPageSettings} />
-      <ProductContent product={product} settings={productPageSettings} />
-      <RelatedProducts relatedProducts={relatedProducts} />
+      <div className="content-container py-8 lg:grid lg:grid-cols-12 lg:gap-8 lg:py-16">
+        <div className="space-y-8 lg:col-span-8">
+          <ProductTabs product={product} settings={productPageSettings} />
+          <ProductBenefits product={product} settings={productPageSettings} />
+          <ProductContent product={product} settings={productPageSettings} />
+        </div>
+
+        <aside className="lg:col-span-4">
+          <div className="lg:sticky lg:top-28">
+            <RelatedProducts
+              relatedProducts={relatedProducts}
+              settings={productPageSettings}
+              variant="sidebar"
+            />
+          </div>
+        </aside>
+      </div>
     </main>
   );
 }

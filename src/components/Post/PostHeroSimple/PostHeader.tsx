@@ -15,7 +15,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="mb-6 text-4xl font-bold leading-tight text-gray-900 lg:text-5xl"
+        className="mb-6 text-3xl font-bold leading-tight text-gray-900 lg:text-5xl"
       >
         {post.title}
       </motion.h1>
@@ -25,7 +25,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-8 text-xl leading-relaxed text-gray-600"
+          className="mb-8 text-lg leading-relaxed text-gray-600 lg:text-xl"
         >
           {post.excerpt}
         </motion.p>

@@ -1,6 +1,5 @@
 'use client';
 
-import * as motion from 'motion/react-client';
 import { useTranslations } from 'next-intl';
 
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -21,37 +20,28 @@ export const PostHeroSimple = ({ post }: PostHeroSimpleProps) => {
   return (
     <>
       <section className="relative bg-gradient-to-b from-green-50 to-white py-4 lg:py-8">
-        <div className="container px-4">
+        <div className="content-container space-y-8">
           <Breadcrumbs
             items={[
               { label: t('posts'), href: '/posts' },
               { label: post.title, isActive: true },
             ]}
-            className="mb-8"
           />
           <PostMeta post={post} />
           <PostHeader post={post} />
           <AuthorAndShare post={post} />
-        </div>
-      </section>
 
-      {post.heroImage && typeof post.heroImage === 'object' && (
-        <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="container px-4"
-          >
+          {post.heroImage && typeof post.heroImage === 'object' && (
             <Media
               resource={post.heroImage}
-              fill
-              className="relative aspect-[2/1] overflow-hidden rounded-2xl shadow-2xl"
-              imgClassName="object-cover"
+              className="aspect-[2/1] overflow-hidden rounded-2xl shadow-2xl"
+              imgClassName="size-full object-cover"
+              priority={true}
+              loading="eager"
             />
-          </motion.div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
     </>
   );
 };

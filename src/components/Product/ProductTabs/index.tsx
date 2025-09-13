@@ -47,46 +47,42 @@ export default function ProductTabs({ product, settings }: ProductTabsProps) {
         : 'grid-cols-1 sm:grid-cols-3';
 
   return (
-    <section className="my-8">
-      <div className="container px-4">
-        <Tabs defaultValue={defaultValue} className="w-full">
-          <TabsList className={cn('grid h-auto w-full gap-2', gridCols)}>
-            {hasDescription && (
-              <TabsTrigger value="description" className="min-h-6 truncate py-3 text-sm">
-                {t('description')}
-              </TabsTrigger>
-            )}
-            {hasSpecifications && (
-              <TabsTrigger value="specifications" className="min-h-6 truncate py-3 text-sm">
-                {t('specifications')}
-              </TabsTrigger>
-            )}
-            {hasDocuments && (
-              <TabsTrigger value="documents" className="min-h-6 truncate py-3 text-sm">
-                {t('documents')}
-              </TabsTrigger>
-            )}
-          </TabsList>
+    <Tabs defaultValue={defaultValue} className="w-full">
+      <TabsList className={cn('grid h-auto w-full gap-2', gridCols)}>
+        {hasDescription && (
+          <TabsTrigger value="description" className="min-h-6 truncate py-3 text-sm">
+            {t('description')}
+          </TabsTrigger>
+        )}
+        {hasSpecifications && (
+          <TabsTrigger value="specifications" className="min-h-6 truncate py-3 text-sm">
+            {t('specifications')}
+          </TabsTrigger>
+        )}
+        {hasDocuments && (
+          <TabsTrigger value="documents" className="min-h-6 truncate py-3 text-sm">
+            {t('documents')}
+          </TabsTrigger>
+        )}
+      </TabsList>
 
-          {hasDescription && (
-            <TabsContent value="description" className="mt-8">
-              <DescriptionTab product={product} settings={settings} />
-            </TabsContent>
-          )}
+      {hasDescription && (
+        <TabsContent value="description" className="mt-8">
+          <DescriptionTab product={product} settings={settings} />
+        </TabsContent>
+      )}
 
-          {hasSpecifications && (
-            <TabsContent value="specifications" className="mt-8">
-              <SpecificationsTab product={product} settings={settings} />
-            </TabsContent>
-          )}
+      {hasSpecifications && (
+        <TabsContent value="specifications" className="mt-8">
+          <SpecificationsTab product={product} settings={settings} />
+        </TabsContent>
+      )}
 
-          {hasDocuments && (
-            <TabsContent value="documents" className="mt-8">
-              <DocumentsTab product={product} settings={settings} />
-            </TabsContent>
-          )}
-        </Tabs>
-      </div>
-    </section>
+      {hasDocuments && (
+        <TabsContent value="documents" className="mt-8">
+          <DocumentsTab product={product} settings={settings} />
+        </TabsContent>
+      )}
+    </Tabs>
   );
 }

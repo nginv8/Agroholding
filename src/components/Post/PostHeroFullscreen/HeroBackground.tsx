@@ -12,11 +12,10 @@ export const HeroBackground = ({ heroImage }: HeroBackgroundProps) => {
     <div className="min-h-[80vh] select-none">
       {heroImage && typeof heroImage === 'object' && (
         <Media
-          fill
-          priority
+          priority={true}
           loading="eager"
           className="absolute inset-0"
-          imgClassName="object-cover object-center"
+          imgClassName="object-cover size-full object-center"
           resource={heroImage}
         />
       )}

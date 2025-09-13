@@ -13,9 +13,5 @@ export default function DescriptionTab({ product }: DescriptionTabProps) {
     return null;
   }
 
-  return (
-    <div className="prose prose-lg max-w-none">
-      <RichText data={product.fullDescription} enableGutter={false} />
-    </div>
-  );
+  return <RichText data={product.fullDescription} enableGutter={false} className="prose-lg" />;
 }

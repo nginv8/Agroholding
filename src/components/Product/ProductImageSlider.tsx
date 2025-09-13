@@ -107,8 +107,8 @@ export default function ProductImageSlider({ product, className }: ProductImageS
                   <Media
                     resource={imageItem.image}
                     alt={`${product.title} ${index + 1}`}
-                    fill
-                    className="object-cover"
+                    className="flex size-full items-center justify-center"
+                    imgClassName="size-full object-cover object-center"
                     priority={index === 0}
                     loading={index === 0 ? 'eager' : 'lazy'}
                   />
@@ -158,8 +158,8 @@ export default function ProductImageSlider({ product, className }: ProductImageS
                       <Media
                         resource={imageItem.image}
                         alt={`${product.title} thumbnail ${index + 1}`}
-                        fill
-                        className="object-cover"
+                        className="flex size-full items-center justify-center bg-white"
+                        imgClassName="size-full object-cover object-center"
                         loading="lazy"
                       />
                     </button>

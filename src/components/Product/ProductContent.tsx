@@ -22,22 +22,14 @@ export default function ProductContent({ product, settings }: ProductContentProp
   }
 
   return (
-    <section className="py-8 lg:py-16">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-4xl">
-          {hasProductContent && product.content && (
-            <div className="mb-8">
-              <RichText data={product.content} enableGutter={false} />
-            </div>
-          )}
+    <div className="space-y-8">
+      {hasProductContent && product.content && (
+        <RichText data={product.content} enableGutter={false} className="prose-lg" />
+      )}
 
-          {hasGlobalContent && settings.globalContent && (
-            <div>
-              <RichText data={settings.globalContent} enableGutter={false} />
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
+      {hasGlobalContent && settings.globalContent && (
+        <RichText data={settings.globalContent} enableGutter={false} className="prose-lg" />
+      )}
+    </div>
   );
 }

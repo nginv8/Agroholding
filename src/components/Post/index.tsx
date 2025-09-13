@@ -1,4 +1,6 @@
-import * as motion from 'motion/react-client';
+import { TypedLocale } from 'payload';
+
+import { getLocale } from 'next-intl/server';
 
 import RichText from '@/components/RichText';
 import { getCachedGlobal } from '@/utilities/getGlobals';
@@ -8,7 +10,7 @@ import { PostGallery } from './PostGallery';
 import { PostHeroFullscreen } from './PostHeroFullscreen';
 import { PostHeroSimple } from './PostHeroSimple';
 import { PostTags } from './PostTags';
-import { RelatedPostsSection } from './RelatedPostsSection';
+import { RelatedPosts } from './RelatedPosts';
 
 interface PostComponentProps {
   post: Post;
@@ -16,9 +18,11 @@ interface PostComponentProps {
 }
 
 export default async function PostComponent({ post, relatedPosts }: PostComponentProps) {
+  const locale = (await getLocale()) as TypedLocale;
   const { heroLayout, relatedPostsTitle, relatedPostsDescription } = (await getCachedGlobal(
     'postPageSettings',
-    1
+    1,
+    locale
   )()) as PostPageSetting;
 
   return (
@@ -26,23 +30,25 @@ export default async function PostComponent({ post, relatedPosts }: PostComponen
       {heroLayout === 'full' && <PostHeroFullscreen post={post} />}
       {heroLayout === 'simple' && <PostHeroSimple post={post} />}
 
-      <div className="container mx-auto p-4 lg:py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="prose prose-lg prose-green mb-8 max-w-5xl"
-        >
-          <RichText data={post.content} enableGutter={false} />
-        </motion.div>
+      <div className="content-container py-8 lg:py-16">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="space-y-8 lg:col-span-8">
+            <RichText data={post.content} enableGutter={false} className="prose-lg" />
+            <PostGallery post={post} />
+            <PostTags post={post} />
+          </div>
 
-        <PostGallery post={post} />
-        <PostTags post={post} />
-        <RelatedPostsSection
-          relatedPosts={relatedPosts}
-          title={relatedPostsTitle}
-          description={relatedPostsDescription}
-        />
+          <aside className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <RelatedPosts
+                relatedPosts={relatedPosts}
+                title={relatedPostsTitle}
+                description={relatedPostsDescription}
+                variant="sidebar"
+              />
+            </div>
+          </aside>
+        </div>
       </div>
     </main>
   );

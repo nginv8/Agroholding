@@ -1,18 +1,7 @@
-'use client';
-
-import { Award, BarChart3, Leaf, Package, Shield, Truck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+import { IconRenderer } from '@/components/IconRenderer';
 import type { Product, ProductPageSetting } from '@/payload-types';
-
-const iconMap = {
-  Award,
-  Leaf,
-  BarChart3,
-  Shield,
-  Package,
-  Truck,
-};
 
 interface SpecificationsTabProps {
   product: Product;
@@ -56,11 +45,13 @@ export default function SpecificationsTab({ product, settings }: SpecificationsT
           </h3>
           <div className="space-y-4">
             {allAdditionalSpecs.map((spec, index) => {
-              const IconComponent = iconMap[spec.icon as keyof typeof iconMap] || Package;
               return (
                 <div key={index} className="rounded-lg bg-primary-50 p-4">
                   <div className="flex items-start space-x-3">
-                    <IconComponent className="mt-1 size-6 text-primary-600" />
+                    <IconRenderer
+                      name={spec?.icon || 'LuPackage'}
+                      className="mt-1 size-6 text-primary-600"
+                    />
                     <div>
                       <h4 className="mb-1 font-medium text-secondary-900">{spec.name}</h4>
                       <p className="text-sm text-secondary-600">{spec.description}</p>
