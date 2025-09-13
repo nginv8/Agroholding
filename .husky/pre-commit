@@ -6,4 +6,4 @@ pnpm lint-staged
 
 # Run build to ensure everything compiles
 echo "Running build to verify code compiles..."
-# pnpm build
+pnpm build
