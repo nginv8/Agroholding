@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import type { DocumentsTabProps } from '../types';
+import type { DocumentsTabProps, DocumentUnion } from '../types';
 import DocumentItem from './DocumentItem';
 
 const EmptyState = () => {
@@ -18,7 +18,7 @@ const EmptyState = () => {
   );
 };
 
-const DocumentsList = ({ documents }: { documents: Array<any> }) => {
+const DocumentsList = ({ documents }: { documents: Array<DocumentUnion> }) => {
   const t = useTranslations();
 
   return (

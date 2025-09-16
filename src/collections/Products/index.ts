@@ -39,6 +39,9 @@ export const Products: CollectionConfig<'products'> = {
     title: true,
     slug: true,
     categories: true,
+    price: true,
+    isRatingEnabled: true,
+    rating: true,
     meta: {
       image: true,
       description: true,
@@ -133,7 +136,7 @@ export const Products: CollectionConfig<'products'> = {
               type: 'row',
               fields: [
                 {
-                  name: 'ratingEnabled',
+                  name: 'isRatingEnabled',
                   type: 'checkbox',
                   label: {
                     en: 'Rating Enabled',
@@ -360,6 +363,8 @@ export const Products: CollectionConfig<'products'> = {
             {
               name: 'relatedProducts',
               type: 'relationship',
+              hasMany: true,
+              relationTo: 'products',
               admin: {
                 position: 'sidebar',
               },
@@ -370,18 +375,16 @@ export const Products: CollectionConfig<'products'> = {
                   },
                 };
               },
-              hasMany: true,
-              relationTo: 'products',
             },
 
             {
               name: 'categories',
               type: 'relationship',
+              hasMany: true,
+              relationTo: 'categories',
               admin: {
                 position: 'sidebar',
               },
-              hasMany: true,
-              relationTo: 'categories',
             },
           ],
         },

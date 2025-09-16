@@ -4,14 +4,15 @@ import { useTranslations } from 'next-intl';
 
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/utilities/ui';
-import type { Product } from '@/payload-types';
+import type { Product, ProductPageSetting } from '@/payload-types';
 
 interface ProductHeaderProps {
   product: Product;
+  settings: ProductPageSetting;
   className?: string;
 }
 
-export default function ProductHeader({ product, className }: ProductHeaderProps) {
+export default function ProductHeader({ product, settings, className }: ProductHeaderProps) {
   const t = useTranslations();
 
   return (
@@ -31,7 +32,7 @@ export default function ProductHeader({ product, className }: ProductHeaderProps
 
       <h1 className="text-3xl font-bold text-secondary-900 sm:text-4xl">{product.title}</h1>
 
-      {product.ratingEnabled && (
+      {settings.isRatingEnabled && product.isRatingEnabled && product.rating && (
         <div className="flex items-center space-x-4">
           <div className="flex items-center">
             {[...Array(product.rating || 5)].map((_, i) => (

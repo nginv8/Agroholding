@@ -11,22 +11,22 @@ interface RelatedProductsProps {
   relatedProducts: Product[];
   settings: ProductPageSetting;
   variant?: 'default' | 'sidebar';
+  className?: string;
 }
 
 export default function RelatedProducts({
   relatedProducts,
   settings,
+  className,
   variant = 'default',
 }: RelatedProductsProps) {
   const t = useTranslations();
 
-  if (!relatedProducts.length) {
-    return null;
-  }
+  if (!relatedProducts.length) return null;
 
   if (variant === 'sidebar') {
     return (
-      <div className="space-y-6">
+      <div className={cn('space-y-6', className)}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function RelatedProducts({
           transition={{ duration: 0.6 }}
         >
           <h2 className="mb-2 text-xl font-bold text-gray-900">{t('related-products')}</h2>
-          <p className="mb-4 text-sm text-gray-600">{t('related-products-description')}</p>
+          <p className="mb-4 text-gray-600">{t('related-products-description')}</p>
         </motion.div>
 
         <div className="space-y-4">
@@ -49,10 +49,10 @@ export default function RelatedProducts({
             >
               <Link
                 href={`/products/${relatedProduct.slug}`}
-                className="flex gap-3 overflow-hidden rounded-lg bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
+                className="flex gap-3 overflow-hidden rounded-lg bg-white p-3 pt-2 shadow-sm transition-shadow hover:shadow-md"
               >
                 {relatedProduct.meta?.image && typeof relatedProduct.meta.image === 'object' && (
-                  <div className="relative size-16 shrink-0 overflow-hidden rounded">
+                  <div className="relative mt-1 size-16 shrink-0 overflow-hidden rounded">
                     <Media
                       resource={relatedProduct.meta.image}
                       className="size-full transition-transform duration-300 group-hover:scale-105"
@@ -61,19 +61,29 @@ export default function RelatedProducts({
                   </div>
                 )}
                 <div className="flex-1">
-                  <h3 className="mb-1 line-clamp-2 text-base font-semibold text-gray-900 transition-colors group-hover:text-primary-700">
-                    {relatedProduct.title}
-                  </h3>
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-primary-700">
+                      {relatedProduct.title}
+                    </h3>
+                    {settings.isRatingEnabled &&
+                      relatedProduct.isRatingEnabled &&
+                      relatedProduct.rating && (
+                        <div className="mb-1 flex shrink-0 items-center">
+                          {[...Array(relatedProduct.rating || 5)].map((_, i) => (
+                            <Star key={i} className="size-3 fill-current text-accent-400" />
+                          ))}
+                        </div>
+                      )}
+                  </div>
+
+                  {relatedProduct.meta?.description && (
+                    <p className="mb-1 line-clamp-2 text-sm text-gray-600">
+                      {relatedProduct.meta.description}
+                    </p>
+                  )}
                   <p className="text-sm font-semibold text-primary-600">
                     {relatedProduct.price || t('price-on-request')}
                   </p>
-                  {settings.isRatingEnabled && (
-                    <div className="mt-1 flex items-center">
-                      {[...Array(relatedProduct.rating || 5)].map((_, i) => (
-                        <Star key={i} className="size-3 fill-current text-accent-400" />
-                      ))}
-                    </div>
-                  )}
                 </div>
               </Link>
             </motion.div>
@@ -126,13 +136,15 @@ export default function RelatedProducts({
                     </div>
                   )}
                   <div className="p-6">
-                    {settings.isRatingEnabled && (
-                      <div className="mb-2 flex items-center">
-                        {[...Array(relatedProduct.rating || 5)].map((_, i) => (
-                          <Star key={i} className="size-4 fill-current text-accent-400" />
-                        ))}
-                      </div>
-                    )}
+                    {settings.isRatingEnabled &&
+                      relatedProduct.isRatingEnabled &&
+                      relatedProduct.rating && (
+                        <div className="mb-2 flex items-center">
+                          {[...Array(relatedProduct.rating || 5)].map((_, i) => (
+                            <Star key={i} className="size-4 fill-current text-accent-400" />
+                          ))}
+                        </div>
+                      )}
 
                     <h3 className="mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-primary-700">
                       {relatedProduct.title}

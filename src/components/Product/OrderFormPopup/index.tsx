@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -74,8 +75,16 @@ export default function OrderFormPopup({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-2xl px-2 py-8 md:px-6">
-        <DialogHeader className="px-2 py-4">
+      <DialogContent
+        aria-describedby="order-form-description"
+        className="flex max-h-dvh max-w-2xl flex-col px-0 py-8"
+      >
+        <DialogDescription id="order-form-description" className="sr-only">
+          {product?.title
+            ? t('contact-about-product', { product: product?.title })
+            : t('contact-us')}
+        </DialogDescription>
+        <DialogHeader className="my-3 shrink-0 px-3 md:px-8">
           <DialogTitle>
             {product?.title
               ? t('contact-about-product', { product: product?.title })
@@ -83,11 +92,14 @@ export default function OrderFormPopup({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="max-h-[70vh] overflow-y-auto px-2">
+        <div className="min-h-0 flex-1 overflow-y-auto px-3 md:px-8">
           {submitStatus === 'success' ? (
             <SuccessMessage message={t('order-success')} onClose={handleDialogClose} />
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="my-1 space-y-4 transition-all duration-300 max-md:focus-within:mb-[400px]"
+            >
               <FormField label={t('item-code')}>
                 <Input id="itemCode" {...register('itemCode')} disabled />
               </FormField>
@@ -97,7 +109,7 @@ export default function OrderFormPopup({
                   id="name"
                   type="text"
                   {...register('name', validationRules.name)}
-                  className={cn(errors.name && 'border-red-500')}
+                  className={cn(errors.name && 'border-error')}
                   placeholder={t('enter-name')}
                   disabled={isSubmitting}
                 />
@@ -108,7 +120,7 @@ export default function OrderFormPopup({
                   id="email"
                   type="email"
                   {...register('email', validationRules.email)}
-                  className={cn(errors.email && 'border-red-500')}
+                  className={cn(errors.email && 'border-error')}
                   placeholder={t('enter-email')}
                   disabled={isSubmitting}
                 />
@@ -119,7 +131,7 @@ export default function OrderFormPopup({
                   id="phone"
                   type="tel"
                   {...register('phone', validationRules.phone)}
-                  className={cn(errors.phone && 'border-red-500')}
+                  className={cn(errors.phone && 'border-error')}
                   placeholder={t('enter-phone')}
                   disabled={isSubmitting}
                 />
@@ -130,7 +142,7 @@ export default function OrderFormPopup({
                   id="message"
                   rows={4}
                   {...register('message')}
-                  className={cn(errors.message && 'border-red-500')}
+                  className={cn(errors.message && 'border-error')}
                   disabled={isSubmitting}
                 />
               </FormField>

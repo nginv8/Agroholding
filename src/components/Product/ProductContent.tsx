@@ -10,12 +10,12 @@ export default function ProductContent({ product, settings }: ProductContentProp
   const hasProductContent =
     product.content &&
     product.content?.root.children.length &&
-    !!(product.content?.root.children[0]?.children as any[])?.length; // eslint-disable-line @typescript-eslint/no-explicit-any
+    !!(product.content?.root.children[0]?.children as unknown[])?.length;
 
   const hasGlobalContent =
     settings?.globalContent &&
     settings?.globalContent?.root.children.length &&
-    !!(settings?.globalContent?.root.children[0]?.children as any[])?.length; // eslint-disable-line @typescript-eslint/no-explicit-any
+    !!(settings?.globalContent?.root.children[0]?.children as unknown[])?.length;
 
   if (!hasProductContent && !hasGlobalContent) {
     return null;

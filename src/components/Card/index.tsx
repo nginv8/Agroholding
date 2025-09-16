@@ -11,7 +11,9 @@ import { cn } from '@/utilities/ui';
 import useClickableCard from '@/utilities/useClickableCard';
 import type { Post, Product } from '@/payload-types';
 
-export type CardCollectionData = Pick<Post | Product, 'slug' | 'categories' | 'meta' | 'title'>;
+export type CardCollectionData = Pick<Post | Product, 'slug' | 'categories' | 'meta' | 'title'> & {
+  relationTo?: 'posts' | 'products';
+};
 
 export const Card: React.FC<{
   alignItems?: 'center';
@@ -33,14 +35,15 @@ export const Card: React.FC<{
     index = 0,
     animationType = 'onView',
   } = props;
-  const { slug, categories, meta, title } = doc || {};
+  const { slug, categories, meta, title, relationTo } = doc || {};
   const { description, image: metaImage } = meta || {};
   const t = useTranslations();
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0;
   const titleToUse = titleFromProps || title;
   const sanitizedDescription = description?.replace(/\s/g, ' '); // replace non-breaking space with white space
-  const href = `/${collectionName}/${slug}`;
+  const actualCollectionName = relationTo || collectionName;
+  const href = `/${actualCollectionName}/${slug}`;
 
   const animationProps =
     animationType === 'onView'
@@ -59,7 +62,7 @@ export const Card: React.FC<{
   return (
     <motion.article {...animationProps} className={cn('group block', className)} ref={card.ref}>
       <Link href={href} ref={link.ref} className="group block">
-        <div className="relative mb-6 aspect-square overflow-hidden rounded-xl bg-muted">
+        <div className="relative mb-6 aspect-[4/3] select-none overflow-hidden rounded-xl bg-muted">
           {!metaImage && (
             <div className="flex h-full items-center justify-center text-muted-foreground">
               No image
@@ -77,7 +80,7 @@ export const Card: React.FC<{
 
         <div className="space-y-3">
           {titleToUse && (
-            <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
+            <h3 className="mb-2 line-clamp-2 text-xl font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
               {titleToUse}
             </h3>
           )}
