@@ -19,8 +19,8 @@ export const PostHeroSimple = ({ post }: PostHeroSimpleProps) => {
 
   return (
     <>
-      <section className="relative bg-gradient-to-b from-green-50 to-white py-4 lg:py-8">
-        <div className="content-container space-y-8">
+      <section className="relative mb-4 bg-gradient-to-b from-green-50 to-white lg:mb-8">
+        <div className="content-container space-y-8 pt-4 lg:pt-8">
           <Breadcrumbs
             items={[
               { label: t('posts'), href: '/posts' },

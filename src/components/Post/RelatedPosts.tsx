@@ -7,23 +7,25 @@ import { cn } from '@/utilities/ui';
 import type { Post } from '@/payload-types';
 
 interface RelatedPostsProps {
-  relatedPosts?: Post[];
   title: string;
   description: string;
+  relatedPosts?: Post[];
   variant?: 'default' | 'sidebar';
+  className?: string;
 }
 
 export const RelatedPosts = async ({
   relatedPosts,
   title,
   description,
+  className,
   variant = 'default',
 }: RelatedPostsProps) => {
   if (!relatedPosts || relatedPosts.length === 0) return null;
 
   if (variant === 'sidebar') {
     return (
-      <div className="space-y-6">
+      <div className={cn('space-y-6', className)}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +33,7 @@ export const RelatedPosts = async ({
           transition={{ duration: 0.6 }}
         >
           {title && <h2 className="mb-2 text-xl font-bold text-gray-900">{title}</h2>}
-          {description && <p className="mb-4 text-sm text-gray-600">{description}</p>}
+          {description && <p className="mb-4 text-gray-600">{description}</p>}
         </motion.div>
 
         <div className="space-y-4">
@@ -49,7 +51,7 @@ export const RelatedPosts = async ({
                 className="flex gap-3 overflow-hidden rounded-lg bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
               >
                 {relatedPost.meta?.image && typeof relatedPost.meta.image === 'object' && (
-                  <div className="relative size-16 shrink-0 overflow-hidden rounded">
+                  <div className="relative mt-1 size-16 shrink-0 overflow-hidden rounded">
                     <Media
                       resource={relatedPost.meta.image}
                       className="size-full transition-transform duration-300 group-hover:scale-105"
@@ -63,7 +65,7 @@ export const RelatedPosts = async ({
                       {formatDateTime(relatedPost.publishedAt)}
                     </div>
                   )}
-                  <h3 className="mb-1 line-clamp-2 text-base font-semibold text-gray-900 transition-colors group-hover:text-green-700">
+                  <h3 className="mb-1 line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-green-700">
                     {relatedPost.title}
                   </h3>
                   {relatedPost.meta?.description && (
