@@ -1,11 +1,18 @@
-import { getPayload } from 'payload';
+import { createLocalReq, getPayload } from 'payload';
 
 import { headers } from 'next/headers';
 import config from '@payload-config';
 
+import { seed } from '@/endpoints/seed';
+
 export const maxDuration = 60; // This function can run for a maximum of 60 seconds
 
 export async function POST(): Promise<Response> {
+  // Disable seed endpoint in production
+  if (process.env.NODE_ENV === 'production') {
+    return new Response('Seed endpoint is disabled in production.', { status: 404 });
+  }
+
   const payload = await getPayload({ config });
   const requestHeaders = await headers();
 
@@ -17,11 +24,15 @@ export async function POST(): Promise<Response> {
   }
 
   try {
-    // Placeholder seed functionality - you can implement your seeding logic here
-    payload.logger.info('Seed endpoint called, but no seeding logic implemented yet.');
-    return Response.json({ success: true, message: 'Seed endpoint placeholder' });
+    // Create a Payload request object to pass to the Local API for transactions
+    // At this point you should pass in a user, locale, and any other context you need for the Local API
+    const payloadReq = await createLocalReq({ user }, payload);
+
+    await seed({ payload, req: payloadReq });
+
+    return Response.json({ success: true });
   } catch (e) {
-    payload.logger.error({ err: e, message: 'Error in seed endpoint' });
-    return new Response('Error in seed endpoint.', { status: 500 });
+    payload.logger.error({ err: e, message: 'Error seeding data' });
+    return new Response('Error seeding data.', { status: 500 });
   }
 }
