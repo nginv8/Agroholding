@@ -9,6 +9,44 @@
     }
   }
 
+  &__content {
+    display: grid;
+    gap: base(1.5);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  section {
+    margin-bottom: base(1.5);
+
+    h5 {
+      margin-bottom: base(0.75);
+      font-weight: 600;
+      font-size: base(1.125);
+    }
+
+    p {
+      margin-bottom: base(1);
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: base(1.5);
+
+      li {
+        margin-bottom: base(0.5);
+        line-height: 1.5;
+
+        strong {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
   &__instructions {
     list-style: decimal;
     margin-bottom: base(0.5);
