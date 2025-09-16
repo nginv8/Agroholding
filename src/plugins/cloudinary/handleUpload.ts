@@ -3,13 +3,21 @@ import type { HandleUpload } from '@payloadcms/plugin-cloud-storage/types';
 
 import { v2 as cloudinary } from 'cloudinary';
 
-import { generatePublicId, getResourceTypeByFilename } from './utilities';
+import {
+  generatePublicId,
+  getCloudinaryFormatOptions,
+  getResourceTypeByFilename,
+} from './utilities';
 
 export const handleUpload: HandleUpload = async ({ data, file }) => {
   try {
     const resourceType = getResourceTypeByFilename(file.filename);
     const publicId = generatePublicId(file.filename, resourceType);
-    const ext = file.filename.split('.').pop();
+    const ext = file.filename.split('.').pop()?.toLowerCase();
+
+    if (!ext) {
+      throw new APIError('Invalid filename: no extension found');
+    }
 
     await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
@@ -20,7 +28,7 @@ export const handleUpload: HandleUpload = async ({ data, file }) => {
           use_filename: true,
           secure: true,
           unique_filename: false,
-          format: ext,
+          ...getCloudinaryFormatOptions(ext),
         },
         (error, result) => {
           if (error) return reject(error);

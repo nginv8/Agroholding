@@ -29,3 +29,11 @@ export const getResourceTypeByFilename = (filename: string): UploadApiResponse['
   if (RAW_EXTENSIONS.some((ext) => filename.endsWith(ext))) return 'raw';
   return 'auto';
 };
+
+export const getCloudinaryFormatOptions = (ext: string) => {
+  return IMAGE_EXTENSIONS.includes(`.${ext}`) ||
+    VIDEO_EXTENSIONS.includes(`.${ext}`) ||
+    RAW_EXTENSIONS.includes(`.${ext}`)
+    ? { format: ext }
+    : {};
+};
