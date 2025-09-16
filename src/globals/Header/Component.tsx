@@ -71,23 +71,21 @@ export async function Header() {
       )}
 
       {/* Header content */}
-      <div className="content-container">
-        <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            {headerData.logo?.[logoStyle] && typeof headerData.logo[logoStyle] !== 'string' ? (
-              <Media
-                resource={headerData.logo[logoStyle]}
-                className="h-14 w-auto"
-                imgClassName="object-contain"
-              />
-            ) : (
-              <Logo variant={logoStyle} />
-            )}
-          </Link>
+      <div className="content-container flex h-20 items-center justify-between gap-x-8">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2">
+          {headerData.logo?.[logoStyle] && typeof headerData.logo[logoStyle] !== 'string' ? (
+            <Media
+              resource={headerData.logo[logoStyle]}
+              className="h-14 w-auto"
+              imgClassName="object-contain"
+            />
+          ) : (
+            <Logo variant={logoStyle} />
+          )}
+        </Link>
 
-          <HeaderNav data={headerData} />
-        </div>
+        <HeaderNav data={headerData} />
       </div>
     </header>
   );

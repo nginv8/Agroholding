@@ -42,7 +42,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden items-center space-x-8 md:flex">
+      <nav className="hidden items-center space-x-8 lg:flex">
         {navItems.map((item, i) => (
           <div
             key={i}
@@ -78,7 +78,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                         className="group flex items-start space-x-3 rounded-lg p-3 transition-colors hover:bg-secondary-100"
                       >
                         {subItem.icon && (
-                          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 transition-colors group-hover:bg-primary-100">
+                          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 transition-colors group-hover:bg-white">
                             <IconRenderer
                               name={subItem.icon}
                               size={20}
@@ -87,7 +87,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                           </div>
                         )}
                         <div>
-                          <div className="font-medium text-secondary-900 transition-colors group-hover:text-primary-700">
+                          <div className="text-sm font-medium text-secondary-900 transition-colors group-hover:text-primary-700">
                             {subItem.link.label}
                           </div>
                           {subItem.description && (
@@ -110,7 +110,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       </nav>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2"
@@ -128,7 +128,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute inset-x-0 top-full z-50 bg-white py-6 shadow-lg md:hidden"
+            className="absolute inset-x-0 top-full z-50 bg-white py-6 shadow-lg lg:hidden"
           >
             <motion.nav
               initial={{ opacity: 0, height: 0 }}
@@ -141,43 +141,41 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-x-3 rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
               >
-                <SearchIcon className="size-5" />
+                <SearchIcon size={18} />
                 <span>{t('search')}</span>
               </Link>
 
               {navItems.map((item, i) => (
                 <div key={i}>
-                  <div
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
-                  >
+                  <div onClick={() => setIsOpen(false)}>
                     <CMSLink
                       {...{ ...item.link, label: null }}
-                      className="flex items-center space-x-4"
+                      className="flex items-center justify-between space-x-4 rounded-lg p-3 text-secondary-600 transition-colors hover:bg-secondary-100 hover:text-primary-700"
                     >
-                      {item.icon && isValidIconName(item.icon) && (
-                        <IconRenderer name={item.icon} size={20} className="size-5" />
+                      <span className="flex items-center space-x-4">
+                        {item.icon && isValidIconName(item.icon) && (
+                          <IconRenderer name={item.icon} size={18} />
+                        )}
+                        <span>{item.link.label}</span>
+                      </span>
+
+                      {item.submenu && item.submenu.length > 0 && (
+                        <ChevronDown className="size-4" />
                       )}
-                      <span>{item.link.label}</span>
                     </CMSLink>
-                    {item.submenu && item.submenu.length > 0 && <ChevronDown className="size-4" />}
                   </div>
 
                   {/* Mobile submenu */}
                   {item.submenu && item.submenu.length > 0 && (
                     <div className="ml-5 mt-1 space-y-1">
                       {item.submenu.map((subItem, subIndex) => (
-                        <div
-                          key={subIndex}
-                          onClick={() => setIsOpen(false)}
-                          className="flex items-center space-x-3 rounded-lg p-3 text-secondary-500 transition-colors hover:bg-secondary-100 hover:text-primary-700"
-                        >
+                        <div key={subIndex} onClick={() => setIsOpen(false)} className="">
                           <CMSLink
                             {...{ ...subItem.link, label: null }}
-                            className="flex items-center space-x-4"
+                            className="flex items-center space-x-4 rounded-lg p-3 text-secondary-500 transition-colors hover:bg-secondary-100 hover:text-primary-700"
                           >
                             {subItem.icon && isValidIconName(subItem.icon) && (
-                              <IconRenderer name={subItem.icon} size={16} className="size-4" />
+                              <IconRenderer name={subItem.icon} size={18} />
                             )}
                             <span>{subItem.link.label}</span>
                           </CMSLink>
