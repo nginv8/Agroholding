@@ -1,7 +1,7 @@
 import { getPayload, TypedLocale } from 'payload';
 
 import React from 'react';
-import type { Metadata } from 'next/types';
+import type { Metadata } from 'next';
 import configPromise from '@payload-config';
 import { getTranslations } from 'next-intl/server';
 
@@ -9,8 +9,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
-
-import PageClient from './page.client';
+import { COLLECTION_NAMES, PAGINATION_LIMITS } from '@/constants/app';
 
 export const dynamic = 'force-static';
 export const revalidate = 600;
@@ -21,11 +20,11 @@ type Args = {
   }>;
 };
 
-const COLLECTION_NAME = 'products';
-const ITEMS_LIMIT = 8;
+const COLLECTION_NAME = COLLECTION_NAMES.PRODUCTS;
+const ITEMS_LIMIT = PAGINATION_LIMITS.DEFAULT;
 
 export default async function Page({ params }: Args) {
-  const { locale = 'uk' } = await params;
+  const { locale } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });
 
@@ -45,23 +44,18 @@ export default async function Page({ params }: Args) {
 
   return (
     <div className="pb-24">
-      <PageClient />
-
       <Breadcrumbs items={[{ label: t(COLLECTION_NAME), isActive: true }]} withSection={true} />
 
-      <div className="content-container my-8 px-4">
-        <h1 className="text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
-          {t(COLLECTION_NAME)}
-        </h1>
-      </div>
+      <div className="content-container mb-8 space-y-8 lg:flex lg:items-end lg:justify-between lg:space-y-0">
+        <div className="prose max-w-none dark:prose-invert">
+          <h1>{t(COLLECTION_NAME)}</h1>
+        </div>
 
-      <div className="content-container px-4">
         <PageRange
           collection={COLLECTION_NAME}
           currentPage={products.page}
           limit={ITEMS_LIMIT}
           totalDocs={products.totalDocs}
-          className="mb-8"
         />
       </div>
 
@@ -69,9 +63,10 @@ export default async function Page({ params }: Args) {
         collection={products.docs}
         collectionName={COLLECTION_NAME}
         animationType="immediate"
+        limit={ITEMS_LIMIT}
       />
 
-      <div className="content-container px-4">
+      <div className="content-container">
         {products.totalPages > 1 && products.page && (
           <Pagination
             page={products.page}
@@ -84,8 +79,11 @@ export default async function Page({ params }: Args) {
   );
 }
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
   return {
-    title: COLLECTION_NAME,
+    title: t(COLLECTION_NAME),
   };
 }

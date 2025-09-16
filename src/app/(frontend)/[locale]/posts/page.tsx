@@ -1,7 +1,7 @@
 import { getPayload, TypedLocale } from 'payload';
 
 import React from 'react';
-import type { Metadata } from 'next/types';
+import type { Metadata } from 'next';
 import configPromise from '@payload-config';
 import { getTranslations } from 'next-intl/server';
 
@@ -9,8 +9,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { PageRange } from '@/components/PageRange';
 import { Pagination } from '@/components/Pagination';
-
-import PageClient from './page.client';
+import { COLLECTION_NAMES, PAGINATION_LIMITS } from '@/constants/app';
 
 export const dynamic = 'force-static';
 export const revalidate = 600;
@@ -21,19 +20,19 @@ type Args = {
   }>;
 };
 
-export default async function Page({ params }: Args) {
-  const collectionName = 'posts';
-  const itemsLimit = 8;
+const COLLECTION_NAME = COLLECTION_NAMES.POSTS;
+const ITEMS_LIMIT = PAGINATION_LIMITS.DEFAULT;
 
-  const { locale = 'uk' } = await params;
+export default async function Page({ params }: Args) {
+  const { locale } = await params;
   const t = await getTranslations();
   const payload = await getPayload({ config: configPromise });
 
   const posts = await payload.find({
-    collection: collectionName,
+    collection: COLLECTION_NAME,
     locale,
     depth: 1,
-    limit: itemsLimit,
+    limit: ITEMS_LIMIT,
     overrideAccess: false,
     select: {
       title: true,
@@ -44,45 +43,47 @@ export default async function Page({ params }: Args) {
   });
 
   return (
-    <div className="pb-24">
-      <PageClient />
+    <>
+      <Breadcrumbs items={[{ label: t(COLLECTION_NAME), isActive: true }]} withSection={true} />
 
-      <Breadcrumbs items={[{ label: t(collectionName), isActive: true }]} withSection={true} />
-
-      <div className="content-container">
-        <h1 className="my-8 text-3xl capitalize leading-tight md:text-4xl lg:text-5xl">
-          {t(collectionName)}
-        </h1>
+      <div className="content-container mb-8 space-y-8 lg:flex lg:items-end lg:justify-between lg:space-y-0">
+        <div className="prose max-w-none dark:prose-invert">
+          <h1>{t(COLLECTION_NAME)}</h1>
+        </div>
 
         <PageRange
-          collection={collectionName}
+          collection={COLLECTION_NAME}
           currentPage={posts.page}
-          limit={itemsLimit}
+          limit={ITEMS_LIMIT}
           totalDocs={posts.totalDocs}
-          className="mb-8"
         />
       </div>
 
       <CollectionArchive
         collection={posts.docs}
-        collectionName={collectionName}
+        collectionName={COLLECTION_NAME}
         animationType="immediate"
+        limit={ITEMS_LIMIT}
       />
 
       <div className="content-container">
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} collectionName="posts" />
+          <Pagination
+            page={posts.page}
+            totalPages={posts.totalPages}
+            collectionName={COLLECTION_NAME}
+          />
         )}
       </div>
-    </div>
+    </>
   );
 }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { locale = 'uk' } = await params;
+  const { locale } = await params;
   const t = await getTranslations({ locale });
 
   return {
-    title: t('posts'),
+    title: t(COLLECTION_NAME),
   };
 }

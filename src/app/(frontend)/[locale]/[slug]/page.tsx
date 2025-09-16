@@ -11,8 +11,6 @@ import { PayloadRedirects } from '@/components/PayloadRedirects';
 import { RenderHero } from '@/heros/RenderHero';
 import { generateMeta } from '@/utilities/generateMeta';
 
-import PageClient from './page.client';
-
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
   const pages = await payload.find({
@@ -47,7 +45,7 @@ type Args = {
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode();
-  const { slug = 'home', locale = 'en' } = await paramsPromise;
+  const { slug = 'home', locale } = await paramsPromise;
   const url = '/' + slug;
 
   const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPage({
@@ -62,8 +60,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page;
 
   return (
-    <article>
-      <PageClient />
+    <>
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
@@ -71,18 +68,18 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       <RenderHero hero={hero} />
       <RenderBlocks blocks={layout} locale={locale} />
-    </article>
+    </>
   );
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home', locale = 'uk' } = await paramsPromise;
+  const { slug = 'home', locale } = await paramsPromise;
   const page = await queryPage({
     slug,
     locale,
   });
 
-  return generateMeta({ doc: page });
+  return generateMeta({ doc: page, locale });
 }
 
 const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {

@@ -1,16 +1,13 @@
-// import { Post } from '@/payload-types'
 import { getPayload, TypedLocale } from 'payload';
 
 import React from 'react';
-import type { Metadata } from 'next/types';
+import type { Metadata } from 'next';
 import configPromise from '@payload-config';
 import { getTranslations } from 'next-intl/server';
 
 import { CardCollectionData } from '@/components/Card';
 import { CollectionArchive } from '@/components/CollectionArchive';
 import { Search } from '@/search/Component';
-
-import PageClient from './page.client';
 
 type Args = {
   searchParams: Promise<{
@@ -21,17 +18,21 @@ type Args = {
   }>;
 };
 
+export const dynamic = 'force-static';
+export const revalidate = 600;
+
 export default async function Page({
   searchParams: searchParamsPromise,
-  // params: paramsPromise,
+  params: paramsPromise,
 }: Args) {
   const { q: query } = await searchParamsPromise;
-  // const { locale } = await paramsPromise
+  const { locale } = await paramsPromise;
   const payload = await getPayload({ config: configPromise });
   const t = await getTranslations();
 
-  const posts = await payload.find({
+  const results = await payload.find({
     collection: 'search',
+    locale,
     depth: 1,
     limit: 12,
     select: {
@@ -39,6 +40,7 @@ export default async function Page({
       slug: true,
       categories: true,
       meta: true,
+      relationTo: true,
     },
     // pagination: false reduces overhead if you don't need totalDocs
     pagination: false,
@@ -74,21 +76,17 @@ export default async function Page({
 
   return (
     <div className="py-24">
-      <PageClient />
       <div className="content-container mb-16">
         <div className="prose max-w-none text-center dark:prose-invert">
           <h1 className="mb-8 lg:mb-16">{t('search')}</h1>
 
-          <div className="mx-auto max-w-[50rem]">
-            <Search />
-          </div>
+          <Search />
         </div>
       </div>
 
-      {posts.totalDocs > 0 ? (
+      {results.totalDocs > 0 ? (
         <CollectionArchive
-          collection={posts.docs as CardCollectionData[]}
-          collectionName="posts"
+          collection={results.docs as CardCollectionData[]}
           animationType="immediate"
         />
       ) : (
@@ -98,8 +96,11 @@ export default async function Page({
   );
 }
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
   return {
-    title: `Search`,
+    title: t('search'),
   };
 }

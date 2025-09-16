@@ -14,7 +14,6 @@ import { LivePreviewListener } from '@/components/LivePreviewListener';
 import { Footer } from '@/globals/Footer/Component';
 import { Header } from '@/globals/Header/Component';
 import { routing } from '@/i18n/routing';
-import { InitTheme } from '@/providers/Theme/InitTheme';
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
 import { cn } from '@/utilities/ui';
 import { Providers } from '@/providers';
@@ -33,14 +32,11 @@ type Args = {
 export default async function RootLayout({ children, params }: Args) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale)) {
+  if (!locale || !routing.locales.includes(locale)) {
     notFound();
   }
-  if (locale) {
-    setRequestLocale(locale);
-  } else {
-    notFound();
-  }
+
+  setRequestLocale(locale);
 
   const { isEnabled } = await draftMode();
   const messages = await getMessages();
@@ -51,12 +47,9 @@ export default async function RootLayout({ children, params }: Args) {
       lang={locale}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
+      data-theme="light"
     >
-      <head>
-        <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-      </head>
+      <head />
       <body>
         <Providers>
           <NextIntlClientProvider messages={messages}>
@@ -85,6 +78,11 @@ export const metadata: Metadata = {
     creator: '@polisagro',
   },
   manifest: '/site.webmanifest',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
+  },
 };
 
 export function generateStaticParams() {

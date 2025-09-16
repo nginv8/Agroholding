@@ -7,18 +7,19 @@ import configPromise from '@payload-config';
 
 import { LivePreviewListener } from '@/components/LivePreviewListener';
 import { PayloadRedirects } from '@/components/PayloadRedirects';
-import PostComponent from '@/components/Post';
+import Post from '@/components/Post';
 import { generateMeta } from '@/utilities/generateMeta';
-import type { Post } from '@/payload-types';
+import { COLLECTION_NAMES, PAGINATION_LIMITS } from '@/constants/app';
+import type { Post as PostType } from '@/payload-types';
 
-import PageClient from './page.client';
+const COLLECTION_NAME = COLLECTION_NAMES.POSTS;
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
   const posts = await payload.find({
-    collection: 'posts',
+    collection: COLLECTION_NAME,
     draft: false,
-    limit: 1000,
+    limit: PAGINATION_LIMITS.MAX_STATIC_PAGES,
     overrideAccess: false,
     pagination: false,
     select: {
@@ -40,9 +41,9 @@ type Args = {
   }>;
 };
 
-export default async function Post({ params: paramsPromise }: Args) {
-  const { slug = '', locale = 'uk' } = await paramsPromise;
-  const url = '/posts/' + slug;
+export default async function PostPage({ params: paramsPromise }: Args) {
+  const { slug = '', locale } = await paramsPromise;
+  const url = `/${COLLECTION_NAME}/` + slug;
   const post = await queryPost({ slug, locale });
   const { isEnabled: draft } = await draftMode();
 
@@ -50,65 +51,45 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   const relatedPosts = post.relatedPosts
     ? post.relatedPosts.filter(
-        (relatedPost): relatedPost is Post => typeof relatedPost === 'object'
+        (relatedPost): relatedPost is PostType => typeof relatedPost === 'object'
       )
     : [];
 
   return (
     <>
-      <PageClient />
-
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
 
-      <PostComponent post={post} relatedPosts={relatedPosts} />
+      <Post post={post} relatedPosts={relatedPosts} />
     </>
   );
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = '', locale = 'en' } = await paramsPromise;
+  const { slug = '', locale } = await paramsPromise;
   const post = await queryPost({ slug, locale });
 
-  return generateMeta({ doc: post });
+  return generateMeta({ doc: post, locale });
 }
 
-const queryPost = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
+const queryPost = cache(async ({ slug, locale }: { slug: string; locale?: TypedLocale }) => {
   const { isEnabled: draft } = await draftMode();
 
   const payload = await getPayload({ config: configPromise });
+  const localeParam = locale ? { locale } : {};
 
   const result = await payload.find({
-    collection: 'posts',
+    collection: COLLECTION_NAME,
     draft,
-    limit: 1,
+    limit: 2,
     overrideAccess: draft,
-    locale,
+    ...localeParam,
     where: {
       slug: {
         equals: slug,
       },
-    },
-    select: {
-      id: true,
-      title: true,
-      excerpt: true,
-      content: true,
-      heroImage: true,
-      gallery: true,
-      tags: true,
-      readTime: true,
-      categories: true,
-      relatedPosts: true,
-      authors: true,
-      populatedAuthors: true,
-      publishedAt: true,
-      slug: true,
-      meta: true,
-      updatedAt: true,
-      createdAt: true,
     },
   });
 
