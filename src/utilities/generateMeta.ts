@@ -1,18 +1,22 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-import type { Media, Page, Post } from '../payload-types';
+import type { Locale } from '@/i18n/routing';
+import type { Media, Page, Post } from '@/payload-types';
+
+import { loadImageAdvanced } from './cloudinaryLoader/loader';
 import { getServerSideURL } from './getURL';
 import { mergeOpenGraph } from './mergeOpenGraph';
 
 const getImageURL = (image?: Media | number | null) => {
-  const serverUrl = getServerSideURL();
-
-  const fallbackUrl = serverUrl + '/polisky-agroholding-og.webp';
-
   if (image && typeof image === 'object') {
-    if (image.url) {
-      const transformations = 'w_1200,h_630,c_fill,q_auto';
-      return image.url.replace('/upload/', `/upload/${transformations}/`);
+    if (image.url || image.cloudinary?.url || image.cloudinary?.secureUrl) {
+      return loadImageAdvanced({
+        src: image.url || image.cloudinary?.url || image.cloudinary?.secureUrl || '',
+        width: 1200,
+        height: 630,
+        crop: 'fill',
+      });
     }
 
     if (image.filename) {
@@ -21,25 +25,43 @@ const getImageURL = (image?: Media | number | null) => {
 
       if (cloudName) {
         const publicId = image.filename.replace(/\.[^/.]+$/, '');
-        const transformations = 'w_1200,h_630,c_fill,q_auto';
-        return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}${folder ? '/' + folder : ''}/${publicId}`;
+        const baseUrl = `https://res.cloudinary.com/${cloudName}/image/upload${folder ? '/' + folder : ''}/${publicId}`;
+
+        return loadImageAdvanced({
+          src: baseUrl,
+          width: 1200,
+          height: 630,
+          crop: 'fill',
+        });
       }
     }
   }
 
+  const serverUrl = getServerSideURL();
+  const fallbackUrl = serverUrl + '/polisky-agroholding-og.webp';
   return fallbackUrl;
 };
 
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null;
+  locale?: Locale;
 }): Promise<Metadata> => {
-  const { doc } = args;
+  const { doc, locale } = args;
 
   const ogImage = getImageURL(doc?.meta?.image);
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Polisky Agroholding'
-    : 'Polisky Agroholding';
+  let siteName = 'Polisky Agroholding';
+
+  if (locale) {
+    try {
+      const t = await getTranslations({ locale });
+      siteName = t('site-name') || 'Polisky Agroholding';
+    } catch {
+      siteName = 'Polisky Agroholding';
+    }
+  }
+
+  const title = doc?.meta?.title ? doc?.meta?.title + ' | ' + siteName : siteName;
 
   return {
     description: doc?.meta?.description,

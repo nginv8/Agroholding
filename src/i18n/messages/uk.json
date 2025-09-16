@@ -1,5 +1,6 @@
 {
   "// === NAVIGATION & GENERAL ===": "",
+  "site-name": "Поліський Агрохолдинг",
   "home": "Головна",
   "navigation": "Навігація",
   "language": "Мова",
@@ -122,5 +123,14 @@
 
   "// === ERROR PAGES ===": "",
   "page-not-found": "Цю сторінку не знайдено.",
-  "untitled-category": "Категорія без назви"
+  "untitled-category": "Категорія без назви",
+
+  "// === API MESSAGES ===": "",
+  "api-email-required": "Email адреса обов'язкова",
+  "api-invalid-email": "Некоректна email адреса",
+  "api-subscription-success": "Ваш email підписано на нашу розсилку",
+  "api-unsubscription-success": "Якщо цей email був підписаний, його успішно відписано від нашої розсилки",
+  "api-internal-error": "Внутрішня помилка сервера",
+  "api-newsletter-subscription-failed": "Помилка підписки на розсилку",
+  "api-newsletter-unsubscription-failed": "Помилка відписки від розсилки"
 }

@@ -1,5 +1,6 @@
 {
   "// === NAVIGATION & GENERAL ===": "",
+  "site-name": "Polisky Agroholding",
   "home": "Home",
   "navigation": "Navigation",
   "language": "Language",
@@ -122,5 +123,14 @@
 
   "// === ERROR PAGES ===": "",
   "page-not-found": "This page could not be found.",
-  "untitled-category": "Untitled category"
+  "untitled-category": "Untitled category",
+
+  "// === API MESSAGES ===": "",
+  "api-email-required": "Email address is required",
+  "api-invalid-email": "Invalid email address",
+  "api-subscription-success": "Your email has been subscribed to our newsletter",
+  "api-unsubscription-success": "If this email was subscribed, it has been successfully unsubscribed from our newsletter",
+  "api-internal-error": "Internal server error",
+  "api-newsletter-subscription-failed": "Newsletter subscription failed",
+  "api-newsletter-unsubscription-failed": "Newsletter unsubscription failed"
 }

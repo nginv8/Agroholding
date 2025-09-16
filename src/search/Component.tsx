@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,7 @@ import { useDebounce } from '@/utilities/useDebounce';
 export const Search: React.FC = () => {
   const [value, setValue] = useState('');
   const router = useRouter();
+  const t = useTranslations();
 
   const debouncedValue = useDebounce(value);
 
@@ -18,26 +20,25 @@ export const Search: React.FC = () => {
   }, [debouncedValue, router]);
 
   return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+      className="mx-auto max-w-[50rem]"
+    >
+      <Label htmlFor="search" className="sr-only">
+        Search
+      </Label>
+      <Input
+        id="search"
+        onChange={(event) => {
+          setValue(event.target.value);
         }}
-      >
-        <Label htmlFor="search" className="sr-only">
-          Search
-        </Label>
-        <Input
-          id="search"
-          onChange={(event) => {
-            setValue(event.target.value);
-          }}
-          placeholder="Search"
-        />
-        <button type="submit" className="sr-only">
-          submit
-        </button>
-      </form>
-    </div>
+        placeholder={t('search')}
+      />
+      <button type="submit" className="sr-only">
+        submit
+      </button>
+    </form>
   );
 };

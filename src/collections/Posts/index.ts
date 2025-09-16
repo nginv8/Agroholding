@@ -277,7 +277,11 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    ...slugField(),
+    ...slugField('title', {
+      slugOverrides: {
+        localized: true,
+      },
+    }),
   ],
   hooks: {
     beforeChange: [autoFillSEO],
