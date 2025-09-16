@@ -71,6 +71,7 @@ export default buildConfig({
   },
   editor: defaultLexical,
   db: postgresAdapter({
+    push: false,
     pool: {
       connectionString: databaseUri,
     },
