@@ -448,7 +448,7 @@ export interface Product {
    */
   price?: string | null;
   availability: 'in_stock' | 'out_of_stock' | 'pre_order';
-  ratingEnabled?: boolean | null;
+  isRatingEnabled?: boolean | null;
   rating?: number | null;
   reviewsCount?: number | null;
   /**
@@ -2368,7 +2368,7 @@ export interface ProductsSelect<T extends boolean = true> {
   itemCode?: T;
   price?: T;
   availability?: T;
-  ratingEnabled?: T;
+  isRatingEnabled?: T;
   rating?: T;
   reviewsCount?: T;
   features?:

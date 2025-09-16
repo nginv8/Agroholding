@@ -2,6 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { buildConfig, PayloadRequest } from 'payload';
+import { postgresAdapter } from '@payloadcms/db-postgres';
 import { en } from '@payloadcms/translations/languages/en';
 import { uk } from '@payloadcms/translations/languages/uk';
 
@@ -24,9 +25,9 @@ import { PostPageSettings } from './globals/PostPageSettings/config';
 import { ProductPageSettings } from './globals/ProductPageSettings/config';
 import localization from './i18n/localization';
 import { plugins } from './plugins';
-import { getDatabaseAdapter } from './utilities/getDatabaseAdapter';
 import { getServerSideURL } from './utilities/getURL';
 
+const databaseUri = process.env.DATABASE_URI;
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -69,7 +70,11 @@ export default buildConfig({
     },
   },
   editor: defaultLexical,
-  db: getDatabaseAdapter(),
+  db: postgresAdapter({
+    pool: {
+      connectionString: databaseUri,
+    },
+  }),
   collections: [Pages, Categories, Products, Posts, Media, Orders, Subscribers, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [ContactInfo, ProductPageSettings, PostPageSettings, Header, Footer],
@@ -90,4 +95,5 @@ export default buildConfig({
     },
     tasks: [],
   },
+  telemetry: false,
 });
