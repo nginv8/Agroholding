@@ -4,11 +4,7 @@ import { routing, type Locale } from '@/i18n/routing';
 import { createErrorResponse, validateRequired } from '@/utilities/api-error';
 import { getAPITranslations, normalizeLocale } from '@/utilities/api-i18n';
 import { normalizeEmail, validateEmail } from '@/utilities/email-validation';
-import {
-  createSubscriber,
-  findExistingSubscriber,
-  reactivateSubscriber,
-} from '@/utilities/newsletter';
+import { findExistingSubscriber, unsubscribeSubscriber } from '@/utilities/newsletter';
 
 interface RequestBody {
   email: string;
@@ -30,26 +26,18 @@ export async function POST(request: NextRequest) {
     const existingSubscriber = await findExistingSubscriber(email);
     const t = await getAPITranslations(locale);
 
-    if (existingSubscriber) {
-      if (existingSubscriber.status !== 'active') {
-        await reactivateSubscriber(existingSubscriber.id);
-      }
-    } else {
-      await createSubscriber({
-        email,
-        status: 'active',
-        source: 'api',
-      });
+    if (existingSubscriber && existingSubscriber.status !== 'unsubscribed') {
+      await unsubscribeSubscriber(existingSubscriber.id);
     }
 
     return NextResponse.json({
       success: true,
-      message: t('api-subscription-success'),
+      message: t('api-unsubscription-success'),
       email,
     });
   } catch (error: unknown) {
     const t = await getAPITranslations(locale);
-    const fallbackMessage = t('api-newsletter-subscription-failed');
+    const fallbackMessage = t('api-newsletter-unsubscription-failed');
     return await createErrorResponse(error, fallbackMessage);
   }
 }
