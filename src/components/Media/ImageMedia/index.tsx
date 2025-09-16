@@ -73,7 +73,7 @@ export const ImageMedia: React.FC<MediaProps> = ({
   return (
     <NextImage
       loader={cloudinaryLoader}
-      className={cn(imgClassName)}
+      className={cn('select-none', imgClassName)}
       fill={fill}
       height={!fill ? imageConfig.height : undefined}
       width={!fill ? imageConfig.width : undefined}

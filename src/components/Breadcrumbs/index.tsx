@@ -68,7 +68,7 @@ export const Breadcrumbs = ({
 
   if (withSection) {
     return (
-      <section className={cn('my-8', sectionClassName)}>
+      <section className={cn('my-4 lg:my-6', sectionClassName)}>
         <div className="content-container">{breadcrumbContent}</div>
       </section>
     );
