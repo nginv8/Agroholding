@@ -1549,6 +1549,7 @@ export interface Search {
         value: number | Product;
       };
   slug?: string | null;
+  relationTo?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -2756,6 +2757,7 @@ export interface SearchSelect<T extends boolean = true> {
   priority?: T;
   doc?: T;
   slug?: T;
+  relationTo?: T;
   meta?:
     | T
     | {
