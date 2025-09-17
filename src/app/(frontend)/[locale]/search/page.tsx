@@ -18,8 +18,7 @@ type Args = {
   }>;
 };
 
-export const dynamic = 'force-static';
-export const revalidate = 600;
+export const dynamic = 'force-dynamic';
 
 export default async function Page({
   searchParams: searchParamsPromise,
